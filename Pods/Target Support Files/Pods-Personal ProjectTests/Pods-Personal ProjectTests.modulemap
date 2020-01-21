@@ -1,0 +1,6 @@
+framework module Pods_Personal_ProjectTests {
+  umbrella header "Pods-Personal ProjectTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
