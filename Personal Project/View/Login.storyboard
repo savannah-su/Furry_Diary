@@ -15,26 +15,58 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jli-id-65H">
-                                <rect key="frame" x="153" y="540" width="109" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Google ID Login"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jli-id-65H">
+                                <rect key="frame" x="82" y="543" width="250" height="50"/>
+                                <color key="backgroundColor" red="0.85882352941176465" green="0.26666666666666666" blue="0.21568627450980393" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Ma8-DD-KQe"/>
+                                    <constraint firstAttribute="width" constant="250" id="t9u-QC-bLy"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Log In With Google ID">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="googleLogin:" destination="u1e-EP-nCX" eventType="touchUpInside" id="2H5-aR-qV7"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mfI-IV-240">
-                                <rect key="frame" x="157" y="330" width="100" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Apple ID Login"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b4b-4s-XtW">
-                                <rect key="frame" x="82" y="430" width="250" height="36"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mfI-IV-240">
+                                <rect key="frame" x="82" y="303" width="250" height="50"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="250" id="4S9-Yw-0yV"/>
+                                    <constraint firstAttribute="height" constant="50" id="eq2-vz-yfR"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="Log In With Facebook ID"/>
+                                <state key="normal" title="Login With Apple ID ">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b4b-4s-XtW">
+                                <rect key="frame" x="82" y="423" width="250" height="50"/>
+                                <color key="backgroundColor" red="0.094117647058823528" green="0.46666666666666667" blue="0.94901960784313721" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="250" id="4S9-Yw-0yV"/>
+                                    <constraint firstAttribute="height" constant="50" id="oL4-yB-I5f"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Log In With Facebook ID">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="fbLogin:" destination="u1e-EP-nCX" eventType="touchUpInside" id="NhE-ke-Jrf"/>
                                 </connections>
@@ -43,7 +75,15 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="b4b-4s-XtW" firstAttribute="centerY" secondItem="xQv-Wq-6q1" secondAttribute="centerY" id="2Cy-MT-jeY"/>
+                            <constraint firstItem="mfI-IV-240" firstAttribute="trailing" secondItem="b4b-4s-XtW" secondAttribute="trailing" id="7kz-5G-Lsq"/>
+                            <constraint firstItem="Jli-id-65H" firstAttribute="trailing" secondItem="b4b-4s-XtW" secondAttribute="trailing" id="KiP-iC-yGT"/>
+                            <constraint firstItem="b4b-4s-XtW" firstAttribute="top" secondItem="mfI-IV-240" secondAttribute="bottom" constant="70" id="QgC-lf-mNs"/>
+                            <constraint firstItem="Jli-id-65H" firstAttribute="centerX" secondItem="xQv-Wq-6q1" secondAttribute="centerX" id="Tml-MA-rTc"/>
+                            <constraint firstItem="mfI-IV-240" firstAttribute="leading" secondItem="b4b-4s-XtW" secondAttribute="leading" id="bsB-ju-9Gp"/>
+                            <constraint firstItem="Jli-id-65H" firstAttribute="leading" secondItem="b4b-4s-XtW" secondAttribute="leading" id="pug-5T-tsT"/>
                             <constraint firstItem="b4b-4s-XtW" firstAttribute="centerX" secondItem="xQv-Wq-6q1" secondAttribute="centerX" id="tNj-VN-xeR"/>
+                            <constraint firstItem="mfI-IV-240" firstAttribute="centerX" secondItem="xQv-Wq-6q1" secondAttribute="centerX" id="yb2-4G-VCs"/>
+                            <constraint firstItem="Jli-id-65H" firstAttribute="top" secondItem="b4b-4s-XtW" secondAttribute="bottom" constant="70" id="zXS-Cp-wb3"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="HUe-MP-PbA"/>
                     </view>
