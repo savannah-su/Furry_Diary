@@ -49,17 +49,35 @@
             </objects>
             <point key="canvasLocation" x="711.59420289855075" y="-304.01785714285711"/>
         </scene>
-        <!--View Controller-->
+        <!--搜尋共同飼主-->
         <scene sceneID="2EF-ic-tah">
             <objects>
                 <viewController id="rQK-cx-CvF" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XLK-MD-Kg1">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pet-1" translatesAutoresizingMaskIntoConstraints="NO" id="cfG-aZ-Jzb">
+                                <rect key="frame" x="120" y="168" width="174" height="130"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="130" id="yVH-zt-rGp"/>
+                                </constraints>
+                            </imageView>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fLu-WJ-QHr">
+                                <rect key="frame" x="87" y="340" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="h6k-D5-wOq" firstAttribute="trailing" secondItem="cfG-aZ-Jzb" secondAttribute="trailing" constant="120" id="MY1-wU-sD2"/>
+                            <constraint firstItem="cfG-aZ-Jzb" firstAttribute="top" secondItem="h6k-D5-wOq" secondAttribute="top" constant="80" id="Nns-6A-fWm"/>
+                            <constraint firstItem="cfG-aZ-Jzb" firstAttribute="leading" secondItem="h6k-D5-wOq" secondAttribute="leading" constant="120" id="vet-jy-D8q"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="h6k-D5-wOq"/>
                     </view>
-                    <navigationItem key="navigationItem" id="Gtv-vM-kjw"/>
+                    <navigationItem key="navigationItem" title="搜尋共同飼主" id="Gtv-vM-kjw"/>
                     <connections>
                         <segue destination="pFM-r8-lXy" kind="show" id="kNp-tl-u91"/>
                     </connections>
@@ -103,4 +121,7 @@
             <point key="canvasLocation" x="-198.55072463768118" y="-304.01785714285711"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="pet-1" width="512" height="512"/>
+    </resources>
 </document>
