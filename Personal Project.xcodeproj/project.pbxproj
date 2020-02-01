@@ -24,7 +24,7 @@
 		2496DB7023E2CBD800991F79 /* Daily.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2496DB6F23E2CBD800991F79 /* Daily.storyboard */; };
 		2496DB7223E2CC1A00991F79 /* Medical.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2496DB7123E2CC1A00991F79 /* Medical.storyboard */; };
 		2496DB7423E2CC8500991F79 /* Calender.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2496DB7323E2CC8500991F79 /* Calender.storyboard */; };
-		2496DB7623E2CC9100991F79 /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2496DB7523E2CC9100991F79 /* Search.storyboard */; };
+		2496DB7623E2CC9100991F79 /* SearchVet.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2496DB7523E2CC9100991F79 /* SearchVet.storyboard */; };
 		2496DB7823E2DC5C00991F79 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2496DB7723E2DC5C00991F79 /* TabBarController.swift */; };
 		2496DB7B23E2F85100991F79 /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 2496DB7A23E2F85100991F79 /* FacebookLogin */; };
 		2496DB7D23E2FA2600991F79 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2496DB7C23E2FA2600991F79 /* LoginViewController.swift */; };
@@ -75,7 +75,7 @@
 		2496DB6F23E2CBD800991F79 /* Daily.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Daily.storyboard; sourceTree = "<group>"; };
 		2496DB7123E2CC1A00991F79 /* Medical.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Medical.storyboard; sourceTree = "<group>"; };
 		2496DB7323E2CC8500991F79 /* Calender.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Calender.storyboard; sourceTree = "<group>"; };
-		2496DB7523E2CC9100991F79 /* Search.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
+		2496DB7523E2CC9100991F79 /* SearchVet.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SearchVet.storyboard; sourceTree = "<group>"; };
 		2496DB7723E2DC5C00991F79 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		2496DB7C23E2FA2600991F79 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		2B48997A3F6C929B1296EC40 /* Pods-Personal Project-Personal ProjectUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Personal Project-Personal ProjectUITests.release.xcconfig"; path = "Target Support Files/Pods-Personal Project-Personal ProjectUITests/Pods-Personal Project-Personal ProjectUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -213,7 +213,7 @@
 				2496DB6F23E2CBD800991F79 /* Daily.storyboard */,
 				2496DB7123E2CC1A00991F79 /* Medical.storyboard */,
 				2496DB7323E2CC8500991F79 /* Calender.storyboard */,
-				2496DB7523E2CC9100991F79 /* Search.storyboard */,
+				2496DB7523E2CC9100991F79 /* SearchVet.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -351,7 +351,7 @@
 				242F8E0D23D6DFFB00F49853 /* LaunchScreen.storyboard in Resources */,
 				2496DB6C23E2C79F00991F79 /* Home.storyboard in Resources */,
 				2496DB7423E2CC8500991F79 /* Calender.storyboard in Resources */,
-				2496DB7623E2CC9100991F79 /* Search.storyboard in Resources */,
+				2496DB7623E2CC9100991F79 /* SearchVet.storyboard in Resources */,
 				2496DB6E23E2C81800991F79 /* Login.storyboard in Resources */,
 				242F8E3123D6E23A00F49853 /* GoogleService-Info.plist in Resources */,
 				242F8E0A23D6DFFB00F49853 /* Assets.xcassets in Resources */,

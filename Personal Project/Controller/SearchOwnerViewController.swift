@@ -160,9 +160,6 @@ extension SearchOwnerViewController: UISearchBarDelegate{
 //            if error == nil {
 //                for document in querySnapshot!.documents {
 //
-//
-//
-//
 //                }
 //            }
 //        }
