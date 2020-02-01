@@ -9,14 +9,15 @@
 import UIKit
 import Firebase
 import FacebookCore
-import GoogleSignIn
 import FirebaseAuth
+import FirebaseFirestore
+import GoogleSignIn
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
-
+    
     var window: UIWindow?
-
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
@@ -59,7 +60,47 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             }
             
             print("Google Login Sucessfully!")
+            
+            //self.toNextpage()
+            
+            NotificationCenter.default.post(name: Notification.Name("toSearchOwnerPage"), object: nil)
+            
+            self.addToDatabase()
+            
         }
+        
+    }
+    
+    //    func toNextpage() {
+    //
+    //        guard let vc = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(identifier: "searchOwnerPage") as? SearchOwnerViewController else { return }
+    //       //vc.navigationController?.pushViewController(vc, animated: true)
+    //        window?.rootViewController = vc
+    //
+    //    }
+    
+    func addToDatabase() {
+        
+        guard let id = Auth.auth().currentUser?.uid,
+            let userEmail = Auth.auth().currentUser?.email,
+            let userName = Auth.auth().currentUser?.displayName,
+            let userPhoto = Auth.auth().currentUser?.photoURL?.absoluteString else { return }
+        
+        let usersData = UsersData(name: userName, email: userEmail, image: userPhoto)
+        
+        Firestore.firestore().collection("users").document(id).setData(usersData.toDict, completion: { (error) in
+            if error == nil {
+                
+                UserDefaults.standard.set(true, forKey: "logInOrNot")
+                UserDefaults.standard.set(userEmail, forKey: "email")
+                UserDefaults.standard.set(userName, forKey: "userName")
+                UserDefaults.standard.set(userPhoto, forKey: "userPhoto")
+                
+                print("DB added successfully")
+            } else {
+                print("Added failed")
+            }
+        })
         
     }
     
