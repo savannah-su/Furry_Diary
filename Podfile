@@ -16,6 +16,9 @@ target 'Personal Project' do
   # add Goole sign in
   pod 'GoogleSignIn' 
 
+  # add IQKeyboard
+  pod 'IQKeyboardManagerSwift'
+
   # add pods for any other desired Firebase products
   # https://firebase.google.com/docs/ios/setup#available-pods
 
