@@ -10,13 +10,18 @@ import UIKit
 
 class PetInfoViewController: UIViewController {
     
+    @IBOutlet weak var coOwnerImage: UIImageView!
     @IBOutlet weak var coOwnerLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBAction func createButton(_ sender: Any) {
     }
     
+    var imageURL = ""
     let titleArray = ["名字", "種類", "品種", "特徵", "生日", "晶片號碼", "是否絕育", "備註"]
     let placeholderArray = ["輸入寵物名字", "選擇寵物種類", "輸入寵物品種", "輸入寵物特徵與毛色", "輸入寵物生日", "輸入寵物晶片號碼", "選擇是否絕育及絕育日期"]
+    
+    let birthPicker = UIDatePicker()
+    let showBirth = DateFormatter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,11 +29,58 @@ class PetInfoViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
+        let url = URL(string: imageURL)
+        let data = try! Data(contentsOf: url!)
+        coOwnerImage.image = UIImage(data: data)
+        
         tableView.separatorColor = .white
+        setBirthPicker()
         
         // Do any additional setup after loading the view.
     }
     
+    func setBirthPicker() {
+        
+        showBirth.dateFormat = "yyyy-MM-dd"
+        birthPicker.datePickerMode = .date
+        birthPicker.locale = Locale(identifier: "zh_TW")
+        birthPicker.addTarget(self, action: #selector(changeBirth), for: .valueChanged)
+        
+    }
+    
+    @objc func changeBirth() {
+        
+        if let firstResponder = view.window?.firstResponder {
+            // do something with `firstResponder`
+            
+            print(firstResponder)
+            
+            guard let textField = firstResponder as? UITextField else { return }
+            
+            let dateFormatter = DateFormatter()
+            
+            dateFormatter.dateFormat = "yyyy/MM/dd"
+            
+            textField.text = dateFormatter.string(from: birthPicker.date)
+        }
+        
+    }
+    
+}
+
+extension UIView {
+    
+    var firstResponder: UIView? {
+        guard !isFirstResponder else { return self }
+
+        for subview in subviews {
+            if let firstResponder = subview.firstResponder {
+                return firstResponder
+            }
+        }
+
+        return nil
+    }
 }
 
 extension PetInfoViewController: UITableViewDelegate {
@@ -72,6 +124,8 @@ extension PetInfoViewController: UITableViewDataSource {
         case 4:
             cell.titleLabel.text = titleArray[4]
             cell.contentField.placeholder = placeholderArray[4]
+            cell.contentField.inputView = birthPicker
+            
             return cell
             
         case 5:
@@ -93,31 +147,6 @@ extension PetInfoViewController: UITableViewDataSource {
             cell.contentTextView.layer.borderColor = UIColor(red: 199/255.0, green: 199/255.0, blue: 199/255.0, alpha: 1).cgColor
             return cell
         }
-        
-        //        if indexPath.row == 0 {
-        //
-        //        guard let cell = tableView.dequeueReusableCell(withIdentifier: "Text Field Cell", for: indexPath) as? TextFieldCell else {
-        //            return UITableViewCell()
-        //        }
-        //
-        //        cell.titleLabel.text = "名字"
-        //        cell.contentField.placeholder = "輸入寵物名字"
-        //
-        //        return cell
-        //
-        //        } else if indexPath.row == 1 {
-        //
-        //            guard let cell = tableView.dequeueReusableCell(withIdentifier: "Text View Cell", for: indexPath) as? TextViewCell else {
-        //                return UITableViewCell()
-        //            }
-        //
-        //            cell.titleLabel.text = "備註"
-        //            cell.contentTextView.layer.borderColor = UIColor(red: 199/255.0, green: 199/255.0, blue: 199/255.0, alpha: 1).cgColor
-        //
-        //            return cell
-        //        }
-        
-        return UITableViewCell()
     }
     
 }

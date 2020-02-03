@@ -18,6 +18,8 @@ class SearchOwnerViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var currentUserLabel: UILabel!
     
+    var indexRow = 0
+    
     var searchEmpty: Bool = true
     
     var ownerData = [UsersData]() {
@@ -90,10 +92,20 @@ class SearchOwnerViewController: UIViewController {
     
     func toNextpage() {
         
-        guard let vc = storyboard?.instantiateViewController(identifier: "PetInfoPage") as? PetInfoViewController else { return }
-        show(vc, sender: nil)
+//        guard let vc = storyboard?.instantiateViewController(identifier: "PetInfoPage") as? PetInfoViewController else { return }
+//        show(vc, sender: nil)
+        
+      performSegue(withIdentifier: "EnterPetInfo", sender: nil)
+        
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "EnterPetInfo" {
+        
+        let vc = segue.destination as? PetInfoViewController
+            vc?.imageURL = ownerData[indexRow].image
+        }
+    }
 }
 
 extension SearchOwnerViewController: UITableViewDelegate{
@@ -103,6 +115,8 @@ extension SearchOwnerViewController: UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        self.indexRow = indexPath.row
         
         toNextpage()
     }
@@ -146,25 +160,15 @@ extension SearchOwnerViewController: UISearchBarDelegate{
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
         searchEmpty = false
+        searchOwner = ownerData.filter { user in
+            
+//            return $0.contains(searchBar.text!)
+            
+            
+            return true
+        }
         
-        self.searchOwner = []
 
-//        for data in self.ownerData {
-
-//            if data.lowercaseString.hasPrefix(searchText.lowercaseString) {
-//                self.searchOwner.append(data)
-//            }
-//        }
-        
-//        var emailPattern: String = "\"
-//
-//        emailPattern.append(contentsOf: searchText)
-//        emailPattern.append(contentsOf: "\")
-        
-//        ownerData.map { info in
-//
-//
-//        }
 
 //        Firestore.firestore().collection("users").whereField("name", isEqualTo: searchBar.text).getDocuments { (querySnapshot, error) in
 //
