@@ -61,17 +61,28 @@ class SearchOwnerViewController: UIViewController {
     }
     
     func getOwnerData() {
+        
         Firestore.firestore().collection("users").getDocuments { (querySnapshot, error) in
             if error == nil {
                 for document in querySnapshot!.documents {
                     
+                    guard let userName = UserDefaults.standard.value(forKey: "userName") as? String else { return }
                     guard let name = document.data()["name"] as? String,
                         let image = document.data()["image"] as? String,
                         let email = document.data()["email"] as? String  else { return }
                     
-                    let usersData = UsersData(name: name, email: email, image: image)
-                    
-                    self.ownerData.append(usersData)
+                    if name == userName {
+                        
+                        //break, return, continue
+                        continue
+                        
+                    } else {
+                        
+                        let usersData = UsersData(name: name, email: email, image: image)
+                        
+                        self.ownerData.append(usersData)
+                        
+                    }
                 }
             }
         }
@@ -109,7 +120,7 @@ extension SearchOwnerViewController: UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ownerCell", for: indexPath) as? OwnerTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "Owner Cell", for: indexPath) as? OwnerTableViewCell else {
             return UITableViewCell()
         }
         

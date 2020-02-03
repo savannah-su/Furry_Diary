@@ -12,6 +12,7 @@ import FacebookCore
 import FirebaseAuth
 import FirebaseFirestore
 import GoogleSignIn
+import IQKeyboardManagerSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
@@ -28,6 +29,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         //google login
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         GIDSignIn.sharedInstance().delegate = self
+        
+        IQKeyboardManager.shared.enable = true
         
         return true
     }
@@ -61,10 +64,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             
             print("Google Login Sucessfully!")
             
-            //self.toNextpage()
-            
-            NotificationCenter.default.post(name: Notification.Name("toSearchOwnerPage"), object: nil)
-            
             self.addToDatabase()
             
         }
@@ -95,6 +94,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                 UserDefaults.standard.set(userEmail, forKey: "email")
                 UserDefaults.standard.set(userName, forKey: "userName")
                 UserDefaults.standard.set(userPhoto, forKey: "userPhoto")
+                
+                //self.toNextpage()
+                NotificationCenter.default.post(name: Notification.Name("toSearchOwnerPage"), object: nil)
+                
                 
                 print("DB added successfully")
             } else {

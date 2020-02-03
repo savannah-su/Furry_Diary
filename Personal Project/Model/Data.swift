@@ -9,6 +9,7 @@
 import Foundation
 
 struct UsersData {
+    
     let name: String
     let email: String
     let image: String
@@ -20,4 +21,22 @@ struct UsersData {
             "image": image
             ]
     }
+}
+
+struct PetInfo {
+    
+    let ownerName: [String]
+    let ownerImage: [String]
+    let ownerEmail: [String]
+    let petImage: [String]
+    let petName: String
+    let species: String
+    let breed: String?
+    let birth: String?
+    let chip: String?
+    let neuter: Bool
+    let neuterDate: String?
+    let memo: String?
+    
+    
 }

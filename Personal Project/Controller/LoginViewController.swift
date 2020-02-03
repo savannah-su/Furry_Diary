@@ -58,9 +58,8 @@ class LoginViewController: UIViewController {
                     self.addToDatabase()
                     
                     self.dismiss(animated: true, completion: nil)
-                    
-                    self.toNextpage()
                 }
+                
             } else {
                 print("FB login failed")
             }
@@ -88,22 +87,24 @@ class LoginViewController: UIViewController {
             let userName = Auth.auth().currentUser?.displayName,
             let userPhoto = Auth.auth().currentUser?.photoURL?.absoluteString else { return }
         
-            let usersData = UsersData(name: userName, email: userEmail, image: userPhoto)
+        let usersData = UsersData(name: userName, email: userEmail, image: userPhoto)
         
         Firestore.firestore().collection("users").document(id).setData(usersData.toDict, completion: { (error) in
             
-                if error == nil {
-                    
-                    UserDefaults.standard.set(true, forKey: "logInOrNot")
-                    UserDefaults.standard.set(userEmail, forKey: "email")
-                    UserDefaults.standard.set(userName, forKey: "userName")
-                    UserDefaults.standard.set(userPhoto, forKey: "userPhoto")
-                    
-                    print("DB added successfully")
-                    
-                } else {
-                    print("Added failed")
-                }
+            if error == nil {
+                
+                UserDefaults.standard.set(true, forKey: "logInOrNot")
+                UserDefaults.standard.set(userEmail, forKey: "email")
+                UserDefaults.standard.set(userName, forKey: "userName")
+                UserDefaults.standard.set(userPhoto, forKey: "userPhoto")
+                
+                self.toNextpage()
+                
+                print("DB added successfully")
+                
+            } else {
+                print("Added failed")
+            }
         })
         
     }
