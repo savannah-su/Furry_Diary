@@ -201,7 +201,7 @@
                         <outlet property="currentUserLabel" destination="IC6-yU-jaq" id="bXy-bI-mA9"/>
                         <outlet property="searchBar" destination="EAM-5Q-bxQ" id="mgd-LO-Rby"/>
                         <outlet property="tableView" destination="1kD-cG-G1m" id="GOH-Dm-oyP"/>
-                        <segue destination="pFM-r8-lXy" kind="show" id="kNp-tl-u91"/>
+                        <segue destination="pFM-r8-lXy" kind="show" identifier="EnterPetInfo" id="kNp-tl-u91"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3It-aq-TxA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -219,18 +219,35 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4EM-UR-2ww">
                                 <rect key="frame" x="0.0" y="88" width="414" height="50"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="共同飼主為" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OsT-tV-RJC">
-                                        <rect key="frame" x="157" y="12.5" width="100" height="25"/>
-                                        <fontDescription key="fontDescription" name="Verdana-BoldItalic" family="Verdana" pointSize="20"/>
-                                        <color key="textColor" red="0.24711078410000001" green="0.2274727523" blue="0.22742256520000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="bZ7-bi-fwS">
+                                        <rect key="frame" x="292" y="10" width="106" height="30"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="共同飼主" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OsT-tV-RJC">
+                                                <rect key="frame" x="0.0" y="0.0" width="68" height="30"/>
+                                                <fontDescription key="fontDescription" name="Verdana-BoldItalic" family="Verdana" pointSize="17"/>
+                                                <color key="textColor" red="0.24711078410000001" green="0.2274727523" blue="0.22742256520000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="iG6-HA-APr">
+                                                <rect key="frame" x="76" y="0.0" width="30" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="30" id="aoV-aw-9Ts"/>
+                                                    <constraint firstAttribute="height" constant="30" id="uaz-nt-Fxn"/>
+                                                </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="15"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </imageView>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
-                                    <constraint firstItem="OsT-tV-RJC" firstAttribute="centerY" secondItem="4EM-UR-2ww" secondAttribute="centerY" id="Msr-nR-xGp"/>
+                                    <constraint firstAttribute="trailing" secondItem="bZ7-bi-fwS" secondAttribute="trailing" constant="16" id="JWE-cR-Hqj"/>
+                                    <constraint firstItem="bZ7-bi-fwS" firstAttribute="centerY" secondItem="4EM-UR-2ww" secondAttribute="centerY" id="dux-3z-YPd"/>
                                     <constraint firstAttribute="height" constant="50" id="o4A-wD-F4M"/>
-                                    <constraint firstItem="OsT-tV-RJC" firstAttribute="centerX" secondItem="4EM-UR-2ww" secondAttribute="centerX" id="qUj-Kr-Obw"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kDG-Nq-AgQ">
@@ -257,13 +274,13 @@
                                 <rect key="frame" x="0.0" y="146" width="414" height="606"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <button key="tableHeaderView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="0NF-1K-MK3">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="55"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="115"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <state key="normal" title="上傳照片"/>
                                 </button>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Text Field Cell" rowHeight="80" id="PsW-vc-oXL" customClass="TextFieldCell" customModule="Personal_Project" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="83" width="414" height="80"/>
+                                        <rect key="frame" x="0.0" y="143" width="414" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PsW-vc-oXL" id="gE1-2X-ii8">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
@@ -306,7 +323,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Text View Cell" rowHeight="298" id="YVZ-oK-I5h" customClass="TextViewCell" customModule="Personal_Project" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="163" width="414" height="298"/>
+                                        <rect key="frame" x="0.0" y="223" width="414" height="298"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="YVZ-oK-I5h" id="8Bl-a0-jvU">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="298"/>
@@ -362,7 +379,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="80" id="jrH-Nb-7Wb">
-                                        <rect key="frame" x="0.0" y="461" width="414" height="80"/>
+                                        <rect key="frame" x="0.0" y="521" width="414" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jrH-Nb-7Wb" id="djT-zK-Yhq">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
@@ -411,6 +428,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="輸入寵物資料" id="nmU-5X-8Cy"/>
                     <connections>
+                        <outlet property="coOwnerImage" destination="iG6-HA-APr" id="K5r-b9-0G0"/>
                         <outlet property="coOwnerLabel" destination="OsT-tV-RJC" id="k37-ng-Nin"/>
                         <outlet property="tableView" destination="NNl-Aj-RYs" id="fFG-Dt-T9U"/>
                     </connections>
