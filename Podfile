@@ -10,9 +10,18 @@ target 'Personal Project' do
   # add the Firebase pod for Google Analytics
   pod 'Firebase/Analytics'
   pod 'Firebase/Auth'
+  pod 'Firebase/Firestore'
+  pod 'Firebase/Core'
+  pod 'Firebase/Storage'
 
   # add Goole sign in
   pod 'GoogleSignIn' 
+
+  # add IQKeyboard
+  pod 'IQKeyboardManagerSwift'
+
+  # add JGProgressHUD
+  pod 'JGProgressHUD'
 
   # add pods for any other desired Firebase products
   # https://firebase.google.com/docs/ios/setup#available-pods
