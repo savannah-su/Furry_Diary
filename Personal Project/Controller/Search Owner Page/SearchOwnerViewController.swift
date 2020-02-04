@@ -71,7 +71,8 @@ class SearchOwnerViewController: UIViewController {
                     guard let userName = UserDefaults.standard.value(forKey: "userName") as? String else { return }
                     guard let name = document.data()["name"] as? String,
                         let image = document.data()["image"] as? String,
-                        let email = document.data()["email"] as? String  else { return }
+                        let email = document.data()["email"] as? String,
+                        let id = document.data()["id"] as? String else { return }
                     
                     if name == userName {
                         
@@ -80,7 +81,7 @@ class SearchOwnerViewController: UIViewController {
                         
                     } else {
                         
-                        let usersData = UsersData(name: name, email: email, image: image)
+                        let usersData = UsersData(name: name, email: email, image: image, id: id)
                         
                         self.ownerData.append(usersData)
                         
@@ -103,7 +104,9 @@ class SearchOwnerViewController: UIViewController {
         if segue.identifier == "EnterPetInfo" {
         
         let vc = segue.destination as? PetInfoViewController
-            vc?.imageURL = ownerData[indexRow].image
+            vc?.coOwnerImageURL = ownerData[indexRow].image
+            vc?.coOwnerName = ownerData[indexRow].name
+            vc?.coOwnerID = ownerData[indexRow].id
         }
     }
 }

@@ -19,6 +19,9 @@
 		242F8E1823D6DFFC00F49853 /* Personal_ProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242F8E1723D6DFFC00F49853 /* Personal_ProjectTests.swift */; };
 		242F8E2323D6DFFC00F49853 /* Personal_ProjectUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242F8E2223D6DFFC00F49853 /* Personal_ProjectUITests.swift */; };
 		242F8E3123D6E23A00F49853 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 242F8E3023D6E23A00F49853 /* GoogleService-Info.plist */; };
+		243230F423E83C68008C512B /* CoOwnerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243230F323E83C68008C512B /* CoOwnerCell.swift */; };
+		243230F623E83D34008C512B /* UploadIamgeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243230F523E83D34008C512B /* UploadIamgeCell.swift */; };
+		2455D3DC23E95EA30095D039 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2455D3DB23E95EA30095D039 /* UIViewController+Extension.swift */; };
 		24874E7723E71EBC007810B0 /* TextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24874E7623E71EBC007810B0 /* TextFieldCell.swift */; };
 		24874E7B23E71FDF007810B0 /* TextViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24874E7A23E71FDF007810B0 /* TextViewCell.swift */; };
 		2496DB6C23E2C79F00991F79 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2496DB6B23E2C79F00991F79 /* Home.storyboard */; };
@@ -72,6 +75,9 @@
 		242F8E2223D6DFFC00F49853 /* Personal_ProjectUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Personal_ProjectUITests.swift; sourceTree = "<group>"; };
 		242F8E2423D6DFFC00F49853 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		242F8E3023D6E23A00F49853 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		243230F323E83C68008C512B /* CoOwnerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CoOwnerCell.swift; path = "/Users/savannahsu/Desktop/Personal-Project/Personal Project/Controller/Enter Pet Info Page/CoOwnerCell.swift"; sourceTree = "<absolute>"; };
+		243230F523E83D34008C512B /* UploadIamgeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadIamgeCell.swift; sourceTree = "<group>"; };
+		2455D3DB23E95EA30095D039 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		24874E7623E71EBC007810B0 /* TextFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldCell.swift; sourceTree = "<group>"; };
 		24874E7A23E71FDF007810B0 /* TextViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewCell.swift; sourceTree = "<group>"; };
 		2496DB6B23E2C79F00991F79 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
@@ -149,6 +155,7 @@
 			children = (
 				2402B3BE23E5542500E8D009 /* Data.swift */,
 				2403C46C23E5723A00B73021 /* UserManager.swift */,
+				2455D3DB23E95EA30095D039 /* UIViewController+Extension.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -222,6 +229,8 @@
 				2403C46A23E56D8900B73021 /* PetInfoViewController.swift */,
 				24874E7623E71EBC007810B0 /* TextFieldCell.swift */,
 				24874E7A23E71FDF007810B0 /* TextViewCell.swift */,
+				243230F323E83C68008C512B /* CoOwnerCell.swift */,
+				243230F523E83D34008C512B /* UploadIamgeCell.swift */,
 			);
 			path = "Enter Pet Info Page";
 			sourceTree = "<group>";
@@ -541,7 +550,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				2402B3BF23E5542500E8D009 /* Data.swift in Sources */,
+				2455D3DC23E95EA30095D039 /* UIViewController+Extension.swift in Sources */,
 				2402B3BD23E4163A00E8D009 /* OwnerTableViewCell.swift in Sources */,
+				243230F623E83D34008C512B /* UploadIamgeCell.swift in Sources */,
 				2496DB7D23E2FA2600991F79 /* LoginViewController.swift in Sources */,
 				2496DB7823E2DC5C00991F79 /* TabBarController.swift in Sources */,
 				2402B3BB23E4129000E8D009 /* SearchOwnerViewController.swift in Sources */,
@@ -549,6 +560,7 @@
 				2403C46D23E5723A00B73021 /* UserManager.swift in Sources */,
 				24874E7723E71EBC007810B0 /* TextFieldCell.swift in Sources */,
 				2403C46B23E56D8900B73021 /* PetInfoViewController.swift in Sources */,
+				243230F423E83C68008C512B /* CoOwnerCell.swift in Sources */,
 				24874E7B23E71FDF007810B0 /* TextViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

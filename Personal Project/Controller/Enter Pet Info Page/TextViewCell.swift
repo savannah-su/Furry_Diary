@@ -13,6 +13,8 @@ class TextViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var contentTextView: UITextView!
     
+    var touchHandler: ( (String) -> Void )?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -35,14 +37,20 @@ extension TextViewCell: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         if contentTextView.textColor == UIColor.lightGray {
             contentTextView.text = nil
-            contentTextView.textColor = UIColor(red: 199/255.0, green: 199/255.0, blue: 199/255.0, alpha: 1)
+            contentTextView.textColor = .black
         }
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
+        
         if contentTextView.text.isEmpty {
             contentTextView.text = "輸入寵物喜好及個性"
             contentTextView.textColor = UIColor.lightGray
         }
+        
+        guard let text = contentTextView.text else { return }
+        
+        touchHandler?(text)
     }
 }
+

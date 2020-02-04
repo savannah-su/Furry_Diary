@@ -82,14 +82,14 @@ class LoginViewController: UIViewController {
     
     func addToDatabase() {
         
-        guard let id = Auth.auth().currentUser?.uid,
+        guard let userID = Auth.auth().currentUser?.uid,
             let userEmail = Auth.auth().currentUser?.email,
             let userName = Auth.auth().currentUser?.displayName,
             let userPhoto = Auth.auth().currentUser?.photoURL?.absoluteString else { return }
         
-        let usersData = UsersData(name: userName, email: userEmail, image: userPhoto)
+        let usersData = UsersData(name: userName, email: userEmail, image: userPhoto, id: userID)
         
-        Firestore.firestore().collection("users").document(id).setData(usersData.toDict, completion: { (error) in
+        Firestore.firestore().collection("users").document(userID).setData(usersData.toDict, completion: { (error) in
             
             if error == nil {
                 
@@ -97,6 +97,7 @@ class LoginViewController: UIViewController {
                 UserDefaults.standard.set(userEmail, forKey: "email")
                 UserDefaults.standard.set(userName, forKey: "userName")
                 UserDefaults.standard.set(userPhoto, forKey: "userPhoto")
+                UserDefaults.standard.set(userID, forKey: "userID")
                 
                 self.toNextpage()
                 
