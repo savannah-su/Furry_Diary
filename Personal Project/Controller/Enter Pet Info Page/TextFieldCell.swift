@@ -8,49 +8,82 @@
 
 import UIKit
 
-enum DateType {
+enum KeyBoardType {
     
+    case date(Date, String)
+    
+    case picker([String])
+    
+    case normal
 }
-
-enum generalType{
-    
-    case optionOne
-    case optionTwo
-    case optionThree
-    
-//    var species: String {
-//        switch self {
-//        case .optionOne: return "狗狗"
-//        case .optionTwo: return "貓咪"
-//        case .optionThree: return "其他"
-//        }
-//    }
-}
-
-//var neuter: String {
-//    switch self {
-//    case .optionOne: return "尚未絕育"
-//    case .optionTwo: return "已絕育"
-//    }
-//}
 
 class TextFieldCell: UITableViewCell {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var contentField: UITextField!
     
-    var datePiker = UIDatePicker()
-    var pickerView = UIPickerView()
-    var speciesArray = ["狗狗", "貓咪", "其他"]
-    var neuterArray = ["尚未絕育", "已絕育"]
+    var touchHandler: ( (String) -> Void )?
+    
+    lazy var datePiker: UIDatePicker = {
+        
+        let picker = UIDatePicker()
+        
+        picker.locale = Locale(identifier: "zh_TW")
+        
+        picker.addTarget(self, action: #selector(didSeletedDate(_:)), for: .valueChanged)
+        
+        return picker
+    }()
+    
+    lazy var pickerView: UIPickerView = {
+        
+        let picker = UIPickerView()
+    
+        picker.dataSource = self
+        
+        picker.delegate = self
+        
+        return picker
+    }()
+        
+    lazy var dateFormatter = DateFormatter()
+    
+    var pickerViewDatas: [String] = []
+    
+    var keyboardType: KeyBoardType = .normal {
+        
+        didSet {
+            
+            switch keyboardType {
+            
+            case .date(let date, let format):
+                
+                contentField.inputView = datePiker
+                
+                datePiker.date = date
+                
+                dateFormatter.dateFormat = format
+                
+                contentField.text = dateFormatter.string(from: date)
+                
+            case .picker(let datas):
+                
+                contentField.inputView = pickerView
+                
+                pickerViewDatas = datas
+                
+            case .normal:
+                
+                contentField.inputView = nil
+            
+            }
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
         contentField.delegate = self
-        pickerView.dataSource = self
-        pickerView.delegate = self
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -58,30 +91,57 @@ class TextFieldCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
+    @objc func didSeletedDate(_ sender: UIDatePicker) {
+        
+        contentField.text = dateFormatter.string(from: sender.date)
+    }
 
 }
 
 extension TextFieldCell: UITextFieldDelegate {
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    
         textField.resignFirstResponder()
+        
+        print("456")
+        
         return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        
+        guard let text = textField.text else { return }
+        
+        touchHandler?(text)
+        
+        print("123")
     }
 }
 
 extension TextFieldCell: UIPickerViewDelegate {
     
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
+        contentField.text = pickerViewDatas[row]
+    }
 }
 
 extension TextFieldCell: UIPickerViewDataSource {
+    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
+    
         return 1
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return speciesArray.count
+        
+        return pickerViewDatas.count
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return speciesArray[row]
+        
+        return pickerViewDatas[row]
     }
 }
