@@ -303,7 +303,15 @@ extension PetInfoViewController: UITableViewDataSource {
 extension PetInfoViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return selectedPhoto.count + 2
+        
+        if selectedPhoto.count == 0 {
+            
+            return 2
+            
+        } else {
+            
+            return selectedPhoto.count + 1
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -312,7 +320,9 @@ extension PetInfoViewController: UICollectionViewDataSource {
         
         cell.layer.borderColor = UIColor(red: 199/255.0, green: 199/255.0, blue: 199/255.0, alpha: 1).cgColor
         
-        if indexPath.row == selectedPhoto.count {
+        
+        
+        if indexPath.row >= selectedPhoto.count {
             cell.imageButton.isHidden = false
             cell.uplodaImage.isHidden = true
         } else {
