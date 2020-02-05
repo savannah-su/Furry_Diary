@@ -2,9 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/savannahsu/Desktop/Personal-Project/Personal Project/Controller/Enter Pet Info Page/CoOwnerCell.swift">
-   </FileRef>
-   <FileRef
       location = "group:Personal Project.xcodeproj">
    </FileRef>
    <FileRef

@@ -303,7 +303,7 @@ extension PetInfoViewController: UITableViewDataSource {
 extension PetInfoViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return selectedPhoto.count + 1
+        return selectedPhoto.count + 2
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
