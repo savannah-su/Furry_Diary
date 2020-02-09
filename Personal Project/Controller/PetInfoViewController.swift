@@ -21,10 +21,12 @@ class PetInfoViewController: UIViewController {
         
         print("---------------")
         print(petInfo)
-        picToStorage()
-//        toDataBase()
+        
+        picUpload()
+        
+        dismiss(animated: true, completion: nil)
+        
     }
-    
     
     var count = 0
     var coOwnerImageURL = ""
@@ -81,7 +83,7 @@ class PetInfoViewController: UIViewController {
         present(controller, animated: true, completion: nil)
     }
     
-    func picToStorage() {
+    func picUpload() {
         
         
         for index in 0 ..< selectedPhoto.count {
@@ -94,7 +96,7 @@ class PetInfoViewController: UIViewController {
                 
                 if error != nil {
                     print("To Storage Failed")
-                  return
+                    return
                 }
                 
                 storageRef.downloadURL { (url, error) in
@@ -118,14 +120,14 @@ class PetInfoViewController: UIViewController {
     }
     
     func toDataBase() {
-      
+        
         guard let currentUserID = UserDefaults.standard.value(forKey: "userID") else { return }
         guard let currentUserName = UserDefaults.standard.value(forKey: "userName") else { return }
         guard let currentUserImage = UserDefaults.standard.value(forKey: "userPhoto") else { return }
         
         self.petInfo.ownersID = [currentUserID as! String, coOwnerID]
         self.petInfo.ownersName = [currentUserName as! String, coOwnerName]
-                self.petInfo.ownersImage = [currentUserImage as! String, coOwnerImageURL]
+        self.petInfo.ownersImage = [currentUserImage as! String, coOwnerImageURL]
         self.petInfo.petImage = photoURL
         
         Firestore.firestore().collection("pets").document(petID).setData(petInfo.toDict, completion: { (error) in
@@ -239,7 +241,7 @@ extension PetInfoViewController: UITableViewDataSource {
         case 4:
             cell.titleLabel.text = titleArray[4]
             cell.contentField.placeholder = placeholderArray[4]
-            cell.keyboardType = .date(Date(), "yyyy/MM/dd")
+            cell.keyboardType = .date(Date(), "yyyy-MM-dd")
             cell.touchHandler = { [weak self] text in
                 
                 self?.petInfo.birth = text
@@ -288,16 +290,29 @@ extension PetInfoViewController: UITableViewDataSource {
         default:
             
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "Co Owner Cell", for: indexPath) as? CoOwnerCell else { return UITableViewCell() }
+            
             cell.titleLabel.text = titleArray[8]
-            let url = URL(string: coOwnerImageURL)
-            let data = try! Data(contentsOf: url!)
-            cell.ownerImage?.image = UIImage(data: data)
-            cell.ownerImage?.layer.cornerRadius = 15
+            
+            if coOwnerImageURL != "" {
+                
+                cell.searchButton.isHidden = true
+                cell.ownerImage.isHidden = false
+                
+                let url = URL(string: coOwnerImageURL)
+                let data = try! Data(contentsOf: url!)
+                cell.ownerImage?.image = UIImage(data: data)
+                cell.ownerImage?.layer.cornerRadius = 15
+                
+            } else {
+                
+                cell.searchButton.isHidden = false
+                cell.ownerImage.isHidden = true
+            }
+            
             return cell
             
         }
     }
-    
 }
 
 extension PetInfoViewController: UICollectionViewDataSource {

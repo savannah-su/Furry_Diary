@@ -10,6 +10,13 @@ import UIKit
 
 class HomePageViewController: UIViewController {
 
+    @IBAction func createButton(_ sender: Any) {
+       
+        let vc = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(identifier: "Create Pet Page") as? PetInfoViewController
+        
+        vc?.isModalInPresentation = true
+    }
+    
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -20,6 +27,13 @@ class HomePageViewController: UIViewController {
         
         tableView.separatorColor = .none
 
+        let coloredAppearance = UINavigationBarAppearance()
+        coloredAppearance.configureWithOpaqueBackground()
+        coloredAppearance.backgroundColor = .G2
+        coloredAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+               
+        UINavigationBar.appearance().standardAppearance = coloredAppearance
+        UINavigationBar.appearance().scrollEdgeAppearance = coloredAppearance
         // Do any additional setup after loading the view.
     }
 

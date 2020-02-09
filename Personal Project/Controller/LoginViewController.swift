@@ -31,6 +31,7 @@ class LoginViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(Nextpage), name: Notification.Name("toSearchOwnerPage"), object: nil)
         
+        
         // Do any additional setup after loading the view.
     }
     

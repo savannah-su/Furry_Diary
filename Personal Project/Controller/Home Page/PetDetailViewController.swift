@@ -10,6 +10,14 @@ import UIKit
 
 class PetDetailViewController: UIViewController {
 
+    @IBAction func backButton(_ sender: Any) {
+        
+        navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func editButton(_ sender: Any) {
+    }
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var exceedView: UIView!
     let firstImage: UIImageView = UIImageView()
@@ -74,7 +82,7 @@ class PetDetailViewController: UIViewController {
 extension PetDetailViewController: UITableViewDataSource {
    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 30
+        return 10
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -100,23 +108,23 @@ extension PetDetailViewController: UITableViewDelegate {
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
-        guard var widthConstraint = widthConstraint else { return }
-
-        topConstraint?.constant = -(tableView.contentOffset.y - (-200)) / 3
-
-        print("---", -(tableView.contentOffset.y - (-200)) / 3)
-
-        firstImage.transform = CGAffineTransform(scaleX: (tableView.contentOffset.y - (-200)) / 200 * 0.5 + 1, y: (tableView.contentOffset.y - (-200)) / 200 * 0.5 + 1)
-        
-        widthConstraint.isActive = false
-
-        widthConstraint = firstImage.widthAnchor.constraint(
-            equalTo: view.widthAnchor,
-            multiplier: (tableView.contentOffset.y - (-200)) / 200 * 0.5 + 1,
-            constant: 0
-        )
-
-        widthConstraint.isActive = true
+//        guard var widthConstraint = widthConstraint else { return }
+//
+//        topConstraint?.constant = -(tableView.contentOffset.y - (-200)) / 3
+//
+//        print("---", -(tableView.contentOffset.y - (-200)) / 3)
+//
+////        firstImage.transform = CGAffineTransform(scaleX: (tableView.contentOffset.y - (-200)) / 200 * 0.5 + 1, y: (tableView.contentOffset.y - (-200)) / 200 * 0.5 + 1)
+//        
+//        widthConstraint.isActive = false
+//
+//        widthConstraint = firstImage.widthAnchor.constraint(
+//            equalTo: view.widthAnchor,
+//            multiplier: (tableView.contentOffset.y - (-200)) / 200 * 0.5 + 1,
+//            constant: 0
+//        )
+//
+//        widthConstraint.isActive = true
     }
     
 }

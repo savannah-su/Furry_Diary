@@ -42,6 +42,7 @@ class PetCardCell: UITableViewCell {
         background?.layer.shadowOpacity = 0.5
         background?.layer.shadowRadius = 3
         background?.layer.shadowColor = UIColor(red: 44.0/255.0, green: 62.0/255.0, blue: 80.0/255.0, alpha: 1).cgColor
+   
     }
     
     

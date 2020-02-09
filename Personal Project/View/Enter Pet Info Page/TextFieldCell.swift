@@ -30,6 +30,8 @@ class TextFieldCell: UITableViewCell {
         
         picker.locale = Locale(identifier: "zh_TW")
         
+        picker.datePickerMode = .date
+        
         picker.addTarget(self, action: #selector(didSeletedDate(_:)), for: .valueChanged)
         
         return picker
