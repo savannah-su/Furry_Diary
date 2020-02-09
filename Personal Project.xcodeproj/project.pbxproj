@@ -19,7 +19,7 @@
 		242F8E1823D6DFFC00F49853 /* Personal_ProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242F8E1723D6DFFC00F49853 /* Personal_ProjectTests.swift */; };
 		242F8E2323D6DFFC00F49853 /* Personal_ProjectUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242F8E2223D6DFFC00F49853 /* Personal_ProjectUITests.swift */; };
 		242F8E3123D6E23A00F49853 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 242F8E3023D6E23A00F49853 /* GoogleService-Info.plist */; };
-		2430552423ED425000B9F4E6 /* DetailPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2430552323ED425000B9F4E6 /* DetailPageViewController.swift */; };
+		2430552423ED425000B9F4E6 /* DailyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2430552323ED425000B9F4E6 /* DailyPageViewController.swift */; };
 		2430552723ED42C000B9F4E6 /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2430552623ED42C000B9F4E6 /* ItemCell.swift */; };
 		243230F623E83D34008C512B /* UploadIamgeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243230F523E83D34008C512B /* UploadIamgeCell.swift */; };
 		2455D3DC23E95EA30095D039 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2455D3DB23E95EA30095D039 /* UIViewController+Extension.swift */; };
@@ -84,7 +84,7 @@
 		242F8E2223D6DFFC00F49853 /* Personal_ProjectUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Personal_ProjectUITests.swift; sourceTree = "<group>"; };
 		242F8E2423D6DFFC00F49853 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		242F8E3023D6E23A00F49853 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		2430552323ED425000B9F4E6 /* DetailPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPageViewController.swift; sourceTree = "<group>"; };
+		2430552323ED425000B9F4E6 /* DailyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyPageViewController.swift; sourceTree = "<group>"; };
 		2430552623ED42C000B9F4E6 /* ItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
 		243230F523E83D34008C512B /* UploadIamgeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadIamgeCell.swift; sourceTree = "<group>"; };
 		2455D3DB23E95EA30095D039 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
@@ -235,6 +235,14 @@
 			path = "Personal ProjectUITests";
 			sourceTree = "<group>";
 		};
+		2430552823F00C1400B9F4E6 /* Daily Page */ = {
+			isa = PBXGroup;
+			children = (
+				2430552623ED42C000B9F4E6 /* ItemCell.swift */,
+			);
+			path = "Daily Page";
+			sourceTree = "<group>";
+		};
 		24647FEE23EBF546005DB6E7 /* Pet Detail Page */ = {
 			isa = PBXGroup;
 			children = (
@@ -293,8 +301,8 @@
 				2473A10523EADD4700C8FFE2 /* Home Page */,
 				24647FEE23EBF546005DB6E7 /* Pet Detail Page */,
 				24874E7823E71EC7007810B0 /* Search Owner Page */,
+				2430552823F00C1400B9F4E6 /* Daily Page */,
 				24874E7923E71EF0007810B0 /* Enter Pet Info Page */,
-				2430552623ED42C000B9F4E6 /* ItemCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -307,7 +315,7 @@
 				2402B3BA23E4129000E8D009 /* SearchOwnerViewController.swift */,
 				2403C46A23E56D8900B73021 /* PetInfoViewController.swift */,
 				24647FF123EBF63D005DB6E7 /* Home Page */,
-				2430552323ED425000B9F4E6 /* DetailPageViewController.swift */,
+				2430552323ED425000B9F4E6 /* DailyPageViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -619,7 +627,7 @@
 				2403C46B23E56D8900B73021 /* PetInfoViewController.swift in Sources */,
 				24874E7B23E71FDF007810B0 /* TextViewCell.swift in Sources */,
 				24647FED23EBD08D005DB6E7 /* PetDetailViewController.swift in Sources */,
-				2430552423ED425000B9F4E6 /* DetailPageViewController.swift in Sources */,
+				2430552423ED425000B9F4E6 /* DailyPageViewController.swift in Sources */,
 				2473A10723EADD8400C8FFE2 /* PetCardCell.swift in Sources */,
 				248E9DD123EC4F1700388A3B /* UIColor+Extension.swift in Sources */,
 			);

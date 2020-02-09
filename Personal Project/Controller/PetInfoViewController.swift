@@ -105,7 +105,9 @@ class PetInfoViewController: UIViewController {
                         print("Get URL Failed")
                         return
                     }
+                    
                     guard let backPhotoURL = url else { return }
+                    
                     self.photoURL.append("\(backPhotoURL)")
                     self.count += 1
                 }

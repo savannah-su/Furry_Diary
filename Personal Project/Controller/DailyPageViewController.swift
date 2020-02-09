@@ -8,13 +8,15 @@
 
 import UIKit
 
-class DetailPageViewController: UIViewController {
-
+class DailyPageViewController: UIViewController {
+    
     @IBOutlet weak var collectionView: UICollectionView!
+    
+    let item = ["衛生清潔", "預防計畫", "體重紀錄", "行為症狀"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         collectionView.delegate = self
         collectionView.dataSource = self
         // Do any additional setup after loading the view.
@@ -22,7 +24,7 @@ class DetailPageViewController: UIViewController {
     
 }
 
-extension DetailPageViewController: UICollectionViewDelegateFlowLayout {
+extension DailyPageViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
@@ -36,7 +38,7 @@ extension DetailPageViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-    
+        
         return 26
     }
     
@@ -47,18 +49,24 @@ extension DetailPageViewController: UICollectionViewDelegateFlowLayout {
     
 }
 
-extension DetailPageViewController: UICollectionViewDataSource {
+extension DailyPageViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 8
+        return 4
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
+   
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Item Cell", for: indexPath) as? ItemCell else { return UICollectionViewCell() }
+        
+        for index in 0 ... 3 {
+            
+            let index = indexPath.row
+            cell.itemLabel.text = item[index]
+
+        }
         
         return cell
     }
-    
-    
+   
 }

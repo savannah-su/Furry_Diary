@@ -106,8 +106,8 @@ extension PetDetailViewController: UITableViewDataSource {
 
 extension PetDetailViewController: UITableViewDelegate {
 
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//
 //        guard var widthConstraint = widthConstraint else { return }
 //
 //        topConstraint?.constant = -(tableView.contentOffset.y - (-200)) / 3
@@ -115,7 +115,7 @@ extension PetDetailViewController: UITableViewDelegate {
 //        print("---", -(tableView.contentOffset.y - (-200)) / 3)
 //
 ////        firstImage.transform = CGAffineTransform(scaleX: (tableView.contentOffset.y - (-200)) / 200 * 0.5 + 1, y: (tableView.contentOffset.y - (-200)) / 200 * 0.5 + 1)
-//        
+//
 //        widthConstraint.isActive = false
 //
 //        widthConstraint = firstImage.widthAnchor.constraint(
@@ -125,6 +125,6 @@ extension PetDetailViewController: UITableViewDelegate {
 //        )
 //
 //        widthConstraint.isActive = true
-    }
+//    }
     
 }
