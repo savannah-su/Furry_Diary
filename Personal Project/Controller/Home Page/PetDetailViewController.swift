@@ -19,6 +19,8 @@ class PetDetailViewController: UIViewController {
     @IBAction func backButton(_ sender: Any) {
         
         navigationController?.popViewController(animated: true)
+        
+        NotificationCenter.default.post(name: Notification.Name("Create New Pet"), object: nil)
     }
     
     @IBAction func editButton(_ sender: Any) {

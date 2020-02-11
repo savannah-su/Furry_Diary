@@ -13,6 +13,7 @@ class DailyPageViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     
     let item = ["衛生清潔", "預防計畫", "體重紀錄", "行為症狀"]
+    let itemImage = ["dog-treat", "shield", "libra-2", "pet"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,10 +64,23 @@ extension DailyPageViewController: UICollectionViewDataSource {
             
             let index = indexPath.row
             cell.itemLabel.text = item[index]
+            cell.image.image = UIImage(named: itemImage[index])
 
         }
         
         return cell
     }
    
+}
+
+extension DailyPageViewController: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.row == 3 {
+            
+            guard let vc = UIStoryboard(name: "Daily", bundle: nil).instantiateViewController(identifier: "Behavior Page") as? BehaviorPageViewController else { return }
+            show(vc, sender: nil)
+            
+        }
+    }
 }

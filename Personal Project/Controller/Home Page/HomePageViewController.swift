@@ -32,18 +32,39 @@ class HomePageViewController: UIViewController {
             } else {
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
+                    self.refreshControl.endRefreshing()
                 }
             }
         }
     }
     
+    var refreshControl: UIRefreshControl!
+    
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         
         tableView.dataSource = self
         tableView.delegate = self
         
+        NotificationCenter.default.addObserver(self, selector: #selector(loadData), name: Notification.Name("Create New Pet"), object: nil)
+        
         tableView.separatorColor = .clear
+        
+        getPetData()
+        
+        addRefreshControl()
+    }
+    
+    func addRefreshControl() {
+        
+        refreshControl = UIRefreshControl()
+        tableView.addSubview(refreshControl)
+        refreshControl.addTarget(self, action: #selector(loadData), for: .valueChanged)
+        
+    }
+    
+    @objc func loadData() {
         
         getPetData()
     }
@@ -51,6 +72,8 @@ class HomePageViewController: UIViewController {
     func getPetData() {
         
         Firestore.firestore().collection("pets").getDocuments { (querySnapshot, error) in
+            
+            var petDataFromDB = [PetInfo]()
             
             if error == nil {
                 
@@ -60,7 +83,7 @@ class HomePageViewController: UIViewController {
                         
                         if let petInfo = try document.data(as: PetInfo.self, decoder: Firestore.Decoder()) {
                         
-                        self.petData.append(petInfo)
+                            petDataFromDB.append(petInfo)
                             
                         }
                         
@@ -68,6 +91,7 @@ class HomePageViewController: UIViewController {
                         print(error)
                     }
                 }
+                self.petData = petDataFromDB
             }
         }
     }
@@ -93,7 +117,6 @@ extension HomePageViewController: UITableViewDataSource {
         
         cell.petName.text = petData[indexPath.row].petName
         cell.genderAndOld.text = petData[indexPath.row].gender
-        cell.tag = indexPath.row
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(toDetailPage(_:)))
         cell.background.addGestureRecognizer(tap)
@@ -108,16 +131,13 @@ extension HomePageViewController: UITableViewDataSource {
     @objc func toDetailPage(_ sender: UIGestureRecognizer) {
         
         guard let vc = UIStoryboard(name: "PetDetail", bundle: nil).instantiateViewController(identifier: "Pet Detail Page") as? PetDetailViewController else { return }
-        
-//        vc.petData = petData
+
         guard let cell = sender.view?.superview?.superview as? PetCardCell,
               let indexPath = tableView.indexPath(for: cell)
-        else {
             
+        else {
             return
         }
-        
-//        let data = petData[indexPath.row]
         
         vc.petData = petData[indexPath.row]
         

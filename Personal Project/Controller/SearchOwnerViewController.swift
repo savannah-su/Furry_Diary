@@ -77,6 +77,7 @@ class SearchOwnerViewController: UIViewController {
                 for document in querySnapshot!.documents {
                     
                     guard let userName = UserDefaults.standard.value(forKey: "userName") as? String else { return }
+                    
                     guard let name = document.data()["name"] as? String,
                         let image = document.data()["image"] as? String,
                         let email = document.data()["email"] as? String,

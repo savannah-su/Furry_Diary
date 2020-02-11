@@ -3,7 +3,6 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15703"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -239,7 +238,7 @@
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Gfb-XV-hgP">
                                 <rect key="frame" x="25" y="150" width="364" height="663"/>
-                                <color key="backgroundColor" red="1" green="0.59636612779999998" blue="0.84972930089999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="aQ4-Gx-mir">
                                     <size key="itemSize" width="179" height="222"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -254,6 +253,9 @@
                                             <rect key="frame" x="0.0" y="0.0" width="169" height="200"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JBc-w1-Un8">
+                                                    <rect key="frame" x="10" y="10" width="149" height="180"/>
+                                                </view>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rU2-Th-Ckw">
                                                     <rect key="frame" x="24.5" y="20" width="120" height="120"/>
                                                     <constraints>
@@ -270,14 +272,18 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="yAG-MX-yWw" firstAttribute="centerX" secondItem="oHS-1g-zyA" secondAttribute="centerX" id="0ae-L5-E2N"/>
+                                                <constraint firstAttribute="trailing" secondItem="JBc-w1-Un8" secondAttribute="trailing" constant="10" id="D7Y-52-mc7"/>
+                                                <constraint firstAttribute="bottom" secondItem="JBc-w1-Un8" secondAttribute="bottom" constant="10" id="S27-HU-gkr"/>
+                                                <constraint firstItem="JBc-w1-Un8" firstAttribute="leading" secondItem="oHS-1g-zyA" secondAttribute="leading" constant="10" id="T7M-4F-MUV"/>
                                                 <constraint firstItem="yAG-MX-yWw" firstAttribute="top" secondItem="rU2-Th-Ckw" secondAttribute="bottom" constant="16" id="bmq-c0-aHe"/>
                                                 <constraint firstItem="rU2-Th-Ckw" firstAttribute="top" secondItem="oHS-1g-zyA" secondAttribute="top" constant="20" id="gAg-2u-Ute"/>
+                                                <constraint firstItem="JBc-w1-Un8" firstAttribute="top" secondItem="oHS-1g-zyA" secondAttribute="top" constant="10" id="h8V-wZ-MVU"/>
                                                 <constraint firstItem="rU2-Th-Ckw" firstAttribute="centerX" secondItem="oHS-1g-zyA" secondAttribute="centerX" id="nIn-Zj-z7G"/>
                                             </constraints>
                                         </collectionViewCellContentView>
-                                        <color key="backgroundColor" name="Color"/>
                                         <size key="customSize" width="169" height="200"/>
                                         <connections>
+                                            <outlet property="background" destination="JBc-w1-Un8" id="yaA-ZM-3LH"/>
                                             <outlet property="image" destination="rU2-Th-Ckw" id="MoX-6T-Sdf"/>
                                             <outlet property="itemLabel" destination="yAG-MX-yWw" id="Iei-DH-fEZ"/>
                                         </connections>
@@ -423,8 +429,5 @@
         <image name="medical-selected" width="32" height="32"/>
         <image name="search" width="32" height="32"/>
         <image name="search-selected" width="32" height="32"/>
-        <namedColor name="Color">
-            <color red="0.96700000762939453" green="0.84200000762939453" blue="0.40000000596046448" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-        </namedColor>
     </resources>
 </document>
