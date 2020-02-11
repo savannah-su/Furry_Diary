@@ -10,21 +10,18 @@ import UIKit
 
 class PetCardCell: UITableViewCell {
 
-    @IBOutlet weak var background: UIView!
-    @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var exceedView: UIView!
-    @IBOutlet weak var firstImage: UIImageView!
-    @IBOutlet weak var secondImage: UIImageView!
-    @IBOutlet weak var thirdImage: UIImageView!
-    @IBOutlet weak var fourthImage: UIImageView!
-    @IBOutlet weak var fifthImage: UIImageView!
+    @IBOutlet weak var background: BannerView!
     @IBOutlet weak var petName: UILabel!
     @IBOutlet weak var genderAndOld: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
+//        background.layer.cornerRadius = 20
+        
         setupShadow()
+        
+        setupBannerView()
         
         // Initialization code
     }
@@ -45,6 +42,32 @@ class PetCardCell: UITableViewCell {
    
     }
     
-    
+    func setupBannerView() {
+        
+        background.dataSource = self
+    }
+}
 
+extension PetCardCell: BannerViewDataSource {
+    
+    func numberOfPages(in bannerView: BannerView) -> Int {
+        return 5
+    }
+    
+    func viewFor(bannerView: BannerView, at index: Int) -> UIView {
+        
+        let image = UIImage(named: "圖片 28")
+        
+        let imageView = UIImageView(image: image)
+        
+        imageView.layer.cornerRadius = 20
+        
+        imageView.contentMode = .scaleAspectFill
+        
+        imageView.clipsToBounds = true
+        
+        return imageView
+    }
+    
+    
 }

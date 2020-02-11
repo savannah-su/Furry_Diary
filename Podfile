@@ -14,6 +14,9 @@ target 'Personal Project' do
   pod 'Firebase/Core'
   pod 'Firebase/Storage'
 
+  #add the decodable pod for Firebase
+  pod 'FirebaseFirestoreSwift'
+
   # add Goole sign in
   pod 'GoogleSignIn' 
 

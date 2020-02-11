@@ -13,14 +13,11 @@ import FirebaseCore
 import FirebaseFirestore
 import FirebaseStorage
 
-class PetInfoViewController: UIViewController {
+class CreatePetViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var tableView: UITableView!
     @IBAction func createButton(_ sender: Any) {
-        
-        print("---------------")
-        print(petInfo)
         
         picUpload()
         
@@ -29,19 +26,23 @@ class PetInfoViewController: UIViewController {
     }
     
     var count = 0
+    
     var coOwnerImageURL = ""
     var coOwnerName = ""
     var coOwnerID = ""
+    
     let birthPicker = UIDatePicker()
     let showBirth = DateFormatter()
     let picker = UIImagePickerController()
+    
     //上傳圖片需要先轉png形式，傳到Storage後，拿到URL，才可傳至DB
-    var photoURL: [String] = []
+    var petPhotoURL: [String] = []
     var petID = UUID().uuidString
     var selectedPhoto: [UIImage] = []
-    let titleArray = ["名字", "種類", "品種", "特徵", "生日", "晶片號碼", "是否絕育", "個性喜好", "共同飼主"]
-    let placeholderArray = ["輸入寵物名字", "選擇寵物種類", "輸入寵物品種", "輸入寵物特徵與毛色", "輸入寵物生日", "輸入寵物晶片號碼", "選擇是否絕育"]
-    var petInfo = PetInfo(ownersID: [], ownersName: [], ownersImage: [], petImage: [], petName: "", species: "", breed: "", color: "", birth: "", chip: "", neuter: false, neuterDate: "", memo: "")
+    
+    let titleArray = ["名字", "種類", "性別", "品種", "特徵", "生日", "晶片號碼", "是否絕育", "個性喜好", "共同飼主"]
+    let placeholderArray = ["輸入毛孩名字", "選擇毛孩種類", "選擇毛孩性別", "輸入毛孩品種", "輸入毛孩特徵與毛色", "輸入毛孩生日", "輸入毛孩晶片號碼", "選擇是否絕育"]
+    var petInfo = PetInfo(ownersID: [], ownersName: [], ownersImage: [], petImage: [], petName: "", species: "", gender: "", breed: "", color: "", birth: "", chip: "", neuter: false, neuterDate: "", memo: "")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -108,16 +109,19 @@ class PetInfoViewController: UIViewController {
                     
                     guard let backPhotoURL = url else { return }
                     
-                    self.photoURL.append("\(backPhotoURL)")
-                    self.count += 1
+                    self.petPhotoURL.append("\(backPhotoURL)")
+                    
+                    if self.count == self.selectedPhoto.count - 1 {
+                        
+                        self.toDataBase()
+                        
+                    } else {
+                        
+                          self.count += 1
+                    }
                 }
                 
             }
-        }
-        
-        if count == selectedPhoto.count {
-            
-            self.toDataBase()
         }
     }
     
@@ -130,7 +134,7 @@ class PetInfoViewController: UIViewController {
         self.petInfo.ownersID = [currentUserID as! String, coOwnerID]
         self.petInfo.ownersName = [currentUserName as! String, coOwnerName]
         self.petInfo.ownersImage = [currentUserImage as! String, coOwnerImageURL]
-        self.petInfo.petImage = photoURL
+        self.petInfo.petImage = petPhotoURL
         
         Firestore.firestore().collection("pets").document(petID).setData(petInfo.toDict, completion: { (error) in
             
@@ -142,54 +146,12 @@ class PetInfoViewController: UIViewController {
         })
         
     }
-    
-    //    func setBirthPicker() {
-    //
-    //        showBirth.dateFormat = "yyyy-MM-dd"
-    //        birthPicker.datePickerMode = .date
-    //        birthPicker.locale = Locale(identifier: "zh_TW")
-    //        birthPicker.addTarget(self, action: #selector(changeBirth), for: .valueChanged)
-    //
-    //    }
-    //
-    //    @objc func changeBirth() {
-    //
-    //        if let firstResponder = view.window?.firstResponder {
-    //            // do something with `firstResponder`
-    //
-    //            print(firstResponder)
-    //
-    //            guard let textField = firstResponder as? UITextField else { return }
-    //
-    //            let dateFormatter = DateFormatter()
-    //
-    //            dateFormatter.dateFormat = "yyyy/MM/dd"
-    //
-    //            textField.text = dateFormatter.string(from: birthPicker.date)
-    //        }
-    //
-    //    }
 }
 
-//extension UIView {
-//
-//    var firstResponder: UIView? {
-//        guard !isFirstResponder else { return self }
-//
-//        for subview in subviews {
-//            if let firstResponder = subview.firstResponder {
-//                return firstResponder
-//            }
-//        }
-//
-//        return nil
-//    }
-//}
-
-extension PetInfoViewController: UITableViewDataSource {
+extension CreatePetViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 9
+        return 10
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -213,20 +175,21 @@ extension PetInfoViewController: UITableViewDataSource {
         case 1:
             cell.titleLabel.text = titleArray[1]
             cell.contentField.placeholder = placeholderArray[1]
-            cell.keyboardType = .picker(["狗狗", "貓咪", "其他"])
+            cell.keyboardType = .picker(["汪汪", "喵嗚", "其他"])
             cell.touchHandler = { [weak self] text in
                 
                 self?.petInfo.species = text
             }
             return cell
             
+            
         case 2:
             cell.titleLabel.text = titleArray[2]
             cell.contentField.placeholder = placeholderArray[2]
-            cell.keyboardType = .normal
+            cell.keyboardType = .picker(["男生", "女生"])
             cell.touchHandler = { [weak self] text in
                 
-                self?.petInfo.breed = text
+                self?.petInfo.gender = text
             }
             return cell
             
@@ -236,13 +199,23 @@ extension PetInfoViewController: UITableViewDataSource {
             cell.keyboardType = .normal
             cell.touchHandler = { [weak self] text in
                 
-                self?.petInfo.color = text
+                self?.petInfo.breed = text
             }
             return cell
             
         case 4:
             cell.titleLabel.text = titleArray[4]
             cell.contentField.placeholder = placeholderArray[4]
+            cell.keyboardType = .normal
+            cell.touchHandler = { [weak self] text in
+                
+                self?.petInfo.color = text
+            }
+            return cell
+            
+        case 5:
+            cell.titleLabel.text = titleArray[5]
+            cell.contentField.placeholder = placeholderArray[5]
             cell.keyboardType = .date(Date(), "yyyy-MM-dd")
             cell.touchHandler = { [weak self] text in
                 
@@ -250,9 +223,9 @@ extension PetInfoViewController: UITableViewDataSource {
             }
             return cell
             
-        case 5:
-            cell.titleLabel.text = titleArray[5]
-            cell.contentField.placeholder = placeholderArray[5]
+        case 6:
+            cell.titleLabel.text = titleArray[6]
+            cell.contentField.placeholder = placeholderArray[6]
             cell.keyboardType = .normal
             cell.touchHandler = { [weak self] text in
                 
@@ -260,9 +233,9 @@ extension PetInfoViewController: UITableViewDataSource {
             }
             return cell
             
-        case 6:
-            cell.titleLabel.text = titleArray[6]
-            cell.contentField.placeholder = placeholderArray[6]
+        case 7:
+            cell.titleLabel.text = titleArray[7]
+            cell.contentField.placeholder = placeholderArray[7]
             cell.keyboardType = .picker(["已絕育", "尚未絕育"])
             cell.touchHandler = { [weak self] text in
                 
@@ -274,13 +247,13 @@ extension PetInfoViewController: UITableViewDataSource {
             }
             return cell
             
-        case 7:
+        case 8:
             
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "Text View Cell", for: indexPath) as? TextViewCell else {
                 return UITableViewCell()
             }
             
-            cell.titleLabel.text = titleArray[7]
+            cell.titleLabel.text = titleArray[8]
             cell.contentTextView.layer.borderColor = UIColor(red: 199/255.0, green: 199/255.0, blue: 199/255.0, alpha: 1).cgColor
             cell.touchHandler = { [weak self] text in
                 
@@ -293,7 +266,7 @@ extension PetInfoViewController: UITableViewDataSource {
             
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "Co Owner Cell", for: indexPath) as? CoOwnerCell else { return UITableViewCell() }
             
-            cell.titleLabel.text = titleArray[8]
+            cell.titleLabel.text = titleArray[9]
             
             if coOwnerImageURL != "" {
                 
@@ -311,13 +284,31 @@ extension PetInfoViewController: UITableViewDataSource {
                 cell.ownerImage.isHidden = true
             }
             
+            cell.searchButton.addTarget(self, action: #selector(searchOwner), for: .touchUpInside)
+            
             return cell
             
         }
     }
+    
+    @objc func searchOwner() {
+        
+        guard let vc = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(identifier: "Search Owner Page") as? SearchOwnerViewController else { return }
+        
+        vc.selectHandler = { data in
+            
+            self.coOwnerImageURL = data.image
+            self.coOwnerID = data.id
+            self.coOwnerName = data.name
+            self.tableView.reloadData()
+            
+        }
+        
+        show(vc, sender: self)
+    }
 }
 
-extension PetInfoViewController: UICollectionViewDataSource {
+extension CreatePetViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
@@ -353,7 +344,7 @@ extension PetInfoViewController: UICollectionViewDataSource {
     }
 }
 
-extension PetInfoViewController: UICollectionViewDelegateFlowLayout {
+extension CreatePetViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
@@ -365,7 +356,7 @@ extension PetInfoViewController: UICollectionViewDelegateFlowLayout {
     
 }
 
-extension PetInfoViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension CreatePetViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func getPhotoWay(type: Int) {
         

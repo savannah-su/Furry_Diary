@@ -10,7 +10,7 @@
 		2402B3BB23E4129000E8D009 /* SearchOwnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2402B3BA23E4129000E8D009 /* SearchOwnerViewController.swift */; };
 		2402B3BD23E4163A00E8D009 /* OwnerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2402B3BC23E4163A00E8D009 /* OwnerTableViewCell.swift */; };
 		2402B3BF23E5542500E8D009 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2402B3BE23E5542500E8D009 /* Data.swift */; };
-		2403C46B23E56D8900B73021 /* PetInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2403C46A23E56D8900B73021 /* PetInfoViewController.swift */; };
+		2403C46B23E56D8900B73021 /* CreatePetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2403C46A23E56D8900B73021 /* CreatePetViewController.swift */; };
 		2403C46D23E5723A00B73021 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2403C46C23E5723A00B73021 /* UserManager.swift */; };
 		242F8E0123D6DFF700F49853 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242F8E0023D6DFF700F49853 /* AppDelegate.swift */; };
 		242F8E0823D6DFF700F49853 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 242F8E0623D6DFF700F49853 /* Main.storyboard */; };
@@ -21,6 +21,7 @@
 		242F8E3123D6E23A00F49853 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 242F8E3023D6E23A00F49853 /* GoogleService-Info.plist */; };
 		2430552423ED425000B9F4E6 /* DailyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2430552323ED425000B9F4E6 /* DailyPageViewController.swift */; };
 		2430552723ED42C000B9F4E6 /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2430552623ED42C000B9F4E6 /* ItemCell.swift */; };
+		2430552A23F1616A00B9F4E6 /* Banner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2430552923F1616A00B9F4E6 /* Banner.swift */; };
 		243230F623E83D34008C512B /* UploadIamgeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243230F523E83D34008C512B /* UploadIamgeCell.swift */; };
 		2455D3DC23E95EA30095D039 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2455D3DB23E95EA30095D039 /* UIViewController+Extension.swift */; };
 		24647FED23EBD08D005DB6E7 /* PetDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24647FEC23EBD08D005DB6E7 /* PetDetailViewController.swift */; };
@@ -69,7 +70,7 @@
 		2402B3BA23E4129000E8D009 /* SearchOwnerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchOwnerViewController.swift; sourceTree = "<group>"; };
 		2402B3BC23E4163A00E8D009 /* OwnerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerTableViewCell.swift; sourceTree = "<group>"; };
 		2402B3BE23E5542500E8D009 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
-		2403C46A23E56D8900B73021 /* PetInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetInfoViewController.swift; sourceTree = "<group>"; };
+		2403C46A23E56D8900B73021 /* CreatePetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePetViewController.swift; sourceTree = "<group>"; };
 		2403C46C23E5723A00B73021 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		242F8DFD23D6DFF700F49853 /* Personal Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Personal Project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		242F8E0023D6DFF700F49853 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -86,6 +87,7 @@
 		242F8E3023D6E23A00F49853 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2430552323ED425000B9F4E6 /* DailyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyPageViewController.swift; sourceTree = "<group>"; };
 		2430552623ED42C000B9F4E6 /* ItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
+		2430552923F1616A00B9F4E6 /* Banner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Banner.swift; sourceTree = "<group>"; };
 		243230F523E83D34008C512B /* UploadIamgeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadIamgeCell.swift; sourceTree = "<group>"; };
 		2455D3DB23E95EA30095D039 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		24647FEC23EBD08D005DB6E7 /* PetDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PetDetailViewController.swift; path = "Personal Project/Controller/Home Page/PetDetailViewController.swift"; sourceTree = SOURCE_ROOT; };
@@ -177,6 +179,7 @@
 				24D50A5023EAA9460074DD51 /* VerticalAlignedButton.swift */,
 				248E9DCE23EC48B500388A3B /* ColoredNavController.swift */,
 				248E9DD023EC4F1700388A3B /* UIColor+Extension.swift */,
+				2430552923F1616A00B9F4E6 /* Banner.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -313,7 +316,7 @@
 				2496DB7723E2DC5C00991F79 /* TabBarController.swift */,
 				2496DB7C23E2FA2600991F79 /* LoginViewController.swift */,
 				2402B3BA23E4129000E8D009 /* SearchOwnerViewController.swift */,
-				2403C46A23E56D8900B73021 /* PetInfoViewController.swift */,
+				2403C46A23E56D8900B73021 /* CreatePetViewController.swift */,
 				24647FF123EBF63D005DB6E7 /* Home Page */,
 				2430552323ED425000B9F4E6 /* DailyPageViewController.swift */,
 			);
@@ -612,6 +615,7 @@
 				248E9DCF23EC48B500388A3B /* ColoredNavController.swift in Sources */,
 				2402B3BF23E5542500E8D009 /* Data.swift in Sources */,
 				24647FF023EBF580005DB6E7 /* DetailCell.swift in Sources */,
+				2430552A23F1616A00B9F4E6 /* Banner.swift in Sources */,
 				2455D3DC23E95EA30095D039 /* UIViewController+Extension.swift in Sources */,
 				2402B3BD23E4163A00E8D009 /* OwnerTableViewCell.swift in Sources */,
 				243230F623E83D34008C512B /* UploadIamgeCell.swift in Sources */,
@@ -624,7 +628,7 @@
 				2403C46D23E5723A00B73021 /* UserManager.swift in Sources */,
 				2430552723ED42C000B9F4E6 /* ItemCell.swift in Sources */,
 				24874E7723E71EBC007810B0 /* TextFieldCell.swift in Sources */,
-				2403C46B23E56D8900B73021 /* PetInfoViewController.swift in Sources */,
+				2403C46B23E56D8900B73021 /* CreatePetViewController.swift in Sources */,
 				24874E7B23E71FDF007810B0 /* TextViewCell.swift in Sources */,
 				24647FED23EBD08D005DB6E7 /* PetDetailViewController.swift in Sources */,
 				2430552423ED425000B9F4E6 /* DailyPageViewController.swift in Sources */,

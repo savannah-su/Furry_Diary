@@ -9,7 +9,13 @@
 import UIKit
 
 class PetDetailViewController: UIViewController {
-
+    
+    
+    @IBOutlet weak var bannerView: BannerView!
+    @IBOutlet weak var tableView: PetTableView!
+    @IBOutlet weak var topConstraint: NSLayoutConstraint!
+    @IBOutlet weak var heightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var widthConstraint: NSLayoutConstraint!
     @IBAction func backButton(_ sender: Any) {
         
         navigationController?.popViewController(animated: true)
@@ -18,17 +24,9 @@ class PetDetailViewController: UIViewController {
     @IBAction func editButton(_ sender: Any) {
     }
     
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var exceedView: UIView!
-    let firstImage: UIImageView = UIImageView()
-    @IBOutlet weak var secondImage: UIImageView!
-    @IBOutlet weak var thirdImage: UIImageView!
-    @IBOutlet weak var fourImage: UIImageView!
-    @IBOutlet weak var fifthImage: UIImageView!
-    var widthConstraint: NSLayoutConstraint?
-    @IBOutlet weak var topConstraint: NSLayoutConstraint!
+    let titleArray = ["名字", "種類", "性別", "品種", "特徵", "生日", "晶片號碼", "是否絕育", "個性喜好", "共同飼主"]
     
-    @IBOutlet weak var scrollView: UIScrollView!
+    var petData: PetInfo?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,50 +35,57 @@ class PetDetailViewController: UIViewController {
         tableView.delegate = self
         
         tableView.contentInset = UIEdgeInsets(top: 200, left: 0, bottom: 0, right: 0)
-
-        setupScrollView()
+        
+        setupBannerView()
+        
     }
     
-    func setupScrollView() {
+    func setupBannerView() {
         
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.backgroundColor = .red
-        NSLayoutConstraint.activate([
-            scrollView.centerXAnchor.constraint(equalTo: exceedView.centerXAnchor),
-            scrollView.topAnchor.constraint(equalTo: exceedView.topAnchor),
-            scrollView.heightAnchor.constraint(equalTo: exceedView.heightAnchor),
-            scrollView.widthAnchor.constraint(equalTo: exceedView.widthAnchor)
-        ])
-        
-        firstImage.image = UIImage(named: "圖片 27")
-        scrollView.addSubview(firstImage)
-        firstImage.translatesAutoresizingMaskIntoConstraints = false
-        firstImage.contentMode = .scaleAspectFill
-        firstImage.backgroundColor = .green
-        firstImage.clipsToBounds = true
-        
-        widthConstraint = firstImage.widthAnchor.constraint(equalTo: exceedView.widthAnchor)
-        NSLayoutConstraint.activate([
-            widthConstraint!,
-            firstImage.heightAnchor.constraint(equalTo: exceedView.heightAnchor),
-            firstImage.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
-            firstImage.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-            firstImage.topAnchor.constraint(equalTo: scrollView.topAnchor),
-            firstImage.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor)
-        ])
+        bannerView.dataSource = self
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        print(scrollView)
-        print(firstImage)
-    }
+}
 
+class PetTableView: UITableView {
+    
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        
+        if point.y < 0 {
+            
+            return nil
+            
+        } else {
+            
+            return super.hitTest(point, with: event)
+        }
+    }
+}
+
+extension PetDetailViewController: BannerViewDataSource {
+    
+    func numberOfPages(in bannerView: BannerView) -> Int {
+        
+        return 5
+        
+    }
+    
+    func viewFor(bannerView: BannerView, at index: Int) -> UIView {
+        
+        let image = UIImage(named: "圖片 28")
+        
+        let imageView = UIImageView(image: image)
+        
+        imageView.contentMode = .scaleAspectFill
+        
+        imageView.clipsToBounds = true
+        
+        return imageView
+    }
 }
 
 extension PetDetailViewController: UITableViewDataSource {
-   
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 10
     }
@@ -89,42 +94,79 @@ extension PetDetailViewController: UITableViewDataSource {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "Detail Cell", for: indexPath) as? DetailCell else { return UITableViewCell() }
         
-
-        if indexPath.row == 0 {
+        cell.titleLabel.text = titleArray[indexPath.row]
+        
+        switch indexPath.row {
             
+        case 0:
+            cell.contentLabel.text = petData?.petName
+            
+        case 1:
+            cell.contentLabel.text = petData?.species
+            
+        case 2:
+            cell.contentLabel.text = petData?.gender
+            
+        case 3:
+            cell.contentLabel.text = petData?.breed
+            
+        case 4:
+            cell.contentLabel.text = petData?.color
+            
+        case 5:
+            cell.contentLabel.text = petData?.birth
+            
+        case 6:
+            cell.contentLabel.text = petData?.chip
+            
+        case 7:
+            
+            var status = ""
+            
+            if petData?.neuter == true {
+                status = "已經結紮嘍！"
+            } else {
+                status = "還沒結紮唷！"
+            }
+            cell.contentLabel.text = status
+            
+        case 8:
+            cell.contentLabel.text = petData?.memo
+            
+        default:
+            cell.contentLabel.text = petData?.ownersImage[0]
+   
+        }
+        
+        
+        if indexPath.row == 0 {
             cell.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
             cell.layer.cornerRadius = 20
-            return cell
-            
         } else {
-            
             cell.layer.cornerRadius = 0
-            return cell
         }
+        
+        return cell
     }
 }
 
 extension PetDetailViewController: UITableViewDelegate {
-
-//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//
-//        guard var widthConstraint = widthConstraint else { return }
-//
-//        topConstraint?.constant = -(tableView.contentOffset.y - (-200)) / 3
-//
-//        print("---", -(tableView.contentOffset.y - (-200)) / 3)
-//
-////        firstImage.transform = CGAffineTransform(scaleX: (tableView.contentOffset.y - (-200)) / 200 * 0.5 + 1, y: (tableView.contentOffset.y - (-200)) / 200 * 0.5 + 1)
-//
-//        widthConstraint.isActive = false
-//
-//        widthConstraint = firstImage.widthAnchor.constraint(
-//            equalTo: view.widthAnchor,
-//            multiplier: (tableView.contentOffset.y - (-200)) / 200 * 0.5 + 1,
-//            constant: 0
-//        )
-//
-//        widthConstraint.isActive = true
-//    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        if tableView.contentOffset.y <= 0 &&  tableView.contentOffset.y >= -200 {
+            
+            topConstraint.constant = -(tableView.contentOffset.y - (-200)) / 3
+            
+            bannerView.manipulateWidthConstraints(with: tableView.contentOffset.y - (-200))
+        }
+        
+        if tableView.contentOffset.y <= -200 {
+            
+            heightConstraint.constant = 530 - (tableView.contentOffset.y - (-200))
+        }
+    }
     
 }
+
+
