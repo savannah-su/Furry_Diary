@@ -30,7 +30,7 @@
 		2473A10423EADD1300C8FFE2 /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2473A10323EADD1300C8FFE2 /* HomePageViewController.swift */; };
 		2473A10723EADD8400C8FFE2 /* PetCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2473A10623EADD8400C8FFE2 /* PetCardCell.swift */; };
 		24866E5A23F2B89E003CC715 /* BehaviorPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24866E5923F2B89E003CC715 /* BehaviorPageViewController.swift */; };
-		24866E5E23F2D3CE003CC715 /* BehavItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24866E5D23F2D3CE003CC715 /* BehavItemCell.swift */; };
+		24866E5E23F2D3CE003CC715 /* ReuseItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24866E5D23F2D3CE003CC715 /* ReuseItemCell.swift */; };
 		24874E7723E71EBC007810B0 /* TextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24874E7623E71EBC007810B0 /* TextFieldCell.swift */; };
 		24874E7B23E71FDF007810B0 /* TextViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24874E7A23E71FDF007810B0 /* TextViewCell.swift */; };
 		248E9DCF23EC48B500388A3B /* ColoredNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248E9DCE23EC48B500388A3B /* ColoredNavController.swift */; };
@@ -101,7 +101,7 @@
 		2473A10323EADD1300C8FFE2 /* HomePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
 		2473A10623EADD8400C8FFE2 /* PetCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetCardCell.swift; sourceTree = "<group>"; };
 		24866E5923F2B89E003CC715 /* BehaviorPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BehaviorPageViewController.swift; sourceTree = "<group>"; };
-		24866E5D23F2D3CE003CC715 /* BehavItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BehavItemCell.swift; sourceTree = "<group>"; };
+		24866E5D23F2D3CE003CC715 /* ReuseItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReuseItemCell.swift; sourceTree = "<group>"; };
 		24874E7623E71EBC007810B0 /* TextFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldCell.swift; sourceTree = "<group>"; };
 		24874E7A23E71FDF007810B0 /* TextViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewCell.swift; sourceTree = "<group>"; };
 		248E9DCE23EC48B500388A3B /* ColoredNavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColoredNavController.swift; sourceTree = "<group>"; };
@@ -252,7 +252,7 @@
 			isa = PBXGroup;
 			children = (
 				2430552623ED42C000B9F4E6 /* ItemCell.swift */,
-				24866E5D23F2D3CE003CC715 /* BehavItemCell.swift */,
+				24866E5D23F2D3CE003CC715 /* ReuseItemCell.swift */,
 			);
 			path = "Daily Page";
 			sourceTree = "<group>";
@@ -653,7 +653,7 @@
 				2403C46D23E5723A00B73021 /* UserManager.swift in Sources */,
 				2430552723ED42C000B9F4E6 /* ItemCell.swift in Sources */,
 				24874E7723E71EBC007810B0 /* TextFieldCell.swift in Sources */,
-				24866E5E23F2D3CE003CC715 /* BehavItemCell.swift in Sources */,
+				24866E5E23F2D3CE003CC715 /* ReuseItemCell.swift in Sources */,
 				2403C46B23E56D8900B73021 /* CreatePetViewController.swift in Sources */,
 				24874E7B23E71FDF007810B0 /* TextViewCell.swift in Sources */,
 				24647FED23EBD08D005DB6E7 /* PetDetailViewController.swift in Sources */,

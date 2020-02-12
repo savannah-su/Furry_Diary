@@ -68,13 +68,13 @@ class BehaviorPageViewController: UIViewController {
 extension BehaviorPageViewController: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath) as! BehavItemCell
+        let cell = collectionView.cellForItem(at: indexPath) as! ReuseItemCell
         cell.image.image = UIImage(named: "icon-selected")
         cell.isSelected = true
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath) as! BehavItemCell
+        let cell = collectionView.cellForItem(at: indexPath) as! ReuseItemCell
         cell.image.image = UIImage(named: "icon")
         cell.isSelected = false
     }
@@ -108,7 +108,7 @@ extension BehaviorPageViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Item Cell", for: indexPath) as? BehavItemCell else { return UICollectionViewCell() }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Item Cell", for: indexPath) as? ReuseItemCell else { return UICollectionViewCell() }
         
         for index in 0 ... 9 {
             
