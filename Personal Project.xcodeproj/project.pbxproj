@@ -12,6 +12,7 @@
 		2402B3BF23E5542500E8D009 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2402B3BE23E5542500E8D009 /* Data.swift */; };
 		2403C46B23E56D8900B73021 /* CreatePetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2403C46A23E56D8900B73021 /* CreatePetViewController.swift */; };
 		2403C46D23E5723A00B73021 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2403C46C23E5723A00B73021 /* UserManager.swift */; };
+		24188A1823F3E02E00DA250A /* WeightPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24188A1723F3E02E00DA250A /* WeightPageViewController.swift */; };
 		242F8E0123D6DFF700F49853 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242F8E0023D6DFF700F49853 /* AppDelegate.swift */; };
 		242F8E0823D6DFF700F49853 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 242F8E0623D6DFF700F49853 /* Main.storyboard */; };
 		242F8E0A23D6DFFB00F49853 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 242F8E0923D6DFFB00F49853 /* Assets.xcassets */; };
@@ -74,6 +75,7 @@
 		2402B3BE23E5542500E8D009 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		2403C46A23E56D8900B73021 /* CreatePetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePetViewController.swift; sourceTree = "<group>"; };
 		2403C46C23E5723A00B73021 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
+		24188A1723F3E02E00DA250A /* WeightPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightPageViewController.swift; sourceTree = "<group>"; };
 		242F8DFD23D6DFF700F49853 /* Personal Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Personal Project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		242F8E0023D6DFF700F49853 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		242F8E0723D6DFF700F49853 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -256,6 +258,7 @@
 			children = (
 				2430552323ED425000B9F4E6 /* DailyPageViewController.swift */,
 				24866E5923F2B89E003CC715 /* BehaviorPageViewController.swift */,
+				24188A1723F3E02E00DA250A /* WeightPageViewController.swift */,
 			);
 			path = "Daily Page";
 			sourceTree = "<group>";
@@ -649,6 +652,7 @@
 				24647FED23EBD08D005DB6E7 /* PetDetailViewController.swift in Sources */,
 				2430552423ED425000B9F4E6 /* DailyPageViewController.swift in Sources */,
 				2473A10723EADD8400C8FFE2 /* PetCardCell.swift in Sources */,
+				24188A1823F3E02E00DA250A /* WeightPageViewController.swift in Sources */,
 				248E9DD123EC4F1700388A3B /* UIColor+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

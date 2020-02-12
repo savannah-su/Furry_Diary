@@ -9,14 +9,26 @@
 import UIKit
 
 class BehaviorPageViewController: UIViewController {
-
+    
+    @IBAction func backButton(_ sender: Any) {
+        
+        navigationController?.popViewController(animated: true)
+        
+        NotificationCenter.default.post(name: Notification.Name("Create New Pet"), object: nil)
+    }
+    
+    @IBAction func saveButton(_ sender: Any) {
+    }
+    
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var timeTextField: UITextField!
     @IBOutlet weak var memoTextView: UITextView!
     let datePiker = UIDatePicker()
     let showDateFormatter = DateFormatter()
     
-    let itemLabel = ["嘔吐", "嗆咳", "外傷", "搔癢", "流眼淚", "打噴嚏", "呼吸不順", "拉肚子", "食慾不佳", "精神不佳"]
+    let itemLabel = ["嘔吐", "拉肚子", "嗆咳", "流眼淚", "打噴嚏", "搔癢", "外傷", "焦躁", "食慾不佳", "精神不佳"]
+    //    let itemImage = ["嘔吐", "拉肚子", "嗆咳", "流眼淚", "打噴嚏", "搔癢", "外傷", "焦躁", "食慾不佳", "精神不佳"]
+    //    let selectedImage = ["嘔吐-selected", "拉肚子-selected", "嗆咳-selected", "流眼淚-selected", "打噴嚏-selected", "搔癢-selected", "外傷-selected", "焦躁-selected", "食慾不佳-selected", "精神不佳-selected"]
     
     override func viewDidLoad() {
         
@@ -25,10 +37,12 @@ class BehaviorPageViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         
+        memoTextView.delegate = self
+        
         setupTextView()
         
         setupDatePiker()
-
+        
         // Do any additional setup after loading the view.
     }
     
@@ -47,12 +61,23 @@ class BehaviorPageViewController: UIViewController {
     }
     
     func setupTextView() {
-        
-        memoTextView.delegate = self
         memoTextView.text = "輸入寵物喜好及個性"
         memoTextView.textColor = UIColor(red: 211/255.0, green: 211/255.0, blue: 212/255.0, alpha: 1)
     }
     
+}
+
+extension BehaviorPageViewController: UICollectionViewDelegate {
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Item Cell", for: indexPath) as! BehavItemCell
+//        cell.image.image = UIImage(named: "icon-selected")
+        
+        cell.backgroundColor = .red
+        
+        
+    }
 }
 
 extension BehaviorPageViewController: UICollectionViewDelegateFlowLayout {
@@ -89,6 +114,7 @@ extension BehaviorPageViewController: UICollectionViewDataSource {
             
             let index = indexPath.row
             cell.itemLabel.text = itemLabel[index]
+            cell.image.image = UIImage(named: "icon")
             
         }
         return cell
@@ -98,7 +124,7 @@ extension BehaviorPageViewController: UICollectionViewDataSource {
 extension BehaviorPageViewController: UITextViewDelegate {
     
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if memoTextView.textColor == UIColor.lightGray {
+        if memoTextView.textColor == UIColor(red: 211/255.0, green: 211/255.0, blue: 212/255.0, alpha: 1) {
             memoTextView.text = nil
             memoTextView.textColor = .black
         }
@@ -108,7 +134,7 @@ extension BehaviorPageViewController: UITextViewDelegate {
         
         if memoTextView.text.isEmpty {
             memoTextView.text = "輸入相關敘述或其他事件"
-            memoTextView.textColor = UIColor.lightGray
+            memoTextView.textColor = UIColor(red: 211/255.0, green: 211/255.0, blue: 212/255.0, alpha: 1)
         }
     }
 }

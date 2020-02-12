@@ -67,7 +67,6 @@ extension DailyPageViewController: UICollectionViewDataSource {
             cell.image.image = UIImage(named: itemImage[index])
 
         }
-        
         return cell
     }
    
@@ -76,7 +75,13 @@ extension DailyPageViewController: UICollectionViewDataSource {
 extension DailyPageViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.row == 3 {
+        
+        if indexPath.row == 2 {
+            
+            guard let vc = UIStoryboard(name: "Daily", bundle: nil).instantiateViewController(identifier: "Weight Page") as? WeightPageViewController else { return }
+            show(vc, sender: nil)
+            
+        } else if indexPath.row == 3 {
             
             guard let vc = UIStoryboard(name: "Daily", bundle: nil).instantiateViewController(identifier: "Behavior Page") as? BehaviorPageViewController else { return }
             show(vc, sender: nil)
