@@ -17,6 +17,11 @@ class SearchOwnerViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var currentUserLabel: UILabel!
+    @IBOutlet weak var backButton: UIButton!
+    @IBAction func backButton(_ sender: Any) {
+        
+        dismiss(animated: true, completion: nil)
+    }
     
     var indexRow = 0
     
@@ -48,6 +53,8 @@ class SearchOwnerViewController: UIViewController {
         }
     }
     
+    var selectHandler: ((UsersData) -> Void)?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -65,10 +72,12 @@ class SearchOwnerViewController: UIViewController {
     func getOwnerData() {
         
         Firestore.firestore().collection("users").getDocuments { (querySnapshot, error) in
+            
             if error == nil {
                 for document in querySnapshot!.documents {
                     
                     guard let userName = UserDefaults.standard.value(forKey: "userName") as? String else { return }
+                    
                     guard let name = document.data()["name"] as? String,
                         let image = document.data()["image"] as? String,
                         let email = document.data()["email"] as? String,
@@ -92,22 +101,8 @@ class SearchOwnerViewController: UIViewController {
     }
     
     func toNextpage() {
-        
-//        guard let vc = storyboard?.instantiateViewController(identifier: "PetInfoPage") as? PetInfoViewController else { return }
-//        show(vc, sender: nil)
-        
-      performSegue(withIdentifier: "EnterPetInfo", sender: nil)
-        
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "EnterPetInfo" {
-        
-        let vc = segue.destination as? PetInfoViewController
-            vc?.coOwnerImageURL = ownerData[indexRow].image
-            vc?.coOwnerName = ownerData[indexRow].name
-            vc?.coOwnerID = ownerData[indexRow].id
-        }
+
+        navigationController?.popViewController(animated: true)
     }
 }
 
@@ -120,6 +115,10 @@ extension SearchOwnerViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         self.indexRow = indexPath.row
+                
+        selectHandler?(ownerData[indexRow])
+        
+        dismiss(animated: true, completion: nil)
         
         toNextpage()
     }
@@ -166,7 +165,6 @@ extension SearchOwnerViewController: UISearchBarDelegate{
         searchOwner = ownerData.filter { user in
             
 //            return $0.contains(searchBar.text!)
-            
             
             return true
         }

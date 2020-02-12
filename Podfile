@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
-# platform :ios, '9.0'
+platform :ios, '10.0'
 
 target 'Personal Project' do
   # Comment the next line if you don't want to use dynamic frameworks
@@ -14,6 +14,9 @@ target 'Personal Project' do
   pod 'Firebase/Core'
   pod 'Firebase/Storage'
 
+  #add the decodable pod for Firebase
+  pod 'FirebaseFirestoreSwift'
+
   # add Goole sign in
   pod 'GoogleSignIn' 
 
@@ -22,6 +25,9 @@ target 'Personal Project' do
 
   # add JGProgressHUD
   pod 'JGProgressHUD'
+
+  # add LineChart
+  pod 'PNChart'
 
   # add pods for any other desired Firebase products
   # https://firebase.google.com/docs/ios/setup#available-pods

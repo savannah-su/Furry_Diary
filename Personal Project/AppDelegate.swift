@@ -32,6 +32,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         
         IQKeyboardManager.shared.enable = true
         
+        //Change Large Nav Bar Style
+//        let coloredAppearance = UINavigationBarAppearance()
+//        coloredAppearance.configureWithOpaqueBackground()
+//        
+//        coloredAppearance.backgroundColor = .G2
+//        coloredAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+//        
+//        let button = UIBarButtonItemAppearance()
+//        button.normal.titleTextAttributes = [.foregroundColor: UIColor.white]
+//        coloredAppearance.buttonAppearance = button
+//        
+//               
+//        UINavigationBar.appearance().standardAppearance = coloredAppearance
+//        UINavigationBar.appearance().scrollEdgeAppearance = coloredAppearance
+        
         return true
     }
     

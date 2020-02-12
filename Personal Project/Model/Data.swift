@@ -25,7 +25,7 @@ struct UsersData {
     }
 }
 
-struct PetInfo {
+struct PetInfo: Codable {
     
     var ownersID: [String]
     var ownersName: [String]
@@ -33,6 +33,7 @@ struct PetInfo {
     var petImage: [String]
     var petName: String
     var species: String
+    var gender: String
     var breed: String?
     var color: String?
     var birth: String?
@@ -40,6 +41,24 @@ struct PetInfo {
     var neuter: Bool
     var neuterDate: String?
     var memo: String?
+    
+    enum CodingKeys: String, CodingKey {
+        
+        case ownersID = "owners ID"
+        case ownersName = "owners name"
+        case ownersImage = "owners image"
+        case petImage = "pet Images"
+        case petName = "pet Name"
+        case species = "pet species"
+        case gender = "pet gender"
+        case breed = "pet breed"
+        case color = "pet color"
+        case birth = "pet birth"
+        case chip = "pet chip"
+        case neuter = "neuter or not"
+        case neuterDate = "neuter Date"
+        case memo
+    }
     
     var toDict: [String: Any] {
         return [
@@ -49,6 +68,7 @@ struct PetInfo {
         "pet Images": petImage,
         "pet Name": petName,
         "pet species": species,
+        "pet gender": gender,
         "pet breed": breed as Any,
         "pet color": color as Any,
         "pet birth": birth as Any,

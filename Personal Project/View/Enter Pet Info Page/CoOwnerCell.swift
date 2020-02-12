@@ -12,4 +12,6 @@ class CoOwnerCell: UITableViewCell {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var ownerImage: UIImageView!
+    @IBOutlet weak var searchButton: UIButton!
+
 }
