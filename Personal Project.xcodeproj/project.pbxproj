@@ -44,6 +44,8 @@
 		2496DB7823E2DC5C00991F79 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2496DB7723E2DC5C00991F79 /* TabBarController.swift */; };
 		2496DB7B23E2F85100991F79 /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 2496DB7A23E2F85100991F79 /* FacebookLogin */; };
 		2496DB7D23E2FA2600991F79 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2496DB7C23E2FA2600991F79 /* LoginViewController.swift */; };
+		24B9958C23F41ECD005246AB /* PreventPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B9958B23F41ECD005246AB /* PreventPageViewController.swift */; };
+		24B9958E23F41EDD005246AB /* CleanPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B9958D23F41EDD005246AB /* CleanPageViewController.swift */; };
 		24D50A4D23EA9C470074DD51 /* CoOwnerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D50A4C23EA9C470074DD51 /* CoOwnerCell.swift */; };
 		24D50A5123EAA9460074DD51 /* VerticalAlignedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D50A5023EAA9460074DD51 /* VerticalAlignedButton.swift */; };
 		6A64345A99945321A0099564 /* Pods_Personal_Project_Personal_ProjectUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BD08B74CC7E78D692249B9B /* Pods_Personal_Project_Personal_ProjectUITests.framework */; };
@@ -112,6 +114,8 @@
 		2496DB7523E2CC9100991F79 /* SearchVet.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SearchVet.storyboard; sourceTree = "<group>"; };
 		2496DB7723E2DC5C00991F79 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		2496DB7C23E2FA2600991F79 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		24B9958B23F41ECD005246AB /* PreventPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreventPageViewController.swift; sourceTree = "<group>"; };
+		24B9958D23F41EDD005246AB /* CleanPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanPageViewController.swift; sourceTree = "<group>"; };
 		24D50A4C23EA9C470074DD51 /* CoOwnerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoOwnerCell.swift; sourceTree = "<group>"; };
 		24D50A5023EAA9460074DD51 /* VerticalAlignedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalAlignedButton.swift; sourceTree = "<group>"; };
 		2B48997A3F6C929B1296EC40 /* Pods-Personal Project-Personal ProjectUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Personal Project-Personal ProjectUITests.release.xcconfig"; path = "Target Support Files/Pods-Personal Project-Personal ProjectUITests/Pods-Personal Project-Personal ProjectUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -259,6 +263,8 @@
 				2430552323ED425000B9F4E6 /* DailyPageViewController.swift */,
 				24866E5923F2B89E003CC715 /* BehaviorPageViewController.swift */,
 				24188A1723F3E02E00DA250A /* WeightPageViewController.swift */,
+				24B9958B23F41ECD005246AB /* PreventPageViewController.swift */,
+				24B9958D23F41EDD005246AB /* CleanPageViewController.swift */,
 			);
 			path = "Daily Page";
 			sourceTree = "<group>";
@@ -639,6 +645,7 @@
 				2496DB7D23E2FA2600991F79 /* LoginViewController.swift in Sources */,
 				2496DB7823E2DC5C00991F79 /* TabBarController.swift in Sources */,
 				24D50A4D23EA9C470074DD51 /* CoOwnerCell.swift in Sources */,
+				24B9958E23F41EDD005246AB /* CleanPageViewController.swift in Sources */,
 				2473A10423EADD1300C8FFE2 /* HomePageViewController.swift in Sources */,
 				2402B3BB23E4129000E8D009 /* SearchOwnerViewController.swift in Sources */,
 				242F8E0123D6DFF700F49853 /* AppDelegate.swift in Sources */,
@@ -652,6 +659,7 @@
 				24647FED23EBD08D005DB6E7 /* PetDetailViewController.swift in Sources */,
 				2430552423ED425000B9F4E6 /* DailyPageViewController.swift in Sources */,
 				2473A10723EADD8400C8FFE2 /* PetCardCell.swift in Sources */,
+				24B9958C23F41ECD005246AB /* PreventPageViewController.swift in Sources */,
 				24188A1823F3E02E00DA250A /* WeightPageViewController.swift in Sources */,
 				248E9DD123EC4F1700388A3B /* UIColor+Extension.swift in Sources */,
 			);

@@ -27,8 +27,6 @@ class BehaviorPageViewController: UIViewController {
     let showDateFormatter = DateFormatter()
     
     let itemLabel = ["嘔吐", "拉肚子", "嗆咳", "流眼淚", "打噴嚏", "搔癢", "外傷", "焦躁", "食慾不佳", "精神不佳"]
-    //    let itemImage = ["嘔吐", "拉肚子", "嗆咳", "流眼淚", "打噴嚏", "搔癢", "外傷", "焦躁", "食慾不佳", "精神不佳"]
-    //    let selectedImage = ["嘔吐-selected", "拉肚子-selected", "嗆咳-selected", "流眼淚-selected", "打噴嚏-selected", "搔癢-selected", "外傷-selected", "焦躁-selected", "食慾不佳-selected", "精神不佳-selected"]
     
     override func viewDidLoad() {
         
@@ -38,7 +36,7 @@ class BehaviorPageViewController: UIViewController {
         collectionView.dataSource = self
         
         memoTextView.delegate = self
-        
+        collectionView.allowsMultipleSelection = true
         setupTextView()
         
         setupDatePiker()
@@ -61,7 +59,7 @@ class BehaviorPageViewController: UIViewController {
     }
     
     func setupTextView() {
-        memoTextView.text = "輸入寵物喜好及個性"
+        memoTextView.text = "輸入相關敘述或其他事件"
         memoTextView.textColor = UIColor(red: 211/255.0, green: 211/255.0, blue: 212/255.0, alpha: 1)
     }
     
@@ -70,13 +68,15 @@ class BehaviorPageViewController: UIViewController {
 extension BehaviorPageViewController: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Item Cell", for: indexPath) as! BehavItemCell
-//        cell.image.image = UIImage(named: "icon-selected")
-        
-        cell.backgroundColor = .red
-        
-        
+        let cell = collectionView.cellForItem(at: indexPath) as! BehavItemCell
+        cell.image.image = UIImage(named: "icon-selected")
+        cell.isSelected = true
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath) as! BehavItemCell
+        cell.image.image = UIImage(named: "icon")
+        cell.isSelected = false
     }
 }
 

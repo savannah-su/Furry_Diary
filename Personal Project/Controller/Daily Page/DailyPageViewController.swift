@@ -76,7 +76,17 @@ extension DailyPageViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        if indexPath.row == 2 {
+        if indexPath.row == 0 {
+            
+            guard let vc = UIStoryboard(name: "Daily", bundle: nil).instantiateViewController(identifier: "Clean Page") as? CleanPageViewController else { return }
+            show(vc, sender: nil)
+            
+        } else if indexPath.row == 1 {
+            
+            guard let vc = UIStoryboard(name: "Daily", bundle: nil).instantiateViewController(identifier: "Prevent Page") as? PreventPageViewController else { return }
+            show(vc, sender: nil)
+            
+        } else if indexPath.row == 2 {
             
             guard let vc = UIStoryboard(name: "Daily", bundle: nil).instantiateViewController(identifier: "Weight Page") as? WeightPageViewController else { return }
             show(vc, sender: nil)
