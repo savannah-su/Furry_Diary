@@ -76,7 +76,6 @@ class WeightPageViewController: UIViewController {
         datePicker.locale = Locale(identifier: "zh_TW")
         datePicker.addTarget(self, action: #selector(changeDate), for: .valueChanged)
         dateTextfield.inputView = datePicker
-        changeDate()
     }
     
     @objc func changeDate() {

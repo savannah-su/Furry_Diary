@@ -24,6 +24,7 @@
 		2430552723ED42C000B9F4E6 /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2430552623ED42C000B9F4E6 /* ItemCell.swift */; };
 		2430552A23F1616A00B9F4E6 /* Banner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2430552923F1616A00B9F4E6 /* Banner.swift */; };
 		243230F623E83D34008C512B /* UploadIamgeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243230F523E83D34008C512B /* UploadIamgeCell.swift */; };
+		24413D0123F5269400A07AAE /* EnterInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24413D0023F5269400A07AAE /* EnterInfoCell.swift */; };
 		2455D3DC23E95EA30095D039 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2455D3DB23E95EA30095D039 /* UIViewController+Extension.swift */; };
 		24647FED23EBD08D005DB6E7 /* PetDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24647FEC23EBD08D005DB6E7 /* PetDetailViewController.swift */; };
 		24647FF023EBF580005DB6E7 /* DetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24647FEF23EBF580005DB6E7 /* DetailCell.swift */; };
@@ -46,6 +47,7 @@
 		2496DB7D23E2FA2600991F79 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2496DB7C23E2FA2600991F79 /* LoginViewController.swift */; };
 		24B9958C23F41ECD005246AB /* PreventPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B9958B23F41ECD005246AB /* PreventPageViewController.swift */; };
 		24B9958E23F41EDD005246AB /* CleanPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B9958D23F41EDD005246AB /* CleanPageViewController.swift */; };
+		24CACB2A23F549140068EC7D /* NotiCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24CACB2923F549140068EC7D /* NotiCell.swift */; };
 		24D50A4D23EA9C470074DD51 /* CoOwnerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D50A4C23EA9C470074DD51 /* CoOwnerCell.swift */; };
 		24D50A5123EAA9460074DD51 /* VerticalAlignedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D50A5023EAA9460074DD51 /* VerticalAlignedButton.swift */; };
 		6A64345A99945321A0099564 /* Pods_Personal_Project_Personal_ProjectUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BD08B74CC7E78D692249B9B /* Pods_Personal_Project_Personal_ProjectUITests.framework */; };
@@ -95,6 +97,7 @@
 		2430552623ED42C000B9F4E6 /* ItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
 		2430552923F1616A00B9F4E6 /* Banner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Banner.swift; sourceTree = "<group>"; };
 		243230F523E83D34008C512B /* UploadIamgeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadIamgeCell.swift; sourceTree = "<group>"; };
+		24413D0023F5269400A07AAE /* EnterInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterInfoCell.swift; sourceTree = "<group>"; };
 		2455D3DB23E95EA30095D039 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		24647FEC23EBD08D005DB6E7 /* PetDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PetDetailViewController.swift; path = "Personal Project/Controller/Home Page/PetDetailViewController.swift"; sourceTree = SOURCE_ROOT; };
 		24647FEF23EBF580005DB6E7 /* DetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCell.swift; sourceTree = "<group>"; };
@@ -116,6 +119,7 @@
 		2496DB7C23E2FA2600991F79 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		24B9958B23F41ECD005246AB /* PreventPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreventPageViewController.swift; sourceTree = "<group>"; };
 		24B9958D23F41EDD005246AB /* CleanPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanPageViewController.swift; sourceTree = "<group>"; };
+		24CACB2923F549140068EC7D /* NotiCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotiCell.swift; sourceTree = "<group>"; };
 		24D50A4C23EA9C470074DD51 /* CoOwnerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoOwnerCell.swift; sourceTree = "<group>"; };
 		24D50A5023EAA9460074DD51 /* VerticalAlignedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalAlignedButton.swift; sourceTree = "<group>"; };
 		2B48997A3F6C929B1296EC40 /* Pods-Personal Project-Personal ProjectUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Personal Project-Personal ProjectUITests.release.xcconfig"; path = "Target Support Files/Pods-Personal Project-Personal ProjectUITests/Pods-Personal Project-Personal ProjectUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -253,6 +257,8 @@
 			children = (
 				2430552623ED42C000B9F4E6 /* ItemCell.swift */,
 				24866E5D23F2D3CE003CC715 /* ReuseItemCell.swift */,
+				24413D0023F5269400A07AAE /* EnterInfoCell.swift */,
+				24CACB2923F549140068EC7D /* NotiCell.swift */,
 			);
 			path = "Daily Page";
 			sourceTree = "<group>";
@@ -642,6 +648,7 @@
 				2455D3DC23E95EA30095D039 /* UIViewController+Extension.swift in Sources */,
 				2402B3BD23E4163A00E8D009 /* OwnerTableViewCell.swift in Sources */,
 				243230F623E83D34008C512B /* UploadIamgeCell.swift in Sources */,
+				24413D0123F5269400A07AAE /* EnterInfoCell.swift in Sources */,
 				2496DB7D23E2FA2600991F79 /* LoginViewController.swift in Sources */,
 				2496DB7823E2DC5C00991F79 /* TabBarController.swift in Sources */,
 				24D50A4D23EA9C470074DD51 /* CoOwnerCell.swift in Sources */,
@@ -662,6 +669,7 @@
 				24B9958C23F41ECD005246AB /* PreventPageViewController.swift in Sources */,
 				24188A1823F3E02E00DA250A /* WeightPageViewController.swift in Sources */,
 				248E9DD123EC4F1700388A3B /* UIColor+Extension.swift in Sources */,
+				24CACB2A23F549140068EC7D /* NotiCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
