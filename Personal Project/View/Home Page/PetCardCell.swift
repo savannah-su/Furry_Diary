@@ -14,10 +14,21 @@ class PetCardCell: UITableViewCell {
     @IBOutlet weak var petName: UILabel!
     @IBOutlet weak var genderAndOld: UILabel!
     
+    var petImage = [String]() {
+
+        didSet {
+            if petImage.isEmpty {
+                return
+            } else {
+                DispatchQueue.main.async {
+                    self.background.reloadData()
+                }
+            }
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-//        background.layer.cornerRadius = 20
         
         setupShadow()
         
@@ -29,7 +40,6 @@ class PetCardCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
     }
     
     func setupShadow() {
@@ -51,12 +61,12 @@ class PetCardCell: UITableViewCell {
 extension PetCardCell: BannerViewDataSource {
     
     func numberOfPages(in bannerView: BannerView) -> Int {
-        return 5
+        return petImage.count
     }
     
     func viewFor(bannerView: BannerView, at index: Int) -> UIView {
         
-        let image = UIImage(named: "圖片 28")
+        let image = UIImage(named: petImage[index])
         
         let imageView = UIImageView(image: image)
         

@@ -117,6 +117,7 @@ extension HomePageViewController: UITableViewDataSource {
         
         cell.petName.text = petData[indexPath.row].petName
         cell.genderAndOld.text = petData[indexPath.row].gender
+        cell.petImage = petData[indexPath.row].petImage
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(toDetailPage(_:)))
         cell.background.addGestureRecognizer(tap)

@@ -58,8 +58,6 @@ class BannerView: UIView {
         
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         
-//        scrollView.backgroundColor = .blue
-        
         self.addSubview(scrollView)
         
         return scrollView
@@ -93,6 +91,8 @@ class BannerView: UIView {
     private func setupBasicBannerPageViews() {
         
         unitViews.forEach{ $0.removeFromSuperview() }
+        
+        unitViews.removeAll()
         
         guard let dataSource = dataSource else { return }
         
