@@ -26,7 +26,7 @@ class BehaviorPageViewController: UIViewController {
     let datePiker = UIDatePicker()
     let showDateFormatter = DateFormatter()
     
-    let itemLabel = ["嘔吐", "拉肚子", "嗆咳", "流眼淚", "打噴嚏", "搔癢", "外傷", "焦躁", "食慾不佳", "精神不佳"]
+    let itemLabel = ["嘔吐", "拉肚子", "嗆咳", "打噴嚏", "搔癢", "外傷", "焦躁", "食慾不佳", "精神不佳", "其他"]
     
     override func viewDidLoad() {
         

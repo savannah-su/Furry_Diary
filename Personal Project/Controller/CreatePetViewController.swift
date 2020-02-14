@@ -31,10 +31,7 @@ class CreatePetViewController: UIViewController {
     var coOwnerName = ""
     var coOwnerID = ""
     
-    let birthPicker = UIDatePicker()
-    let showBirth = DateFormatter()
     let picker = UIImagePickerController()
-    
     //上傳圖片需要先轉png形式，傳到Storage後，拿到URL，才可傳至DB
     var petPhotoURL: [String] = []
     var petID = UUID().uuidString
@@ -42,7 +39,7 @@ class CreatePetViewController: UIViewController {
     
     let titleArray = ["名字", "種類", "性別", "品種", "特徵", "生日", "晶片號碼", "是否絕育", "個性喜好", "共同飼主"]
     let placeholderArray = ["輸入毛孩名字", "選擇毛孩種類", "選擇毛孩性別", "輸入毛孩品種", "輸入毛孩特徵與毛色", "輸入毛孩生日", "輸入毛孩晶片號碼", "選擇是否絕育"]
-    var petInfo = PetInfo(ownersID: [], ownersName: [], ownersImage: [], petImage: [], petName: "", species: "", gender: "", breed: "", color: "", birth: "", chip: "", neuter: false, neuterDate: "", memo: "")
+    var petInfo = PetInfo(petID: "", ownersID: [], ownersName: [], ownersImage: [], petImage: [], petName: "", species: "", gender: "", breed: "", color: "", birth: "", chip: "", neuter: false, neuterDate: "", memo: "")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -135,6 +132,7 @@ class CreatePetViewController: UIViewController {
         self.petInfo.ownersName = [currentUserName as! String, coOwnerName]
         self.petInfo.ownersImage = [currentUserImage as! String, coOwnerImageURL]
         self.petInfo.petImage = petPhotoURL
+        self.petInfo.petID = petID
         
         Firestore.firestore().collection("pets").document(petID).setData(petInfo.toDict, completion: { (error) in
             

@@ -46,6 +46,17 @@ class WeightPageViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     @IBAction func saveButton(_ sender: Any) {
+        
+        UploadManager.shared.uploadWeight(petID: "08910E4F-29AC-4DB0-A8F1-7860716E35E5", time: 123, kilo: 90) { result in
+            
+            switch result {
+                
+            case .success(let success):
+                print(success)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
     
     @IBOutlet weak var dateTextfield: UITextField!
@@ -76,6 +87,7 @@ class WeightPageViewController: UIViewController {
         datePicker.locale = Locale(identifier: "zh_TW")
         datePicker.addTarget(self, action: #selector(changeDate), for: .valueChanged)
         dateTextfield.inputView = datePicker
+        changeDate()
     }
     
     @objc func changeDate() {

@@ -15,7 +15,7 @@ class PreventPageViewController: UIViewController {
     @IBOutlet weak var buttomViewConstraint: NSLayoutConstraint!
     @IBOutlet weak var bottomViewButton: VerticalAlignedButton!
     @IBAction func bottomViewButton(_ sender: Any) {
-        downButtomView()
+//        downButtomView()
     }
     @IBOutlet weak var bottomViewLabel: UILabel!
     @IBAction func backButton(_ sender: Any) {
@@ -30,6 +30,7 @@ class PreventPageViewController: UIViewController {
     let itemImage = ["疫苗施打", "體內驅蟲", "體外驅蟲"]
     let selectedImage = ["疫苗施打-selected", "體內驅蟲-selected", "體外驅蟲-selected"]
     var itemCellStatus = [false, false, false]
+    var isSwitchOn: Bool = false
 
     override func viewDidLoad() {
         
@@ -39,7 +40,7 @@ class PreventPageViewController: UIViewController {
         collectionView.dataSource = self
         
         tableView.dataSource = self
-//        tableView.delegate = self
+        tableView.delegate = self
         
         collectionView.allowsMultipleSelection = false
         
@@ -52,43 +53,46 @@ class PreventPageViewController: UIViewController {
     }
 }
 
-//extension PreventPageViewController: UITableViewDelegate {
-//
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//
-//        let cell = tableView.cellForRow(at: indexPath) as? NotiCell
-//
-//        if cell?.notiSwitch.isOn == true {
-//            return 140
-//        }
-//
-//        return 54
-//
-//    }
-//}
+extension PreventPageViewController: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        
+        if indexPath.row == 2 && isSwitchOn == true {
+                return 140
+            }
+            
+            return 40
+
+    }
+}
 
 extension PreventPageViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 3
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "Enter Cell", for: indexPath) as? EnterInfoCell else {
-            return UITableViewCell()
-        }
         
         switch indexPath.row {
             
         case 0:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "Enter Cell", for: indexPath) as? EnterInfoCell else {
+                return UITableViewCell()
+            }
             cell.titleLabel.text = "藥劑名稱"
             cell.contentText.placeholder = "例：三合一疫苗、蚤不到"
+            cell.textFieldType = .normal
             return cell
             
         case 1:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "Enter Cell", for: indexPath) as? EnterInfoCell else {
+                return UITableViewCell()
+            }
             cell.titleLabel.text = "施作時間"
             cell.contentText.placeholder = "選擇本次施作時間"
+            cell.textFieldType = .date(Date(), "yyyy-MM-dd")
             return cell
             
             
@@ -96,11 +100,18 @@ extension PreventPageViewController: UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "Noti Cell", for: indexPath) as? NotiCell else {
                 return UITableViewCell()
             }
+            cell.notiSwitch.addTarget(self, action: #selector(changeSwitch), for: .valueChanged)
+            cell.textFieldType = .date(Date(), "yyyy-MM-dd")
+            cell.textFieldType = .normal
             return cell
+        }
     }
-
-
-}
+    
+    @objc func changeSwitch() {
+        
+        isSwitchOn = !isSwitchOn
+        tableView.reloadData()
+    }
 }
 
 extension PreventPageViewController: UICollectionViewDelegateFlowLayout {
@@ -133,7 +144,7 @@ extension PreventPageViewController: UICollectionViewDataSource {
             let index = indexPath.row
             cell.itemLabel.text = itemLabel[index]
             
-            if itemCellStatus[index] {
+            if itemCellStatus[index] == true {
                 cell.image.image = UIImage(named: selectedImage[index])
             } else {
                 cell.image.image = UIImage(named: itemImage[index])
@@ -156,8 +167,9 @@ extension PreventPageViewController: UICollectionViewDelegate {
             }
         }
         collectionView.reloadData()
+        tableView.reloadData()
         
-        upButtomView()
+//        upButtomView()
  
         bottomViewLabel.isHidden = true
         tableView.isHidden = false
@@ -168,7 +180,7 @@ extension PreventPageViewController: UICollectionViewDelegate {
         let move = UIViewPropertyAnimator(duration: 0.2, curve: .easeInOut) {
             
             self.buttomViewConstraint.isActive = false
-            self.buttomViewConstraint = self.bottomView.topAnchor.constraint(equalTo: self.topView.bottomAnchor, constant: 5)
+            self.buttomViewConstraint = self.bottomView.topAnchor.constraint(equalTo: self.topView.bottomAnchor, constant: 200)
             self.buttomViewConstraint.isActive = true
             self.view.layoutIfNeeded()
         }

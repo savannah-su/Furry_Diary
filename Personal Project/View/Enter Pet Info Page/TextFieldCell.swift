@@ -103,15 +103,6 @@ class TextFieldCell: UITableViewCell {
 
 extension TextFieldCell: UITextFieldDelegate {
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-    
-        textField.resignFirstResponder()
-        
-        print("456")
-        
-        return true
-    }
-    
     func textFieldDidEndEditing(_ textField: UITextField) {
         
         guard let text = textField.text else { return }
