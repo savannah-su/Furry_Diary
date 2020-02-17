@@ -37,14 +37,12 @@ class BehaviorPageViewController: UIViewController {
     let showDateFormatter = DateFormatter()
     
     let itemLabel = ["嘔吐", "拉肚子", "嗆咳", "打噴嚏", "搔癢", "外傷", "焦躁", "食慾不佳", "精神不佳", "其他"]
-    var itemCellStatus = [false, false, false, false, false, false, false, false, false, false]
     
-    var enterDate = Date()
     var subItemType = [""]
     var petID = ""
     var doneDate = ""
     var memo = ""
-    var selectCell: [ReuseItemCell] = []
+    var selectDisease: [String] = []
     
     override func viewDidLoad() {
         
@@ -69,21 +67,23 @@ class BehaviorPageViewController: UIViewController {
     }
     
     func toDataBase() {
+        
+        getInfo()
+        
+        print(petID)
+        print(subItemType)
+        print(doneDate)
+        print(memo)
+        
+        UploadManager.shared.uploadData(petID: petID, categoryType: "行為症狀", date: doneDate, subItem: [""], medicineName: "", kilo: "", memo: memo, notiOrNot: "", notiDate: "", notiText: "") { result in
             
-            print(petID)
-            print(subItemType)
-            print(doneDate)
-            print(memo)
-            
-            UploadManager.shared.uploadData(petID: petID, categoryType: "行為症狀", date: doneDate, subItem: "", medicineName: "", kilo: "", memo: memo, notiOrNot: "", notiDate: "", notiText: "") { result in
-                
-                switch result {
-                case .success(let success):
-                    print(success)
-                case .failure(let error):
-                    print(error.localizedDescription)
-                }
+            switch result {
+            case .success(let success):
+                print(success)
+            case .failure(let error):
+                print(error.localizedDescription)
             }
+        }
     }
     
     func getInfo() {
@@ -152,65 +152,31 @@ extension BehaviorPageViewController: UICollectionViewDelegate {
             
             guard let cell = collectionView.cellForItem(at: indexPath) as?
                 ReuseItemCell else { return }
-            if selectCell.contains(cell) {
+            guard let disease = cell.itemLabel.text else { return }
+            if selectDisease.contains(disease) {
                 cell.image.image = UIImage(named: "icon")
-                guard let order = selectCell.firstIndex(of: cell) else { return }
-                selectCell.remove(at: order)
+                guard let order = selectDisease.firstIndex(of: disease) else { return }
+                selectDisease.remove(at: order)
             } else {
-                selectCell.append(cell)
+                selectDisease.append(disease)
                 cell.image.image = UIImage(named: "icon-selected")
             }
-//            for index in 0 ..< itemCellStatus.count {
-//
-//                if index == indexPath.row {
-//
-//                    itemCellStatus[index] = true
-//
-//
-//                    //                    subItemType = itemLabel[index]
-//                } else {
-//                    itemCellStatus[index] = false
-//                }
-//            }
-//            collectionView.reloadData()
+            
+            subItemType = selectDisease
             
             petNameCollectionView.isHidden = false
             bottomViewLabel.text = "要幫哪個毛孩紀錄呢？"
             
+        } else if collectionView == self.petNameCollectionView {
+            
+            petID = UploadManager.shared.simplePetInfo[indexPath.row].petID
+            
+            bottomViewLabel.isHidden = true
+            petNameCollectionView.isHidden = true
+            showEnterBox()
         }
-        
-        
-//        if collectionView == self.collectionView {
-//
-//            let cellA = collectionView.cellForItem(at: indexPath) as! ReuseItemCell
-//            cellA.image.image = UIImage(named: "icon-selected")
-//            cellA.isSelected = true
-//
-//            petNameCollectionView.isHidden = false
-//            bottomViewLabel.text = "要幫哪個毛孩紀錄呢？"
-//
-//            subItemType = [itemLabel[indexPath.row]]
-//
-//        } else if collectionView == self.petNameCollectionView {
-//
-//            petID = UploadManager.shared.simplePetInfo[indexPath.row].petID
-//
-//            bottomViewLabel.isHidden = true
-//            petNameCollectionView.isHidden = true
-//            showEnterBox()
-//
-//        }
     }
     
-//    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-//
-//        if collectionView == self.collectionView {
-//
-//            let cell = collectionView.cellForItem(at: indexPath) as! ReuseItemCell
-//            cell.image.image = UIImage(named: "icon")
-//            cell.isSelected = false
-//        }
-//    }
 }
 
 extension BehaviorPageViewController: UICollectionViewDelegateFlowLayout {
@@ -265,19 +231,6 @@ extension BehaviorPageViewController: UICollectionViewDataSource {
             
             guard let cellA = collectionView.dequeueReusableCell(withReuseIdentifier: "Item Cell", for: indexPath) as? ReuseItemCell else { return UICollectionViewCell() }
             
-//            for index in 0 ... 9 {
-//
-//                let index = indexPath.row
-//                cellA.itemLabel.text = itemLabel[index]
-////                cellA.image.image = UIImage(named: "icon")
-//
-//                if itemCellStatus[index] == true {
-//                    cellA.image.image = UIImage(named: "icon-selected")
-//                } else {
-//                    cellA.image.image = UIImage(named: "icon")
-//                }
-//
-//            }
             cellA.itemLabel.text = itemLabel[indexPath.item]
             cellA.image.image = UIImage(named: "icon")
             return cellA

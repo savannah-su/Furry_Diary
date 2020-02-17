@@ -25,6 +25,7 @@
 		2430552A23F1616A00B9F4E6 /* Banner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2430552923F1616A00B9F4E6 /* Banner.swift */; };
 		243230F623E83D34008C512B /* UploadIamgeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243230F523E83D34008C512B /* UploadIamgeCell.swift */; };
 		2440D09B23F95DD700E7A803 /* ChoosePetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2440D09A23F95DD700E7A803 /* ChoosePetCell.swift */; };
+		2440D09D23FAD32B00E7A803 /* DownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2440D09C23FAD32B00E7A803 /* DownloadManager.swift */; };
 		24413D0123F5269400A07AAE /* EnterInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24413D0023F5269400A07AAE /* EnterInfoCell.swift */; };
 		2455D3DC23E95EA30095D039 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2455D3DB23E95EA30095D039 /* UIViewController+Extension.swift */; };
 		24647FED23EBD08D005DB6E7 /* PetDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24647FEC23EBD08D005DB6E7 /* PetDetailViewController.swift */; };
@@ -101,6 +102,7 @@
 		2430552923F1616A00B9F4E6 /* Banner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Banner.swift; sourceTree = "<group>"; };
 		243230F523E83D34008C512B /* UploadIamgeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadIamgeCell.swift; sourceTree = "<group>"; };
 		2440D09A23F95DD700E7A803 /* ChoosePetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoosePetCell.swift; sourceTree = "<group>"; };
+		2440D09C23FAD32B00E7A803 /* DownloadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadManager.swift; sourceTree = "<group>"; };
 		24413D0023F5269400A07AAE /* EnterInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterInfoCell.swift; sourceTree = "<group>"; };
 		2455D3DB23E95EA30095D039 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		24647FEC23EBD08D005DB6E7 /* PetDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PetDetailViewController.swift; path = "Personal Project/Controller/Home Page/PetDetailViewController.swift"; sourceTree = SOURCE_ROOT; };
@@ -201,6 +203,7 @@
 				248E9DD023EC4F1700388A3B /* UIColor+Extension.swift */,
 				2430552923F1616A00B9F4E6 /* Banner.swift */,
 				246EF8F523F6A07E00A17F65 /* UploadManager.swift */,
+				2440D09C23FAD32B00E7A803 /* DownloadManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -674,6 +677,7 @@
 				24874E7723E71EBC007810B0 /* TextFieldCell.swift in Sources */,
 				24866E5E23F2D3CE003CC715 /* ReuseItemCell.swift in Sources */,
 				2403C46B23E56D8900B73021 /* CreatePetViewController.swift in Sources */,
+				2440D09D23FAD32B00E7A803 /* DownloadManager.swift in Sources */,
 				24874E7B23E71FDF007810B0 /* TextViewCell.swift in Sources */,
 				24647FED23EBD08D005DB6E7 /* PetDetailViewController.swift in Sources */,
 				2430552423ED425000B9F4E6 /* DailyPageViewController.swift in Sources */,

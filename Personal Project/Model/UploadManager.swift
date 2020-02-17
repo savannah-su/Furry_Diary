@@ -21,7 +21,7 @@ enum upload: Error {
 struct Record {
     
     let categoryType: String
-    let subItem: String?
+    let subItem: [String?]
     let medicineName: String?
     let kilo: String?
     let memo: String?
@@ -67,7 +67,7 @@ class UploadManager {
     
     var simplePetInfo: [simplePetInfo] = []
     
-    func uploadData(petID: String, categoryType: String, date: String, subItem: String, medicineName: String, kilo: String, memo: String, notiOrNot: String, notiDate: String, notiText: String, completion: @escaping (Result<String, Error>) -> Void) {
+    func uploadData(petID: String, categoryType: String, date: String, subItem: [String], medicineName: String, kilo: String, memo: String, notiOrNot: String, notiDate: String, notiText: String, completion: @escaping (Result<String, Error>) -> Void) {
         
         let data = Record(categoryType: categoryType, subItem: subItem, medicineName: medicineName, kilo: kilo, memo: memo, date: date, notiOrNot: notiOrNot, notiDate: notiDate, notiText: notiText)
         

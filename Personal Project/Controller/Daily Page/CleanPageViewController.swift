@@ -40,7 +40,7 @@ class CleanPageViewController: UIViewController {
     var sectionTwoStatus = [false, false, false, false, false]
     
     var enterDate = Date()
-    var subItemType = ""
+    var subItemType = [""]
     var petID = ""
     var doneDate = ""
     var isSwitchOn: Bool = false
@@ -209,7 +209,7 @@ extension CleanPageViewController: UICollectionViewDelegate {
                         sectionOneStatus[index] = true
                         sectionTwoStatus[index] = false
                         
-                        subItemType = sectionOneLabel[index]
+                        subItemType = [sectionOneLabel[index]]
                         
                     } else {
                         sectionOneStatus[index] = false
@@ -225,7 +225,7 @@ extension CleanPageViewController: UICollectionViewDelegate {
                         sectionOneStatus[index] = false
                         sectionTwoStatus[index] = true
                         
-                        subItemType = sectionTwoLabel[index]
+                        subItemType = [sectionTwoLabel[index]]
                         
                     } else {
                         sectionOneStatus[index] = false
@@ -344,13 +344,13 @@ extension CleanPageViewController: UITableViewDataSource {
         
         isSwitchOn = !isSwitchOn
         
+        tableView.reloadData()
+        
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         guard let date = dateFormatter.date(from: doneDate) else {
             return
         }
         enterDate = date
-
-        tableView.reloadData()
     }
 }

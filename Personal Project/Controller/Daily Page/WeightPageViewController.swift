@@ -101,7 +101,7 @@ class WeightPageViewController: UIViewController {
         print(doneDate)
         print(weight)
         
-        UploadManager.shared.uploadData(petID: petID, categoryType: "體重紀錄", date: doneDate, subItem: "", medicineName: "", kilo: weight, memo: "", notiOrNot: "", notiDate: "", notiText: "") { result in
+        UploadManager.shared.uploadData(petID: petID, categoryType: "體重紀錄", date: doneDate, subItem: [""], medicineName: "", kilo: weight, memo: "", notiOrNot: "", notiDate: "", notiText: "") { result in
             
             switch result {
             case .success(let success):

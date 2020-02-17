@@ -34,7 +34,7 @@ class PreventPageViewController: UIViewController {
     var itemCellStatus = [false, false, false]
     
     var enterDate = Date()
-    var subItemType = ""
+    var subItemType = [""]
     var petID = ""
     var medicineName = ""
     var doneDate = ""
@@ -162,6 +162,8 @@ extension PreventPageViewController: UITableViewDataSource {
         
         isSwitchOn = !isSwitchOn
         
+        tableView.reloadData()
+        
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         guard let date = dateFormatter.date(from: doneDate) else {
@@ -169,7 +171,7 @@ extension PreventPageViewController: UITableViewDataSource {
         }
         enterDate = date
         
-        tableView.reloadData()
+        
     }
 }
 
@@ -251,7 +253,7 @@ extension PreventPageViewController: UICollectionViewDelegate {
                     
                     itemCellStatus[index] = true
                     
-                    subItemType = itemLabel[index]
+                    subItemType = [itemLabel[index]]
                 } else {
                     itemCellStatus[index] = false
                 }
