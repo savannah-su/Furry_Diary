@@ -21,8 +21,12 @@ class BehaviorPageViewController: UIViewController {
     }
     
     @IBOutlet weak var collectionView: UICollectionView!
+    
+    @IBOutlet weak var bottomViewLabel: UILabel!
+    @IBOutlet weak var petNameCollectionView: UICollectionView!
     @IBOutlet weak var timeTextField: UITextField!
     @IBOutlet weak var memoTextView: UITextView!
+    
     let datePiker = UIDatePicker()
     let showDateFormatter = DateFormatter()
     

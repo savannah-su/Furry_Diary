@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class PetCardCell: UITableViewCell {
 
@@ -66,9 +67,11 @@ extension PetCardCell: BannerViewDataSource {
     
     func viewFor(bannerView: BannerView, at index: Int) -> UIView {
         
-        let image = UIImage(named: petImage[index])
+        let imageView = UIImageView()
         
-        let imageView = UIImageView(image: image)
+        imageView.kf.setImage(with: URL(string: petImage[index]))
+        
+        imageView.backgroundColor = .blue
         
         imageView.layer.cornerRadius = 20
         

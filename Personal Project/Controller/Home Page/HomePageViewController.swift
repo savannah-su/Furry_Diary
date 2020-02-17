@@ -40,6 +40,8 @@ class HomePageViewController: UIViewController {
     
     var refreshControl: UIRefreshControl!
     
+    let manager = UploadManager()
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -85,6 +87,10 @@ class HomePageViewController: UIViewController {
                         
                             petDataFromDB.append(petInfo)
                             
+                            let simplePet = simplePetInfo(petName: petInfo.petName, petID: petInfo.petID, petPhoto: petInfo.petImage)
+                            
+                            self.manager.simplePetInfo.append(simplePet)
+                            
                         }
                         
                     } catch {
@@ -123,10 +129,6 @@ extension HomePageViewController: UITableViewDataSource {
         cell.background.addGestureRecognizer(tap)
 
         return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
     }
     
     @objc func toDetailPage(_ sender: UIGestureRecognizer) {

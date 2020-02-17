@@ -9,17 +9,18 @@
 import UIKit
 
 class CleanPageViewController: UIViewController {
-
+    
     @IBOutlet weak var topView: UIView!
     
     @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var bottomViewConstraint: NSLayoutConstraint!
     @IBOutlet weak var bottomViewButton: VerticalAlignedButton!
     @IBAction func bottomViewButton(_ sender: Any) {
-//        downButtomView()
+        //        downButtomView()
     }
     @IBOutlet weak var bottomViewLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var petNameCollectionView: UICollectionView!
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBAction func backButton(_ sender: Any) {
@@ -43,10 +44,14 @@ class CleanPageViewController: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-    
+        
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.allowsMultipleSelection = false
+        
+        petNameCollectionView.dataSource = self
+        petNameCollectionView.delegate = self
+        petNameCollectionView.isHidden = true
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -62,69 +67,102 @@ class CleanPageViewController: UIViewController {
 extension CleanPageViewController: UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 2
+        
+        if collectionView == self.collectionView {
+            return 2
+        }
+        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
-        guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "Header", for: indexPath) as? HeaderView else {
-            return UICollectionReusableView()
+        if collectionView == self.collectionView {
+            
+            guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "Header", for: indexPath) as? HeaderView else {
+                return UICollectionReusableView()
+            }
+            
+            if indexPath.section == 0 {
+                header.sectionTitle.text = "關於毛孩"
+            } else {
+                header.sectionTitle.text = "生活起居"
+            }
+            return header
         }
-        
-        if indexPath.section == 0 {
-            header.sectionTitle.text = "關於毛孩"
-        } else {
-            header.sectionTitle.text = "生活起居"
-        }
-        return header
+        return UICollectionReusableView()
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        if collectionView == self.collectionView {
             return 5
+        }
+        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Item Cell", for: indexPath) as? ReuseItemCell else {
-            return UICollectionViewCell()
-        }
-        
-        cell.image.backgroundColor = .white
-        
-        if indexPath.section == 0 {
+        if collectionView == self.collectionView {
             
-            cell.itemLabel.text = sectionOneLabel[indexPath.row]
-            
-            let index = indexPath.row
-            if sectionOneStatus[index] == true {
-                cell.image.image = UIImage(named: sectionOneSelected[index])
-            } else {
-                cell.image.image = UIImage(named: sectionOneImage[index])
+            guard let cellA = collectionView.dequeueReusableCell(withReuseIdentifier: "Item Cell", for: indexPath) as? ReuseItemCell else {
+                return UICollectionViewCell()
             }
             
-        } else if indexPath.section == 1 {
+            cellA.image.backgroundColor = .white
             
-            cell.itemLabel.text = sectionTwoLabel[indexPath.row]
-            
-            let index = indexPath.row
-            if sectionTwoStatus[index] == true {
-                cell.image.image = UIImage(named: sectionTwoSelected[index])
-            } else {
-                cell.image.image = UIImage(named: sectionTwoImage[index])
+            if indexPath.section == 0 {
+                
+                cellA.itemLabel.text = sectionOneLabel[indexPath.row]
+                
+                let index = indexPath.row
+                if sectionOneStatus[index] == true {
+                    cellA.image.image = UIImage(named: sectionOneSelected[index])
+                } else {
+                    cellA.image.image = UIImage(named: sectionOneImage[index])
+                }
+                
+            } else if indexPath.section == 1 {
+                
+                cellA.itemLabel.text = sectionTwoLabel[indexPath.row]
+                
+                let index = indexPath.row
+                if sectionTwoStatus[index] == true {
+                    cellA.image.image = UIImage(named: sectionTwoSelected[index])
+                } else {
+                    cellA.image.image = UIImage(named: sectionTwoImage[index])
+                }
             }
+            return cellA
+            
+        } else {
+            
+            guard let cellB = collectionView.dequeueReusableCell(withReuseIdentifier: "Pet Name Cell", for: indexPath) as? ChoosePetCell else {
+                return UICollectionViewCell()
+            }
+            
+            cellB.layer.cornerRadius = 20
+            return cellB
         }
-        return cell
     }
 }
 
 extension CleanPageViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+        
+        if collectionView == self.collectionView {
+            return UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+        } else {
+            return UIEdgeInsets()
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 60, height: 85)
+        
+        if collectionView == self.collectionView {
+            return CGSize(width: 60, height: 85)
+        }
+        return CGSize(width: 80, height: 50)
     }
 }
 
@@ -132,40 +170,51 @@ extension CleanPageViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        if indexPath.section == 0 {
+        if collectionView == self.collectionView {
             
-            for index in 0 ..< 5 {
+            if indexPath.section == 0 {
                 
-                if index == indexPath.row {
-                    sectionOneStatus[index] = true
-                    sectionTwoStatus[index] = false
-                } else {
-                    sectionOneStatus[index] = false
-                    sectionTwoStatus[index] = false
+                for index in 0 ..< 5 {
+                    
+                    if index == indexPath.row {
+                        sectionOneStatus[index] = true
+                        sectionTwoStatus[index] = false
+                    } else {
+                        sectionOneStatus[index] = false
+                        sectionTwoStatus[index] = false
+                    }
+                }
+            } else {
+                
+                for index in 0 ..< 5 {
+                    
+                    if index == indexPath.row {
+                        sectionOneStatus[index] = false
+                        sectionTwoStatus[index] = true
+                    } else {
+                        sectionOneStatus[index] = false
+                        sectionTwoStatus[index] = false
+                    }
                 }
             }
-        } else {
             
-            for index in 0 ..< 5 {
-                
-                if index == indexPath.row {
-                    sectionOneStatus[index] = false
-                    sectionTwoStatus[index] = true
-                } else {
-                    sectionOneStatus[index] = false
-                    sectionTwoStatus[index] = false
-                }
-            }
+            collectionView.reloadData()
+            //            tableView.reloadData()
+            
+            //        upButtomView()
+            
+            //        bottomViewLabel.isHidden = true
+            tableView.isHidden = true
+            bottomViewLabel.isHidden = false
+            petNameCollectionView.isHidden = false
+            bottomViewLabel.text = "要幫哪個毛孩紀錄呢？"
+            
+        } else if collectionView == self.petNameCollectionView {
+            
+            bottomViewLabel.isHidden = true
+            tableView.isHidden = false
+            self.petNameCollectionView.isHidden = true
         }
-        
-        collectionView.reloadData()
-        tableView.reloadData()
-        
-        //        upButtomView()
-        
-        //        bottomViewLabel.isHidden = true
-        tableView.isHidden = false
-        
     }
     
     func upButtomView() {

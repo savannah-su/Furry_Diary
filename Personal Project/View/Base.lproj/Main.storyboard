@@ -202,7 +202,6 @@
                     <connections>
                         <segue destination="W11-lZ-q3Q" kind="relationship" relationship="viewControllers" id="nLa-60-fVR"/>
                         <segue destination="Jyk-FN-VVy" kind="relationship" relationship="viewControllers" id="h2M-4U-6e1"/>
-                        <segue destination="ozW-0b-ADV" kind="relationship" relationship="viewControllers" id="Vz4-dm-uzE"/>
                         <segue destination="DBw-HM-dLl" kind="relationship" relationship="viewControllers" id="hEJ-nE-p6e"/>
                         <segue destination="Mvo-ky-IFL" kind="relationship" relationship="viewControllers" id="vrJ-y1-GFe"/>
                     </connections>
@@ -351,10 +350,10 @@
             </objects>
             <point key="canvasLocation" x="-1019" y="828"/>
         </scene>
-        <!--Colored Nav Controller-->
+        <!--Navigation Controller-->
         <scene sceneID="VNh-G2-f2I">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ozW-0b-ADV" customClass="ColoredNavController" customModule="Personal_Project" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ozW-0b-ADV" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="medical" selectedImage="medical-selected" id="n1E-7F-ir1"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="yqg-Ko-LsV">

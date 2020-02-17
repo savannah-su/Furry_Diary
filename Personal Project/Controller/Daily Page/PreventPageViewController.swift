@@ -9,29 +9,32 @@
 import UIKit
 
 class PreventPageViewController: UIViewController {
-
+    
     @IBOutlet weak var topView: UIView!
+    
     @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var buttomViewConstraint: NSLayoutConstraint!
     @IBOutlet weak var bottomViewButton: VerticalAlignedButton!
     @IBAction func bottomViewButton(_ sender: Any) {
-//        downButtomView()
+        //        downButtomView()
     }
     @IBOutlet weak var bottomViewLabel: UILabel!
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var petNameCollectionView: UICollectionView!
+    
     @IBAction func backButton(_ sender: Any) {
         navigationController?.popViewController(animated: true)
     }
     @IBAction func saveButton(_ sender: Any) {
     }
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var tableView: UITableView!
     
     let itemLabel = ["疫苗施打", "體內驅蟲", "體外驅蟲"]
     let itemImage = ["疫苗施打", "體內驅蟲", "體外驅蟲"]
     let selectedImage = ["疫苗施打-selected", "體內驅蟲-selected", "體外驅蟲-selected"]
     var itemCellStatus = [false, false, false]
     var isSwitchOn: Bool = false
-
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -42,33 +45,37 @@ class PreventPageViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         
+        petNameCollectionView.dataSource = self
+        petNameCollectionView.delegate = self
+        petNameCollectionView.isHidden = true
+        
         collectionView.allowsMultipleSelection = false
         
         bottomViewButton.isHidden = true
         
         tableView.separatorColor = .clear
         tableView.isHidden = true
-
+        
         // Do any additional setup after loading the view.
     }
 }
 
 extension PreventPageViewController: UITableViewDelegate {
-
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         
         if indexPath.row == 2 && isSwitchOn == true {
-                return 140
-            }
-            
-            return 40
-
+            return 140
+        }
+        
+        return 40
+        
     }
 }
 
 extension PreventPageViewController: UITableViewDataSource {
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 3
     }
@@ -117,40 +124,65 @@ extension PreventPageViewController: UITableViewDataSource {
 extension PreventPageViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 70, height: 100)
+        
+        if collectionView == self.collectionView {
+            return CGSize(width: 70, height: 100)
+        }
+        return CGSize(width: 80, height: 50)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 34
+        
+        if collectionView == self.collectionView {
+            return 34
+        }
+        return CGFloat()
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 98, left: 51, bottom: 98, right: 51)
+        if collectionView == self.collectionView {
+            return UIEdgeInsets(top: 98, left: 51, bottom: 98, right: 51)
+        }
+        return UIEdgeInsets()
     }
 }
 
 extension PreventPageViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        if collectionView == self.collectionView {
+            return 3
+        }
+        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Item Cell", for: indexPath) as? ReuseItemCell else { return UICollectionViewCell() }
-        
-        for index in 0 ... 2 {
+        if collectionView == self.collectionView {
             
-            let index = indexPath.row
-            cell.itemLabel.text = itemLabel[index]
+            guard let cellA = collectionView.dequeueReusableCell(withReuseIdentifier: "Item Cell", for: indexPath) as? ReuseItemCell else { return UICollectionViewCell() }
             
-            if itemCellStatus[index] == true {
-                cell.image.image = UIImage(named: selectedImage[index])
-            } else {
-                cell.image.image = UIImage(named: itemImage[index])
+            for index in 0 ... 2 {
+                
+                let index = indexPath.row
+                cellA.itemLabel.text = itemLabel[index]
+                
+                if itemCellStatus[index] == true {
+                    cellA.image.image = UIImage(named: selectedImage[index])
+                } else {
+                    cellA.image.image = UIImage(named: itemImage[index])
+                }
             }
+            return cellA
+            
+        } else {
+            
+            guard let cellB = collectionView.dequeueReusableCell(withReuseIdentifier: "Pet Name Cell", for: indexPath) as? ChoosePetCell else {
+                return UICollectionViewCell()
+            }
+            
+            return cellB
         }
-        return cell
     }
 }
 
@@ -158,21 +190,32 @@ extension PreventPageViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        for index in 0 ..< itemCellStatus.count {
+        if collectionView == self.collectionView {
             
-            if index == indexPath.row {
-                itemCellStatus[index] = true
-            } else {
-                itemCellStatus[index] = false
+            for index in 0 ..< itemCellStatus.count {
+                
+                if index == indexPath.row {
+                    itemCellStatus[index] = true
+                } else {
+                    itemCellStatus[index] = false
+                }
             }
+            collectionView.reloadData()
+            tableView.reloadData()
+            
+            //        upButtomView()
+            
+            bottomViewLabel.isHidden = false
+            bottomViewLabel.text = "要幫哪個毛孩紀錄呢？"
+            tableView.isHidden = true
+            petNameCollectionView.isHidden = false
+            
+        } else if collectionView == self.petNameCollectionView {
+            
+            bottomViewLabel.isHidden = true
+            tableView.isHidden = false
+            self.petNameCollectionView.isHidden = true
         }
-        collectionView.reloadData()
-        tableView.reloadData()
-        
-//        upButtomView()
- 
-        bottomViewLabel.isHidden = true
-        tableView.isHidden = false
     }
     
     func upButtomView() {

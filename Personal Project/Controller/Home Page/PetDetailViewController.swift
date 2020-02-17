@@ -68,15 +68,15 @@ extension PetDetailViewController: BannerViewDataSource {
     
     func numberOfPages(in bannerView: BannerView) -> Int {
         
-        return 5
+        return petData?.petImage.count ?? 0
         
     }
     
     func viewFor(bannerView: BannerView, at index: Int) -> UIView {
         
-        let image = UIImage(named: "圖片 28")
+        let imageView = UIImageView()
         
-        let imageView = UIImageView(image: image)
+        imageView.kf.setImage(with: URL(string: petData?.petImage[index] ?? ""))
         
         imageView.contentMode = .scaleAspectFill
         
