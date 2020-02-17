@@ -75,7 +75,7 @@ class BehaviorPageViewController: UIViewController {
         print(doneDate)
         print(memo)
         
-        UploadManager.shared.uploadData(petID: petID, categoryType: "行為症狀", date: doneDate, subItem: [""], medicineName: "", kilo: "", memo: memo, notiOrNot: "", notiDate: "", notiText: "") { result in
+        UploadManager.shared.uploadData(petID: petID, categoryType: "行為症狀", date: doneDate, subitem: [""], medicineName: "", kilo: "", memo: memo, notiOrNot: "", notiDate: "", notiText: "") { result in
             
             switch result {
             case .success(let success):

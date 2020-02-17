@@ -49,6 +49,8 @@ class WeightPageViewController: UIViewController {
         
         toDataBase()
         
+//        toGetRecord()
+        
     }
     
     @IBOutlet weak var dateLabel: UILabel!
@@ -93,6 +95,19 @@ class WeightPageViewController: UIViewController {
         
     }
     
+    func toGetRecord() {
+        
+        DownloadManager.shared.downloadData(petID: petID) { result in
+            
+            switch result {
+            case .success(let success):
+                print(success)
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
     func toDataBase() {
         
         getInfo()
@@ -101,7 +116,7 @@ class WeightPageViewController: UIViewController {
         print(doneDate)
         print(weight)
         
-        UploadManager.shared.uploadData(petID: petID, categoryType: "體重紀錄", date: doneDate, subItem: [""], medicineName: "", kilo: weight, memo: "", notiOrNot: "", notiDate: "", notiText: "") { result in
+        UploadManager.shared.uploadData(petID: petID, categoryType: "體重紀錄", date: doneDate, subitem: [""], medicineName: "", kilo: weight, memo: "", notiOrNot: "", notiDate: "", notiText: "") { result in
             
             switch result {
             case .success(let success):

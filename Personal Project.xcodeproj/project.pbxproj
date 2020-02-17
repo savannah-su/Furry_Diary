@@ -26,6 +26,7 @@
 		243230F623E83D34008C512B /* UploadIamgeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243230F523E83D34008C512B /* UploadIamgeCell.swift */; };
 		2440D09B23F95DD700E7A803 /* ChoosePetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2440D09A23F95DD700E7A803 /* ChoosePetCell.swift */; };
 		2440D09D23FAD32B00E7A803 /* DownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2440D09C23FAD32B00E7A803 /* DownloadManager.swift */; };
+		2440D09F23FAFAB800E7A803 /* OwnerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2440D09E23FAFAB800E7A803 /* OwnerCell.swift */; };
 		24413D0123F5269400A07AAE /* EnterInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24413D0023F5269400A07AAE /* EnterInfoCell.swift */; };
 		2455D3DC23E95EA30095D039 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2455D3DB23E95EA30095D039 /* UIViewController+Extension.swift */; };
 		24647FED23EBD08D005DB6E7 /* PetDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24647FEC23EBD08D005DB6E7 /* PetDetailViewController.swift */; };
@@ -103,6 +104,7 @@
 		243230F523E83D34008C512B /* UploadIamgeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadIamgeCell.swift; sourceTree = "<group>"; };
 		2440D09A23F95DD700E7A803 /* ChoosePetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoosePetCell.swift; sourceTree = "<group>"; };
 		2440D09C23FAD32B00E7A803 /* DownloadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadManager.swift; sourceTree = "<group>"; };
+		2440D09E23FAFAB800E7A803 /* OwnerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerCell.swift; sourceTree = "<group>"; };
 		24413D0023F5269400A07AAE /* EnterInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterInfoCell.swift; sourceTree = "<group>"; };
 		2455D3DB23E95EA30095D039 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		24647FEC23EBD08D005DB6E7 /* PetDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PetDetailViewController.swift; path = "Personal Project/Controller/Home Page/PetDetailViewController.swift"; sourceTree = SOURCE_ROOT; };
@@ -290,6 +292,7 @@
 			isa = PBXGroup;
 			children = (
 				24647FEF23EBF580005DB6E7 /* DetailCell.swift */,
+				2440D09E23FAFAB800E7A803 /* OwnerCell.swift */,
 			);
 			path = "Pet Detail Page";
 			sourceTree = "<group>";
@@ -654,6 +657,7 @@
 			files = (
 				24D50A5123EAA9460074DD51 /* VerticalAlignedButton.swift in Sources */,
 				248E9DCF23EC48B500388A3B /* ColoredNavController.swift in Sources */,
+				2440D09F23FAFAB800E7A803 /* OwnerCell.swift in Sources */,
 				2402B3BF23E5542500E8D009 /* Data.swift in Sources */,
 				24647FF023EBF580005DB6E7 /* DetailCell.swift in Sources */,
 				2430552A23F1616A00B9F4E6 /* Banner.swift in Sources */,

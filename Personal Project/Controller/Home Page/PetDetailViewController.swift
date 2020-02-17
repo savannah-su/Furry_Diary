@@ -136,7 +136,11 @@ extension PetDetailViewController: UITableViewDataSource {
             cell.contentLabel.text = petData?.memo
             
         default:
-            cell.contentLabel.text = petData?.ownersImage[0]
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "CoOwner Cell", for: indexPath) as? CoOwnerCell else { return UITableViewCell() }
+            
+            cell.ownerImage.layer.cornerRadius = 15
+            cell.ownerImage.kf.setImage(with: URL(string: (petData?.ownersImage[1])!))
+            return cell
    
         }
         

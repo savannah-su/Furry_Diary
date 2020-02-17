@@ -164,7 +164,7 @@
                                                         <constraint firstAttribute="width" constant="3" id="Ihb-1t-6UU"/>
                                                     </constraints>
                                                 </view>
-                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="JBc-Hc-vec">
+                                                <collectionView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="JBc-Hc-vec">
                                                     <rect key="frame" x="87" y="20" width="311" height="35"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                     <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="y9a-ae-GJU">
@@ -205,8 +205,17 @@
                                                         </collectionViewCell>
                                                     </cells>
                                                 </collectionView>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uR2-SU-uoK">
+                                                    <rect key="frame" x="87" y="22.5" width="30" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="5My-3j-RqH"/>
+                                                        <constraint firstAttribute="width" constant="30" id="J7q-CN-xow"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="uR2-SU-uoK" firstAttribute="centerY" secondItem="V39-3m-POj" secondAttribute="centerY" id="JI0-c9-xmw"/>
+                                                <constraint firstItem="uR2-SU-uoK" firstAttribute="leading" secondItem="Lni-WR-u4M" secondAttribute="trailing" constant="13" id="JoP-v0-JhX"/>
                                                 <constraint firstItem="V39-3m-POj" firstAttribute="top" secondItem="S6s-KY-tbt" secondAttribute="topMargin" constant="16" id="KfG-Lz-oTl"/>
                                                 <constraint firstItem="JBc-Hc-vec" firstAttribute="top" secondItem="S6s-KY-tbt" secondAttribute="top" constant="20" symbolic="YES" id="NUo-qJ-s3B"/>
                                                 <constraint firstItem="Lni-WR-u4M" firstAttribute="leading" secondItem="V39-3m-POj" secondAttribute="trailing" constant="13" id="PIB-gp-VCM"/>
@@ -218,6 +227,9 @@
                                                 <constraint firstItem="Lni-WR-u4M" firstAttribute="centerY" secondItem="V39-3m-POj" secondAttribute="centerY" id="sfv-Rj-xyb"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="ownerImage" destination="uR2-SU-uoK" id="S97-Ur-YFH"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <userDefinedRuntimeAttributes>

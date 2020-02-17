@@ -78,7 +78,7 @@ class CleanPageViewController: UIViewController {
         print(notiDate)
         print(notiMemo)
         
-        UploadManager.shared.uploadData(petID: petID, categoryType: "衛生清潔", date: doneDate, subItem: subItemType, medicineName: "", kilo: "", memo: "", notiOrNot: isSwitchOn ? "true" : "false", notiDate: notiDate, notiText: notiMemo) { result in
+        UploadManager.shared.uploadData(petID: petID, categoryType: "衛生清潔", date: doneDate, subitem: subItemType, medicineName: "", kilo: "", memo: "", notiOrNot: isSwitchOn ? "true" : "false", notiDate: notiDate, notiText: notiMemo) { result in
             
             switch result {
             case .success(let success):

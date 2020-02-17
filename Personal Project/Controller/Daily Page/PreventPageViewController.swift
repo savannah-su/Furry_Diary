@@ -76,7 +76,7 @@ class PreventPageViewController: UIViewController {
         print(notiDate)
         print(notiMemo)
         
-        UploadManager.shared.uploadData(petID: petID, categoryType: "預防計畫", date: doneDate, subItem: subItemType, medicineName: medicineName, kilo: "", memo: "", notiOrNot: isSwitchOn ? "true" : "false", notiDate: notiDate, notiText: notiMemo) { result in
+        UploadManager.shared.uploadData(petID: petID, categoryType: "預防計畫", date: doneDate, subitem: subItemType, medicineName: medicineName, kilo: "", memo: "", notiOrNot: isSwitchOn ? "true" : "false", notiDate: notiDate, notiText: notiMemo) { result in
             
             switch result {
             case .success(let success):
