@@ -79,6 +79,8 @@ class EnterInfoCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        contentText.delegate = self
         // Initialization code
     }
 

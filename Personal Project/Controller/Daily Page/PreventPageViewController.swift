@@ -15,9 +15,7 @@ class PreventPageViewController: UIViewController {
     @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var buttomViewConstraint: NSLayoutConstraint!
     @IBOutlet weak var bottomViewButton: VerticalAlignedButton!
-    @IBAction func bottomViewButton(_ sender: Any) {
-        //        downButtomView()
-    }
+    @IBAction func bottomViewButton(_ sender: Any) {}
     @IBOutlet weak var bottomViewLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var petNameCollectionView: UICollectionView!
@@ -26,6 +24,7 @@ class PreventPageViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     @IBAction func saveButton(_ sender: Any) {
+        toDataBase()
     }
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -33,7 +32,15 @@ class PreventPageViewController: UIViewController {
     let itemImage = ["疫苗施打", "體內驅蟲", "體外驅蟲"]
     let selectedImage = ["疫苗施打-selected", "體內驅蟲-selected", "體外驅蟲-selected"]
     var itemCellStatus = [false, false, false]
+    
+    var enterDate = Date()
+    var subItemType = ""
+    var petID = ""
+    var medicineName = ""
+    var doneDate = ""
     var isSwitchOn: Bool = false
+    var notiDate = ""
+    var notiMemo = ""
     
     override func viewDidLoad() {
         
@@ -57,6 +64,27 @@ class PreventPageViewController: UIViewController {
         tableView.isHidden = true
         
         // Do any additional setup after loading the view.
+    }
+    
+    func toDataBase() {
+        
+        print(petID)
+        print(subItemType)
+        print(medicineName)
+        print(doneDate)
+        print(isSwitchOn)
+        print(notiDate)
+        print(notiMemo)
+        
+        UploadManager.shared.uploadData(petID: petID, categoryType: "預防計畫", date: doneDate, subItem: subItemType, medicineName: medicineName, kilo: "", memo: "", notiOrNot: isSwitchOn ? "true" : "false", notiDate: notiDate, notiText: notiMemo) { result in
+            
+            switch result {
+            case .success(let success):
+                print(success)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
 }
 
@@ -91,6 +119,9 @@ extension PreventPageViewController: UITableViewDataSource {
             cell.titleLabel.text = "藥劑名稱"
             cell.contentText.placeholder = "例：三合一疫苗、蚤不到"
             cell.textFieldType = .normal
+            cell.touchHandler = { [weak self] text in
+                self?.medicineName = text
+            }
             return cell
             
         case 1:
@@ -99,7 +130,10 @@ extension PreventPageViewController: UITableViewDataSource {
             }
             cell.titleLabel.text = "施作時間"
             cell.contentText.placeholder = "選擇本次施作時間"
-            cell.textFieldType = .date(Date(), "yyyy-MM-dd")
+            cell.textFieldType = .date(enterDate, "yyyy-MM-dd")
+            cell.touchHandler = { [weak self] text in
+                self?.doneDate = text
+            }
             return cell
             
             
@@ -110,6 +144,16 @@ extension PreventPageViewController: UITableViewDataSource {
             cell.notiSwitch.addTarget(self, action: #selector(changeSwitch), for: .valueChanged)
             cell.textFieldType = .date(Date(), "yyyy-MM-dd")
             cell.textFieldType = .normal
+            cell.touchHandler = { [weak self] text in
+                
+                let date = text.components(separatedBy: "-")
+                
+                if date.count == 3 {
+                    self?.notiDate = text
+                } else {
+                    self?.notiMemo = text
+                }
+            }
             return cell
         }
     }
@@ -117,6 +161,14 @@ extension PreventPageViewController: UITableViewDataSource {
     @objc func changeSwitch() {
         
         isSwitchOn = !isSwitchOn
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        guard let date = dateFormatter.date(from: doneDate) else {
+            return
+        }
+        enterDate = date
+        
         tableView.reloadData()
     }
 }
@@ -136,7 +188,7 @@ extension PreventPageViewController: UICollectionViewDelegateFlowLayout {
         if collectionView == self.collectionView {
             return 34
         }
-        return CGFloat()
+        return 20
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -153,7 +205,7 @@ extension PreventPageViewController: UICollectionViewDataSource {
         if collectionView == self.collectionView {
             return 3
         }
-        return 1
+        return UploadManager.shared.simplePetInfo.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -180,6 +232,7 @@ extension PreventPageViewController: UICollectionViewDataSource {
             guard let cellB = collectionView.dequeueReusableCell(withReuseIdentifier: "Pet Name Cell", for: indexPath) as? ChoosePetCell else {
                 return UICollectionViewCell()
             }
+            cellB.petName.text = UploadManager.shared.simplePetInfo[indexPath.row].petName
             
             return cellB
         }
@@ -195,15 +248,15 @@ extension PreventPageViewController: UICollectionViewDelegate {
             for index in 0 ..< itemCellStatus.count {
                 
                 if index == indexPath.row {
+                    
                     itemCellStatus[index] = true
+                    
+                    subItemType = itemLabel[index]
                 } else {
                     itemCellStatus[index] = false
                 }
             }
             collectionView.reloadData()
-            tableView.reloadData()
-            
-            //        upButtomView()
             
             bottomViewLabel.isHidden = false
             bottomViewLabel.text = "要幫哪個毛孩紀錄呢？"
@@ -211,6 +264,8 @@ extension PreventPageViewController: UICollectionViewDelegate {
             petNameCollectionView.isHidden = false
             
         } else if collectionView == self.petNameCollectionView {
+            
+            petID = UploadManager.shared.simplePetInfo[indexPath.row].petID
             
             bottomViewLabel.isHidden = true
             tableView.isHidden = false

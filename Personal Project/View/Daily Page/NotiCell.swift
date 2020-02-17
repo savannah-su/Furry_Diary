@@ -72,6 +72,8 @@ class NotiCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        dateText.delegate = self
+        notiText.delegate = self
         // Initialization code
     }
 
@@ -94,7 +96,6 @@ extension NotiCell: UITextFieldDelegate {
         guard let text = textField.text else {
             return
         }
-        
         touchHandler?(text)
     }
 }

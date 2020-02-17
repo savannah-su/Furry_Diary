@@ -49,23 +49,16 @@ class WeightPageViewController: UIViewController {
         
         toDataBase()
         
-        //        UploadManager.shared.uploadWeight(petID: "08910E4F-29AC-4DB0-A8F1-7860716E35E5", time: 123, kilo: 90) { result in
-        //
-        //            switch result {
-        //
-        //            case .success(let success):
-        //                print(success)
-        //            case .failure(let error):
-        //                print(error.localizedDescription)
-        //            }
-        //        }
     }
     
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var firstBar: UIView!
     @IBOutlet weak var dateTextfield: UITextField!
+    @IBOutlet weak var weightLabel: UILabel!
+    @IBOutlet weak var secondBar: UIView!
     @IBOutlet weak var weightTextField: UITextField!
     @IBOutlet weak var kgLabel: UILabel!
+    
     
     @IBOutlet weak var bottomViewLabel: UILabel!
     @IBOutlet weak var petNameCollectionView: UICollectionView!
@@ -80,7 +73,10 @@ class WeightPageViewController: UIViewController {
     let datePicker = UIDatePicker()
     let showDateFormatter = DateFormatter()
     
-    let uploadManager = UploadManager()
+    var enterDate = Date()
+    var petID = ""
+    var doneDate = ""
+    var weight = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -91,19 +87,62 @@ class WeightPageViewController: UIViewController {
         
         setupDatePicker()
         
+        petNameCollectionView.delegate = self
         petNameCollectionView.dataSource = self
-        petNameCollectionView.dataSource = self
+        petNameCollectionView.isHidden = false
         
     }
     
+    func toDataBase() {
+        
+        getInfo()
+        
+        print(petID)
+        print(doneDate)
+        print(weight)
+        
+        UploadManager.shared.uploadData(petID: petID, categoryType: "體重紀錄", date: doneDate, subItem: "", medicineName: "", kilo: weight, memo: "", notiOrNot: "", notiDate: "", notiText: "") { result in
+            
+            switch result {
+            case .success(let success):
+                print(success)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func getInfo() {
+        
+        guard let enterDate = dateTextfield.text else {
+            return
+        }
+        doneDate = enterDate
+        
+        guard let enterWeight = weightTextField.text else {
+            return
+        }
+        weight = enterWeight
+    }
+    
     func showEnterBox() {
+        dateLabel.isHidden = false
+        firstBar.isHidden = false
         dateTextfield.isHidden = false
+        weightLabel.isHidden = false
+        secondBar.isHidden = false
         weightTextField.isHidden = false
+        kgLabel.isHidden = false
     }
     
     func hideEnterBox() {
+        dateLabel.isHidden = true
+        firstBar.isHidden = true
         dateTextfield.isHidden = true
+        weightLabel.isHidden = true
+        secondBar.isHidden = true
         weightTextField.isHidden = true
+        kgLabel.isHidden = true
     }
     
     func setupDatePicker() {
@@ -118,21 +157,6 @@ class WeightPageViewController: UIViewController {
     
     @objc func changeDate() {
         dateTextfield.text = showDateFormatter.string(from: datePicker.date)
-    }
-    
-    func toDataBase() {
-        
-        guard let currentPetID = UserDefaults.standard.value(forKey: "petID") else { return }
-        
-        uploadManager.uploadData(petID: currentPetID as! String, categoryType: "體重紀錄", date: dateTextfield.text!, subItem: "", title: "", kilo: weightTextField.text!, memo: "", notiOrNot: "", notiDate: "", notiText: "") { result in
-            switch result {
-                
-            case .success(let success):
-                print(success)
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-        }
     }
     
     func setupChart() {
@@ -177,7 +201,7 @@ class WeightPageViewController: UIViewController {
 extension WeightPageViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        return UploadManager.shared.simplePetInfo.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -186,15 +210,17 @@ extension WeightPageViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
+        cell.petName.text = UploadManager.shared.simplePetInfo[indexPath.row].petName
+        
         return cell
     }
-    
-    
 }
 
 extension WeightPageViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        petID = UploadManager.shared.simplePetInfo[indexPath.row].petID
         
         bottomViewLabel.isHidden = true
         petNameCollectionView.isHidden = true

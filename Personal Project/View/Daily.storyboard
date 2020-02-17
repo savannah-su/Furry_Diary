@@ -172,8 +172,8 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </textView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="請選擇預防計畫項目" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DAK-OV-odq">
-                                        <rect key="frame" x="186" y="50" width="228" height="30"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="點選今天發生了什麼事件" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DAK-OV-odq">
+                                        <rect key="frame" x="160.5" y="50" width="279" height="30"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -326,8 +326,12 @@
                     <connections>
                         <outlet property="bottomViewLabel" destination="DAK-OV-odq" id="HjS-NZ-zz1"/>
                         <outlet property="collectionView" destination="AsI-Fe-Znh" id="Y2x-AU-adB"/>
+                        <outlet property="dateLabel" destination="BZ6-Dm-CCH" id="3zp-ik-b7L"/>
+                        <outlet property="firstBar" destination="KI5-kK-pzc" id="dw9-AK-8JA"/>
+                        <outlet property="memoLabel" destination="cIN-6A-4rE" id="2Vi-M8-O4A"/>
                         <outlet property="memoTextView" destination="68L-9V-eZ2" id="3UB-bJ-iKn"/>
                         <outlet property="petNameCollectionView" destination="74b-zC-y3k" id="4C6-Uy-PyU"/>
+                        <outlet property="secondBar" destination="NQO-Sl-nzd" id="gOg-qp-AJj"/>
                         <outlet property="timeTextField" destination="vlL-86-32L" id="WKn-um-t56"/>
                     </connections>
                 </viewController>
@@ -496,8 +500,8 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="請選擇預防計畫項目" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wi2-li-YQ7">
-                                        <rect key="frame" x="186" y="50" width="228" height="30"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="要幫哪個毛孩紀錄呢？" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wi2-li-YQ7">
+                                        <rect key="frame" x="173.5" y="50" width="253.5" height="30"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -599,6 +603,8 @@
                         <outlet property="firstBar" destination="DNm-hu-R76" id="UYM-Sq-vtM"/>
                         <outlet property="kgLabel" destination="IoM-K8-e1b" id="0jN-KO-VLx"/>
                         <outlet property="petNameCollectionView" destination="47O-34-xkX" id="tqK-1v-a85"/>
+                        <outlet property="secondBar" destination="xbS-I7-Nlt" id="Ii3-8Q-LOu"/>
+                        <outlet property="weightLabel" destination="QbF-jg-Tae" id="7wM-sc-s4X"/>
                         <outlet property="weightTextField" destination="5u9-Mg-x3k" id="9QF-hZ-LfC"/>
                     </connections>
                 </viewController>

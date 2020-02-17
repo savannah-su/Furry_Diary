@@ -40,8 +40,6 @@ class HomePageViewController: UIViewController {
     
     var refreshControl: UIRefreshControl!
     
-    let manager = UploadManager()
-    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -73,6 +71,8 @@ class HomePageViewController: UIViewController {
     
     func getPetData() {
         
+        UploadManager.shared.simplePetInfo.removeAll()
+        
         Firestore.firestore().collection("pets").getDocuments { (querySnapshot, error) in
             
             var petDataFromDB = [PetInfo]()
@@ -88,8 +88,8 @@ class HomePageViewController: UIViewController {
                             petDataFromDB.append(petInfo)
                             
                             let simplePet = simplePetInfo(petName: petInfo.petName, petID: petInfo.petID, petPhoto: petInfo.petImage)
-                            
-                            self.manager.simplePetInfo.append(simplePet)
+  
+                            UploadManager.shared.simplePetInfo.append(simplePet)
                             
                         }
                         
