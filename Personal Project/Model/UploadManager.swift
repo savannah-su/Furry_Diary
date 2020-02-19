@@ -38,7 +38,7 @@ class UploadManager {
     
     var simplePetInfo: [simplePetInfo] = []
     
-    func uploadData(petID: String, categoryType: String, date: String, subitem: [String], medicineName: String, kilo: String, memo: String, notiOrNot: String, notiDate: String, notiText: String, completion: @escaping (Result<String, Error>) -> Void) {
+    func uploadData(petID: String, categoryType: String, date: Date, subitem: [String], medicineName: String, kilo: String, memo: String, notiOrNot: String, notiDate: String, notiText: String, completion: @escaping (Result<String, Error>) -> Void) {
         
         let data = Record(categoryType: categoryType, subitem: subitem, medicineName: medicineName, kilo: kilo, memo: memo, date: date, notiOrNot: notiOrNot, notiDate: notiDate, notiText: notiText)
         

@@ -26,6 +26,9 @@ target 'Personal Project' do
   # add JGProgressHUD
   pod 'JGProgressHUD'
 
+  # add Calendar
+  pod 'FSCalendar'
+
   # add LineChart
   pod 'PNChart'
 

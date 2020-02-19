@@ -26,10 +26,12 @@ class DownloadManager {
     
     lazy var db = Firestore.firestore()
     
-    func downloadData(petID: String, completion: @escaping (Result<[Record], Error>) -> Void) {
+    var petRecord = [Record]()
+    
+    let category = ["衛生清潔", "預防計畫", "體重紀錄", "行為症狀"]
+    
+    func downloadData(type: Int, petID: String, completion: @escaping (Result<[Record], Error>) -> Void) {
         db.collection("pets").document(petID).collection("record").getDocuments { (querySnapshot, error) in
-            
-            var petRecord = [Record]()
             
             if error == nil {
                 
@@ -38,15 +40,31 @@ class DownloadManager {
                     do {
                         
                         if let downloadData = try document.data(as: Record.self, decoder: Firestore.Decoder()) {
-                            petRecord.append(downloadData)
+                            self.petRecord.append(downloadData)
                         }
                         
-                        
                     } catch {
-                        completion(.failure(upload.uploadFail))
+                        completion(.failure(download.downloadFail))
                     }
                 }
-                completion(.success(petRecord))
+                
+                if type == 4 {
+                    
+                    completion(.success(self.petRecord))
+                    
+                } else {
+                    
+                    let categoryData = self.petRecord.filter { info in
+                        
+                        if info.categoryType == self.category[type] {
+                            return true
+                        } else {
+                            return false
+                        }
+                    }
+                    
+                    completion(.success(categoryData))
+                }
             }
         }
     }

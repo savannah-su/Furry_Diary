@@ -18,7 +18,6 @@ class PreventPageViewController: UIViewController {
     @IBAction func bottomViewButton(_ sender: Any) {}
     @IBOutlet weak var bottomViewLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var petNameCollectionView: UICollectionView!
     
     @IBAction func backButton(_ sender: Any) {
         navigationController?.popViewController(animated: true)
@@ -52,10 +51,6 @@ class PreventPageViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         
-        petNameCollectionView.dataSource = self
-        petNameCollectionView.delegate = self
-        petNameCollectionView.isHidden = true
-        
         collectionView.allowsMultipleSelection = false
         
         bottomViewButton.isHidden = true
@@ -76,7 +71,7 @@ class PreventPageViewController: UIViewController {
         print(notiDate)
         print(notiMemo)
         
-        UploadManager.shared.uploadData(petID: petID, categoryType: "預防計畫", date: doneDate, subitem: subItemType, medicineName: medicineName, kilo: "", memo: "", notiOrNot: isSwitchOn ? "true" : "false", notiDate: notiDate, notiText: notiMemo) { result in
+        UploadManager.shared.uploadData(petID: petID, categoryType: "預防計畫", date: enterDate, subitem: subItemType, medicineName: medicineName, kilo: "", memo: "", notiOrNot: isSwitchOn ? "true" : "false", notiDate: notiDate, notiText: notiMemo) { result in
             
             switch result {
             case .success(let success):
@@ -178,41 +173,25 @@ extension PreventPageViewController: UITableViewDataSource {
 extension PreventPageViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        if collectionView == self.collectionView {
             return CGSize(width: 70, height: 100)
-        }
-        return CGSize(width: 80, height: 50)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        
-        if collectionView == self.collectionView {
             return 34
-        }
-        return 20
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        if collectionView == self.collectionView {
             return UIEdgeInsets(top: 98, left: 51, bottom: 98, right: 51)
-        }
-        return UIEdgeInsets()
     }
 }
 
 extension PreventPageViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView == self.collectionView {
             return 3
-        }
-        return UploadManager.shared.simplePetInfo.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        if collectionView == self.collectionView {
             
             guard let cellA = collectionView.dequeueReusableCell(withReuseIdentifier: "Item Cell", for: indexPath) as? ReuseItemCell else { return UICollectionViewCell() }
             
@@ -228,16 +207,6 @@ extension PreventPageViewController: UICollectionViewDataSource {
                 }
             }
             return cellA
-            
-        } else {
-            
-            guard let cellB = collectionView.dequeueReusableCell(withReuseIdentifier: "Pet Name Cell", for: indexPath) as? ChoosePetCell else {
-                return UICollectionViewCell()
-            }
-            cellB.petName.text = UploadManager.shared.simplePetInfo[indexPath.row].petName
-            
-            return cellB
-        }
     }
 }
 
@@ -245,8 +214,6 @@ extension PreventPageViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        if collectionView == self.collectionView {
-            
             for index in 0 ..< itemCellStatus.count {
                 
                 if index == indexPath.row {
@@ -260,19 +227,9 @@ extension PreventPageViewController: UICollectionViewDelegate {
             }
             collectionView.reloadData()
             
-            bottomViewLabel.isHidden = false
-            bottomViewLabel.text = "要幫哪個毛孩紀錄呢？"
-            tableView.isHidden = true
-            petNameCollectionView.isHidden = false
-            
-        } else if collectionView == self.petNameCollectionView {
-            
-            petID = UploadManager.shared.simplePetInfo[indexPath.row].petID
-            
             bottomViewLabel.isHidden = true
             tableView.isHidden = false
-            self.petNameCollectionView.isHidden = true
-        }
+            
     }
     
     func upButtomView() {

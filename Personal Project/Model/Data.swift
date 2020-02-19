@@ -86,11 +86,11 @@ struct PetInfo: Codable {
 struct Record: Codable {
     
     let categoryType: String
-    let subitem: [String?]
+    let subitem: [String]?
     let medicineName: String?
     let kilo: String?
     let memo: String?
-    let date: String
+    let date: Date
     let notiOrNot: String?
     let notiDate: String?
     let notiText: String?
@@ -100,7 +100,7 @@ struct Record: Codable {
         case categoryType = "category tpye"
         case medicineName = "medicine name"
         case notiOrNot = "noti or not"
-        case notiDate = "noti date"
+        case notiDate = "noti Date"
         case notiText = "noti text"
         case subitem, kilo, memo, date
 
@@ -117,8 +117,13 @@ struct Record: Codable {
             "memo": memo as Any,
             "date": date,
             "noti or not": notiOrNot as Any,
-            "noti date": notiDate as Any,
+            "noti Date": notiDate as Any,
             "noti text": notiText as Any
         ]
     }
+}
+
+struct WeightData {
+    let date: Date
+    let weight: Double
 }

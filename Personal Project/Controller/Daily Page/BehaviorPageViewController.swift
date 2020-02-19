@@ -24,7 +24,6 @@ class BehaviorPageViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     
     @IBOutlet weak var bottomViewLabel: UILabel!
-    @IBOutlet weak var petNameCollectionView: UICollectionView!
     
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var firstBar: UIView!
@@ -51,10 +50,6 @@ class BehaviorPageViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         
-        petNameCollectionView.delegate = self
-        petNameCollectionView.dataSource = self
-        petNameCollectionView.isHidden = true
-        
         memoTextView.delegate = self
         collectionView.allowsMultipleSelection = true
         setupTextView()
@@ -62,7 +57,6 @@ class BehaviorPageViewController: UIViewController {
         setupDatePiker()
         
         hideEnterBox()
-        
         // Do any additional setup after loading the view.
     }
     
@@ -75,7 +69,7 @@ class BehaviorPageViewController: UIViewController {
         print(doneDate)
         print(memo)
         
-        UploadManager.shared.uploadData(petID: petID, categoryType: "行為症狀", date: doneDate, subitem: [""], medicineName: "", kilo: "", memo: memo, notiOrNot: "", notiDate: "", notiText: "") { result in
+        UploadManager.shared.uploadData(petID: petID, categoryType: "行為症狀", date: datePiker.date, subitem: subItemType, medicineName: "", kilo: "", memo: memo, notiOrNot: "", notiDate: "", notiText: "") { result in
             
             switch result {
             case .success(let success):
@@ -144,73 +138,47 @@ class BehaviorPageViewController: UIViewController {
 
 extension BehaviorPageViewController: UICollectionViewDelegate {
     
-    
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        if collectionView == self.collectionView {
+        guard let cell = collectionView.cellForItem(at: indexPath) as?
+            ReuseItemCell else { return }
+        
+        guard let disease = cell.itemLabel.text else { return }
+        
+        if selectDisease.contains(disease) {
+            cell.image.image = UIImage(named: "icon")
+            guard let order = selectDisease.firstIndex(of: disease) else { return }
+            selectDisease.remove(at: order)
             
-            guard let cell = collectionView.cellForItem(at: indexPath) as?
-                ReuseItemCell else { return }
-            guard let disease = cell.itemLabel.text else { return }
-            if selectDisease.contains(disease) {
-                cell.image.image = UIImage(named: "icon")
-                guard let order = selectDisease.firstIndex(of: disease) else { return }
-                selectDisease.remove(at: order)
-            } else {
-                selectDisease.append(disease)
-                cell.image.image = UIImage(named: "icon-selected")
-            }
+        } else {
             
-            subItemType = selectDisease
-            
-            petNameCollectionView.isHidden = false
-            bottomViewLabel.text = "要幫哪個毛孩紀錄呢？"
-            
-        } else if collectionView == self.petNameCollectionView {
-            
-            petID = UploadManager.shared.simplePetInfo[indexPath.row].petID
-            
-            bottomViewLabel.isHidden = true
-            petNameCollectionView.isHidden = true
-            showEnterBox()
+            selectDisease.append(disease)
+            cell.image.image = UIImage(named: "icon-selected")
         }
+        
+        subItemType = selectDisease
+        
+        showEnterBox()
+        bottomViewLabel.isHidden = true
     }
-    
 }
 
 extension BehaviorPageViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        if collectionView == self.collectionView {
-            return CGSize(width: 70, height: 100)
-        }
-        return CGSize(width: 80, height: 50)
+        return CGSize(width: 70, height: 100)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        
-        if collectionView == self.collectionView {
-            return 8
-        }
-        return 20
+        return 8
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        
-        if collectionView == self.collectionView {
-            return UIEdgeInsets(top: 24, left: 0, bottom: 24, right: 0)
-        }
-        return UIEdgeInsets()
+        return UIEdgeInsets(top: 24, left: 0, bottom: 24, right: 0)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        
-        if collectionView == self.collectionView {
-            return 16
-        }
-        return CGFloat()
+        return 16
     }
     
 }
@@ -218,30 +186,16 @@ extension BehaviorPageViewController: UICollectionViewDelegateFlowLayout {
 extension BehaviorPageViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-        if collectionView == self.collectionView {
-            return itemLabel.count
-        }
-        return UploadManager.shared.simplePetInfo.count
+        return itemLabel.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        if collectionView == self.collectionView {
-            
-            guard let cellA = collectionView.dequeueReusableCell(withReuseIdentifier: "Item Cell", for: indexPath) as? ReuseItemCell else { return UICollectionViewCell() }
-            
-            cellA.itemLabel.text = itemLabel[indexPath.item]
-            cellA.image.image = UIImage(named: "icon")
-            return cellA
-            
-        } else {
-            
-            guard let cellB = collectionView.dequeueReusableCell(withReuseIdentifier: "Pet Name Cell", for: indexPath) as? ChoosePetCell else { return UICollectionViewCell() }
-            cellB.petName.text = UploadManager.shared.simplePetInfo[indexPath.row].petName
-            
-            return cellB
-        }
+        guard let cellA = collectionView.dequeueReusableCell(withReuseIdentifier: "Item Cell", for: indexPath) as? ReuseItemCell else { return UICollectionViewCell() }
+        
+        cellA.itemLabel.text = itemLabel[indexPath.item]
+        cellA.image.image = UIImage(named: "icon")
+        return cellA
     }
 }
 

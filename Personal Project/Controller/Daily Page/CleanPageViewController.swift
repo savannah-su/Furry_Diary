@@ -18,7 +18,6 @@ class CleanPageViewController: UIViewController {
     @IBAction func bottomViewButton(_ sender: Any) {}
     @IBOutlet weak var bottomViewLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var petNameCollectionView: UICollectionView!
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBAction func backButton(_ sender: Any) {
@@ -55,10 +54,6 @@ class CleanPageViewController: UIViewController {
         collectionView.delegate = self
         collectionView.allowsMultipleSelection = false
         
-        petNameCollectionView.dataSource = self
-        petNameCollectionView.delegate = self
-        petNameCollectionView.isHidden = true
-        
         tableView.dataSource = self
         tableView.delegate = self
         tableView.isHidden = true
@@ -78,7 +73,7 @@ class CleanPageViewController: UIViewController {
         print(notiDate)
         print(notiMemo)
         
-        UploadManager.shared.uploadData(petID: petID, categoryType: "衛生清潔", date: doneDate, subitem: subItemType, medicineName: "", kilo: "", memo: "", notiOrNot: isSwitchOn ? "true" : "false", notiDate: notiDate, notiText: notiMemo) { result in
+        UploadManager.shared.uploadData(petID: petID, categoryType: "衛生清潔", date: enterDate, subitem: subItemType, medicineName: "", kilo: "", memo: "", notiOrNot: isSwitchOn ? "true" : "false", notiDate: notiDate, notiText: notiMemo) { result in
             
             switch result {
             case .success(let success):
@@ -93,11 +88,7 @@ class CleanPageViewController: UIViewController {
 extension CleanPageViewController: UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        
-        if collectionView == self.collectionView {
-            return 2
-        }
-        return 1
+        return 2
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -128,69 +119,47 @@ extension CleanPageViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        if collectionView == self.collectionView {
-            
-            guard let cellA = collectionView.dequeueReusableCell(withReuseIdentifier: "Item Cell", for: indexPath) as? ReuseItemCell else {
-                return UICollectionViewCell()
-            }
-            
-            cellA.image.backgroundColor = .white
-            
-            if indexPath.section == 0 {
-                
-                cellA.itemLabel.text = sectionOneLabel[indexPath.row]
-                
-                let index = indexPath.row
-                if sectionOneStatus[index] == true {
-                    cellA.image.image = UIImage(named: sectionOneSelected[index])
-                } else {
-                    cellA.image.image = UIImage(named: sectionOneImage[index])
-                }
-                
-            } else if indexPath.section == 1 {
-                
-                cellA.itemLabel.text = sectionTwoLabel[indexPath.row]
-                
-                let index = indexPath.row
-                if sectionTwoStatus[index] == true {
-                    cellA.image.image = UIImage(named: sectionTwoSelected[index])
-                } else {
-                    cellA.image.image = UIImage(named: sectionTwoImage[index])
-                }
-            }
-            return cellA
-            
-        } else {
-            
-            guard let cellB = collectionView.dequeueReusableCell(withReuseIdentifier: "Pet Name Cell", for: indexPath) as? ChoosePetCell else {
-                return UICollectionViewCell()
-            }
-            
-            cellB.layer.cornerRadius = 20
-            cellB.petName.text = UploadManager.shared.simplePetInfo[indexPath.row].petName
-            
-            return cellB
+        
+        guard let cellA = collectionView.dequeueReusableCell(withReuseIdentifier: "Item Cell", for: indexPath) as? ReuseItemCell else {
+            return UICollectionViewCell()
         }
+        
+        cellA.image.backgroundColor = .white
+        
+        if indexPath.section == 0 {
+            
+            cellA.itemLabel.text = sectionOneLabel[indexPath.row]
+            
+            let index = indexPath.row
+            if sectionOneStatus[index] == true {
+                cellA.image.image = UIImage(named: sectionOneSelected[index])
+            } else {
+                cellA.image.image = UIImage(named: sectionOneImage[index])
+            }
+            
+        } else if indexPath.section == 1 {
+            
+            cellA.itemLabel.text = sectionTwoLabel[indexPath.row]
+            
+            let index = indexPath.row
+            if sectionTwoStatus[index] == true {
+                cellA.image.image = UIImage(named: sectionTwoSelected[index])
+            } else {
+                cellA.image.image = UIImage(named: sectionTwoImage[index])
+            }
+        }
+        return cellA
     }
 }
 
 extension CleanPageViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        
-        if collectionView == self.collectionView {
-            return UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
-        } else {
-            return UIEdgeInsets()
-        }
+        return UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        if collectionView == self.collectionView {
-            return CGSize(width: 60, height: 85)
-        }
-        return CGSize(width: 80, height: 50)
+        return CGSize(width: 60, height: 85)
     }
 }
 
@@ -198,57 +167,44 @@ extension CleanPageViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        if collectionView == self.collectionView {
+        if indexPath.section == 0 {
             
-            if indexPath.section == 0 {
+            for index in 0 ..< 5 {
                 
-                for index in 0 ..< 5 {
+                if index == indexPath.row {
                     
-                    if index == indexPath.row {
-                        
-                        sectionOneStatus[index] = true
-                        sectionTwoStatus[index] = false
-                        
-                        subItemType = [sectionOneLabel[index]]
-                        
-                    } else {
-                        sectionOneStatus[index] = false
-                        sectionTwoStatus[index] = false
-                    }
-                }
-            } else {
-                
-                for index in 0 ..< 5 {
+                    sectionOneStatus[index] = true
+                    sectionTwoStatus[index] = false
                     
-                    if index == indexPath.row {
-                        
-                        sectionOneStatus[index] = false
-                        sectionTwoStatus[index] = true
-                        
-                        subItemType = [sectionTwoLabel[index]]
-                        
-                    } else {
-                        sectionOneStatus[index] = false
-                        sectionTwoStatus[index] = false
-                    }
+                    subItemType = [sectionOneLabel[index]]
+                    
+                } else {
+                    sectionOneStatus[index] = false
+                    sectionTwoStatus[index] = false
                 }
             }
+        } else {
             
-            collectionView.reloadData()
-
-            tableView.isHidden = true
-            bottomViewLabel.isHidden = false
-            petNameCollectionView.isHidden = false
-            bottomViewLabel.text = "要幫哪個毛孩紀錄呢？"
-            
-        } else if collectionView == self.petNameCollectionView {
-            
-            petID = UploadManager.shared.simplePetInfo[indexPath.row].petID
-            
-            bottomViewLabel.isHidden = true
-            tableView.isHidden = false
-            self.petNameCollectionView.isHidden = true
+            for index in 0 ..< 5 {
+                
+                if index == indexPath.row {
+                    
+                    sectionOneStatus[index] = false
+                    sectionTwoStatus[index] = true
+                    
+                    subItemType = [sectionTwoLabel[index]]
+                    
+                } else {
+                    sectionOneStatus[index] = false
+                    sectionTwoStatus[index] = false
+                }
+            }
         }
+        
+        collectionView.reloadData()
+        
+        tableView.isHidden = false
+        bottomViewLabel.isHidden = true
     }
     
     func upButtomView() {

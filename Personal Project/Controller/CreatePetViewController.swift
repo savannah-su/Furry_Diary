@@ -12,6 +12,7 @@ import FirebaseAuth
 import FirebaseCore
 import FirebaseFirestore
 import FirebaseStorage
+import FirebaseFirestoreSwift
 
 class CreatePetViewController: UIViewController {
     
@@ -134,6 +135,8 @@ class CreatePetViewController: UIViewController {
         self.petInfo.ownersImage = [currentUserImage as! String, coOwnerImageURL]
         self.petInfo.petImage = petPhotoURL
         self.petInfo.petID = petID
+        
+//        Firestore.firestore().collection("pets").document(petID).setData(from: petInfo, encoder: Firestore.Encoder(), completion: <#T##((Error?) -> Void)?##((Error?) -> Void)?##(Error?) -> Void#>)
         
         Firestore.firestore().collection("pets").document(petID).setData(petInfo.toDict, completion: { (error) in
             
