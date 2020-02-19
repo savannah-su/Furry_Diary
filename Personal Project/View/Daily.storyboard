@@ -172,15 +172,23 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </textView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="點選今天發生了什麼事件" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DAK-OV-odq">
+                                        <rect key="frame" x="160.5" y="50" width="279" height="30"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.4431372549" green="0.71764705880000002" blue="0.71764705880000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="600" id="2wo-bU-GHc"/>
+                                    <constraint firstItem="DAK-OV-odq" firstAttribute="centerX" secondItem="a6I-3e-5DS" secondAttribute="centerX" id="4qL-P1-pTC"/>
                                     <constraint firstItem="cIN-6A-4rE" firstAttribute="leading" secondItem="BZ6-Dm-CCH" secondAttribute="leading" id="G54-BV-YnZ"/>
                                     <constraint firstAttribute="width" constant="600" id="JGq-8n-u2D"/>
                                     <constraint firstItem="KI5-kK-pzc" firstAttribute="leading" secondItem="BZ6-Dm-CCH" secondAttribute="trailing" constant="13" id="PCI-3F-t2w"/>
                                     <constraint firstItem="KI5-kK-pzc" firstAttribute="centerY" secondItem="BZ6-Dm-CCH" secondAttribute="centerY" id="R2Z-YW-5WS"/>
                                     <constraint firstItem="68L-9V-eZ2" firstAttribute="leading" secondItem="vlL-86-32L" secondAttribute="leading" id="Rn1-Zd-0rM"/>
+                                    <constraint firstItem="DAK-OV-odq" firstAttribute="top" secondItem="a6I-3e-5DS" secondAttribute="top" constant="50" id="S4N-XV-f1k"/>
                                     <constraint firstItem="68L-9V-eZ2" firstAttribute="top" secondItem="cIN-6A-4rE" secondAttribute="top" id="Wa5-Et-ZFH"/>
                                     <constraint firstItem="NQO-Sl-nzd" firstAttribute="centerY" secondItem="cIN-6A-4rE" secondAttribute="centerY" id="ckC-6k-uTh"/>
                                     <constraint firstItem="NQO-Sl-nzd" firstAttribute="leading" secondItem="cIN-6A-4rE" secondAttribute="trailing" constant="13" id="ku9-Ly-qJy"/>
@@ -266,8 +274,13 @@
                         <viewLayoutGuide key="safeArea" id="76Y-Lf-sS8"/>
                     </view>
                     <connections>
+                        <outlet property="bottomViewLabel" destination="DAK-OV-odq" id="HjS-NZ-zz1"/>
                         <outlet property="collectionView" destination="AsI-Fe-Znh" id="Y2x-AU-adB"/>
+                        <outlet property="dateLabel" destination="BZ6-Dm-CCH" id="3zp-ik-b7L"/>
+                        <outlet property="firstBar" destination="KI5-kK-pzc" id="dw9-AK-8JA"/>
+                        <outlet property="memoLabel" destination="cIN-6A-4rE" id="2Vi-M8-O4A"/>
                         <outlet property="memoTextView" destination="68L-9V-eZ2" id="3UB-bJ-iKn"/>
+                        <outlet property="secondBar" destination="NQO-Sl-nzd" id="gOg-qp-AJj"/>
                         <outlet property="timeTextField" destination="vlL-86-32L" id="WKn-um-t56"/>
                     </connections>
                 </viewController>
@@ -475,7 +488,12 @@
                         <viewLayoutGuide key="safeArea" id="cs6-8N-xcA"/>
                     </view>
                     <connections>
+                        <outlet property="dateLabel" destination="bVy-OE-aLy" id="yEa-bp-O3A"/>
                         <outlet property="dateTextfield" destination="MBG-dC-3XL" id="EXg-3H-byb"/>
+                        <outlet property="firstBar" destination="DNm-hu-R76" id="UYM-Sq-vtM"/>
+                        <outlet property="kgLabel" destination="IoM-K8-e1b" id="0jN-KO-VLx"/>
+                        <outlet property="secondBar" destination="xbS-I7-Nlt" id="Ii3-8Q-LOu"/>
+                        <outlet property="weightLabel" destination="QbF-jg-Tae" id="7wM-sc-s4X"/>
                         <outlet property="weightTextField" destination="5u9-Mg-x3k" id="9QF-hZ-LfC"/>
                     </connections>
                 </viewController>
@@ -812,8 +830,8 @@
                                             </tableViewCell>
                                         </prototypes>
                                     </tableView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="請選擇預防計畫項目" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3kz-m1-bX7">
-                                        <rect key="frame" x="186" y="50" width="228" height="30"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="今天做了哪一項預防計畫？" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3kz-m1-bX7">
+                                        <rect key="frame" x="148" y="50" width="304" height="30"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -1077,12 +1095,6 @@
                                             <action selector="bottomViewButton:" destination="13z-mM-f83" eventType="touchUpInside" id="GIi-yU-nYQ"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="請選擇清潔項目" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0lW-z8-U9Q">
-                                        <rect key="frame" x="211.5" y="50" width="177.5" height="30"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="R6m-OJ-LTs">
                                         <rect key="frame" x="140" y="50" width="320" height="188"/>
                                         <color key="backgroundColor" red="0.4431372549" green="0.71764705880000002" blue="0.71764705880000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -1227,6 +1239,12 @@
                                             </tableViewCell>
                                         </prototypes>
                                     </tableView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="今天做了哪一項清潔？" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0lW-z8-U9Q">
+                                        <rect key="frame" x="173.5" y="50" width="253.5" height="30"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.4431372549" green="0.71764705880000002" blue="0.71764705880000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>

@@ -68,15 +68,15 @@ extension PetDetailViewController: BannerViewDataSource {
     
     func numberOfPages(in bannerView: BannerView) -> Int {
         
-        return 5
+        return petData?.petImage.count ?? 0
         
     }
     
     func viewFor(bannerView: BannerView, at index: Int) -> UIView {
         
-        let image = UIImage(named: "圖片 28")
+        let imageView = UIImageView()
         
-        let imageView = UIImageView(image: image)
+        imageView.kf.setImage(with: URL(string: petData?.petImage[index] ?? ""))
         
         imageView.contentMode = .scaleAspectFill
         
@@ -136,7 +136,11 @@ extension PetDetailViewController: UITableViewDataSource {
             cell.contentLabel.text = petData?.memo
             
         default:
-            cell.contentLabel.text = petData?.ownersImage[0]
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "CoOwner Cell", for: indexPath) as? CoOwnerCell else { return UITableViewCell() }
+            
+            cell.ownerImage.layer.cornerRadius = 15
+            cell.ownerImage.kf.setImage(with: URL(string: (petData?.ownersImage[1])!))
+            return cell
    
         }
         

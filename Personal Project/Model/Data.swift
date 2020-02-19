@@ -82,3 +82,48 @@ struct PetInfo: Codable {
         ]
     }
 }
+
+struct Record: Codable {
+    
+    let categoryType: String
+    let subitem: [String]?
+    let medicineName: String?
+    let kilo: String?
+    let memo: String?
+    let date: Date
+    let notiOrNot: String?
+    let notiDate: String?
+    let notiText: String?
+    
+    enum CodingKeys: String, CodingKey {
+        
+        case categoryType = "category tpye"
+        case medicineName = "medicine name"
+        case notiOrNot = "noti or not"
+        case notiDate = "noti Date"
+        case notiText = "noti text"
+        case subitem, kilo, memo, date
+
+    }
+    
+    var toDict: [String: Any] {
+        
+        return [
+            
+            "category tpye": categoryType,
+            "subitem ": subitem as Any,
+            "medicine name": medicineName as Any,
+            "kilo": kilo as Any,
+            "memo": memo as Any,
+            "date": date,
+            "noti or not": notiOrNot as Any,
+            "noti Date": notiDate as Any,
+            "noti text": notiText as Any
+        ]
+    }
+}
+
+struct WeightData {
+    let date: Date
+    let weight: Double
+}

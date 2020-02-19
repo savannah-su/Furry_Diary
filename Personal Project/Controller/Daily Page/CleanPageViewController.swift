@@ -9,15 +9,13 @@
 import UIKit
 
 class CleanPageViewController: UIViewController {
-
+    
     @IBOutlet weak var topView: UIView!
     
     @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var bottomViewConstraint: NSLayoutConstraint!
     @IBOutlet weak var bottomViewButton: VerticalAlignedButton!
-    @IBAction func bottomViewButton(_ sender: Any) {
-//        downButtomView()
-    }
+    @IBAction func bottomViewButton(_ sender: Any) {}
     @IBOutlet weak var bottomViewLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
@@ -27,6 +25,8 @@ class CleanPageViewController: UIViewController {
     }
     
     @IBAction func saveButton(_ sender: Any) {
+        
+        toDataBase()
     }
     
     let sectionOneLabel = ["洗澡", "毛髮", "指甲", "耳朵", "牙齒"]
@@ -38,12 +38,18 @@ class CleanPageViewController: UIViewController {
     var sectionOneStatus = [false, false, false, false, false]
     var sectionTwoStatus = [false, false, false, false, false]
     
+    var enterDate = Date()
+    var subItemType = [""]
+    var petID = ""
+    var doneDate = ""
     var isSwitchOn: Bool = false
+    var notiDate = ""
+    var notiMemo = ""
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
-    
+        
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.allowsMultipleSelection = false
@@ -57,6 +63,26 @@ class CleanPageViewController: UIViewController {
         
         // Do any additional setup after loading the view.
     }
+    
+    func toDataBase() {
+        
+        print(petID)
+        print(subItemType)
+        print(doneDate)
+        print(isSwitchOn)
+        print(notiDate)
+        print(notiMemo)
+        
+        UploadManager.shared.uploadData(petID: petID, categoryType: "衛生清潔", date: enterDate, subitem: subItemType, medicineName: "", kilo: "", memo: "", notiOrNot: isSwitchOn ? "true" : "false", notiDate: notiDate, notiText: notiMemo) { result in
+            
+            switch result {
+            case .success(let success):
+                print(success)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
 }
 
 extension CleanPageViewController: UICollectionViewDataSource {
@@ -67,53 +93,62 @@ extension CleanPageViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
-        guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "Header", for: indexPath) as? HeaderView else {
-            return UICollectionReusableView()
+        if collectionView == self.collectionView {
+            
+            guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "Header", for: indexPath) as? HeaderView else {
+                return UICollectionReusableView()
+            }
+            
+            if indexPath.section == 0 {
+                header.sectionTitle.text = "關於毛孩"
+            } else {
+                header.sectionTitle.text = "生活起居"
+            }
+            return header
         }
-        
-        if indexPath.section == 0 {
-            header.sectionTitle.text = "關於毛孩"
-        } else {
-            header.sectionTitle.text = "生活起居"
-        }
-        return header
+        return UICollectionReusableView()
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        if collectionView == self.collectionView {
             return 5
+        }
+        return UploadManager.shared.simplePetInfo.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Item Cell", for: indexPath) as? ReuseItemCell else {
+        
+        guard let cellA = collectionView.dequeueReusableCell(withReuseIdentifier: "Item Cell", for: indexPath) as? ReuseItemCell else {
             return UICollectionViewCell()
         }
         
-        cell.image.backgroundColor = .white
+        cellA.image.backgroundColor = .white
         
         if indexPath.section == 0 {
             
-            cell.itemLabel.text = sectionOneLabel[indexPath.row]
+            cellA.itemLabel.text = sectionOneLabel[indexPath.row]
             
             let index = indexPath.row
             if sectionOneStatus[index] == true {
-                cell.image.image = UIImage(named: sectionOneSelected[index])
+                cellA.image.image = UIImage(named: sectionOneSelected[index])
             } else {
-                cell.image.image = UIImage(named: sectionOneImage[index])
+                cellA.image.image = UIImage(named: sectionOneImage[index])
             }
             
         } else if indexPath.section == 1 {
             
-            cell.itemLabel.text = sectionTwoLabel[indexPath.row]
+            cellA.itemLabel.text = sectionTwoLabel[indexPath.row]
             
             let index = indexPath.row
             if sectionTwoStatus[index] == true {
-                cell.image.image = UIImage(named: sectionTwoSelected[index])
+                cellA.image.image = UIImage(named: sectionTwoSelected[index])
             } else {
-                cell.image.image = UIImage(named: sectionTwoImage[index])
+                cellA.image.image = UIImage(named: sectionTwoImage[index])
             }
         }
-        return cell
+        return cellA
     }
 }
 
@@ -137,8 +172,12 @@ extension CleanPageViewController: UICollectionViewDelegate {
             for index in 0 ..< 5 {
                 
                 if index == indexPath.row {
+                    
                     sectionOneStatus[index] = true
                     sectionTwoStatus[index] = false
+                    
+                    subItemType = [sectionOneLabel[index]]
+                    
                 } else {
                     sectionOneStatus[index] = false
                     sectionTwoStatus[index] = false
@@ -149,8 +188,12 @@ extension CleanPageViewController: UICollectionViewDelegate {
             for index in 0 ..< 5 {
                 
                 if index == indexPath.row {
+                    
                     sectionOneStatus[index] = false
                     sectionTwoStatus[index] = true
+                    
+                    subItemType = [sectionTwoLabel[index]]
+                    
                 } else {
                     sectionOneStatus[index] = false
                     sectionTwoStatus[index] = false
@@ -159,13 +202,9 @@ extension CleanPageViewController: UICollectionViewDelegate {
         }
         
         collectionView.reloadData()
-        tableView.reloadData()
         
-        //        upButtomView()
-        
-        //        bottomViewLabel.isHidden = true
         tableView.isHidden = false
-        
+        bottomViewLabel.isHidden = true
     }
     
     func upButtomView() {
@@ -225,7 +264,11 @@ extension CleanPageViewController: UITableViewDataSource {
             }
             cell.titleLabel.text = "清潔日期"
             cell.contentText.placeholder = "選擇本次清洗日期"
-            cell.textFieldType = .date(Date(), "yyyy-MM-dd")
+            cell.textFieldType = .date(enterDate, "yyyy-MM-dd")
+            cell.touchHandler = { [weak self] text in
+                
+                self?.doneDate = text
+            }
             
             return cell
             
@@ -238,6 +281,17 @@ extension CleanPageViewController: UITableViewDataSource {
             cell.notiSwitch.addTarget(self, action: #selector(changeSwitch), for: .valueChanged)
             cell.textFieldType = .normal
             cell.textFieldType = .date(Date(), "yyyy-MM-dd")
+            cell.touchHandler = { [weak self] text in
+                
+                //用"-"切開String，2020-01-01的count是3
+                let date = text.components(separatedBy: "-")
+                
+                if date.count == 3 {
+                    self?.notiDate = text
+                } else {
+                    self?.notiMemo = text
+                }
+            }
             return cell
         }
     }
@@ -245,7 +299,14 @@ extension CleanPageViewController: UITableViewDataSource {
     @objc func changeSwitch() {
         
         isSwitchOn = !isSwitchOn
+        
         tableView.reloadData()
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        guard let date = dateFormatter.date(from: doneDate) else {
+            return
+        }
+        enterDate = date
     }
-    
 }

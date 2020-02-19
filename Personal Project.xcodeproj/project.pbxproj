@@ -13,6 +13,7 @@
 		2403C46B23E56D8900B73021 /* CreatePetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2403C46A23E56D8900B73021 /* CreatePetViewController.swift */; };
 		2403C46D23E5723A00B73021 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2403C46C23E5723A00B73021 /* UserManager.swift */; };
 		24188A1823F3E02E00DA250A /* WeightPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24188A1723F3E02E00DA250A /* WeightPageViewController.swift */; };
+		242357B223FBE5C5004C8150 /* WhichPetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242357B123FBE5C5004C8150 /* WhichPetCell.swift */; };
 		242F8E0123D6DFF700F49853 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242F8E0023D6DFF700F49853 /* AppDelegate.swift */; };
 		242F8E0823D6DFF700F49853 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 242F8E0623D6DFF700F49853 /* Main.storyboard */; };
 		242F8E0A23D6DFFB00F49853 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 242F8E0923D6DFFB00F49853 /* Assets.xcassets */; };
@@ -24,6 +25,8 @@
 		2430552723ED42C000B9F4E6 /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2430552623ED42C000B9F4E6 /* ItemCell.swift */; };
 		2430552A23F1616A00B9F4E6 /* Banner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2430552923F1616A00B9F4E6 /* Banner.swift */; };
 		243230F623E83D34008C512B /* UploadIamgeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243230F523E83D34008C512B /* UploadIamgeCell.swift */; };
+		2440D09D23FAD32B00E7A803 /* DownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2440D09C23FAD32B00E7A803 /* DownloadManager.swift */; };
+		2440D09F23FAFAB800E7A803 /* OwnerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2440D09E23FAFAB800E7A803 /* OwnerCell.swift */; };
 		24413D0123F5269400A07AAE /* EnterInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24413D0023F5269400A07AAE /* EnterInfoCell.swift */; };
 		2455D3DC23E95EA30095D039 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2455D3DB23E95EA30095D039 /* UIViewController+Extension.swift */; };
 		24647FED23EBD08D005DB6E7 /* PetDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24647FEC23EBD08D005DB6E7 /* PetDetailViewController.swift */; };
@@ -82,6 +85,7 @@
 		2403C46A23E56D8900B73021 /* CreatePetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePetViewController.swift; sourceTree = "<group>"; };
 		2403C46C23E5723A00B73021 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		24188A1723F3E02E00DA250A /* WeightPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightPageViewController.swift; sourceTree = "<group>"; };
+		242357B123FBE5C5004C8150 /* WhichPetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhichPetCell.swift; sourceTree = "<group>"; };
 		242F8DFD23D6DFF700F49853 /* Personal Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Personal Project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		242F8E0023D6DFF700F49853 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		242F8E0723D6DFF700F49853 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -99,6 +103,8 @@
 		2430552623ED42C000B9F4E6 /* ItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
 		2430552923F1616A00B9F4E6 /* Banner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Banner.swift; sourceTree = "<group>"; };
 		243230F523E83D34008C512B /* UploadIamgeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadIamgeCell.swift; sourceTree = "<group>"; };
+		2440D09C23FAD32B00E7A803 /* DownloadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadManager.swift; sourceTree = "<group>"; };
+		2440D09E23FAFAB800E7A803 /* OwnerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerCell.swift; sourceTree = "<group>"; };
 		24413D0023F5269400A07AAE /* EnterInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterInfoCell.swift; sourceTree = "<group>"; };
 		2455D3DB23E95EA30095D039 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		24647FEC23EBD08D005DB6E7 /* PetDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PetDetailViewController.swift; path = "Personal Project/Controller/Home Page/PetDetailViewController.swift"; sourceTree = SOURCE_ROOT; };
@@ -199,6 +205,7 @@
 				248E9DD023EC4F1700388A3B /* UIColor+Extension.swift */,
 				2430552923F1616A00B9F4E6 /* Banner.swift */,
 				246EF8F523F6A07E00A17F65 /* UploadManager.swift */,
+				2440D09C23FAD32B00E7A803 /* DownloadManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -265,6 +272,7 @@
 				24413D0023F5269400A07AAE /* EnterInfoCell.swift */,
 				24CACB2923F549140068EC7D /* NotiCell.swift */,
 				24CACB2B23F576B30068EC7D /* HeaderView.swift */,
+				242357B123FBE5C5004C8150 /* WhichPetCell.swift */,
 			);
 			path = "Daily Page";
 			sourceTree = "<group>";
@@ -285,6 +293,7 @@
 			isa = PBXGroup;
 			children = (
 				24647FEF23EBF580005DB6E7 /* DetailCell.swift */,
+				2440D09E23FAFAB800E7A803 /* OwnerCell.swift */,
 			);
 			path = "Pet Detail Page";
 			sourceTree = "<group>";
@@ -648,6 +657,7 @@
 			files = (
 				24D50A5123EAA9460074DD51 /* VerticalAlignedButton.swift in Sources */,
 				248E9DCF23EC48B500388A3B /* ColoredNavController.swift in Sources */,
+				2440D09F23FAFAB800E7A803 /* OwnerCell.swift in Sources */,
 				2402B3BF23E5542500E8D009 /* Data.swift in Sources */,
 				24647FF023EBF580005DB6E7 /* DetailCell.swift in Sources */,
 				2430552A23F1616A00B9F4E6 /* Banner.swift in Sources */,
@@ -664,12 +674,14 @@
 				2402B3BB23E4129000E8D009 /* SearchOwnerViewController.swift in Sources */,
 				242F8E0123D6DFF700F49853 /* AppDelegate.swift in Sources */,
 				24866E5A23F2B89E003CC715 /* BehaviorPageViewController.swift in Sources */,
+				242357B223FBE5C5004C8150 /* WhichPetCell.swift in Sources */,
 				2403C46D23E5723A00B73021 /* UserManager.swift in Sources */,
 				2430552723ED42C000B9F4E6 /* ItemCell.swift in Sources */,
 				24CACB2C23F576B30068EC7D /* HeaderView.swift in Sources */,
 				24874E7723E71EBC007810B0 /* TextFieldCell.swift in Sources */,
 				24866E5E23F2D3CE003CC715 /* ReuseItemCell.swift in Sources */,
 				2403C46B23E56D8900B73021 /* CreatePetViewController.swift in Sources */,
+				2440D09D23FAD32B00E7A803 /* DownloadManager.swift in Sources */,
 				24874E7B23E71FDF007810B0 /* TextViewCell.swift in Sources */,
 				24647FED23EBD08D005DB6E7 /* PetDetailViewController.swift in Sources */,
 				2430552423ED425000B9F4E6 /* DailyPageViewController.swift in Sources */,

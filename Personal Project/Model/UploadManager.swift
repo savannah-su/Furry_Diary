@@ -18,38 +18,34 @@ enum upload: Error {
     case uploadFail
 }
 
-struct weight {
-    
-    let date: Int
-    
-    let kilo: Int
-    
-    var toDict: [String: Any] {
-        
-        return [
-        
-            "date": date,
-            "kilo": kilo
-        ]
-    }
+struct simplePetInfo {
+
+    let petName: String
+
+    let petID: String
+
+    let petPhoto: [String]
+
 }
 
 class UploadManager {
     
-    static let shared = UploadManager()
+    static var shared = UploadManager()
     
-    private init () {}
+    private init() {}
     
-    let dbF = Firestore.firestore()
+    lazy var db = Firestore.firestore()
     
-    func uploadWeight(petID: String, time: Int, kilo: Int, completion: @escaping (Result<String, Error>) -> Void) {
+    var simplePetInfo: [simplePetInfo] = []
+    
+    func uploadData(petID: String, categoryType: String, date: Date, subitem: [String], medicineName: String, kilo: String, memo: String, notiOrNot: String, notiDate: String, notiText: String, completion: @escaping (Result<String, Error>) -> Void) {
         
-        let data = weight(date: time, kilo: kilo)
+        let data = Record(categoryType: categoryType, subitem: subitem, medicineName: medicineName, kilo: kilo, memo: memo, date: date, notiOrNot: notiOrNot, notiDate: notiDate, notiText: notiText)
         
-        
-        dbF.collection("pets").document(petID).collection("weight").addDocument(data: data.toDict) { error in
+        db.collection("pets").document(petID).collection("record").addDocument(data: data.toDict) { error in
             
             if error != nil {
+                
                 completion(.failure(upload.uploadFail))
             }
             

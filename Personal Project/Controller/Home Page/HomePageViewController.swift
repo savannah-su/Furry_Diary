@@ -71,6 +71,8 @@ class HomePageViewController: UIViewController {
     
     func getPetData() {
         
+        UploadManager.shared.simplePetInfo.removeAll()
+        
         Firestore.firestore().collection("pets").getDocuments { (querySnapshot, error) in
             
             var petDataFromDB = [PetInfo]()
@@ -84,6 +86,10 @@ class HomePageViewController: UIViewController {
                         if let petInfo = try document.data(as: PetInfo.self, decoder: Firestore.Decoder()) {
                         
                             petDataFromDB.append(petInfo)
+                            
+                            let simplePet = simplePetInfo(petName: petInfo.petName, petID: petInfo.petID, petPhoto: petInfo.petImage)
+  
+                            UploadManager.shared.simplePetInfo.append(simplePet)
                             
                         }
                         
@@ -123,10 +129,6 @@ extension HomePageViewController: UITableViewDataSource {
         cell.background.addGestureRecognizer(tap)
 
         return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
     }
     
     @objc func toDetailPage(_ sender: UIGestureRecognizer) {

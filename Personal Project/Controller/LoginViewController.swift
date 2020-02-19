@@ -50,7 +50,7 @@ class LoginViewController: UIViewController {
                 Auth.auth().signIn(with: fbCredential) { [weak self] (result, error) in
                     guard let self = self else { return }
                     guard error == nil else {
-                        print(error?.localizedDescription)
+                        print(error?.localizedDescription as Any)
                         return
                     }
                     

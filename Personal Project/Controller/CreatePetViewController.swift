@@ -12,6 +12,7 @@ import FirebaseAuth
 import FirebaseCore
 import FirebaseFirestore
 import FirebaseStorage
+import FirebaseFirestoreSwift
 
 class CreatePetViewController: UIViewController {
     
@@ -32,7 +33,7 @@ class CreatePetViewController: UIViewController {
     var coOwnerID = ""
     
     let picker = UIImagePickerController()
-    //上傳圖片需要先轉png形式，傳到Storage後，拿到URL，才可傳至DB
+    //上傳圖片需要先轉jpeg形式，傳到Storage後，拿到URL，才可傳至DB
     var petPhotoURL: [String] = []
     var petID = UUID().uuidString
     var selectedPhoto: [UIImage] = []
@@ -86,9 +87,9 @@ class CreatePetViewController: UIViewController {
         
         for index in 0 ..< selectedPhoto.count {
             
-            guard let uploadPhoto = selectedPhoto[index].pngData() else { return }
+            guard let uploadPhoto = selectedPhoto[index].jpegData(compressionQuality: 0.5) else { return }
             
-            let storageRef = Storage.storage().reference().child("PetPhoto").child("\(petID).png")
+            let storageRef = Storage.storage().reference().child("PetPhoto").child("\(petID)-\(index).jpeg")
             
             storageRef.putData(uploadPhoto, metadata: nil) { (_, error) in
                 
@@ -127,12 +128,15 @@ class CreatePetViewController: UIViewController {
         guard let currentUserID = UserDefaults.standard.value(forKey: "userID") else { return }
         guard let currentUserName = UserDefaults.standard.value(forKey: "userName") else { return }
         guard let currentUserImage = UserDefaults.standard.value(forKey: "userPhoto") else { return }
+        UserDefaults.standard.set(petID, forKey: "userID")
         
         self.petInfo.ownersID = [currentUserID as! String, coOwnerID]
         self.petInfo.ownersName = [currentUserName as! String, coOwnerName]
         self.petInfo.ownersImage = [currentUserImage as! String, coOwnerImageURL]
         self.petInfo.petImage = petPhotoURL
         self.petInfo.petID = petID
+        
+//        Firestore.firestore().collection("pets").document(petID).setData(from: petInfo, encoder: Firestore.Encoder(), completion: <#T##((Error?) -> Void)?##((Error?) -> Void)?##(Error?) -> Void#>)
         
         Firestore.firestore().collection("pets").document(petID).setData(petInfo.toDict, completion: { (error) in
             

@@ -15,53 +15,5 @@
             stopOnStyle = "0">
          </BreakpointContent>
       </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "04967197-D789-4755-B455-3E68CC6411BE"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Personal Project/Controller/Daily Page/WeightPageViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "54"
-            endingLineNumber = "54"
-            landmarkName = "saveButton(_:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "04967197-D789-4755-B455-3E68CC6411BE - 87c13a3a6fb713c4"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Result&lt;Swift.String, Swift.Error&gt;) -&gt; () in Personal_Project.WeightPageViewController.saveButton(Any) -&gt; ()"
-                  moduleName = "Personal Project"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/savannahsu/Desktop/Personal-Project/Personal%20Project/Controller/Daily%20Page/WeightPageViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "54"
-                  endingLineNumber = "54"
-                  offsetFromSymbolStart = "140">
-               </Location>
-               <Location
-                  uuid = "04967197-D789-4755-B455-3E68CC6411BE - 87c13a3a6fb713c4"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Result&lt;Swift.String, Swift.Error&gt;) -&gt; () in Personal_Project.WeightPageViewController.saveButton(Any) -&gt; ()"
-                  moduleName = "Personal Project"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/savannahsu/Desktop/Personal-Project/Personal%20Project/Controller/Daily%20Page/WeightPageViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "54"
-                  endingLineNumber = "54"
-                  offsetFromSymbolStart = "166">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

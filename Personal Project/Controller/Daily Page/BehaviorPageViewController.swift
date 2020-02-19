@@ -18,15 +18,30 @@ class BehaviorPageViewController: UIViewController {
     }
     
     @IBAction func saveButton(_ sender: Any) {
+        toDataBase()
     }
     
     @IBOutlet weak var collectionView: UICollectionView!
+    
+    @IBOutlet weak var bottomViewLabel: UILabel!
+    
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var firstBar: UIView!
     @IBOutlet weak var timeTextField: UITextField!
+    @IBOutlet weak var memoLabel: UILabel!
+    @IBOutlet weak var secondBar: UIView!
     @IBOutlet weak var memoTextView: UITextView!
+    
     let datePiker = UIDatePicker()
     let showDateFormatter = DateFormatter()
     
     let itemLabel = ["嘔吐", "拉肚子", "嗆咳", "打噴嚏", "搔癢", "外傷", "焦躁", "食慾不佳", "精神不佳", "其他"]
+    
+    var subItemType = [""]
+    var petID = ""
+    var doneDate = ""
+    var memo = ""
+    var selectDisease: [String] = []
     
     override func viewDidLoad() {
         
@@ -41,7 +56,63 @@ class BehaviorPageViewController: UIViewController {
         
         setupDatePiker()
         
+        hideEnterBox()
         // Do any additional setup after loading the view.
+    }
+    
+    func toDataBase() {
+        
+        getInfo()
+        
+        print(petID)
+        print(subItemType)
+        print(doneDate)
+        print(memo)
+        
+        UploadManager.shared.uploadData(petID: petID, categoryType: "行為症狀", date: datePiker.date, subitem: subItemType, medicineName: "", kilo: "", memo: memo, notiOrNot: "", notiDate: "", notiText: "") { result in
+            
+            switch result {
+            case .success(let success):
+                print(success)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func getInfo() {
+        
+        guard let enterDate = timeTextField.text else {
+            return
+        }
+        
+        doneDate = enterDate
+        
+        guard let enterMemo = memoTextView.text else {
+            return
+        }
+        
+        memo = enterMemo
+    }
+    
+    func showEnterBox() {
+        
+        dateLabel.isHidden = false
+        firstBar.isHidden = false
+        timeTextField.isHidden = false
+        memoLabel.isHidden = false
+        secondBar.isHidden = false
+        memoTextView.isHidden = false
+    }
+    
+    func hideEnterBox() {
+        
+        dateLabel.isHidden = true
+        firstBar.isHidden = true
+        timeTextField.isHidden = true
+        memoLabel.isHidden = true
+        secondBar.isHidden = true
+        memoTextView.isHidden = true
     }
     
     func setupDatePiker() {
@@ -66,17 +137,29 @@ class BehaviorPageViewController: UIViewController {
 }
 
 extension BehaviorPageViewController: UICollectionViewDelegate {
-
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath) as! ReuseItemCell
-        cell.image.image = UIImage(named: "icon-selected")
-        cell.isSelected = true
-    }
     
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath) as! ReuseItemCell
-        cell.image.image = UIImage(named: "icon")
-        cell.isSelected = false
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        guard let cell = collectionView.cellForItem(at: indexPath) as?
+            ReuseItemCell else { return }
+        
+        guard let disease = cell.itemLabel.text else { return }
+        
+        if selectDisease.contains(disease) {
+            cell.image.image = UIImage(named: "icon")
+            guard let order = selectDisease.firstIndex(of: disease) else { return }
+            selectDisease.remove(at: order)
+            
+        } else {
+            
+            selectDisease.append(disease)
+            cell.image.image = UIImage(named: "icon-selected")
+        }
+        
+        subItemType = selectDisease
+        
+        showEnterBox()
+        bottomViewLabel.isHidden = true
     }
 }
 
@@ -103,27 +186,23 @@ extension BehaviorPageViewController: UICollectionViewDelegateFlowLayout {
 extension BehaviorPageViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return itemLabel.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Item Cell", for: indexPath) as? ReuseItemCell else { return UICollectionViewCell() }
+        guard let cellA = collectionView.dequeueReusableCell(withReuseIdentifier: "Item Cell", for: indexPath) as? ReuseItemCell else { return UICollectionViewCell() }
         
-        for index in 0 ... 9 {
-            
-            let index = indexPath.row
-            cell.itemLabel.text = itemLabel[index]
-            cell.image.image = UIImage(named: "icon")
-            
-        }
-        return cell
+        cellA.itemLabel.text = itemLabel[indexPath.item]
+        cellA.image.image = UIImage(named: "icon")
+        return cellA
     }
 }
 
 extension BehaviorPageViewController: UITextViewDelegate {
     
     func textViewDidBeginEditing(_ textView: UITextView) {
+        
         if memoTextView.textColor == UIColor(red: 211/255.0, green: 211/255.0, blue: 212/255.0, alpha: 1) {
             memoTextView.text = nil
             memoTextView.textColor = .black
