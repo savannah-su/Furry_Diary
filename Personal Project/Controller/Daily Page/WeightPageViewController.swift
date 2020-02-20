@@ -47,9 +47,7 @@ class WeightPageViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     @IBAction func saveButton(_ sender: Any) {
-        
         toDataBase()
-        
     }
     
     @IBOutlet weak var dateLabel: UILabel!
