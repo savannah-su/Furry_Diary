@@ -28,6 +28,8 @@ class DownloadManager {
     
     var petRecord = [Record]()
     
+    var monthlyData = [Record]()
+    
     let category = ["衛生清潔", "預防計畫", "體重紀錄", "行為症狀"]
     
     func downloadData(type: Int, petID: String, completion: @escaping (Result<[Record], Error>) -> Void) {
@@ -62,8 +64,30 @@ class DownloadManager {
                             return false
                         }
                     }
-                    
                     completion(.success(categoryData))
+                }
+            }
+        }
+    }
+    
+    func downloadMonthlyData(petID: String, startOfMonth:Date, endOfMonth:Date, completion: @escaping (Result<[Record], Error>) -> Void) {
+        db.collection("pets").document(petID).collection("record").whereField("date", isGreaterThan: startOfMonth).whereField("date", isLessThan: endOfMonth).getDocuments { (querySnapshot, error) in
+            
+            if error == nil {
+                
+                for document in querySnapshot!.documents {
+                    
+                    do {
+                        
+                        if let downloadMonthlyData = try document.data(as: Record.self, decoder: Firestore.Decoder()) {
+                            self.monthlyData.append(downloadMonthlyData)
+                        }
+                        
+                    } catch {
+                        completion(.failure(download.downloadFail))
+                    }
+                    
+                    completion(.success(self.monthlyData))
                 }
             }
         }

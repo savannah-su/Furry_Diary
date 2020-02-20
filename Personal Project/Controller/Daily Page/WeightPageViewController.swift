@@ -47,9 +47,7 @@ class WeightPageViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     @IBAction func saveButton(_ sender: Any) {
-        
         toDataBase()
-        
     }
     
     @IBOutlet weak var dateLabel: UILabel!
@@ -108,30 +106,37 @@ class WeightPageViewController: UIViewController {
                     
                     let kiloDouble = Double(kiloString)
                     
-                    guard let kilo = kiloDouble else { return }
+                    guard let dataKilo = kiloDouble else { return }
                     
-//                    let kiloDouble = kiloString.compactMap{ Double($0) }
-                    
-                    let data = WeightData(date: info.date, weight: kilo)
+                    let data = WeightData(date: info.date, weight: dataKilo)
                     
                     self.weightData.append(data)
+                    
+                    let sortedWeightData = self.weightData.sorted {
+                        $0.date < $1.date
+                    }
                     
                     let showDateFormatter = DateFormatter()
                     
                     showDateFormatter.dateFormat = "yyyy/MM"
                     
-                    var weightStruct = [WeightData]()
+                    var sortedDateString = ""
                     
-//                    weightStruct = data.date.timeIntervalSinceNow.sort
+                    var sortedKiloDouble = 0.0
                     
-                    let dateToString = showDateFormatter.string(from: info.date)
+                    for index in 0 ..< sortedWeightData.count {
                     
-                    self.xLabels.append(dateToString)
+                        sortedDateString = showDateFormatter.string(from: sortedWeightData[index].date)
+                        
+                        sortedKiloDouble = sortedWeightData[index].weight
+                    }
                     
+                    self.xLabels.append(sortedDateString)
+                    
+                    self.data.append(sortedKiloDouble)
+
 //                    info.date.timeIntervalSinceNow
-                    
-                    self.data.append(kilo)
-                    
+             
                     NotificationCenter.default.post(name: Notification.Name("Load Weight Data"), object: nil)
                 }
                 
