@@ -164,21 +164,7 @@ extension SearchOwnerViewController: UISearchBarDelegate{
         searchEmpty = false
         searchOwner = ownerData.filter { user in
             
-//            return $0.contains(searchBar.text!)
-            
             return true
         }
-        
-
-
-//        Firestore.firestore().collection("users").whereField("name", isEqualTo: searchBar.text).getDocuments { (querySnapshot, error) in
-//
-//            if error == nil {
-//                for document in querySnapshot!.documents {
-//
-//                }
-//            }
-//        }
     }
-
 }

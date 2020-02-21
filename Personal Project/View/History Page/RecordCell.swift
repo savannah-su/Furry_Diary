@@ -25,7 +25,8 @@ class RecordCell: UITableViewCell {
         
         didSet{
             background.backgroundColor = .white
-            background.layer.borderWidth = 0
+            background.layer.borderWidth = 1
+            background.layer.borderColor = UIColor.black.cgColor
             background.layer.cornerRadius = 10
             background.layer.shadowOffset = CGSize(width: 5, height: 5)
             background.layer.shadowOpacity = 0.5
@@ -48,8 +49,8 @@ class RecordCell: UITableViewCell {
             case .clean:
                 recordDate.isHidden = false
                 subitemCollection.isHidden = false
-                contentLabel.isHidden = true
-                nextDateLabel.isHidden = false
+                contentLabel.isHidden = false
+                nextDateLabel.isHidden = true
                 
             case .prevent:
                 recordDate.isHidden = false

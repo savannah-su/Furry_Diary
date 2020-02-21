@@ -85,13 +85,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         
     }
     
-    //    func toNextpage() {
-    //
-    //        guard let vc = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(identifier: "searchOwnerPage") as? SearchOwnerViewController else { return }
-    //       //vc.navigationController?.pushViewController(vc, animated: true)
-    //        window?.rootViewController = vc
-    //
-    //    }
+//        func toNextpage() {
+//
+//            guard let vc = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(identifier: "searchOwnerPage") as? SearchOwnerViewController else { return }
+//           //vc.navigationController?.pushViewController(vc, animated: true)
+//            window?.rootViewController = vc
+//
+//        }
     
     func addToDatabase() {
         

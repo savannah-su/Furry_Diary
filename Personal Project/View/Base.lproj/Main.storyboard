@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Mbp-sn-ZEd">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15703"/>
@@ -165,7 +165,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EKv-yd-ff5" customClass="FSCalendar">
-                                <rect key="frame" x="0.0" y="250" width="414" height="355"/>
+                                <rect key="frame" x="0.0" y="266" width="414" height="355"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" priority="750" constant="355" id="tfM-ZZ-pPB"/>
@@ -223,7 +223,7 @@
                                 </connections>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="C3u-7o-g24">
-                                <rect key="frame" x="0.0" y="605" width="414" height="208"/>
+                                <rect key="frame" x="0.0" y="621" width="414" height="192"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Record Cell" rowHeight="220" id="06g-D5-EEc" customClass="RecordCell" customModule="Personal_Project" customModuleProvider="target">
@@ -237,18 +237,21 @@
                                                     <rect key="frame" x="20" y="20" width="374" height="180"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Record Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ny4-VB-iRi">
-                                                            <rect key="frame" x="16" y="16" width="342" height="29"/>
+                                                            <rect key="frame" x="16" y="12" width="342" height="30"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="30" id="TkO-X0-Pz1"/>
+                                                            </constraints>
                                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ewR-TZ-IMR">
-                                                            <rect key="frame" x="0.0" y="61" width="374" height="45"/>
+                                                            <rect key="frame" x="0.0" y="54" width="374" height="35"/>
                                                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="height" constant="45" id="W7f-LQ-Xlo"/>
+                                                                <constraint firstAttribute="height" constant="35" id="W7f-LQ-Xlo"/>
                                                             </constraints>
-                                                            <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="X9i-lw-u8e">
+                                                            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="X9i-lw-u8e">
                                                                 <size key="itemSize" width="99" height="39"/>
                                                                 <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                                 <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -264,8 +267,8 @@
                                                                         <subviews>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subitem" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9tm-wS-GNX">
                                                                                 <rect key="frame" x="8" y="8" width="84" height="19"/>
-                                                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                                                <nil key="textColor"/>
+                                                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                         </subviews>
@@ -290,21 +293,28 @@
                                                             </cells>
                                                         </collectionView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Content" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eui-ow-MuO">
-                                                            <rect key="frame" x="16" y="114" width="342" height="21"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <rect key="frame" x="16" y="97" width="342" height="20"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="20" id="Y5d-0t-nmF"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ro-yq-EaO">
-                                                            <rect key="frame" x="16" y="143" width="342" height="21"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <rect key="frame" x="16" y="125" width="342" height="20"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="20" id="dmx-rm-GxR"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="bottom" secondItem="5ro-yq-EaO" secondAttribute="bottom" constant="16" id="7xK-hY-Lru"/>
-                                                        <constraint firstItem="ewR-TZ-IMR" firstAttribute="top" secondItem="Ny4-VB-iRi" secondAttribute="bottom" constant="16" id="Qiw-zJ-KQr"/>
+                                                        <constraint firstAttribute="bottom" secondItem="5ro-yq-EaO" secondAttribute="bottom" priority="750" constant="16" id="7xK-hY-Lru"/>
+                                                        <constraint firstItem="ewR-TZ-IMR" firstAttribute="top" secondItem="Ny4-VB-iRi" secondAttribute="bottom" constant="12" id="Qiw-zJ-KQr"/>
                                                         <constraint firstItem="5ro-yq-EaO" firstAttribute="trailing" secondItem="Eui-ow-MuO" secondAttribute="trailing" id="ZCZ-zG-Nko"/>
                                                         <constraint firstItem="Ny4-VB-iRi" firstAttribute="leading" secondItem="Pd1-oe-Ldv" secondAttribute="leading" constant="16" id="aWs-V3-yFo"/>
                                                         <constraint firstItem="Eui-ow-MuO" firstAttribute="top" secondItem="ewR-TZ-IMR" secondAttribute="bottom" constant="8" id="b4o-92-976"/>
@@ -313,7 +323,7 @@
                                                         <constraint firstAttribute="trailing" secondItem="Eui-ow-MuO" secondAttribute="trailing" constant="16" id="in8-yf-i2I"/>
                                                         <constraint firstAttribute="trailing" secondItem="Ny4-VB-iRi" secondAttribute="trailing" constant="16" id="mcb-Dk-J1w"/>
                                                         <constraint firstItem="5ro-yq-EaO" firstAttribute="leading" secondItem="Eui-ow-MuO" secondAttribute="leading" id="p7m-Pr-gqq"/>
-                                                        <constraint firstItem="Ny4-VB-iRi" firstAttribute="top" secondItem="Pd1-oe-Ldv" secondAttribute="top" constant="16" id="urp-uW-7U6"/>
+                                                        <constraint firstItem="Ny4-VB-iRi" firstAttribute="top" secondItem="Pd1-oe-Ldv" secondAttribute="top" constant="12" id="urp-uW-7U6"/>
                                                         <constraint firstAttribute="trailing" secondItem="ewR-TZ-IMR" secondAttribute="trailing" id="xjk-p0-94h"/>
                                                         <constraint firstItem="Eui-ow-MuO" firstAttribute="leading" secondItem="Pd1-oe-Ldv" secondAttribute="leading" constant="16" id="xka-B8-x2e"/>
                                                     </constraints>
@@ -337,7 +347,7 @@
                                 </prototypes>
                             </tableView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Ksr-QX-ruP">
-                                <rect key="frame" x="0.0" y="150" width="414" height="100"/>
+                                <rect key="frame" x="0.0" y="166" width="414" height="100"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="nmY-Ms-fcL"/>
@@ -369,6 +379,9 @@
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pet Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iAL-AH-CZD">
                                                     <rect key="frame" x="0.0" y="80" width="80" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20" id="hSq-qa-6xN"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -392,6 +405,15 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="點選毛孩後，才能觀看紀錄唷！" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B5b-FE-b7v">
+                                <rect key="frame" x="30" y="701" width="354" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="tfK-vA-ce1"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -400,12 +422,15 @@
                             <constraint firstItem="t48-rQ-wAB" firstAttribute="leading" secondItem="82g-HT-c9I" secondAttribute="leading" id="8zg-qL-6fP"/>
                             <constraint firstItem="82g-HT-c9I" firstAttribute="bottom" secondItem="C3u-7o-g24" secondAttribute="bottom" id="DvN-P9-3bZ"/>
                             <constraint firstItem="Ksr-QX-ruP" firstAttribute="leading" secondItem="82g-HT-c9I" secondAttribute="leading" id="K1n-9a-N9S"/>
-                            <constraint firstItem="Ksr-QX-ruP" firstAttribute="top" secondItem="t48-rQ-wAB" secondAttribute="bottom" id="LfM-de-NBv"/>
+                            <constraint firstItem="Ksr-QX-ruP" firstAttribute="top" secondItem="t48-rQ-wAB" secondAttribute="bottom" constant="16" id="LfM-de-NBv"/>
                             <constraint firstItem="C3u-7o-g24" firstAttribute="leading" secondItem="82g-HT-c9I" secondAttribute="leading" id="NA9-h2-yMy"/>
                             <constraint firstItem="EKv-yd-ff5" firstAttribute="top" secondItem="Ksr-QX-ruP" secondAttribute="bottom" id="SMb-wt-RiX"/>
                             <constraint firstItem="82g-HT-c9I" firstAttribute="trailing" secondItem="C3u-7o-g24" secondAttribute="trailing" id="YKr-fK-446"/>
                             <constraint firstItem="t48-rQ-wAB" firstAttribute="trailing" secondItem="82g-HT-c9I" secondAttribute="trailing" id="dHc-qx-MCE"/>
+                            <constraint firstItem="82g-HT-c9I" firstAttribute="trailing" secondItem="B5b-FE-b7v" secondAttribute="trailing" constant="30" id="f5Y-Ci-GRZ"/>
+                            <constraint firstItem="B5b-FE-b7v" firstAttribute="leading" secondItem="82g-HT-c9I" secondAttribute="leading" constant="30" id="mdi-RA-ibN"/>
                             <constraint firstItem="C3u-7o-g24" firstAttribute="top" secondItem="EKv-yd-ff5" secondAttribute="bottom" id="nlq-s0-qWc"/>
+                            <constraint firstItem="B5b-FE-b7v" firstAttribute="top" secondItem="EKv-yd-ff5" secondAttribute="bottom" constant="80" id="sGA-J6-Kte"/>
                             <constraint firstItem="82g-HT-c9I" firstAttribute="trailing" secondItem="EKv-yd-ff5" secondAttribute="trailing" id="tit-OI-Dd0"/>
                             <constraint firstItem="t48-rQ-wAB" firstAttribute="top" secondItem="udf-ec-Gew" secondAttribute="top" id="yza-Yn-XdV"/>
                         </constraints>
@@ -413,6 +438,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="月曆" id="SOO-Zr-blh"/>
                     <connections>
+                        <outlet property="alertLabel" destination="B5b-FE-b7v" id="iLN-LO-eiS"/>
                         <outlet property="calendar" destination="EKv-yd-ff5" id="aLK-FA-s3Y"/>
                         <outlet property="calendarHeightConstraint" destination="tfM-ZZ-pPB" id="z26-kY-G1h"/>
                         <outlet property="choosePetCollection" destination="Ksr-QX-ruP" id="oIh-MB-brs"/>
@@ -490,7 +516,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="150"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="日常紀錄" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nWg-Nq-rpP">
-                                        <rect key="frame" x="21" y="101" width="138" height="41"/>
+                                        <rect key="frame" x="21" y="101" width="372" height="41"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -498,6 +524,7 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.4431372549" green="0.71764705880000002" blue="0.71764705880000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="nWg-Nq-rpP" secondAttribute="trailing" constant="21" id="UWM-1D-V59"/>
                                     <constraint firstAttribute="bottom" secondItem="nWg-Nq-rpP" secondAttribute="bottom" constant="8" id="jtg-c9-GSU"/>
                                     <constraint firstItem="nWg-Nq-rpP" firstAttribute="leading" secondItem="e0C-1d-1uU" secondAttribute="leading" constant="21" id="s3H-dX-VXj"/>
                                     <constraint firstAttribute="height" constant="150" id="ugd-Bo-IkM"/>
@@ -612,21 +639,12 @@
                                             </collectionViewCell>
                                         </cells>
                                     </collectionView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="想要幫哪個毛孩紀錄呢？" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lDv-wf-bay">
-                                        <rect key="frame" x="20" y="50" width="374" height="30"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="lDv-wf-bay" secondAttribute="trailing" constant="20" id="0ef-2B-n5h"/>
                                     <constraint firstItem="m8H-Ce-BP9" firstAttribute="leading" secondItem="pJR-vx-ux8" secondAttribute="leading" id="3y3-yF-Xnt"/>
                                     <constraint firstAttribute="trailing" secondItem="m8H-Ce-BP9" secondAttribute="trailing" id="9mJ-6w-W3S"/>
                                     <constraint firstAttribute="bottom" secondItem="m8H-Ce-BP9" secondAttribute="bottom" constant="100" id="LoF-vT-QHP"/>
-                                    <constraint firstItem="lDv-wf-bay" firstAttribute="top" secondItem="pJR-vx-ux8" secondAttribute="top" constant="50" id="XzY-3h-Bqd"/>
-                                    <constraint firstItem="m8H-Ce-BP9" firstAttribute="top" secondItem="lDv-wf-bay" secondAttribute="bottom" constant="40" id="kpm-ra-VN1"/>
-                                    <constraint firstItem="lDv-wf-bay" firstAttribute="leading" secondItem="pJR-vx-ux8" secondAttribute="leading" constant="20" id="lbj-QG-cvU"/>
+                                    <constraint firstItem="m8H-Ce-BP9" firstAttribute="top" secondItem="pJR-vx-ux8" secondAttribute="top" constant="120" id="goS-Qk-Knd"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -651,6 +669,7 @@
                         <outlet property="choosePetCollectionView" destination="m8H-Ce-BP9" id="GBn-eF-lCW"/>
                         <outlet property="chooseView" destination="pJR-vx-ux8" id="pPc-RY-y6K"/>
                         <outlet property="collectionView" destination="Gfb-XV-hgP" id="Y9t-58-YQp"/>
+                        <outlet property="navigationTitle" destination="nWg-Nq-rpP" id="Kqk-3F-OuW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QMi-TV-YOc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

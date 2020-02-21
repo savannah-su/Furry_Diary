@@ -51,6 +51,7 @@ class HistoryPageController: UIViewController {
     }
     
     @IBOutlet weak var subitemCollection: UICollectionView!
+    @IBOutlet weak var alertLabel: UILabel!
     
     fileprivate lazy var scopeGesture: UIPanGestureRecognizer = { [unowned self] in
         
@@ -71,7 +72,7 @@ class HistoryPageController: UIViewController {
         
         let formatter = DateFormatter()
         
-        formatter.dateFormat = "yyyy/MM/dd"
+        formatter.dateFormat = "yyyy-MM-dd"
         
         return formatter
     }()
@@ -94,7 +95,10 @@ class HistoryPageController: UIViewController {
     var currentDateData: [Record] = [] {
         
         didSet {
-            tableView.reloadData()
+            if currentDateData.isEmpty {
+            } else {
+                tableView.reloadData()
+            }
         }
     }
     
@@ -104,10 +108,21 @@ class HistoryPageController: UIViewController {
         
         setCalendar()
         
-        getMonthlyData()
-        
         tableView.separatorColor = .clear
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        super.viewWillAppear(animated)
+        
+        selectedDate = Date()
+        currentDateData.removeAll()
+        alertLabel.isHidden = false
+        calendar.allowsSelection = false
+        choosePetCollection.reloadData()
+        calendar.reloadData()
+        tableView.reloadData()
     }
     
     // 上滑月曆變週曆
@@ -121,10 +136,11 @@ class HistoryPageController: UIViewController {
         DownloadManager.shared.monthlyData.removeAll()
         
         DownloadManager.shared.downloadMonthlyData(petID:
-        "E4306502-DF94-4BE3-BDF2-36889A8EED59", startOfMonth: calendar.currentPage.startOfMonth(), endOfMonth: calendar.currentPage.endOfMonth()) { [weak self] result in
+        petID, startOfMonth: calendar.currentPage.startOfMonth(), endOfMonth: calendar.currentPage.endOfMonth()) { [weak self] result in
             
             switch result {
             case .success(let monthlyData):
+                
                 print(monthlyData)
                 
                 self?.currentMonthlyData = monthlyData
@@ -137,19 +153,21 @@ class HistoryPageController: UIViewController {
     
     func getCurrentDateData() {
         
+        var data: [Record] = []
+        
         for index in 0 ..< currentMonthlyData.count {
             
             let currentDate = currentMonthlyData[index].date
             
             if formatter.string(from: selectedDate) == formatter.string(from: currentDate) {
                 
-                currentDateData = currentMonthlyData
-                
-            } else {
-                
-                return
+                data.append(currentMonthlyData[index])
             }
         }
+        
+        self.currentDateData = data
+        print(currentDateData)
+        
     }
 }
 
@@ -169,7 +187,6 @@ extension HistoryPageController: FSCalendarDelegate {
     //點選日期
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         selectedDate = date
-        getCurrentDateData()
     }
 }
 
@@ -222,7 +239,18 @@ extension HistoryPageController: UIGestureRecognizerDelegate {
 extension HistoryPageController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 165
+        
+        switch currentDateData[indexPath.section].categoryType {
+            
+        case "衛生清潔":
+            return 169
+        case "預防計畫":
+            return 200
+        case "體重紀錄":
+            return 169
+        default:
+            return 169
+        }
     }
 }
 
@@ -244,6 +272,7 @@ extension HistoryPageController: UITableViewDataSource {
         
         cell.subitemCollection.delegate = self
         cell.subitemCollection.dataSource = self
+        cell.subitemCollection.reloadData()
         
         switch currentDateData[indexPath.row].categoryType {
             
@@ -251,10 +280,10 @@ extension HistoryPageController: UITableViewDataSource {
             cell.cellType = .clean
             cell.recordDate.text = formatter.string(from: currentDateData[indexPath.row].date)
             
-            if currentDateData[indexPath.row].notiDate == "" {
-                cell.nextDateLabel.text = "下次清潔\(currentDateData[indexPath.row].notiDate)"
+            if currentDateData[indexPath.row].notiDate != "" {
+                cell.contentLabel.text = "下次清潔\(currentDateData[indexPath.row].notiDate ?? "")"
             } else {
-            cell.nextDateLabel.isHidden = true
+            cell.contentLabel.isHidden = true
             }
             
         case "預防計畫":
@@ -262,8 +291,8 @@ extension HistoryPageController: UITableViewDataSource {
             cell.recordDate.text = formatter.string(from: currentDateData[indexPath.row].date)
             cell.contentLabel.text = currentDateData[indexPath.row].medicineName
             
-            if currentDateData[indexPath.row].notiDate == "" {
-                cell.nextDateLabel.text = "下次清潔\(currentDateData[indexPath.row].notiDate)"
+            if currentDateData[indexPath.row].notiDate != "" {
+                cell.nextDateLabel.text = "下次施作是\(currentDateData[indexPath.row].notiDate ?? "")"
             } else {
             cell.nextDateLabel.isHidden = true
             }
@@ -271,11 +300,17 @@ extension HistoryPageController: UITableViewDataSource {
         case "體重紀錄":
             cell.cellType = .weight
             cell.recordDate.text = formatter.string(from: currentDateData[indexPath.row].date)
-            cell.contentLabel.text = "\(currentDateData[indexPath.row].kilo)KG"
+            cell.contentLabel.text = "\(currentDateData[indexPath.row].kilo ?? "") KG"
             
         default:
             cell.cellType = .behavior
             cell.recordDate.text = formatter.string(from: currentDateData[indexPath.row].date)
+            
+            if currentDateData[indexPath.row].memo == "" || currentDateData[indexPath.row].memo == "輸入相關敘述或其他事件" {
+                cell.contentLabel.isHidden = true
+            } else {
+                cell.contentLabel.text = currentDateData[indexPath.row].memo ?? ""
+            }
         }
         
         return cell
@@ -289,7 +324,13 @@ extension HistoryPageController: UICollectionViewDelegate {
         
         if collectionView == self.choosePetCollection {
             
+            alertLabel.isHidden = true
+            
             petID = UploadManager.shared.simplePetInfo[indexPath.item].petID
+            
+            getMonthlyData()
+            
+            calendar.allowsSelection = true
         }
     }
 }
@@ -301,7 +342,7 @@ extension HistoryPageController: UICollectionViewDataSource {
         if collectionView == self.choosePetCollection {
             return UploadManager.shared.simplePetInfo.count
         }
-        return currentDateData.count
+        return currentDateData[section].subitem?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -324,11 +365,20 @@ extension HistoryPageController: UICollectionViewDataSource {
                 return UICollectionViewCell()
             }
             
-            guard let subitemData = currentDateData[indexPath.item].subitem else { return UICollectionViewCell() }
+            guard let subitemData = currentDateData[indexPath.section].subitem else { return UICollectionViewCell() }
             
-            for index in 0 ..< subitemData.count {
-            cellB.subitemLabel.text = subitemData[index]
+            switch currentDateData[indexPath.section].categoryType {
+                
+            case "衛生清潔":
+                cellB.layer.backgroundColor = UIColor.R0?.cgColor
+            case "預防計畫":
+                cellB.layer.backgroundColor = UIColor.G1?.cgColor
+            case "體重紀錄":
+                cellB.layer.backgroundColor = UIColor.B0?.cgColor
+            default:
+                cellB.layer.backgroundColor = UIColor.P0?.cgColor
             }
+                cellB.subitemLabel.text = subitemData[indexPath.row]
             
             return cellB
         }
@@ -345,11 +395,22 @@ extension HistoryPageController: UICollectionViewDelegateFlowLayout {
         return CGSize(width: 100, height: 35)
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         
         if collectionView == self.choosePetCollection {
-            return UIEdgeInsets(top: 16, left: 16, bottom: 0, right: 16)
+            return CGFloat()
         }
-        return UIEdgeInsets()
+        return 20
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayot: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        
+        if collectionView == self.choosePetCollection {
+            return UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+        }
+        
+        guard let itemCount = currentDateData[section].subitem?.count else { return UIEdgeInsets() }
+        
+        return UIEdgeInsets(top: 0, left: (UIScreen.main.bounds.width - 100 * CGFloat(itemCount) - 20 * CGFloat(itemCount - 1) - 40) / 2, bottom: 0, right: (UIScreen.main.bounds.width - 100 * CGFloat(itemCount) - 20 * CGFloat(itemCount - 1) - 40) / 2)
     }
 }

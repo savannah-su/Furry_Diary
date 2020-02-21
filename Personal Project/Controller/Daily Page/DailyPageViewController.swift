@@ -13,6 +13,7 @@ class DailyPageViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var choosePetCollectionView: UICollectionView!
     @IBOutlet weak var chooseView: UIView!
+    @IBOutlet weak var navigationTitle: UILabel!
     
     let item = ["衛生清潔", "預防計畫", "體重紀錄", "行為症狀"]
     let itemImage = ["dog-treat", "shield", "libra-2", "pet"]
@@ -23,7 +24,6 @@ class DailyPageViewController: UIViewController {
         
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.isHidden = true
         
         choosePetCollectionView.delegate = self
         choosePetCollectionView.dataSource = self
@@ -34,6 +34,7 @@ class DailyPageViewController: UIViewController {
         
         super.viewWillAppear(animated)
         
+        navigationTitle.text = "要幫哪個毛孩紀錄呢？"
         collectionView.isHidden = true
         chooseView.isHidden = false
         choosePetCollectionView.reloadData()
@@ -152,6 +153,7 @@ extension DailyPageViewController: UICollectionViewDelegate {
             
         } else if collectionView == self.choosePetCollectionView {
             
+            navigationTitle.text = "日常紀錄"
             chooseView.isHidden = true
             self.collectionView.isHidden = false
             

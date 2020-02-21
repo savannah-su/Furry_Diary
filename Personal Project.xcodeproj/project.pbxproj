@@ -132,6 +132,7 @@
 		2496DB7523E2CC9100991F79 /* SearchVet.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SearchVet.storyboard; sourceTree = "<group>"; };
 		2496DB7723E2DC5C00991F79 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		2496DB7C23E2FA2600991F79 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		24AFF65B24000EBA009895B8 /* Personal Project.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Personal Project.entitlements"; sourceTree = "<group>"; };
 		24B9958B23F41ECD005246AB /* PreventPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreventPageViewController.swift; sourceTree = "<group>"; };
 		24B9958D23F41EDD005246AB /* CleanPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanPageViewController.swift; sourceTree = "<group>"; };
 		24CACB2923F549140068EC7D /* NotiCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotiCell.swift; sourceTree = "<group>"; };
@@ -267,6 +268,7 @@
 		242F8DFF23D6DFF700F49853 /* Personal Project */ = {
 			isa = PBXGroup;
 			children = (
+				24AFF65B24000EBA009895B8 /* Personal Project.entitlements */,
 				242F8E0023D6DFF700F49853 /* AppDelegate.swift */,
 				2402B3C023E5599400E8D009 /* Model */,
 				2496DB7E23E3139700991F79 /* View */,
@@ -899,6 +901,7 @@
 			baseConfigurationReference = 8BEDED9C06C179EDF8230211 /* Pods-Personal Project.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Personal Project/Personal Project.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 65D6M8WUK7;
 				INFOPLIST_FILE = "Personal Project/Info.plist";
@@ -918,6 +921,7 @@
 			baseConfigurationReference = C25D2087F00C46860990FD4C /* Pods-Personal Project.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Personal Project/Personal Project.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 65D6M8WUK7;
 				INFOPLIST_FILE = "Personal Project/Info.plist";

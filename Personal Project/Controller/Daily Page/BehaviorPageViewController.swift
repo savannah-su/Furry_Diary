@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import JGProgressHUD
 
 class BehaviorPageViewController: UIViewController {
     
@@ -60,6 +61,14 @@ class BehaviorPageViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    func uploadSuccess() {
+           let hud = JGProgressHUD(style: .dark)
+           hud.textLabel.text = "Success!"
+           hud.show(in: self.view)
+           hud.dismiss(afterDelay: 3.0)
+           hud.indicatorView = JGProgressHUDSuccessIndicatorView()
+       }
+    
     func toDataBase() {
         
         getInfo()
@@ -74,6 +83,7 @@ class BehaviorPageViewController: UIViewController {
             switch result {
             case .success(let success):
                 print(success)
+                self.uploadSuccess()
             case .failure(let error):
                 print(error.localizedDescription)
             }

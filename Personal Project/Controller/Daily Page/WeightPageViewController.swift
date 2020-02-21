@@ -8,6 +8,7 @@
 
 import UIKit
 import PNChart
+import JGProgressHUD
 
 /*
  
@@ -134,8 +135,6 @@ class WeightPageViewController: UIViewController {
                     self.xLabels.append(sortedDateString)
                     
                     self.data.append(sortedKiloDouble)
-
-//                    info.date.timeIntervalSinceNow
              
                     NotificationCenter.default.post(name: Notification.Name("Load Weight Data"), object: nil)
                 }
@@ -146,6 +145,14 @@ class WeightPageViewController: UIViewController {
         }
     }
     
+    func uploadSuccess() {
+           let hud = JGProgressHUD(style: .dark)
+           hud.textLabel.text = "Success!"
+           hud.show(in: self.view)
+           hud.dismiss(afterDelay: 3.0)
+           hud.indicatorView = JGProgressHUDSuccessIndicatorView()
+       }
+    
     func toDataBase() {
         
         getInfo()
@@ -154,11 +161,12 @@ class WeightPageViewController: UIViewController {
         print(doneDate)
         print(weight)
         
-        UploadManager.shared.uploadData(petID: petID, categoryType: "體重紀錄", date: datePicker.date, subitem: [""], medicineName: "", kilo: weight, memo: "", notiOrNot: "", notiDate: "", notiText: "") { result in
+        UploadManager.shared.uploadData(petID: petID, categoryType: "體重紀錄", date: datePicker.date, subitem: ["體重紀錄"], medicineName: "", kilo: weight, memo: "", notiOrNot: "", notiDate: "", notiText: "") { result in
             
             switch result {
             case .success(let success):
                 print(success)
+                self.uploadSuccess()
             case .failure(let error):
                 print(error.localizedDescription)
             }
