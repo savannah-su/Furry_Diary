@@ -47,6 +47,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 //        UINavigationBar.appearance().standardAppearance = coloredAppearance
 //        UINavigationBar.appearance().scrollEdgeAppearance = coloredAppearance
         
+        if UserDefaults.standard.value(forKey: "logInOrNot") as? Bool != nil {
+            
+            toNextpage()
+            
+        } else {
+            
+            let vc = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(identifier: "Login Page") as? LoginViewController
+            
+            window?.rootViewController = vc
+            
+            window?.makeKeyAndVisible()
+        }
+        
         return true
     }
     
@@ -82,16 +95,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             self.addToDatabase()
             
         }
-        
     }
     
-//        func toNextpage() {
-//
-//            guard let vc = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(identifier: "searchOwnerPage") as? SearchOwnerViewController else { return }
-//           //vc.navigationController?.pushViewController(vc, animated: true)
-//            window?.rootViewController = vc
-//
-//        }
+    @objc func toNextpage() {
+        
+        guard let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "Tab Bar Controller") as? UITabBarController else {
+            return
+        }
+        window?.rootViewController = vc
+    }
     
     func addToDatabase() {
         
@@ -114,14 +126,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                 //self.toNextpage()
                 NotificationCenter.default.post(name: Notification.Name("toSearchOwnerPage"), object: nil)
                 
-                
                 print("DB added successfully")
+                
+                self.toNextpage()
+                
             } else {
                 print("Added failed")
             }
         })
-        
     }
-    
 }
-

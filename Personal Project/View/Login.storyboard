@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="u1e-EP-nCX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="dpO-6A-xg0">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15703"/>
@@ -11,12 +11,12 @@
         <!--登入-->
         <scene sceneID="R4T-DZ-FHp">
             <objects>
-                <viewController id="u1e-EP-nCX" customClass="LoginViewController" customModule="Personal_Project" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Login Page" id="u1e-EP-nCX" customClass="LoginViewController" customModule="Personal_Project" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xQv-Wq-6q1">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="寵物背景-2" translatesAutoresizingMaskIntoConstraints="NO" id="n84-mC-WlI">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ak0a2-44oor" translatesAutoresizingMaskIntoConstraints="NO" id="n84-mC-WlI">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jli-id-65H">
@@ -66,6 +66,11 @@
                                     <constraint firstAttribute="width" constant="250" id="a45-7J-gie"/>
                                     <constraint firstAttribute="height" constant="50" id="fnc-SU-b2l"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -93,7 +98,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mdQ-nI-Sie" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="651" y="-304"/>
+            <point key="canvasLocation" x="1560.8695652173915" y="-304.01785714285711"/>
         </scene>
         <!--搜尋共同飼主-->
         <scene sceneID="2EF-ic-tah">
@@ -236,7 +241,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3It-aq-TxA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1329" y="-304"/>
+            <point key="canvasLocation" x="2239.130434782609" y="-304.01785714285711"/>
         </scene>
         <!--輸入寵物資料-->
         <scene sceneID="Vpi-OI-gmm">
@@ -509,14 +514,31 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DSK-yz-UT5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2013" y="-304"/>
+            <point key="canvasLocation" x="2921.739130434783" y="-304.01785714285711"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="b0T-5G-kpL">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="dpO-6A-xg0" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="1rv-tq-jpz">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="u1e-EP-nCX" kind="relationship" relationship="rootViewController" id="m15-cR-O0G"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FR6-vz-1ml" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="650.72463768115949" y="-304.01785714285711"/>
         </scene>
     </scenes>
     <resources>
         <image name="Icon_24px_Cancel" width="24" height="24"/>
         <image name="Icon_24px_Search" width="24" height="24"/>
+        <image name="ak0a2-44oor" width="3265" height="5477"/>
         <image name="camera" catalog="system" width="64" height="48"/>
         <image name="cats and dogs" width="512" height="512"/>
-        <image name="寵物背景-2" width="3652" height="5479"/>
     </resources>
 </document>

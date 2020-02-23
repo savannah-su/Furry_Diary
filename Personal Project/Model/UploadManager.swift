@@ -52,4 +52,20 @@ class UploadManager {
             completion(.success("Success"))
         }
     }
+    
+    func uploadVet(vetName: String, vetPhone: String, vetAddress: String, vetLatitude: Double, vetLongitude: Double, completion: @escaping (Result<String, Error>) -> Void) {
+        
+        let data = VetDataToDB(vetName: vetName, vetPhone: vetPhone, vetAddress: vetAddress, vetLatitude: vetLatitude, vetLongitude: vetLongitude)
+        
+        db.collection("Veterinary").document().setData(data.toDict) { error in
+            
+            if error != nil {
+                
+                completion(.failure(upload.uploadFail))
+            }
+            
+            completion(.success("Success"))
+            
+        }
+    }
 }

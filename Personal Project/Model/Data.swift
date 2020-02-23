@@ -116,6 +116,8 @@ struct Record: Codable {
         switch categoryType {
         case "衛生清潔": return "下次清潔是\(notiDate ?? "")"
         case "預防計畫": return ""
+        case "體重紀錄": return ""
+        case "行為症狀": return ""
         default:return ""
         }
     }
@@ -128,13 +130,13 @@ struct Record: Codable {
         }
     }
     
-//    var height: CGFloat {
-//        switch categoryType {
-//        case "衛生清潔": return "下次清潔是\(notiDate ?? "")"
-//        case "衛生清潔": return ""
-//        default:return ""
-//        }
-//    }
+    //    var height: CGFloat {
+    //        switch categoryType {
+    //        case "衛生清潔": return "下次清潔是\(notiDate ?? "")"
+    //        case "衛生清潔": return ""
+    //        default:return ""
+    //        }
+    //    }
     
     enum CodingKeys: String, CodingKey {
         
@@ -144,7 +146,7 @@ struct Record: Codable {
         case notiDate = "noti Date"
         case notiText = "noti text"
         case subitem, kilo, memo, date
-
+        
     }
     
     var toDict: [String: Any] {
@@ -165,6 +167,59 @@ struct Record: Codable {
 }
 
 struct WeightData {
+    
     let date: Date
     let weight: Double
+}
+
+struct VetData: Codable {
+    
+    let vetName: String
+    let vetPhone: String
+    let vetAddress: String
+    
+    
+    enum CodingKeys: String, CodingKey {
+        
+        case vetName = "機構名稱"
+        case vetPhone = "機構電話"
+        case vetAddress = "機構地址"
+    }
+}
+
+struct VetDataToDB: Codable {
+    
+    let vetName: String
+    let vetPhone: String
+    let vetAddress: String
+    let vetLatitude: Double
+    let vetLongitude: Double
+    
+    var toDict: [String: Any] {
+        
+        return [
+            
+            "vetName": vetName,
+            "vetPhone": vetPhone,
+            "vetAddress": vetAddress,
+            "vetLatitude": vetLatitude,
+            "vetLongitude": vetLongitude
+        ]
+    }
+}
+
+struct VetPlacemarkData: Codable {
+    let results: [ResultData]
+}
+
+struct ResultData: Codable {
+    let geometry: Geometry
+}
+
+struct Geometry: Codable {
+    let location: Location
+}
+
+struct Location: Codable {
+    let lat, lng: Double
 }

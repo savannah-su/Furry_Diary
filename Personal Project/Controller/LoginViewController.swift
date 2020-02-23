@@ -48,7 +48,7 @@ class LoginViewController: UIViewController {
     
     @objc func toNextpage() {
         
-        guard let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "Home Page") as? HomePageViewController else {
+        guard let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "Tab Bar Controller") as? UITabBarController else {
             return
         }
         show(vc, sender: nil)

@@ -117,11 +117,16 @@ class HistoryPageController: UIViewController {
         super.viewWillAppear(animated)
         
         selectedDate = Date()
+        
         currentDateData.removeAll()
+        
         alertLabel.isHidden = false
+        
         calendar.allowsSelection = false
-        choosePetCollection.reloadData()
+        calendar.scrollEnabled = false
         calendar.reloadData()
+        
+        choosePetCollection.reloadData()
         tableView.reloadData()
     }
     
@@ -166,8 +171,6 @@ class HistoryPageController: UIViewController {
         }
         
         self.currentDateData = data
-        print(currentDateData)
-        
     }
 }
 
@@ -331,6 +334,8 @@ extension HistoryPageController: UICollectionViewDelegate {
             getMonthlyData()
             
             calendar.allowsSelection = true
+            
+            calendar.scrollEnabled = true
         }
     }
 }
