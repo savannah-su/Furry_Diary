@@ -73,6 +73,8 @@ extension PetCardCell: BannerViewDataSource {
         
         imageView.backgroundColor = .blue
         
+        imageView.alpha = 0.7
+        
         imageView.layer.cornerRadius = 20
         
         imageView.contentMode = .scaleAspectFill

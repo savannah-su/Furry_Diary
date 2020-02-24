@@ -60,6 +60,8 @@ class CleanPageViewController: UIViewController {
         tableView.isHidden = true
         tableView.separatorColor = .clear
         
+        topView.layer.cornerRadius = topView.bounds.height / 2
+        bottomView.layer.cornerRadius = bottomView.bounds.height / 2
         bottomViewButton.isHidden = true
         
         // Do any additional setup after loading the view.

@@ -15,6 +15,10 @@ import FirebaseFirestoreSwift
 
 class HomePageViewController: UIViewController {
 
+    @IBAction func logoutBotton(_ sender: Any) {
+        logout()
+    }
+    
     @IBAction func createButton(_ sender: Any) {
        
         guard let vc = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(identifier: "Create Pet Page") as? CreatePetViewController else { return }
@@ -54,6 +58,30 @@ class HomePageViewController: UIViewController {
         getPetData()
         
         addRefreshControl()
+    }
+    
+    func logout() {
+        
+        let alertController = UIAlertController(title: "確定要登出嗎？", message: "", preferredStyle: .alert)
+        let OKAction = UIAlertAction(title: "確定", style: .default) { _ in
+            
+            do {
+               try Auth.auth().signOut()
+            } catch {
+                print("登出失敗")
+            }
+            
+            UserDefaults.standard.removeObject(forKey: "LogInOrNot")
+            
+           let vc = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(identifier: "Login Page") as? LoginViewController
+            self.view.window?.rootViewController = vc
+        }
+        
+        let cancelAction = UIAlertAction(title: "取消", style: .default, handler: nil)
+        alertController.addAction(OKAction)
+        alertController.addAction(cancelAction)
+        self.present(alertController, animated: true, completion: nil)
+        
     }
     
     func addRefreshControl() {
@@ -106,7 +134,21 @@ class HomePageViewController: UIViewController {
 extension HomePageViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 232
+        return 220
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        let spring = UISpringTimingParameters(dampingRatio: 0.7, initialVelocity: CGVector(dx: 1.0, dy: 0.2))
+        let animator = UIViewPropertyAnimator(duration: 0.5, timingParameters: spring)
+               cell.alpha = 0
+               cell.transform = CGAffineTransform(translationX: 0, y: 100 * 0.6)
+               animator.addAnimations {
+                   cell.alpha = 1
+                   cell.transform = .identity
+                 self.tableView.layoutIfNeeded()
+               }
+               animator.startAnimation(afterDelay: 0.1 * Double(indexPath.item))
     }
     
 }

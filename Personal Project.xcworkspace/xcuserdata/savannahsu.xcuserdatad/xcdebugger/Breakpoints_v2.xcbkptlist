@@ -18,63 +18,63 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "A4BC5D8B-8DE9-4983-BF66-E85152045FCD"
+            uuid = "C78A0663-5681-4B60-A096-72817728949F"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Personal Project/Controller/Vet Page/VetPageController.swift"
+            filePath = "Personal Project/Model/DownloadManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "102"
-            endingLineNumber = "102"
-            landmarkName = "getPlacemarker()"
+            startingLineNumber = "121"
+            endingLineNumber = "121"
+            landmarkName = "downloadVetPlacemark(completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "EE173734-2522-4ABC-AA7E-5DF1966ACC20"
+            uuid = "B86FB791-018F-4FDC-BCF2-C9074262A173"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Personal Project/Controller/Vet Page/VetPageController.swift"
+            filePath = "Personal Project/Model/DownloadManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "96"
-            endingLineNumber = "96"
-            landmarkName = "getPlacemarker()"
+            startingLineNumber = "103"
+            endingLineNumber = "103"
+            landmarkName = "downloadVetPlacemark(completion:)"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "EE173734-2522-4ABC-AA7E-5DF1966ACC20 - adee8985e5086f5d"
+                  uuid = "B86FB791-018F-4FDC-BCF2-C9074262A173 - 66d0f764aee4357"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "Personal_Project.VetPageController.getPlacemarker() -&gt; ()"
+                  symbolName = "Personal_Project.DownloadManager.downloadVetPlacemark(completion: (Swift.Result&lt;Swift.Array&lt;Personal_Project.VetDataToDB&gt;, Swift.Error&gt;) -&gt; ()) -&gt; ()"
                   moduleName = "Personal Project"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/savannahsu/Desktop/Personal-Project/Personal%20Project/Controller/Vet%20Page/VetPageController.swift"
+                  urlString = "file:///Users/savannahsu/Desktop/Personal-Project/Personal%20Project/Model/DownloadManager.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "96"
-                  endingLineNumber = "96"
-                  offsetFromSymbolStart = "982">
+                  startingLineNumber = "103"
+                  endingLineNumber = "103"
+                  offsetFromSymbolStart = "172">
                </Location>
                <Location
-                  uuid = "EE173734-2522-4ABC-AA7E-5DF1966ACC20 - 1669e3d521d83f68"
+                  uuid = "B86FB791-018F-4FDC-BCF2-C9074262A173 - f20b20117eafe09a"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Result&lt;Swift.Array&lt;Personal_Project.VetPlacemarkData&gt;, Swift.Error&gt;) -&gt; () in Personal_Project.VetPageController.getPlacemarker() -&gt; ()"
+                  symbolName = "closure #1 (Swift.Optional&lt;__C.FIRQuerySnapshot&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Personal_Project.DownloadManager.downloadVetPlacemark(completion: (Swift.Result&lt;Swift.Array&lt;Personal_Project.VetDataToDB&gt;, Swift.Error&gt;) -&gt; ()) -&gt; ()"
                   moduleName = "Personal Project"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/savannahsu/Desktop/Personal-Project/Personal%20Project/Controller/Vet%20Page/VetPageController.swift"
+                  urlString = "file:///Users/savannahsu/Desktop/Personal-Project/Personal%20Project/Model/DownloadManager.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "96"
-                  endingLineNumber = "96"
-                  offsetFromSymbolStart = "158">
+                  startingLineNumber = "105"
+                  endingLineNumber = "105"
+                  offsetFromSymbolStart = "184">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -82,31 +82,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "3A0133CE-9E70-48D6-B17E-B60F4CDE5E95"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Personal Project/Controller/Vet Page/VetPageController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "53"
-            endingLineNumber = "53"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "35B3F847-3AEF-4354-8351-66EE24CD4D79"
-            shouldBeEnabled = "Yes"
+            uuid = "DEDAB707-88D5-4B34-9930-B297A0B23AA4"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Personal Project/Model/GetDataManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
             landmarkName = "getVetPlacemark(addressString:completion:)"
             landmarkType = "7">
          </BreakpointContent>

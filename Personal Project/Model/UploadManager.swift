@@ -57,7 +57,7 @@ class UploadManager {
         
         let data = VetDataToDB(vetName: vetName, vetPhone: vetPhone, vetAddress: vetAddress, vetLatitude: vetLatitude, vetLongitude: vetLongitude)
         
-        db.collection("Veterinary").document().setData(data.toDict) { error in
+        db.collection("veterinary").document().setData(data.toDict) { error in
             
             if error != nil {
                 

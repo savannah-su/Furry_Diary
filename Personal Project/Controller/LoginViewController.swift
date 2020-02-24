@@ -51,7 +51,8 @@ class LoginViewController: UIViewController {
         guard let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "Tab Bar Controller") as? UITabBarController else {
             return
         }
-        show(vc, sender: nil)
+        
+        self.view.window?.rootViewController = vc
         
     }
     

@@ -24,6 +24,7 @@ class ItemCell: UICollectionViewCell {
     func setupShadow() {
         background.backgroundColor = .white
         background.layer.borderWidth = 1
+        background.layer.cornerRadius = 10
         background.layer.shadowOffset = CGSize(width: 5, height: 5)
         background.layer.shadowOpacity = 0.5
         background.layer.shadowRadius = 3

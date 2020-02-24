@@ -30,6 +30,8 @@ class DownloadManager {
     
     var monthlyData = [Record]()
     
+    var vetPlacemark = [VetDataToDB]()
+    
     let category = ["衛生清潔", "預防計畫", "體重紀錄", "行為症狀"]
     
     func downloadData(type: Int, petID: String, completion: @escaping (Result<[Record], Error>) -> Void) {
@@ -90,6 +92,36 @@ class DownloadManager {
                     completion(.success(self.monthlyData))
                 }
             }
+        }
+    }
+    
+    func downloadVetPlacemark(completion: @escaping (Result<[VetDataToDB], Error>) -> Void) {
+        
+        vetPlacemark = []
+
+        
+        db.collection("veterinary").getDocuments { (querySnapshot, error) in
+            
+            if error == nil {
+                
+                for document in querySnapshot!.documents {
+                    
+                    do {
+                        
+                        if let downloadVetData = try document.data(as: VetDataToDB.self, decoder: Firestore.Decoder()) {
+                            
+                            self.vetPlacemark.append(downloadVetData)
+                        }
+                        
+                    } catch {
+                        completion(.failure(download.downloadFail))
+                    }
+                    
+                }
+                completion(.success(self.vetPlacemark))
+            }
+            
+            
         }
     }
 }

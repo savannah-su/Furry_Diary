@@ -44,8 +44,9 @@ class DailyPageViewController: UIViewController {
 extension DailyPageViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
         if collectionView == self.collectionView {
-            return CGSize(width: 169, height: 200)
+            return CGSize(width: 158, height: 200)
         }
         return CGSize(width: 150, height: 200)
     }
@@ -53,7 +54,7 @@ extension DailyPageViewController: UICollectionViewDelegateFlowLayout {
     //space of item
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         if collectionView == self.collectionView {
-            return CGFloat(26)
+            return (UIScreen.main.bounds.width - 316) / 3
         }
         return CGFloat()
     }
@@ -67,7 +68,7 @@ extension DailyPageViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         if collectionView == self.collectionView {
-            return UIEdgeInsets(top: 26, left: 0, bottom: 0, right: 0)
+            return UIEdgeInsets(top: 26, left: (UIScreen.main.bounds.width - 316) / 3, bottom: 26, right: (UIScreen.main.bounds.width - 316) / 3)
         }
         return UIEdgeInsets(top: 0, left: (UIScreen.main.bounds.width - 150 * CGFloat(UploadManager.shared.simplePetInfo.count)) / CGFloat(UploadManager.shared.simplePetInfo.count + 2), bottom: 0, right: (UIScreen.main.bounds.width - 150 * CGFloat(UploadManager.shared.simplePetInfo.count)) / CGFloat(UploadManager.shared.simplePetInfo.count + 2))
     }
@@ -95,7 +96,6 @@ extension DailyPageViewController: UICollectionViewDataSource {
                 let index = indexPath.row
                 cellA.itemLabel.text = item[index]
                 cellA.image.image = UIImage(named: itemImage[index])
-                
                 
             }
             return cellA
@@ -159,5 +159,19 @@ extension DailyPageViewController: UICollectionViewDelegate {
             
             recordPetID = UploadManager.shared.simplePetInfo[indexPath.item].petID
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        
+        let spring = UISpringTimingParameters(dampingRatio: 0.7, initialVelocity: CGVector(dx: 1.0, dy: 0.2))
+        let animator = UIViewPropertyAnimator(duration: 0.5, timingParameters: spring)
+               cell.alpha = 0
+               cell.transform = CGAffineTransform(translationX: 0, y: 100 * 0.6)
+               animator.addAnimations {
+                   cell.alpha = 1
+                   cell.transform = .identity
+                 self.collectionView.layoutIfNeeded()
+               }
+               animator.startAnimation(afterDelay: 0.1 * Double(indexPath.item))
     }
 }

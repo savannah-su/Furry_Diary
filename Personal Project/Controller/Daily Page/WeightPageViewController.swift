@@ -51,6 +51,10 @@ class WeightPageViewController: UIViewController {
         toDataBase()
     }
     
+    
+    @IBOutlet weak var topView: UIView!
+    @IBOutlet weak var bottomView: UIView!
+    
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var firstBar: UIView!
     @IBOutlet weak var dateTextfield: UITextField!
@@ -63,7 +67,7 @@ class WeightPageViewController: UIViewController {
     var xLabels: [String] = []
     var data: [Double] = []
     let chartData = PNLineChartData()
-    let lineChart = PNLineChart(frame: CGRect(origin: CGPoint(x: 8, y: 300), size: CGSize(width: UIScreen.main.bounds.width, height: 280)))
+    var lineChart = PNLineChart()
     
     let datePicker = UIDatePicker()
     let showDateFormatter = DateFormatter()
@@ -76,11 +80,16 @@ class WeightPageViewController: UIViewController {
     var weightData = [WeightData]()
     
     override func viewDidLoad() {
+    
         super.viewDidLoad()
+    
+        topView.layer.cornerRadius = topView.bounds.height / 2
+        bottomView.layer.cornerRadius = bottomView.bounds.height / 2
         
         toGetRecord()
         setupChart()
         setupDatePicker()
+        setupChartframe()
         
         NotificationCenter.default.addObserver(self, selector: #selector(setupChart), name: Notification.Name("Load Weight Data"), object: nil)
     }
@@ -184,6 +193,12 @@ class WeightPageViewController: UIViewController {
             return
         }
         weight = enterWeight
+    }
+    
+    func setupChartframe() {
+        
+        lineChart = PNLineChart(frame: CGRect(origin: CGPoint(x: 8, y: topView.bounds.height / 2), size: CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - topView.bounds.height - 8)))
+        
     }
     
     func setupDatePicker() {

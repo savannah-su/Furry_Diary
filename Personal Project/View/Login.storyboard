@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="dpO-6A-xg0">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="u1e-EP-nCX">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15703"/>
@@ -20,7 +20,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jli-id-65H">
-                                <rect key="frame" x="82" y="787" width="250" height="50"/>
+                                <rect key="frame" x="82" y="796" width="250" height="50"/>
                                 <color key="backgroundColor" red="0.85882352941176465" green="0.26666666666666666" blue="0.21568627450980393" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="Ma8-DD-KQe"/>
@@ -40,7 +40,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b4b-4s-XtW">
-                                <rect key="frame" x="82" y="717" width="250" height="50"/>
+                                <rect key="frame" x="82" y="730" width="250" height="50"/>
                                 <color key="backgroundColor" red="0.094117647058823528" green="0.46666666666666667" blue="0.94901960784313721" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="250" id="4S9-Yw-0yV"/>
@@ -60,7 +60,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YJy-C3-W4e">
-                                <rect key="frame" x="82" y="647" width="250" height="50"/>
+                                <rect key="frame" x="82" y="664" width="250" height="50"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="250" id="a45-7J-gie"/>
@@ -76,17 +76,17 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="YJy-C3-W4e" firstAttribute="centerX" secondItem="xQv-Wq-6q1" secondAttribute="centerX" id="9Br-Cq-9gZ"/>
-                            <constraint firstItem="HUe-MP-PbA" firstAttribute="bottom" secondItem="Jli-id-65H" secondAttribute="bottom" constant="25" id="KbQ-AD-o39"/>
+                            <constraint firstItem="HUe-MP-PbA" firstAttribute="bottom" secondItem="Jli-id-65H" secondAttribute="bottom" constant="16" id="KbQ-AD-o39"/>
                             <constraint firstItem="Jli-id-65H" firstAttribute="trailing" secondItem="b4b-4s-XtW" secondAttribute="trailing" id="KiP-iC-yGT"/>
                             <constraint firstAttribute="bottom" secondItem="n84-mC-WlI" secondAttribute="bottom" id="SIH-D6-58E"/>
                             <constraint firstItem="Jli-id-65H" firstAttribute="centerX" secondItem="xQv-Wq-6q1" secondAttribute="centerX" id="Tml-MA-rTc"/>
                             <constraint firstItem="HUe-MP-PbA" firstAttribute="trailing" secondItem="n84-mC-WlI" secondAttribute="trailing" id="YkO-4P-wJy"/>
                             <constraint firstItem="n84-mC-WlI" firstAttribute="top" secondItem="xQv-Wq-6q1" secondAttribute="top" id="ogq-1J-b3M"/>
                             <constraint firstItem="Jli-id-65H" firstAttribute="leading" secondItem="b4b-4s-XtW" secondAttribute="leading" id="pug-5T-tsT"/>
-                            <constraint firstItem="b4b-4s-XtW" firstAttribute="top" secondItem="YJy-C3-W4e" secondAttribute="bottom" constant="20" id="qU3-zp-No2"/>
+                            <constraint firstItem="b4b-4s-XtW" firstAttribute="top" secondItem="YJy-C3-W4e" secondAttribute="bottom" constant="16" id="qU3-zp-No2"/>
                             <constraint firstItem="n84-mC-WlI" firstAttribute="leading" secondItem="HUe-MP-PbA" secondAttribute="leading" id="rkU-pI-cVN"/>
                             <constraint firstItem="b4b-4s-XtW" firstAttribute="centerX" secondItem="xQv-Wq-6q1" secondAttribute="centerX" id="tNj-VN-xeR"/>
-                            <constraint firstItem="Jli-id-65H" firstAttribute="top" secondItem="b4b-4s-XtW" secondAttribute="bottom" constant="20" id="zXS-Cp-wb3"/>
+                            <constraint firstItem="Jli-id-65H" firstAttribute="top" secondItem="b4b-4s-XtW" secondAttribute="bottom" constant="16" id="zXS-Cp-wb3"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="HUe-MP-PbA"/>
                     </view>
@@ -515,23 +515,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DSK-yz-UT5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2921.739130434783" y="-304.01785714285711"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="b0T-5G-kpL">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="dpO-6A-xg0" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="1rv-tq-jpz">
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="u1e-EP-nCX" kind="relationship" relationship="rootViewController" id="m15-cR-O0G"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="FR6-vz-1ml" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="650.72463768115949" y="-304.01785714285711"/>
         </scene>
     </scenes>
     <resources>

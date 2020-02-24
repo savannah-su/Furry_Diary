@@ -246,13 +246,13 @@ extension HistoryPageController: UITableViewDelegate {
         switch currentDateData[indexPath.section].categoryType {
             
         case "衛生清潔":
-            return 169
+            return 161
         case "預防計畫":
-            return 200
+            return 192
         case "體重紀錄":
-            return 169
+            return 161
         default:
-            return 169
+            return 161
         }
     }
 }
@@ -338,6 +338,20 @@ extension HistoryPageController: UICollectionViewDelegate {
             calendar.scrollEnabled = true
         }
     }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        
+        let spring = UISpringTimingParameters(dampingRatio: 0.7, initialVelocity: CGVector(dx: 1.0, dy: 0.2))
+        let animator = UIViewPropertyAnimator(duration: 0.5, timingParameters: spring)
+               cell.alpha = 0
+               cell.transform = CGAffineTransform(translationX: 0, y: 100 * 0.6)
+               animator.addAnimations {
+                   cell.alpha = 1
+                   cell.transform = .identity
+                 self.choosePetCollection.layoutIfNeeded()
+               }
+               animator.startAnimation(afterDelay: 0.1 * Double(indexPath.item))
+    }
 }
 
 extension HistoryPageController: UICollectionViewDataSource {
@@ -395,7 +409,7 @@ extension HistoryPageController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         if collectionView == self.choosePetCollection {
-            return CGSize(width: 80, height: 100)
+            return CGSize(width: 70, height: 90)
         }
         return CGSize(width: 100, height: 35)
     }
@@ -403,7 +417,7 @@ extension HistoryPageController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         
         if collectionView == self.choosePetCollection {
-            return CGFloat()
+            return 16
         }
         return 20
     }
@@ -411,7 +425,7 @@ extension HistoryPageController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayot: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         
         if collectionView == self.choosePetCollection {
-            return UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+            return UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
         }
         
         guard let itemCount = currentDateData[section].subitem?.count else { return UIEdgeInsets() }

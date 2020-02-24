@@ -11,11 +11,9 @@ import JGProgressHUD
 
 class BehaviorPageViewController: UIViewController {
     
+    @IBOutlet weak var topView: UIView!
     @IBAction func backButton(_ sender: Any) {
-        
         navigationController?.popViewController(animated: true)
-        
-        NotificationCenter.default.post(name: Notification.Name("Create New Pet"), object: nil)
     }
     
     @IBAction func saveButton(_ sender: Any) {
@@ -23,9 +21,9 @@ class BehaviorPageViewController: UIViewController {
     }
     
     @IBOutlet weak var collectionView: UICollectionView!
-    
     @IBOutlet weak var bottomViewLabel: UILabel!
     
+    @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var firstBar: UIView!
     @IBOutlet weak var timeTextField: UITextField!
@@ -50,6 +48,9 @@ class BehaviorPageViewController: UIViewController {
         
         collectionView.delegate = self
         collectionView.dataSource = self
+        
+        topView.layer.cornerRadius = topView.bounds.height / 2
+        bottomView.layer.cornerRadius = bottomView.bounds.height / 2
         
         memoTextView.delegate = self
         collectionView.allowsMultipleSelection = true
@@ -184,11 +185,13 @@ extension BehaviorPageViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 24, left: 0, bottom: 24, right: 0)
+        
+        let inset = (UIScreen.main.bounds.height - topView.bounds.height - 208) / 2
+        return UIEdgeInsets(top: inset, left: 0, bottom: inset, right: 0)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 16
+        return 8
     }
     
 }

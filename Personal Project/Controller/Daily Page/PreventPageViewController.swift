@@ -54,6 +54,8 @@ class PreventPageViewController: UIViewController {
         
         collectionView.allowsMultipleSelection = false
         
+        topView.layer.cornerRadius = topView.bounds.height / 2
+        bottomView.layer.cornerRadius = bottomView.bounds.height / 2
         bottomViewButton.isHidden = true
         
         tableView.separatorColor = .clear
@@ -187,11 +189,14 @@ extension PreventPageViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-            return 34
+        return (UIScreen.main.bounds.width - 310) / 2
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-            return UIEdgeInsets(top: 98, left: 51, bottom: 98, right: 51)
+        
+        let inset = (UIScreen.main.bounds.height - topView.bounds.height - 100) / 2
+        
+            return UIEdgeInsets(top: inset, left: 50, bottom: inset, right: 50)
     }
 }
 

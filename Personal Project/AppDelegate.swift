@@ -94,6 +94,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             
             self.addToDatabase()
             
+            self.toNextpage()
+            
         }
     }
     
