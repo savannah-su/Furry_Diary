@@ -48,6 +48,7 @@ class WeightPageViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     @IBAction func saveButton(_ sender: Any) {
+
         toDataBase()
     }
     
@@ -87,11 +88,7 @@ class WeightPageViewController: UIViewController {
         bottomView.layer.cornerRadius = bottomView.bounds.height / 2
         
         toGetRecord()
-        setupChart()
         setupDatePicker()
-        setupChartframe()
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(setupChart), name: Notification.Name("Load Weight Data"), object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -103,6 +100,10 @@ class WeightPageViewController: UIViewController {
         
         DownloadManager.shared.petRecord.removeAll()
         
+        self.xLabels.removeAll()
+                           
+        self.data.removeAll()
+        
         DownloadManager.shared.downloadData(type: 2, petID: petID) { result in
             
             switch result {
@@ -110,7 +111,7 @@ class WeightPageViewController: UIViewController {
             case .success(let downloadWeightData):
                 
                 //(map, filet, reduce)給Array用的for in, 組成左邊新的array; filter是把右邊true的情況，組成左邊新的array
-                downloadWeightData.map { info in
+                downloadWeightData.sorted{ return $0.date > $1.date }.prefix(5).reversed().forEach { info in
                     
                     guard let kiloString = info.kilo else { return }
                     
@@ -122,30 +123,20 @@ class WeightPageViewController: UIViewController {
                     
                     self.weightData.append(data)
                     
-                    let sortedWeightData = self.weightData.sorted {
-                        $0.date < $1.date
-                    }
-                    
                     let showDateFormatter = DateFormatter()
                     
                     showDateFormatter.dateFormat = "yyyy/MM"
                     
-                    var sortedDateString = ""
+                    var sortedDateString = showDateFormatter.string(from: info.date)
                     
-                    var sortedKiloDouble = 0.0
-                    
-                    for index in 0 ..< sortedWeightData.count {
-                    
-                        sortedDateString = showDateFormatter.string(from: sortedWeightData[index].date)
-                        
-                        sortedKiloDouble = sortedWeightData[index].weight
-                    }
+                    var sortedKiloDouble = dataKilo
                     
                     self.xLabels.append(sortedDateString)
                     
                     self.data.append(sortedKiloDouble)
-             
-                    NotificationCenter.default.post(name: Notification.Name("Load Weight Data"), object: nil)
+                    
+                    self.setupChart()
+                    
                 }
                 
             case .failure(let error):
@@ -166,16 +157,13 @@ class WeightPageViewController: UIViewController {
         
         getInfo()
         
-        print(petID)
-        print(doneDate)
-        print(weight)
-        
         UploadManager.shared.uploadData(petID: petID, categoryType: "體重紀錄", date: datePicker.date, subitem: ["體重紀錄"], medicineName: "", kilo: weight, memo: "", notiOrNot: "", notiDate: "", notiText: "") { result in
             
             switch result {
             case .success(let success):
                 print(success)
                 self.uploadSuccess()
+                self.toGetRecord()
             case .failure(let error):
                 print(error.localizedDescription)
             }
@@ -195,12 +183,6 @@ class WeightPageViewController: UIViewController {
         weight = enterWeight
     }
     
-    func setupChartframe() {
-        
-        lineChart = PNLineChart(frame: CGRect(origin: CGPoint(x: 8, y: topView.bounds.height / 2), size: CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - topView.bounds.height - 8)))
-        
-    }
-    
     func setupDatePicker() {
         
         showDateFormatter.dateFormat = "yyyy-MM-dd"
@@ -216,6 +198,8 @@ class WeightPageViewController: UIViewController {
     }
     
     @objc func setupChart() {
+        
+        lineChart = PNLineChart(frame: CGRect(origin: CGPoint(x: 0, y: topView.bounds.height / 2), size: CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - topView.bounds.height)))
         
         lineChart.setXLabels(xLabels, withWidth: UIScreen.main.bounds.width / CGFloat(xLabels.count + 2))
         

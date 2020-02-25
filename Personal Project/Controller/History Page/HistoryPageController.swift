@@ -45,8 +45,6 @@ class HistoryPageController: UIViewController {
         didSet {
             tableView.delegate = self
             tableView.dataSource = self
-            
-            
         }
     }
     
@@ -66,7 +64,11 @@ class HistoryPageController: UIViewController {
         return panGesture
         }()
     
+    var selectedStatus: [Bool] = []
+    
     var petID = ""
+    
+    var currentIndex = 0
     
     lazy var formatter: DateFormatter = {
         
@@ -82,6 +84,8 @@ class HistoryPageController: UIViewController {
         
         didSet {
             calendar.reloadData()
+            currentDateData.removeAll()
+            tableView.reloadData()
         }
     }
     
@@ -116,22 +120,25 @@ class HistoryPageController: UIViewController {
         
         super.viewWillAppear(animated)
         
-        selectedDate = Date()
+        selectedStatus = Array(repeating: false, count: UploadManager.shared.simplePetInfo.count)
         
         currentDateData.removeAll()
+        tableView.reloadData()
         
         alertLabel.isHidden = false
         
         calendar.allowsSelection = false
         calendar.scrollEnabled = false
+        
+        currentMonthlyData.removeAll()
         calendar.reloadData()
         
         choosePetCollection.reloadData()
-        tableView.reloadData()
     }
     
-    // 上滑月曆變週曆
     func setCalendar() {
+        
+         // 上滑月曆變週曆
         self.view.addGestureRecognizer(self.scopeGesture)
         self.tableView.panGestureRecognizer.require(toFail: self.scopeGesture)
     }
@@ -157,6 +164,10 @@ class HistoryPageController: UIViewController {
     }
     
     func getCurrentDateData() {
+        
+        currentDateData.removeAll()
+        
+        tableView.reloadData()
         
         var data: [Record] = []
         
@@ -238,7 +249,6 @@ extension HistoryPageController: UIGestureRecognizerDelegate {
     }
 }
 
-
 extension HistoryPageController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -277,7 +287,10 @@ extension HistoryPageController: UITableViewDataSource {
         cell.subitemCollection.dataSource = self
         cell.subitemCollection.reloadData()
         
+        currentIndex = indexPath.row
+        
         switch currentDateData[indexPath.row].categoryType {
+            
             
         case "衛生清潔":
             cell.cellType = .clean
@@ -327,15 +340,25 @@ extension HistoryPageController: UICollectionViewDelegate {
         
         if collectionView == self.choosePetCollection {
             
-            alertLabel.isHidden = true
-            
             petID = UploadManager.shared.simplePetInfo[indexPath.item].petID
+            
+            for index in 0 ..< UploadManager.shared.simplePetInfo.count {
+                
+                if index == indexPath.item {
+                    selectedStatus[index] = true
+                } else {
+                    selectedStatus[index] = false
+                }
+            }
+            choosePetCollection.reloadData()
             
             getMonthlyData()
             
-            calendar.allowsSelection = true
+            alertLabel.isHidden = true
             
+            calendar.allowsSelection = true
             calendar.scrollEnabled = true
+            
         }
     }
     
@@ -359,9 +382,10 @@ extension HistoryPageController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         if collectionView == self.choosePetCollection {
+            
             return UploadManager.shared.simplePetInfo.count
         }
-        return currentDateData[section].subitem?.count ?? 0
+        return currentDateData[currentIndex].subitem?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -370,11 +394,19 @@ extension HistoryPageController: UICollectionViewDataSource {
             
             guard let cellA = collectionView.dequeueReusableCell(withReuseIdentifier: "Pet Cell", for: indexPath) as? WhichPetCell else { return UICollectionViewCell() }
             
-            cellA.petName.text = UploadManager.shared.simplePetInfo[indexPath.row].petName
+            cellA.petName.text = UploadManager.shared.simplePetInfo[indexPath.item].petName
             
-            let url = URL(string: UploadManager.shared.simplePetInfo[indexPath.row].petPhoto.randomElement()!)
+            let url = URL(string: UploadManager.shared.simplePetInfo[indexPath.item].petPhoto.randomElement()!)
             cellA.petPhoto.kf.setImage(with: url)
             cellA.petPhoto.contentMode = .scaleToFill
+            
+            let index = indexPath.item
+            if selectedStatus[index] == true {
+                cellA.petPhoto.layer.borderWidth = 5
+                cellA.petPhoto.layer.borderColor = UIColor.G3?.cgColor
+            } else {
+                cellA.petPhoto.layer.borderColor = UIColor.white.cgColor
+            }
             
             return cellA
             
@@ -384,9 +416,9 @@ extension HistoryPageController: UICollectionViewDataSource {
                 return UICollectionViewCell()
             }
             
-            guard let subitemData = currentDateData[indexPath.section].subitem else { return UICollectionViewCell() }
+            guard let subitemData = currentDateData[currentIndex].subitem else { return UICollectionViewCell() }
             
-            switch currentDateData[indexPath.section].categoryType {
+            switch currentDateData[currentIndex].categoryType {
                 
             case "衛生清潔":
                 cellB.layer.backgroundColor = UIColor.R0?.cgColor
@@ -409,7 +441,7 @@ extension HistoryPageController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         if collectionView == self.choosePetCollection {
-            return CGSize(width: 70, height: 90)
+            return CGSize(width: 80, height: 100)
         }
         return CGSize(width: 100, height: 35)
     }

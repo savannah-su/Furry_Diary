@@ -18,70 +18,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "C78A0663-5681-4B60-A096-72817728949F"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Personal Project/Model/DownloadManager.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "121"
-            endingLineNumber = "121"
-            landmarkName = "downloadVetPlacemark(completion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "B86FB791-018F-4FDC-BCF2-C9074262A173"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Personal Project/Model/DownloadManager.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "103"
-            endingLineNumber = "103"
-            landmarkName = "downloadVetPlacemark(completion:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "B86FB791-018F-4FDC-BCF2-C9074262A173 - 66d0f764aee4357"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Personal_Project.DownloadManager.downloadVetPlacemark(completion: (Swift.Result&lt;Swift.Array&lt;Personal_Project.VetDataToDB&gt;, Swift.Error&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "Personal Project"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/savannahsu/Desktop/Personal-Project/Personal%20Project/Model/DownloadManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "103"
-                  endingLineNumber = "103"
-                  offsetFromSymbolStart = "172">
-               </Location>
-               <Location
-                  uuid = "B86FB791-018F-4FDC-BCF2-C9074262A173 - f20b20117eafe09a"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;__C.FIRQuerySnapshot&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Personal_Project.DownloadManager.downloadVetPlacemark(completion: (Swift.Result&lt;Swift.Array&lt;Personal_Project.VetDataToDB&gt;, Swift.Error&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "Personal Project"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/savannahsu/Desktop/Personal-Project/Personal%20Project/Model/DownloadManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "105"
-                  endingLineNumber = "105"
-                  offsetFromSymbolStart = "184">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "DEDAB707-88D5-4B34-9930-B297A0B23AA4"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -92,6 +28,242 @@
             startingLineNumber = "62"
             endingLineNumber = "62"
             landmarkName = "getVetPlacemark(addressString:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0CE7C5C8-7B4E-40C7-92EC-80E83199695D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Personal Project/Controller/Daily Page/CleanPageViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "186"
+            endingLineNumber = "186"
+            landmarkName = "collectionView(_:didSelectItemAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2BFE243D-ECAA-4D46-81A4-3D8A43ACCE14"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Personal Project/Controller/Daily Page/WeightPageViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "134"
+            endingLineNumber = "134"
+            landmarkName = "toGetRecord()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "78407E12-D9BA-4667-A136-CF6AE865A05E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Personal Project/Controller/Daily Page/WeightPageViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "136"
+            endingLineNumber = "136"
+            landmarkName = "toGetRecord()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1F433CA6-E234-4510-950C-D1E87F466DBB"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Personal Project/Controller/History Page/HistoryPageController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "421"
+            endingLineNumber = "421"
+            landmarkName = "collectionView(_:cellForItemAt:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "1F433CA6-E234-4510-950C-D1E87F466DBB - 22c7b717178371d2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Personal_Project.HistoryPageController.collectionView(_: __C.UICollectionView, cellForItemAt: Foundation.IndexPath) -&gt; __C.UICollectionViewCell"
+                  moduleName = "Personal Project"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/savannahsu/Desktop/Personal-Project/Personal%20Project/Controller/History%20Page/HistoryPageController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "421"
+                  endingLineNumber = "421"
+                  offsetFromSymbolStart = "5869">
+               </Location>
+               <Location
+                  uuid = "1F433CA6-E234-4510-950C-D1E87F466DBB - 22c7b717178371d2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Personal_Project.HistoryPageController.collectionView(_: __C.UICollectionView, cellForItemAt: Foundation.IndexPath) -&gt; __C.UICollectionViewCell"
+                  moduleName = "Personal Project"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/savannahsu/Desktop/Personal-Project/Personal%20Project/Controller/History%20Page/HistoryPageController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "421"
+                  endingLineNumber = "421"
+                  offsetFromSymbolStart = "6027">
+               </Location>
+               <Location
+                  uuid = "1F433CA6-E234-4510-950C-D1E87F466DBB - 22c7b717178371d2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Personal_Project.HistoryPageController.collectionView(_: __C.UICollectionView, cellForItemAt: Foundation.IndexPath) -&gt; __C.UICollectionViewCell"
+                  moduleName = "Personal Project"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/savannahsu/Desktop/Personal-Project/Personal%20Project/Controller/History%20Page/HistoryPageController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "421"
+                  endingLineNumber = "421"
+                  offsetFromSymbolStart = "6517">
+               </Location>
+               <Location
+                  uuid = "1F433CA6-E234-4510-950C-D1E87F466DBB - 22c7b717178371d2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Personal_Project.HistoryPageController.collectionView(_: __C.UICollectionView, cellForItemAt: Foundation.IndexPath) -&gt; __C.UICollectionViewCell"
+                  moduleName = "Personal Project"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/savannahsu/Desktop/Personal-Project/Personal%20Project/Controller/History%20Page/HistoryPageController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "421"
+                  endingLineNumber = "421"
+                  offsetFromSymbolStart = "7007">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "568F2309-F2A1-43EB-BD94-A526E70A1B3E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Personal Project/Controller/History Page/HistoryPageController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "432"
+            endingLineNumber = "432"
+            landmarkName = "collectionView(_:cellForItemAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4EA310EB-4AA3-4924-8616-059C30CE995B"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Personal Project/Controller/History Page/HistoryPageController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "292"
+            endingLineNumber = "292"
+            landmarkName = "tableView(_:cellForRowAt:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "4EA310EB-4AA3-4924-8616-059C30CE995B - 99bb260392430b46"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Personal_Project.HistoryPageController.tableView(_: __C.UITableView, cellForRowAt: Foundation.IndexPath) -&gt; __C.UITableViewCell"
+                  moduleName = "Personal Project"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/savannahsu/Desktop/Personal-Project/Personal%20Project/Controller/History%20Page/HistoryPageController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "292"
+                  endingLineNumber = "292"
+                  offsetFromSymbolStart = "1912">
+               </Location>
+               <Location
+                  uuid = "4EA310EB-4AA3-4924-8616-059C30CE995B - 99bb260392430b46"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Personal_Project.HistoryPageController.tableView(_: __C.UITableView, cellForRowAt: Foundation.IndexPath) -&gt; __C.UITableViewCell"
+                  moduleName = "Personal Project"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/savannahsu/Desktop/Personal-Project/Personal%20Project/Controller/History%20Page/HistoryPageController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "292"
+                  endingLineNumber = "292"
+                  offsetFromSymbolStart = "2085">
+               </Location>
+               <Location
+                  uuid = "4EA310EB-4AA3-4924-8616-059C30CE995B - 99bb260392430b46"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Personal_Project.HistoryPageController.tableView(_: __C.UITableView, cellForRowAt: Foundation.IndexPath) -&gt; __C.UITableViewCell"
+                  moduleName = "Personal Project"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/savannahsu/Desktop/Personal-Project/Personal%20Project/Controller/History%20Page/HistoryPageController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "292"
+                  endingLineNumber = "292"
+                  offsetFromSymbolStart = "4696">
+               </Location>
+               <Location
+                  uuid = "4EA310EB-4AA3-4924-8616-059C30CE995B - 99bb260392430b46"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Personal_Project.HistoryPageController.tableView(_: __C.UITableView, cellForRowAt: Foundation.IndexPath) -&gt; __C.UITableViewCell"
+                  moduleName = "Personal Project"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/savannahsu/Desktop/Personal-Project/Personal%20Project/Controller/History%20Page/HistoryPageController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "292"
+                  endingLineNumber = "292"
+                  offsetFromSymbolStart = "7949">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D806FCCE-2D22-49CE-92C1-F441282CD791"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Personal Project/Controller/History Page/HistoryPageController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "388"
+            endingLineNumber = "388"
+            landmarkName = "collectionView(_:numberOfItemsInSection:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

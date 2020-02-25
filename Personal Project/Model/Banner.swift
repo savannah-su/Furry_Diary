@@ -15,7 +15,16 @@ protocol BannerViewDataSource: AnyObject {
     func viewFor(bannerView: BannerView, at index: Int) -> UIView
 }
 
+protocol BannerViewDelegate: AnyObject {
+    
+    func didScrollToPage(_ bannerView: BannerView, page: Int)
+}
+
 class BannerView: UIView {
+    
+    
+    weak var delegate: BannerViewDelegate?
+    
 
     weak var dataSource: BannerViewDataSource? {
         
@@ -58,6 +67,8 @@ class BannerView: UIView {
         
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         
+        scrollView.delegate = self
+        
         self.addSubview(scrollView)
         
         return scrollView
@@ -79,7 +90,7 @@ class BannerView: UIView {
     private func setupBaseScrollView() {
         
         scrollView.isPagingEnabled = true
-    
+
         NSLayoutConstraint.activate([
             scrollView.leadingAnchor.constraint(equalTo: leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: trailingAnchor),
@@ -147,6 +158,16 @@ class BannerView: UIView {
         unitView.translatesAutoresizingMaskIntoConstraints = false
         
         return unitView
+    }
+}
+
+extension BannerView: UIScrollViewDelegate {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        let page = Int(scrollView.contentOffset.x / scrollView.frame.size.width)
+    
+        delegate?.didScrollToPage(self, page: page)
     }
 }
 

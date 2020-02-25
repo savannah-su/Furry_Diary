@@ -185,7 +185,6 @@ extension HomePageViewController: UITableViewDataSource {
         }
         
         vc.petData = petData[indexPath.row]
-        
         show(vc, sender: nil)
     }
     

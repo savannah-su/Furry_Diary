@@ -14,6 +14,7 @@ class PetCardCell: UITableViewCell {
     @IBOutlet weak var background: BannerView!
     @IBOutlet weak var petName: UILabel!
     @IBOutlet weak var genderAndOld: UILabel!
+    @IBOutlet weak var pageControl: UIPageControl!
     
     var petImage = [String]() {
 
@@ -23,6 +24,7 @@ class PetCardCell: UITableViewCell {
             } else {
                 DispatchQueue.main.async {
                     self.background.reloadData()
+                    self.setupPageControl()
                 }
             }
         }
@@ -35,12 +37,18 @@ class PetCardCell: UITableViewCell {
         
         setupBannerView()
         
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
+    }
+    
+    func setupPageControl() {
+        
+        pageControl.numberOfPages = petImage.count
+        pageControl.currentPageIndicatorTintColor = .white
+        
     }
     
     func setupShadow() {
@@ -56,6 +64,8 @@ class PetCardCell: UITableViewCell {
     func setupBannerView() {
         
         background.dataSource = self
+        
+        background.delegate = self
     }
 }
 
@@ -71,7 +81,7 @@ extension PetCardCell: BannerViewDataSource {
         
         imageView.kf.setImage(with: URL(string: petImage[index]))
         
-        imageView.backgroundColor = .blue
+        imageView.backgroundColor = .white
         
         imageView.alpha = 0.7
         
@@ -83,6 +93,12 @@ extension PetCardCell: BannerViewDataSource {
         
         return imageView
     }
-    
-    
+}
+
+extension PetCardCell: BannerViewDelegate {
+
+    func didScrollToPage(_ bannerView: BannerView, page: Int) {
+        
+        pageControl.currentPage = page
+    }
 }
