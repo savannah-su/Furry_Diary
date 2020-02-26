@@ -14,6 +14,7 @@ struct UsersData {
     let email: String
     let image: String
     let id: String
+    var isSelected: Bool = false
     
     var toDict: [String: Any] {
         return [

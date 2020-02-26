@@ -256,13 +256,13 @@ extension HistoryPageController: UITableViewDelegate {
         switch currentDateData[indexPath.section].categoryType {
             
         case "衛生清潔":
-            return 161
+            return 141
         case "預防計畫":
-            return 192
+            return 172
         case "體重紀錄":
-            return 161
+            return 141
         default:
-            return 161
+            return 141
         }
     }
 }

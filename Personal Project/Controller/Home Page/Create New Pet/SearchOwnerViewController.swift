@@ -18,9 +18,24 @@ class SearchOwnerViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var currentUserLabel: UILabel!
     @IBOutlet weak var backButton: UIButton!
-    @IBAction func backButton(_ sender: Any) {
+    
+    @IBAction func okButton(_ sender: Any) {
         
-        dismiss(animated: true, completion: nil)
+        let selectedOwners: [UsersData] = ownerData.compactMap({ owner in
+            
+            if owner.isSelected {
+                return owner
+            } else {
+                return nil
+            }
+        })
+        
+        print(selectedOwners)
+//        selectHandler?([ownerData[indexRow]])
+//
+//        dismiss(animated: true, completion: nil)
+//
+//        toNextpage()
     }
     
     var indexRow = 0
@@ -40,20 +55,7 @@ class SearchOwnerViewController: UIViewController {
         }
     }
     
-    var searchOwner = [UsersData]() {
-        
-        didSet {
-            if searchOwner.isEmpty {
-                return
-            } else {
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
-            }
-        }
-    }
-    
-    var selectHandler: ((UsersData) -> Void)?
+    var selectHandler: (([UsersData]) -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -114,13 +116,11 @@ extension SearchOwnerViewController: UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        self.indexRow = indexPath.row
-                
-        selectHandler?(ownerData[indexRow])
+        ownerData[indexPath.row].isSelected = !ownerData[indexPath.row].isSelected
         
-        dismiss(animated: true, completion: nil)
+        let cell = tableView.cellForRow(at: indexPath)
         
-        toNextpage()
+        cell?.backgroundColor = ownerData[indexPath.row].isSelected ? .yellow : .white
     }
 }
 
@@ -128,11 +128,7 @@ extension SearchOwnerViewController: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if searchEmpty {
-          return ownerData.count
-        } else {
-            return searchOwner.count
-        }
+        return ownerData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -140,18 +136,12 @@ extension SearchOwnerViewController: UITableViewDataSource{
             return UITableViewCell()
         }
         
-        if searchEmpty {
-            
-            let url = URL(string: ownerData[indexPath.row].image)
-            let data = try! Data(contentsOf: url!)
-            cell.ownerImage.image = UIImage(data: data)
-            cell.ownerName.text = ownerData[indexPath.row].name
-        } else {
-            
-            let ownerImage = UIImage(named: searchOwner[indexPath.row].image)
-            cell.ownerImage = UIImageView(image: ownerImage)
-            cell.ownerName.text = searchOwner[indexPath.row].name
-        }
+        let url = URL(string: ownerData[indexPath.row].image)
+        let data = try! Data(contentsOf: url!)
+        cell.ownerImage.image = UIImage(data: data)
+        cell.ownerName.text = ownerData[indexPath.row].name
+        
+        cell.backgroundColor = ownerData[indexPath.row].isSelected ? .yellow : .white
         
         return cell
     }
@@ -161,8 +151,7 @@ extension SearchOwnerViewController: UISearchBarDelegate{
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
-        searchEmpty = false
-        searchOwner = ownerData.filter { user in
+        ownerData = ownerData.filter { user in
             
             return true
         }

@@ -28,9 +28,9 @@ class CreatePetViewController: UIViewController {
     
     var count = 0
     
-    var coOwnerImageURL = ""
-    var coOwnerName = ""
-    var coOwnerID = ""
+    var coOwnerImageURL = [""]
+    var coOwnerName = [""]
+    var coOwnerID = [""]
     
     let picker = UIImagePickerController()
     //上傳圖片需要先轉jpeg形式，傳到Storage後，拿到URL，才可傳至DB
@@ -130,13 +130,11 @@ class CreatePetViewController: UIViewController {
         guard let currentUserImage = UserDefaults.standard.value(forKey: "userPhoto") else { return }
         UserDefaults.standard.set(petID, forKey: "userID")
         
-        self.petInfo.ownersID = [currentUserID as! String, coOwnerID]
-        self.petInfo.ownersName = [currentUserName as! String, coOwnerName]
-        self.petInfo.ownersImage = [currentUserImage as! String, coOwnerImageURL]
-        self.petInfo.petImage = petPhotoURL
-        self.petInfo.petID = petID
-        
-//        Firestore.firestore().collection("pets").document(petID).setData(from: petInfo, encoder: Firestore.Encoder(), completion: <#T##((Error?) -> Void)?##((Error?) -> Void)?##(Error?) -> Void#>)
+//        self.petInfo.ownersID = [currentUserID as! String, coOwnerID]
+//        self.petInfo.ownersName = [currentUserName as! String, coOwnerName]
+//        self.petInfo.ownersImage = [currentUserImage as! String, coOwnerImageURL]
+//        self.petInfo.petImage = petPhotoURL
+//        self.petInfo.petID = petID
         
         Firestore.firestore().collection("pets").document(petID).setData(petInfo.toDict, completion: { (error) in
             
@@ -153,7 +151,7 @@ class CreatePetViewController: UIViewController {
 extension CreatePetViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return titleArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -162,10 +160,11 @@ extension CreatePetViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         
+        cell.titleLabel.text = titleArray[indexPath.row]
+        
         switch indexPath.row {
             
         case 0:
-            cell.titleLabel.text = titleArray[0]
             cell.contentField.placeholder = placeholderArray[0]
             cell.keyboardType = .normal
             cell.touchHandler = { [weak self] text in
@@ -175,7 +174,6 @@ extension CreatePetViewController: UITableViewDataSource {
             return cell
             
         case 1:
-            cell.titleLabel.text = titleArray[1]
             cell.contentField.placeholder = placeholderArray[1]
             cell.keyboardType = .picker(["汪汪", "喵嗚", "其他"])
             cell.touchHandler = { [weak self] text in
@@ -186,7 +184,6 @@ extension CreatePetViewController: UITableViewDataSource {
             
             
         case 2:
-            cell.titleLabel.text = titleArray[2]
             cell.contentField.placeholder = placeholderArray[2]
             cell.keyboardType = .picker(["男生", "女生"])
             cell.touchHandler = { [weak self] text in
@@ -196,7 +193,6 @@ extension CreatePetViewController: UITableViewDataSource {
             return cell
             
         case 3:
-            cell.titleLabel.text = titleArray[3]
             cell.contentField.placeholder = placeholderArray[3]
             cell.keyboardType = .normal
             cell.touchHandler = { [weak self] text in
@@ -206,7 +202,6 @@ extension CreatePetViewController: UITableViewDataSource {
             return cell
             
         case 4:
-            cell.titleLabel.text = titleArray[4]
             cell.contentField.placeholder = placeholderArray[4]
             cell.keyboardType = .normal
             cell.touchHandler = { [weak self] text in
@@ -216,7 +211,6 @@ extension CreatePetViewController: UITableViewDataSource {
             return cell
             
         case 5:
-            cell.titleLabel.text = titleArray[5]
             cell.contentField.placeholder = placeholderArray[5]
             cell.keyboardType = .date(Date(), "yyyy-MM-dd")
             cell.touchHandler = { [weak self] text in
@@ -226,7 +220,6 @@ extension CreatePetViewController: UITableViewDataSource {
             return cell
             
         case 6:
-            cell.titleLabel.text = titleArray[6]
             cell.contentField.placeholder = placeholderArray[6]
             cell.keyboardType = .normal
             cell.touchHandler = { [weak self] text in
@@ -236,7 +229,6 @@ extension CreatePetViewController: UITableViewDataSource {
             return cell
             
         case 7:
-            cell.titleLabel.text = titleArray[7]
             cell.contentField.placeholder = placeholderArray[7]
             cell.keyboardType = .picker(["已絕育", "尚未絕育"])
             cell.touchHandler = { [weak self] text in
@@ -255,7 +247,7 @@ extension CreatePetViewController: UITableViewDataSource {
                 return UITableViewCell()
             }
             
-            cell.titleLabel.text = titleArray[8]
+            cell.titleLabel.text = titleArray[indexPath.row]
             cell.contentTextView.layer.borderColor = UIColor(red: 199/255.0, green: 199/255.0, blue: 199/255.0, alpha: 1).cgColor
             cell.touchHandler = { [weak self] text in
                 
@@ -268,23 +260,27 @@ extension CreatePetViewController: UITableViewDataSource {
             
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "Co Owner Cell", for: indexPath) as? CoOwnerCell else { return UITableViewCell() }
             
-            cell.titleLabel.text = titleArray[9]
+            cell.titleLabel.text = titleArray[indexPath.row]
             
-            if coOwnerImageURL != "" {
-                
-                cell.searchButton.isHidden = true
-                cell.ownerImage.isHidden = false
-                
-                let url = URL(string: coOwnerImageURL)
-                let data = try! Data(contentsOf: url!)
-                cell.ownerImage?.image = UIImage(data: data)
-                cell.ownerImage?.layer.cornerRadius = 15
-                
-            } else {
-                
-                cell.searchButton.isHidden = false
-                cell.ownerImage.isHidden = true
-            }
+            cell.collectionView.isHidden = true
+            
+            cell.searchButton.isHidden = false
+            
+//            if coOwnerImageURL != "" {
+//
+//                cell.searchButton.isHidden = true
+//                cell.collectionView.isHidden = false
+//
+//                let url = URL(string: coOwnerImageURL)
+//                let data = try! Data(contentsOf: url!)
+//                cell.ownerImage?.image = UIImage(data: data)
+//                cell.ownerImage?.layer.cornerRadius = 15
+//
+//            } else {
+//
+
+//                cell.collectionView.isHidden = true
+//            }
             
             cell.searchButton.addTarget(self, action: #selector(searchOwner), for: .touchUpInside)
             
@@ -299,11 +295,22 @@ extension CreatePetViewController: UITableViewDataSource {
         
         vc.selectHandler = { data in
             
-            self.coOwnerImageURL = data.image
-            self.coOwnerID = data.id
-            self.coOwnerName = data.name
-            self.tableView.reloadData()
+            guard let currentUserID = UserDefaults.standard.value(forKey: "userID") as? String else { return }
+            guard let currentUserName = UserDefaults.standard.value(forKey: "userName") as? String else { return }
+            guard let currentUserImage = UserDefaults.standard.value(forKey: "userPhoto") as? String else { return }
+            guard let currentEmail = UserDefaults.standard.value(forKey: "email") as? String else { return }
+
+            let currentUser = UsersData(name: currentUserName, email: currentEmail, image: currentUserImage, id: currentUserID)
             
+            let owners = data + [currentUser]
+            
+            self.petInfo.ownersID = owners.map{ $0.id }
+            self.petInfo.ownersName = owners.map{ $0.name }
+            self.petInfo.ownersImage = owners.map{ $0.image }
+            
+            print(self.petInfo.ownersID)
+            print(self.petInfo.ownersName)
+            print(self.petInfo.ownersImage)
         }
         
         show(vc, sender: self)

@@ -101,7 +101,7 @@ class HomePageViewController: UIViewController {
         
         UploadManager.shared.simplePetInfo.removeAll()
         
-        Firestore.firestore().collection("pets").getDocuments { (querySnapshot, error) in
+        Firestore.firestore().collection("pets").whereField("owners ID", arrayContains: Auth.auth().currentUser!.uid).getDocuments { (querySnapshot, error) in
             
             var petDataFromDB = [PetInfo]()
             
