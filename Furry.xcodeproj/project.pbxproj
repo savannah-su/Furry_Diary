@@ -15,6 +15,7 @@
 		2403C46D23E5723A00B73021 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2403C46C23E5723A00B73021 /* UserManager.swift */; };
 		24188A1823F3E02E00DA250A /* WeightPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24188A1723F3E02E00DA250A /* WeightPageViewController.swift */; };
 		2422DC0E2406A3F800380D4F /* LocalNotiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2422DC0D2406A3F800380D4F /* LocalNotiManager.swift */; };
+		2422DC132407D0F000380D4F /* PetDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2422DC122407D0F000380D4F /* PetDetailViewController.swift */; };
 		242357B223FBE5C5004C8150 /* WhichPetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242357B123FBE5C5004C8150 /* WhichPetCell.swift */; };
 		242357B623FD3F9F004C8150 /* HistoryPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242357B523FD3F9F004C8150 /* HistoryPageController.swift */; };
 		242357B923FD6BD2004C8150 /* RecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242357B823FD6BD2004C8150 /* RecordCell.swift */; };
@@ -36,7 +37,6 @@
 		24569510240165AD007FAE98 /* GetDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2456950F240165AD007FAE98 /* GetDataManager.swift */; };
 		24569512240557DB007FAE98 /* CoOwnerCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24569511240557DA007FAE98 /* CoOwnerCollectionCell.swift */; };
 		2456951424064B2B007FAE98 /* OwnerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2456951324064B2B007FAE98 /* OwnerCell.swift */; };
-		24647FED23EBD08D005DB6E7 /* PetDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24647FEC23EBD08D005DB6E7 /* PetDetailViewController.swift */; };
 		24647FF023EBF580005DB6E7 /* DetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24647FEF23EBF580005DB6E7 /* DetailCell.swift */; };
 		246E0ECA24012E12008F044A /* VetPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246E0EC924012E12008F044A /* VetPageController.swift */; };
 		246EF8F623F6A07E00A17F65 /* UploadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246EF8F523F6A07E00A17F65 /* UploadManager.swift */; };
@@ -90,6 +90,7 @@
 		2403C46C23E5723A00B73021 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		24188A1723F3E02E00DA250A /* WeightPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightPageViewController.swift; sourceTree = "<group>"; };
 		2422DC0D2406A3F800380D4F /* LocalNotiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotiManager.swift; sourceTree = "<group>"; };
+		2422DC122407D0F000380D4F /* PetDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetDetailViewController.swift; sourceTree = "<group>"; };
 		242357B123FBE5C5004C8150 /* WhichPetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhichPetCell.swift; sourceTree = "<group>"; };
 		242357B523FD3F9F004C8150 /* HistoryPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryPageController.swift; sourceTree = "<group>"; };
 		242357B823FD6BD2004C8150 /* RecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCell.swift; sourceTree = "<group>"; };
@@ -117,7 +118,6 @@
 		2456950F240165AD007FAE98 /* GetDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetDataManager.swift; sourceTree = "<group>"; };
 		24569511240557DA007FAE98 /* CoOwnerCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoOwnerCollectionCell.swift; sourceTree = "<group>"; };
 		2456951324064B2B007FAE98 /* OwnerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerCell.swift; sourceTree = "<group>"; };
-		24647FEC23EBD08D005DB6E7 /* PetDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PetDetailViewController.swift; path = "Personal Project/Controller/Home Page/PetDetailViewController.swift"; sourceTree = SOURCE_ROOT; };
 		24647FEF23EBF580005DB6E7 /* DetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCell.swift; sourceTree = "<group>"; };
 		246E0EC924012E12008F044A /* VetPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VetPageController.swift; sourceTree = "<group>"; };
 		246EF8F523F6A07E00A17F65 /* UploadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadManager.swift; sourceTree = "<group>"; };
@@ -262,14 +262,15 @@
 		242F8DF423D6DFF700F49853 = {
 			isa = PBXGroup;
 			children = (
-				242F8DFF23D6DFF700F49853 /* Personal Project */,
+				242F8DFF23D6DFF700F49853 /* Furry */,
 				242F8E1623D6DFFC00F49853 /* FurryTests */,
-				242F8E2123D6DFFC00F49853 /* Personal ProjectUITests */,
+				242F8E2123D6DFFC00F49853 /* FurryUITests */,
 				242F8DFE23D6DFF700F49853 /* Products */,
 				127BC1F06868B686E14F9927 /* Pods */,
 				018704AEC6AAD868D769546F /* Frameworks */,
 			);
 			sourceTree = "<group>";
+			wrapsLines = 0;
 		};
 		242F8DFE23D6DFF700F49853 /* Products */ = {
 			isa = PBXGroup;
@@ -281,7 +282,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		242F8DFF23D6DFF700F49853 /* Personal Project */ = {
+		242F8DFF23D6DFF700F49853 /* Furry */ = {
 			isa = PBXGroup;
 			children = (
 				24AFF65B24000EBA009895B8 /* Personal Project.entitlements */,
@@ -293,7 +294,7 @@
 				242F8E0E23D6DFFB00F49853 /* Info.plist */,
 				242F8E3023D6E23A00F49853 /* GoogleService-Info.plist */,
 			);
-			path = "Personal Project";
+			path = Furry;
 			sourceTree = "<group>";
 		};
 		242F8E1623D6DFFC00F49853 /* FurryTests */ = {
@@ -305,13 +306,13 @@
 			path = FurryTests;
 			sourceTree = "<group>";
 		};
-		242F8E2123D6DFFC00F49853 /* Personal ProjectUITests */ = {
+		242F8E2123D6DFFC00F49853 /* FurryUITests */ = {
 			isa = PBXGroup;
 			children = (
 				242F8E2223D6DFFC00F49853 /* Personal_ProjectUITests.swift */,
 				242F8E2423D6DFFC00F49853 /* Info.plist */,
 			);
-			path = "Personal ProjectUITests";
+			path = FurryUITests;
 			sourceTree = "<group>";
 		};
 		2430552823F00C1400B9F4E6 /* Daily Page */ = {
@@ -352,7 +353,7 @@
 			isa = PBXGroup;
 			children = (
 				2473A10323EADD1300C8FFE2 /* HomePageViewController.swift */,
-				24647FEC23EBD08D005DB6E7 /* PetDetailViewController.swift */,
+				2422DC122407D0F000380D4F /* PetDetailViewController.swift */,
 				242357B323FD3F52004C8150 /* Create New Pet */,
 			);
 			path = "Home Page";
@@ -760,7 +761,6 @@
 				246E0ECA24012E12008F044A /* VetPageController.swift in Sources */,
 				2440D09D23FAD32B00E7A803 /* DownloadManager.swift in Sources */,
 				24874E7B23E71FDF007810B0 /* TextViewCell.swift in Sources */,
-				24647FED23EBD08D005DB6E7 /* PetDetailViewController.swift in Sources */,
 				2430552423ED425000B9F4E6 /* DailyPageViewController.swift in Sources */,
 				24569512240557DB007FAE98 /* CoOwnerCollectionCell.swift in Sources */,
 				2473A10723EADD8400C8FFE2 /* PetCardCell.swift in Sources */,
@@ -768,6 +768,7 @@
 				24B9958C23F41ECD005246AB /* PreventPageViewController.swift in Sources */,
 				24188A1823F3E02E00DA250A /* WeightPageViewController.swift in Sources */,
 				2456951424064B2B007FAE98 /* OwnerCell.swift in Sources */,
+				2422DC132407D0F000380D4F /* PetDetailViewController.swift in Sources */,
 				248E9DD123EC4F1700388A3B /* UIColor+Extension.swift in Sources */,
 				24CACB2A23F549140068EC7D /* NotiCell.swift in Sources */,
 			);
@@ -946,7 +947,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Personal Project/Personal Project.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 65D6M8WUK7;
-				INFOPLIST_FILE = "Personal Project/Info.plist";
+				INFOPLIST_FILE = Furry/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -966,7 +967,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Personal Project/Personal Project.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 65D6M8WUK7;
-				INFOPLIST_FILE = "Personal Project/Info.plist";
+				INFOPLIST_FILE = Furry/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
