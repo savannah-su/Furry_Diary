@@ -61,8 +61,6 @@ class EnterInfoCell: UITableViewCell {
                 
                 contentText.inputView = datePicker
                 
-                
-                
                 datePicker.date = dateString == "" ? Date() : dateFormatter.date(from: dateString) ?? Date()
                 
                 dateFormatter.dateFormat = format

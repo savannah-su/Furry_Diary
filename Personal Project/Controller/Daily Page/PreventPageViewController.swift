@@ -156,16 +156,16 @@ extension PreventPageViewController: UITableViewDataSource {
             cell.notiSwitch.addTarget(self, action: #selector(changeSwitch), for: .valueChanged)
 //            cell.textFieldType = .date(Date(), "yyyy-MM-dd")
             cell.textFieldType = .normal
-            cell.touchHandler = { [weak self] text in
-                
-                let date = text.components(separatedBy: "-")
-                
-                if date.count == 3 {
-                    self?.notiDate = text
-                } else {
-                    self?.notiMemo = text
-                }
-            }
+//            cell.touchHandler = { [weak self] text in
+//                
+//                let date = text.components(separatedBy: "-")
+//                
+//                if date.count == 3 {
+//                    self?.notiDate = text
+//                } else {
+//                    self?.notiMemo = text
+//                }
+//            }
             return cell
         }
     }

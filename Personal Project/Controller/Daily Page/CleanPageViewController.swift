@@ -40,12 +40,20 @@ class CleanPageViewController: UIViewController {
     var sectionOneStatus = [false, false, false, false, false]
     var sectionTwoStatus = [false, false, false, false, false]
     
-    var enterDate = Date()
-    var subItemType = [""]
     var petID = ""
+    
+    var subItemType = [""]
+    
     lazy var doneDate = self.dateFormatter.string(from: Date())
-    var isSwitchOn: Bool = false
-    var notiDate = ""
+    
+    var isSwitchOn: Bool = false {
+        didSet {
+            checkUpdateStatus()
+        }
+    }
+    
+    lazy var notiDate = self.dateFormatter.string(from: Date()) 
+    
     var notiMemo = ""
     
     var dateFormatter: DateFormatter = {
@@ -102,7 +110,9 @@ class CleanPageViewController: UIViewController {
         print(notiDate)
         print(notiMemo)
         
-        UploadManager.shared.uploadData(petID: petID, categoryType: "衛生清潔", date: enterDate, subitem: subItemType, medicineName: "", kilo: "", memo: "", notiOrNot: isSwitchOn ? "true" : "false", notiDate: notiDate, notiText: notiMemo) { result in
+        guard let doneDate = dateFormatter.date(from: doneDate) else { return }
+        
+        UploadManager.shared.uploadData(petID: petID, categoryType: "衛生清潔", date: doneDate, subitem: subItemType, medicineName: "", kilo: "", memo: notiMemo, notiOrNot: isSwitchOn ? "true" : "false", notiDate: notiDate, notiText: notiMemo) { result in
             
             switch result {
             case .success(let success):
@@ -263,6 +273,18 @@ extension CleanPageViewController: UICollectionViewDelegate {
         
     }
     
+    func checkUpdateStatus() {
+        
+        if isSwitchOn {
+            
+            saveButton.isEnabled = notiDate > doneDate
+            
+        } else {
+            
+            saveButton.isEnabled = true
+        }
+    }
+    
 }
 
 extension CleanPageViewController: UITableViewDelegate {
@@ -296,6 +318,8 @@ extension CleanPageViewController: UITableViewDataSource {
                 
                 self?.doneDate = text
                 
+                self?.checkUpdateStatus()
+                
                 if self?.doneDate != "" {
                     self?.saveButton.isEnabled = true
                 }
@@ -309,37 +333,48 @@ extension CleanPageViewController: UITableViewDataSource {
                 return UITableViewCell()
             }
 
-            
-            var notificationDate: Date?
-            var nitificationContent: String?
-            
             cell.notiSwitch.addTarget(self, action: #selector(changeSwitch), for: .valueChanged)
-            cell.textFieldType = .normal
+            
+            cell.notiText.text = notiMemo
+            
             cell.textFieldType = .date(notiDate, "yyyy-MM-dd")
-            cell.touchHandler = { [weak self] text in
+            
+            cell.dateUpdateHandler = { [weak self] text in
                 
-                //用"-"切開String，2020-01-01的count是3
-                let date = text.components(separatedBy: "-")
-                
-                if date.count == 3 {
-                    
-                    self?.notiDate = text
-                    
-                    notificationDate = self?.dateFormatter.date(from: text)
-                    
-                    guard let apple = self?.isSwitchOn else { return }
-                    
-                    if apple && self?.notiDate != "" {
-                        self?.saveButton.isEnabled = true
-                    }
-                    
-                } else {
-                    
-                    self?.notiMemo = text
-                    
-                    LocalNotiManager.shared.setupNoti(notiDate: 10 , type: "毛孩的\(self?.subItemType)清潔通知", meaasge: text)
-                }
+                self?.notiDate = text
+            
+                self?.checkUpdateStatus()
             }
+            
+            cell.contentUpdateHandler = { [weak self] text in
+                
+                self?.notiMemo = text
+            }
+            
+//            cell.touchHandler = { [weak self] text in
+//                
+//                //用"-"切開String，2020-01-01的count是3
+//                let date = text.components(separatedBy: "-")
+//                
+//                if date.count == 3 {
+//                    
+//                    self?.notiDate = text
+//                    
+////                    notificationDate = self?.dateFormatter.date(from: text)
+//                    
+//                    guard let apple = self?.isSwitchOn else { return }
+//                    
+//                    if apple && self?.notiDate != "" {
+//                        self?.saveButton.isEnabled = true
+//                    }
+//                    
+//                } else {
+//                    
+//                    self?.notiMemo = text
+//                    
+//                    LocalNotiManager.shared.setupNoti(notiDate: 10 , type: "毛孩的\(self?.subItemType)清潔通知", meaasge: text)
+//                }
+//            }
             return cell
         }
     }
