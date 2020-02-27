@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2374773F559F4D6175A58DC6 /* Pods_Furry_FurryUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD584AB15D38A433DC2D1FD3 /* Pods_Furry_FurryUITests.framework */; };
 		2402B3BB23E4129000E8D009 /* SearchOwnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2402B3BA23E4129000E8D009 /* SearchOwnerViewController.swift */; };
 		2402B3BD23E4163A00E8D009 /* OwnerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2402B3BC23E4163A00E8D009 /* OwnerTableViewCell.swift */; };
 		2402B3BF23E5542500E8D009 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2402B3BE23E5542500E8D009 /* Data.swift */; };
@@ -59,9 +60,8 @@
 		24CACB2C23F576B30068EC7D /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24CACB2B23F576B30068EC7D /* HeaderView.swift */; };
 		24D50A4D23EA9C470074DD51 /* CoOwnerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D50A4C23EA9C470074DD51 /* CoOwnerCell.swift */; };
 		24D50A5123EAA9460074DD51 /* VerticalAlignedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D50A5023EAA9460074DD51 /* VerticalAlignedButton.swift */; };
-		6A64345A99945321A0099564 /* Pods_Personal_Project_Personal_ProjectUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BD08B74CC7E78D692249B9B /* Pods_Personal_Project_Personal_ProjectUITests.framework */; };
-		A17AAF2ABE5E92FB89902E7A /* Pods_Personal_ProjectTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D55425AB25603A98EA9FEF7E /* Pods_Personal_ProjectTests.framework */; };
-		F9396BA6EB130FC3F005FFD1 /* Pods_Personal_Project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4EC98440B2C5CEC1B81309D /* Pods_Personal_Project.framework */; };
+		B2A301A642B74293C6AA8577 /* Pods_FurryTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7807F617716646AAB6BC651 /* Pods_FurryTests.framework */; };
+		BF353C4E9DBF141286690AF8 /* Pods_Furry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6544CD5DF44AAD3E8BDF090C /* Pods_Furry.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -142,13 +142,19 @@
 		24D50A4C23EA9C470074DD51 /* CoOwnerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoOwnerCell.swift; sourceTree = "<group>"; };
 		24D50A5023EAA9460074DD51 /* VerticalAlignedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalAlignedButton.swift; sourceTree = "<group>"; };
 		2B48997A3F6C929B1296EC40 /* Pods-Personal Project-Personal ProjectUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Personal Project-Personal ProjectUITests.release.xcconfig"; path = "Target Support Files/Pods-Personal Project-Personal ProjectUITests/Pods-Personal Project-Personal ProjectUITests.release.xcconfig"; sourceTree = "<group>"; };
+		2DE3CAC233B7D3D7CA81E790 /* Pods-FurryTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FurryTests.debug.xcconfig"; path = "Target Support Files/Pods-FurryTests/Pods-FurryTests.debug.xcconfig"; sourceTree = "<group>"; };
+		39BE8373DDC9A63979B5C20F /* Pods-FurryTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FurryTests.release.xcconfig"; path = "Target Support Files/Pods-FurryTests/Pods-FurryTests.release.xcconfig"; sourceTree = "<group>"; };
 		3FEB1B548278A373EFB8D3AC /* Pods-Personal ProjectTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Personal ProjectTests.debug.xcconfig"; path = "Target Support Files/Pods-Personal ProjectTests/Pods-Personal ProjectTests.debug.xcconfig"; sourceTree = "<group>"; };
-		8BD08B74CC7E78D692249B9B /* Pods_Personal_Project_Personal_ProjectUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Personal_Project_Personal_ProjectUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6544CD5DF44AAD3E8BDF090C /* Pods_Furry.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Furry.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6B374159552FBE4B249D9BCA /* Pods-Furry.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Furry.debug.xcconfig"; path = "Target Support Files/Pods-Furry/Pods-Furry.debug.xcconfig"; sourceTree = "<group>"; };
 		8BEDED9C06C179EDF8230211 /* Pods-Personal Project.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Personal Project.debug.xcconfig"; path = "Target Support Files/Pods-Personal Project/Pods-Personal Project.debug.xcconfig"; sourceTree = "<group>"; };
-		B4EC98440B2C5CEC1B81309D /* Pods_Personal_Project.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Personal_Project.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D4A252DFF4EC911DF33B0F2 /* Pods-Furry-FurryUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Furry-FurryUITests.release.xcconfig"; path = "Target Support Files/Pods-Furry-FurryUITests/Pods-Furry-FurryUITests.release.xcconfig"; sourceTree = "<group>"; };
+		A06807A63FCB5856E792B261 /* Pods-Furry.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Furry.release.xcconfig"; path = "Target Support Files/Pods-Furry/Pods-Furry.release.xcconfig"; sourceTree = "<group>"; };
+		B2AA23AB2CF6947B0BEABD29 /* Pods-Furry-FurryUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Furry-FurryUITests.debug.xcconfig"; path = "Target Support Files/Pods-Furry-FurryUITests/Pods-Furry-FurryUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		C25D2087F00C46860990FD4C /* Pods-Personal Project.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Personal Project.release.xcconfig"; path = "Target Support Files/Pods-Personal Project/Pods-Personal Project.release.xcconfig"; sourceTree = "<group>"; };
+		CD584AB15D38A433DC2D1FD3 /* Pods_Furry_FurryUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Furry_FurryUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D487CDA08CC4ABC5FF33BE58 /* Pods-Personal ProjectTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Personal ProjectTests.release.xcconfig"; path = "Target Support Files/Pods-Personal ProjectTests/Pods-Personal ProjectTests.release.xcconfig"; sourceTree = "<group>"; };
-		D55425AB25603A98EA9FEF7E /* Pods_Personal_ProjectTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Personal_ProjectTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E7807F617716646AAB6BC651 /* Pods_FurryTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FurryTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,7 +163,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2496DB7B23E2F85100991F79 /* FacebookLogin in Frameworks */,
-				F9396BA6EB130FC3F005FFD1 /* Pods_Personal_Project.framework in Frameworks */,
+				BF353C4E9DBF141286690AF8 /* Pods_Furry.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -165,7 +171,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A17AAF2ABE5E92FB89902E7A /* Pods_Personal_ProjectTests.framework in Frameworks */,
+				B2A301A642B74293C6AA8577 /* Pods_FurryTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -173,7 +179,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6A64345A99945321A0099564 /* Pods_Personal_Project_Personal_ProjectUITests.framework in Frameworks */,
+				2374773F559F4D6175A58DC6 /* Pods_Furry_FurryUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -183,9 +189,9 @@
 		018704AEC6AAD868D769546F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				B4EC98440B2C5CEC1B81309D /* Pods_Personal_Project.framework */,
-				8BD08B74CC7E78D692249B9B /* Pods_Personal_Project_Personal_ProjectUITests.framework */,
-				D55425AB25603A98EA9FEF7E /* Pods_Personal_ProjectTests.framework */,
+				6544CD5DF44AAD3E8BDF090C /* Pods_Furry.framework */,
+				CD584AB15D38A433DC2D1FD3 /* Pods_Furry_FurryUITests.framework */,
+				E7807F617716646AAB6BC651 /* Pods_FurryTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -199,6 +205,12 @@
 				2B48997A3F6C929B1296EC40 /* Pods-Personal Project-Personal ProjectUITests.release.xcconfig */,
 				3FEB1B548278A373EFB8D3AC /* Pods-Personal ProjectTests.debug.xcconfig */,
 				D487CDA08CC4ABC5FF33BE58 /* Pods-Personal ProjectTests.release.xcconfig */,
+				6B374159552FBE4B249D9BCA /* Pods-Furry.debug.xcconfig */,
+				A06807A63FCB5856E792B261 /* Pods-Furry.release.xcconfig */,
+				B2AA23AB2CF6947B0BEABD29 /* Pods-Furry-FurryUITests.debug.xcconfig */,
+				8D4A252DFF4EC911DF33B0F2 /* Pods-Furry-FurryUITests.release.xcconfig */,
+				2DE3CAC233B7D3D7CA81E790 /* Pods-FurryTests.debug.xcconfig */,
+				39BE8373DDC9A63979B5C20F /* Pods-FurryTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -251,7 +263,7 @@
 			isa = PBXGroup;
 			children = (
 				242F8DFF23D6DFF700F49853 /* Personal Project */,
-				242F8E1623D6DFFC00F49853 /* Personal ProjectTests */,
+				242F8E1623D6DFFC00F49853 /* FurryTests */,
 				242F8E2123D6DFFC00F49853 /* Personal ProjectUITests */,
 				242F8DFE23D6DFF700F49853 /* Products */,
 				127BC1F06868B686E14F9927 /* Pods */,
@@ -284,13 +296,13 @@
 			path = "Personal Project";
 			sourceTree = "<group>";
 		};
-		242F8E1623D6DFFC00F49853 /* Personal ProjectTests */ = {
+		242F8E1623D6DFFC00F49853 /* FurryTests */ = {
 			isa = PBXGroup;
 			children = (
 				242F8E1723D6DFFC00F49853 /* Personal_ProjectTests.swift */,
 				242F8E1923D6DFFC00F49853 /* Info.plist */,
 			);
-			path = "Personal ProjectTests";
+			path = FurryTests;
 			sourceTree = "<group>";
 		};
 		242F8E2123D6DFFC00F49853 /* Personal ProjectUITests */ = {
@@ -424,9 +436,9 @@
 				242F8DF923D6DFF700F49853 /* Sources */,
 				242F8DFA23D6DFF700F49853 /* Frameworks */,
 				242F8DFB23D6DFF700F49853 /* Resources */,
-				EA467B6E2E9683FC2C23B517 /* [CP] Embed Pods Frameworks */,
-				5EE937484F3758771C65133E /* [CP] Copy Pods Resources */,
 				2422DC0F2407C1A200380D4F /* ShellScript */,
+				CD46B86ADB0C982A00E00302 /* [CP] Embed Pods Frameworks */,
+				15F39D9C5496F52FCC6D7E7A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -467,8 +479,8 @@
 				242F8E1A23D6DFFC00F49853 /* Sources */,
 				242F8E1B23D6DFFC00F49853 /* Frameworks */,
 				242F8E1C23D6DFFC00F49853 /* Resources */,
-				684C95737CE18572ACAD9DA9 /* [CP] Embed Pods Frameworks */,
-				8595B46B76010CD19E6F444B /* [CP] Copy Pods Resources */,
+				5C72EFBD2EED7E6D8B3A0EAA /* [CP] Embed Pods Frameworks */,
+				F082DCAD125F48C71C9DB39A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -559,6 +571,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		15F39D9C5496F52FCC6D7E7A /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Furry/Pods-Furry-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Furry/Pods-Furry-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Furry/Pods-Furry-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		195D524720CEED14012E1C0A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -574,7 +603,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Personal Project-Personal ProjectUITests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Furry-FurryUITests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -598,55 +627,21 @@
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/Fabric/run\"\n";
 		};
-		5EE937484F3758771C65133E /* [CP] Copy Pods Resources */ = {
+		5C72EFBD2EED7E6D8B3A0EAA /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Personal Project/Pods-Personal Project-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Personal Project/Pods-Personal Project-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Personal Project/Pods-Personal Project-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		684C95737CE18572ACAD9DA9 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Personal Project-Personal ProjectUITests/Pods-Personal Project-Personal ProjectUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Furry-FurryUITests/Pods-Furry-FurryUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Personal Project-Personal ProjectUITests/Pods-Personal Project-Personal ProjectUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Furry-FurryUITests/Pods-Furry-FurryUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Personal Project-Personal ProjectUITests/Pods-Personal Project-Personal ProjectUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		8595B46B76010CD19E6F444B /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Personal Project-Personal ProjectUITests/Pods-Personal Project-Personal ProjectUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Personal Project-Personal ProjectUITests/Pods-Personal Project-Personal ProjectUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Personal Project-Personal ProjectUITests/Pods-Personal Project-Personal ProjectUITests-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Furry-FurryUITests/Pods-Furry-FurryUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		A519B33454D00C0DAF06D339 /* [CP] Check Pods Manifest.lock */ = {
@@ -664,11 +659,28 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Personal ProjectTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-FurryTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CD46B86ADB0C982A00E00302 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Furry/Pods-Furry-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Furry/Pods-Furry-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Furry/Pods-Furry-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D502FC7949286358D219D8FA /* [CP] Check Pods Manifest.lock */ = {
@@ -686,28 +698,28 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Personal Project-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Furry-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		EA467B6E2E9683FC2C23B517 /* [CP] Embed Pods Frameworks */ = {
+		F082DCAD125F48C71C9DB39A /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Personal Project/Pods-Personal Project-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Furry-FurryUITests/Pods-Furry-FurryUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Embed Pods Frameworks";
+			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Personal Project/Pods-Personal Project-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Furry-FurryUITests/Pods-Furry-FurryUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Personal Project/Pods-Personal Project-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Furry-FurryUITests/Pods-Furry-FurryUITests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -928,7 +940,7 @@
 		};
 		242F8E2823D6DFFC00F49853 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8BEDED9C06C179EDF8230211 /* Pods-Personal Project.debug.xcconfig */;
+			baseConfigurationReference = 6B374159552FBE4B249D9BCA /* Pods-Furry.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Personal Project/Personal Project.entitlements";
@@ -948,7 +960,7 @@
 		};
 		242F8E2923D6DFFC00F49853 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C25D2087F00C46860990FD4C /* Pods-Personal Project.release.xcconfig */;
+			baseConfigurationReference = A06807A63FCB5856E792B261 /* Pods-Furry.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Personal Project/Personal Project.entitlements";
@@ -968,7 +980,7 @@
 		};
 		242F8E2B23D6DFFC00F49853 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3FEB1B548278A373EFB8D3AC /* Pods-Personal ProjectTests.debug.xcconfig */;
+			baseConfigurationReference = 2DE3CAC233B7D3D7CA81E790 /* Pods-FurryTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -991,7 +1003,7 @@
 		};
 		242F8E2C23D6DFFC00F49853 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D487CDA08CC4ABC5FF33BE58 /* Pods-Personal ProjectTests.release.xcconfig */;
+			baseConfigurationReference = 39BE8373DDC9A63979B5C20F /* Pods-FurryTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1014,7 +1026,7 @@
 		};
 		242F8E2E23D6DFFC00F49853 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1C821E8D6A5412D169BA95F2 /* Pods-Personal Project-Personal ProjectUITests.debug.xcconfig */;
+			baseConfigurationReference = B2AA23AB2CF6947B0BEABD29 /* Pods-Furry-FurryUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -1035,7 +1047,7 @@
 		};
 		242F8E2F23D6DFFC00F49853 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2B48997A3F6C929B1296EC40 /* Pods-Personal Project-Personal ProjectUITests.release.xcconfig */;
+			baseConfigurationReference = 8D4A252DFF4EC911DF33B0F2 /* Pods-Furry-FurryUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
