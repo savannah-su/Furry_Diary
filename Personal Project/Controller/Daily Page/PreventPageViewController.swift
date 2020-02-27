@@ -142,7 +142,7 @@ extension PreventPageViewController: UITableViewDataSource {
             }
             cell.titleLabel.text = "施作時間"
             cell.contentText.placeholder = "選擇本次施作時間"
-            cell.textFieldType = .date(enterDate, "yyyy-MM-dd")
+//            cell.textFieldType = .date(doneDate, "yyyy-MM-dd")
             cell.touchHandler = { [weak self] text in
                 self?.doneDate = text
             }
@@ -154,7 +154,7 @@ extension PreventPageViewController: UITableViewDataSource {
                 return UITableViewCell()
             }
             cell.notiSwitch.addTarget(self, action: #selector(changeSwitch), for: .valueChanged)
-            cell.textFieldType = .date(Date(), "yyyy-MM-dd")
+//            cell.textFieldType = .date(Date(), "yyyy-MM-dd")
             cell.textFieldType = .normal
             cell.touchHandler = { [weak self] text in
                 

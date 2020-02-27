@@ -43,12 +43,19 @@ class CleanPageViewController: UIViewController {
     var enterDate = Date()
     var subItemType = [""]
     var petID = ""
-    var doneDate = ""
+    lazy var doneDate = self.dateFormatter.string(from: Date())
     var isSwitchOn: Bool = false
     var notiDate = ""
     var notiMemo = ""
     
-    let dateFormatter = DateFormatter()
+    var dateFormatter: DateFormatter = {
+        
+        let dateFormatter = DateFormatter()
+        
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        
+        return dateFormatter
+    }()
     
     override func viewDidLoad() {
         
@@ -66,8 +73,6 @@ class CleanPageViewController: UIViewController {
         bottomViewButton.isHidden = true
         
         saveButton.isEnabled = false
-        
-        dateFormatter.dateFormat = "yyyy-MM-dd"
         // Do any additional setup after loading the view.
     }
     
@@ -286,7 +291,7 @@ extension CleanPageViewController: UITableViewDataSource {
             }
             cell.titleLabel.text = "清潔日期"
             cell.contentText.placeholder = "選擇本次清洗日期"
-            cell.textFieldType = .date(enterDate, "yyyy-MM-dd")
+            cell.textFieldType = .date(doneDate, "yyyy-MM-dd")
             cell.touchHandler = { [weak self] text in
                 
                 self?.doneDate = text
@@ -310,7 +315,7 @@ extension CleanPageViewController: UITableViewDataSource {
             
             cell.notiSwitch.addTarget(self, action: #selector(changeSwitch), for: .valueChanged)
             cell.textFieldType = .normal
-            cell.textFieldType = .date(Date(), "yyyy-MM-dd")
+            cell.textFieldType = .date(notiDate, "yyyy-MM-dd")
             cell.touchHandler = { [weak self] text in
                 
                 //用"-"切開String，2020-01-01的count是3
@@ -347,11 +352,11 @@ extension CleanPageViewController: UITableViewDataSource {
         
         tableView.reloadData()
         
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        guard let date = dateFormatter.date(from: doneDate) else {
-            return
-        }
-        enterDate = date
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.dateFormat = "yyyy-MM-dd"
+//        guard let date = dateFormatter.date(from: doneDate) else {
+//            return
+//        }
+//        enterDate = date
     }
 }

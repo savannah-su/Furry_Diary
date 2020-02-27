@@ -10,7 +10,7 @@ import UIKit
 
 enum TextFieldType {
     
-    case date(Date, String)
+    case date(String, String)
     
     case normal
 }
@@ -18,6 +18,7 @@ enum TextFieldType {
 class EnterInfoCell: UITableViewCell {
 
     @IBOutlet weak var titleLabel: UILabel!
+    
     @IBOutlet weak var contentText: UITextField!
     
     var touchHandler: ( (String) -> Void )?
@@ -56,15 +57,17 @@ class EnterInfoCell: UITableViewCell {
             
             switch textFieldType {
                 
-            case .date(let date, let format):
+            case .date(let dateString, let format):
                 
                 contentText.inputView = datePicker
                 
-                datePicker.date = date
+                
+                
+                datePicker.date = dateString == "" ? Date() : dateFormatter.date(from: dateString) ?? Date()
                 
                 dateFormatter.dateFormat = format
                 
-                contentText.text = dateFormatter.string(from: date)
+                contentText.text = dateString
            
             case .normal:
                 
@@ -72,9 +75,6 @@ class EnterInfoCell: UITableViewCell {
             }
         }
     }
-    
-    
-    
    
     
     override func awakeFromNib() {
@@ -92,8 +92,10 @@ class EnterInfoCell: UITableViewCell {
     
     @objc func didSelectedDate(_ sender: UIDatePicker) {
            
-           contentText.text = dateFormatter.string(from: sender.date)
-       }
+        contentText.text = dateFormatter.string(from: sender.date)
+        
+        touchHandler?(contentText.text!)
+    }
 
 }
 
@@ -101,11 +103,11 @@ extension EnterInfoCell: UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         
-        guard let text = textField.text else {
-            return
-        }
-        
-        touchHandler?(text)
+//        guard let text = textField.text else {
+//            return
+//        }
+//        
+//        touchHandler?(text)
     }
 }
 

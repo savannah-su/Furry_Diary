@@ -49,15 +49,15 @@ class NotiCell: UITableViewCell {
             
             switch textFieldType {
                 
-            case .date(let date, let format):
+            case .date(let dateString, let format):
                 
                 dateText.inputView = datePicker
                 
-                datePicker.date = date
+                datePicker.date = dateFormatter.date(from: dateString) ?? Date()
                 
                 dateFormatter.dateFormat = format
                 
-                dateText.text = dateFormatter.string(from: date)
+                dateText.text = dateString
            
             case .normal:
                 
