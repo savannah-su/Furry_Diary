@@ -34,14 +34,32 @@ class PreventPageViewController: UIViewController {
     let selectedImage = ["疫苗施打-selected", "體內驅蟲-selected", "體外驅蟲-selected"]
     var itemCellStatus = [false, false, false]
     
-    var enterDate = Date()
-    var subItemType = [""]
     var petID = ""
+    
+    var subItemType = [""]
+    
     var medicineName = ""
-    var doneDate = ""
-    var isSwitchOn: Bool = false
-    var notiDate = ""
+    
+    lazy var doneDate = self.dateFormatter.string(from: Date())
+    
+    var isSwitchOn: Bool = false {
+        didSet {
+            checkUpdateStatus()
+        }
+    }
+    
+    lazy var notiDate = self.dateFormatter.string(from: Date())
+    
     var notiMemo = ""
+    
+    var dateFormatter: DateFormatter = {
+        
+        let dateFormatter = DateFormatter()
+        
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        
+        return dateFormatter
+    }()
     
     override func viewDidLoad() {
         
@@ -52,17 +70,16 @@ class PreventPageViewController: UIViewController {
         
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.separatorColor = .clear
+        tableView.isHidden = true
         
         collectionView.allowsMultipleSelection = false
         
         bottomViewButton.isHidden = true
         
-        tableView.separatorColor = .clear
-        tableView.isHidden = true
-        
         saveButton.isEnabled = false
         
-        // Do any additional setup after loading the view.
+        LocalNotiManager.shared.setupNoti(notiDate: 30 , type: "毛孩的清潔通知", meaasge: "Really")
     }
     
     override func viewDidLayoutSubviews() {
@@ -84,7 +101,9 @@ class PreventPageViewController: UIViewController {
     
     func toDataBase() {
         
-        UploadManager.shared.uploadData(petID: petID, categoryType: "預防計畫", date: enterDate, subitem: subItemType, medicineName: medicineName, kilo: "", memo: "", notiOrNot: isSwitchOn ? "true" : "false", notiDate: notiDate, notiText: notiMemo) { result in
+        guard let doneDate = dateFormatter.date(from: doneDate) else { return }
+        
+        UploadManager.shared.uploadData(petID: petID, categoryType: "預防計畫", date: doneDate, subitem: subItemType, medicineName: medicineName, kilo: "", memo: "", notiOrNot: isSwitchOn ? "true" : "false", notiDate: notiDate, notiText: notiMemo) { result in
             
             switch result {
             case .success(let success):
@@ -94,13 +113,26 @@ class PreventPageViewController: UIViewController {
                 print(error.localizedDescription)
             }
         }
+        
+        LocalNotiManager.shared.setupNoti(notiDate: 10 , type: "毛孩的\(self.subItemType)清潔通知", meaasge: "Really")
+    }
+    
+    func checkUpdateStatus() {
+        
+        if isSwitchOn {
+            
+            saveButton.isEnabled = notiDate > doneDate
+            
+        } else {
+            
+            saveButton.isEnabled = medicineName != ""
+        }
     }
 }
 
 extension PreventPageViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
         
         if indexPath.row == 2 && isSwitchOn == true {
             return 140
@@ -125,14 +157,13 @@ extension PreventPageViewController: UITableViewDataSource {
             }
             cell.titleLabel.text = "藥劑名稱"
             cell.contentText.placeholder = "例：三合一疫苗、蚤不到"
+            cell.contentText.text = medicineName
             cell.textFieldType = .normal
-            cell.touchHandler = { [weak self] text in
+            cell.contentUpdateHandler = { [weak self] text in
                 
                 self?.medicineName = text
                 
-                if self?.medicineName != "" {
-                    self?.saveButton.isEnabled = true
-                }
+                self?.checkUpdateStatus()
             }
             return cell
             
@@ -142,9 +173,13 @@ extension PreventPageViewController: UITableViewDataSource {
             }
             cell.titleLabel.text = "施作時間"
             cell.contentText.placeholder = "選擇本次施作時間"
-//            cell.textFieldType = .date(doneDate, "yyyy-MM-dd")
-            cell.touchHandler = { [weak self] text in
+            cell.textFieldType = .date(doneDate, "yyyy-MM-dd")
+            cell.dateUpdateHandler = { [weak self] text in
+                
                 self?.doneDate = text
+                
+                self?.checkUpdateStatus()
+                
             }
             return cell
             
@@ -154,36 +189,34 @@ extension PreventPageViewController: UITableViewDataSource {
                 return UITableViewCell()
             }
             cell.notiSwitch.addTarget(self, action: #selector(changeSwitch), for: .valueChanged)
-//            cell.textFieldType = .date(Date(), "yyyy-MM-dd")
-            cell.textFieldType = .normal
-//            cell.touchHandler = { [weak self] text in
-//                
-//                let date = text.components(separatedBy: "-")
-//                
-//                if date.count == 3 {
-//                    self?.notiDate = text
-//                } else {
-//                    self?.notiMemo = text
-//                }
-//            }
+            
+           cell.notiText.text = notiMemo
+            
+            cell.textFieldType = .date(notiDate, "yyyy-MM-dd")
+            
+            cell.dateUpdateHandler = { [weak self] text in
+                
+                self?.notiDate = text
+            
+                self?.checkUpdateStatus()
+            }
+            
+            cell.contentUpdateHandler = { [weak self] text in
+                
+                self?.notiMemo = text
+            }
+            
             return cell
         }
     }
     
     @objc func changeSwitch() {
         
+        saveButton.isEnabled = false
+        
         isSwitchOn = !isSwitchOn
         
         tableView.reloadData()
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        guard let date = dateFormatter.date(from: doneDate) else {
-            return
-        }
-        enterDate = date
-        
-        
     }
 }
 

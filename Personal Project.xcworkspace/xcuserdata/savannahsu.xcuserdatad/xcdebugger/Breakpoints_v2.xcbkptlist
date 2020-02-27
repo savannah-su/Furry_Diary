@@ -7,16 +7,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "0761F8C5-B3D4-414B-ACD6-F3875166FBC2"
+            uuid = "F7F10AC4-BF5A-4C96-8E2B-7B3B82E4D2E2"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Personal Project/Controller/Daily Page/CleanPageViewController.swift"
+            filePath = "Personal Project/Model/LocalNotiManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "106"
-            endingLineNumber = "106"
-            landmarkName = "toDataBase()"
+            startingLineNumber = "20"
+            endingLineNumber = "20"
+            landmarkName = "setupNoti(notiDate:type:meaasge:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F756F225-CD21-4B79-B889-7352064D5B1D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Personal Project/Model/LocalNotiManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "setupNoti(notiDate:type:meaasge:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

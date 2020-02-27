@@ -7,6 +7,10 @@ target 'Personal Project' do
 
   # Pods for Personal Project
 
+  #handle crash problem
+  pod 'Fabric', '~> 1.10.2'
+  pod 'Crashlytics', '~> 3.14.0'
+
   # add the Firebase pod for Google Analytics
   pod 'Firebase/Analytics'
   pod 'Firebase/Auth'

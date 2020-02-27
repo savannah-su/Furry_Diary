@@ -21,20 +21,11 @@ class EnterInfoCell: UITableViewCell {
     
     @IBOutlet weak var contentText: UITextField!
     
-    var touchHandler: ( (String) -> Void )?
+    var dateUpdateHandler: ( (String) -> Void )?
+    
+    var contentUpdateHandler: ( (String) -> Void )?
     
     var pickerData: [String] = []
-    
-    lazy var pickerView: UIPickerView = {
-        
-        let picker = UIPickerView()
-        
-        picker.delegate = self
-        
-        picker.dataSource = self
-        
-        return picker
-    }()
     
     lazy var datePicker: UIDatePicker = {
         
@@ -61,7 +52,7 @@ class EnterInfoCell: UITableViewCell {
                 
                 contentText.inputView = datePicker
                 
-                datePicker.date = dateString == "" ? Date() : dateFormatter.date(from: dateString) ?? Date()
+                datePicker.date = dateFormatter.date(from: dateString) ?? Date()
                 
                 dateFormatter.dateFormat = format
                 
@@ -92,7 +83,7 @@ class EnterInfoCell: UITableViewCell {
            
         contentText.text = dateFormatter.string(from: sender.date)
         
-        touchHandler?(contentText.text!)
+        dateUpdateHandler?(contentText.text!)
     }
 
 }
@@ -101,33 +92,11 @@ extension EnterInfoCell: UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         
-//        guard let text = textField.text else {
-//            return
-//        }
-//        
-//        touchHandler?(text)
+        guard let text = textField.text else {
+            return
+        }
+        
+        contentUpdateHandler?(text)
     }
 }
-
-extension EnterInfoCell: UIPickerViewDelegate {
     
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        contentText.text = pickerData[row]
-    }
-}
-
-extension EnterInfoCell: UIPickerViewDataSource {
-    
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return pickerData.count
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return pickerData[row]
-    }
-}

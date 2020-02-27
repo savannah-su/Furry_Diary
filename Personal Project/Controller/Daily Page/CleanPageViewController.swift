@@ -81,7 +81,8 @@ class CleanPageViewController: UIViewController {
         bottomViewButton.isHidden = true
         
         saveButton.isEnabled = false
-        // Do any additional setup after loading the view.
+        
+        LocalNotiManager.shared.setupNoti(notiDate: 30 , type: "毛孩的清潔通知", meaasge: "Really")
     }
     
     override func viewDidLayoutSubviews() {
@@ -103,16 +104,9 @@ class CleanPageViewController: UIViewController {
     
     func toDataBase() {
         
-        print(petID)
-        print(subItemType)
-        print(doneDate)
-        print(isSwitchOn)
-        print(notiDate)
-        print(notiMemo)
-        
         guard let doneDate = dateFormatter.date(from: doneDate) else { return }
         
-        UploadManager.shared.uploadData(petID: petID, categoryType: "衛生清潔", date: doneDate, subitem: subItemType, medicineName: "", kilo: "", memo: notiMemo, notiOrNot: isSwitchOn ? "true" : "false", notiDate: notiDate, notiText: notiMemo) { result in
+        UploadManager.shared.uploadData(petID: petID, categoryType: "衛生清潔", date: doneDate, subitem: subItemType, medicineName: "", kilo: "", memo: "", notiOrNot: isSwitchOn ? "true" : "false", notiDate: notiDate, notiText: notiMemo) { result in
             
             switch result {
             case .success(let success):
@@ -121,6 +115,20 @@ class CleanPageViewController: UIViewController {
             case .failure(let error):
                 print(error.localizedDescription)
             }
+        }
+        
+        LocalNotiManager.shared.setupNoti(notiDate: 10 , type: "毛孩的\(self.subItemType)清潔通知", meaasge: "Really")
+    }
+    
+    func checkUpdateStatus() {
+        
+        if isSwitchOn {
+            
+            saveButton.isEnabled = notiDate > doneDate
+            
+        } else {
+            
+            saveButton.isEnabled = true
         }
     }
 }
@@ -272,19 +280,6 @@ extension CleanPageViewController: UICollectionViewDelegate {
         bottomViewButton.isHidden = true
         
     }
-    
-    func checkUpdateStatus() {
-        
-        if isSwitchOn {
-            
-            saveButton.isEnabled = notiDate > doneDate
-            
-        } else {
-            
-            saveButton.isEnabled = true
-        }
-    }
-    
 }
 
 extension CleanPageViewController: UITableViewDelegate {
@@ -314,15 +309,11 @@ extension CleanPageViewController: UITableViewDataSource {
             cell.titleLabel.text = "清潔日期"
             cell.contentText.placeholder = "選擇本次清洗日期"
             cell.textFieldType = .date(doneDate, "yyyy-MM-dd")
-            cell.touchHandler = { [weak self] text in
+            cell.dateUpdateHandler = { [weak self] text in
                 
                 self?.doneDate = text
                 
                 self?.checkUpdateStatus()
-                
-                if self?.doneDate != "" {
-                    self?.saveButton.isEnabled = true
-                }
             }
             
             return cell
@@ -360,19 +351,10 @@ extension CleanPageViewController: UITableViewDataSource {
 //                    
 //                    self?.notiDate = text
 //                    
-////                    notificationDate = self?.dateFormatter.date(from: text)
-//                    
-//                    guard let apple = self?.isSwitchOn else { return }
-//                    
-//                    if apple && self?.notiDate != "" {
-//                        self?.saveButton.isEnabled = true
-//                    }
-//                    
 //                } else {
 //                    
 //                    self?.notiMemo = text
-//                    
-//                    LocalNotiManager.shared.setupNoti(notiDate: 10 , type: "毛孩的\(self?.subItemType)清潔通知", meaasge: text)
+
 //                }
 //            }
             return cell
@@ -386,12 +368,5 @@ extension CleanPageViewController: UITableViewDataSource {
         isSwitchOn = !isSwitchOn
         
         tableView.reloadData()
-        
-//        let dateFormatter = DateFormatter()
-//        dateFormatter.dateFormat = "yyyy-MM-dd"
-//        guard let date = dateFormatter.date(from: doneDate) else {
-//            return
-//        }
-//        enterDate = date
     }
 }

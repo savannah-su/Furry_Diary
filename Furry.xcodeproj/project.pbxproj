@@ -94,16 +94,16 @@
 		242357B523FD3F9F004C8150 /* HistoryPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryPageController.swift; sourceTree = "<group>"; };
 		242357B823FD6BD2004C8150 /* RecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCell.swift; sourceTree = "<group>"; };
 		242357BA23FD74F1004C8150 /* SubitemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubitemCell.swift; sourceTree = "<group>"; };
-		242F8DFD23D6DFF700F49853 /* Personal Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Personal Project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		242F8DFD23D6DFF700F49853 /* Furry.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Furry.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		242F8E0023D6DFF700F49853 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		242F8E0723D6DFF700F49853 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		242F8E0923D6DFFB00F49853 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		242F8E0C23D6DFFB00F49853 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		242F8E0E23D6DFFB00F49853 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		242F8E1323D6DFFC00F49853 /* Personal ProjectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Personal ProjectTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		242F8E1323D6DFFC00F49853 /* FurryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FurryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		242F8E1723D6DFFC00F49853 /* Personal_ProjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Personal_ProjectTests.swift; sourceTree = "<group>"; };
 		242F8E1923D6DFFC00F49853 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		242F8E1E23D6DFFC00F49853 /* Personal ProjectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Personal ProjectUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		242F8E1E23D6DFFC00F49853 /* FurryUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FurryUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		242F8E2223D6DFFC00F49853 /* Personal_ProjectUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Personal_ProjectUITests.swift; sourceTree = "<group>"; };
 		242F8E2423D6DFFC00F49853 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		242F8E3023D6E23A00F49853 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -262,9 +262,9 @@
 		242F8DFE23D6DFF700F49853 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				242F8DFD23D6DFF700F49853 /* Personal Project.app */,
-				242F8E1323D6DFFC00F49853 /* Personal ProjectTests.xctest */,
-				242F8E1E23D6DFFC00F49853 /* Personal ProjectUITests.xctest */,
+				242F8DFD23D6DFF700F49853 /* Furry.app */,
+				242F8E1323D6DFFC00F49853 /* FurryTests.xctest */,
+				242F8E1E23D6DFFC00F49853 /* FurryUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -416,9 +416,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		242F8DFC23D6DFF700F49853 /* Personal Project */ = {
+		242F8DFC23D6DFF700F49853 /* Furry */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 242F8E2723D6DFFC00F49853 /* Build configuration list for PBXNativeTarget "Personal Project" */;
+			buildConfigurationList = 242F8E2723D6DFFC00F49853 /* Build configuration list for PBXNativeTarget "Furry" */;
 			buildPhases = (
 				D502FC7949286358D219D8FA /* [CP] Check Pods Manifest.lock */,
 				242F8DF923D6DFF700F49853 /* Sources */,
@@ -426,22 +426,23 @@
 				242F8DFB23D6DFF700F49853 /* Resources */,
 				EA467B6E2E9683FC2C23B517 /* [CP] Embed Pods Frameworks */,
 				5EE937484F3758771C65133E /* [CP] Copy Pods Resources */,
+				2422DC0F2407C1A200380D4F /* ShellScript */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "Personal Project";
+			name = Furry;
 			packageProductDependencies = (
 				2496DB7A23E2F85100991F79 /* FacebookLogin */,
 			);
 			productName = "Personal Project";
-			productReference = 242F8DFD23D6DFF700F49853 /* Personal Project.app */;
+			productReference = 242F8DFD23D6DFF700F49853 /* Furry.app */;
 			productType = "com.apple.product-type.application";
 		};
-		242F8E1223D6DFFC00F49853 /* Personal ProjectTests */ = {
+		242F8E1223D6DFFC00F49853 /* FurryTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 242F8E2A23D6DFFC00F49853 /* Build configuration list for PBXNativeTarget "Personal ProjectTests" */;
+			buildConfigurationList = 242F8E2A23D6DFFC00F49853 /* Build configuration list for PBXNativeTarget "FurryTests" */;
 			buildPhases = (
 				A519B33454D00C0DAF06D339 /* [CP] Check Pods Manifest.lock */,
 				242F8E0F23D6DFFC00F49853 /* Sources */,
@@ -453,14 +454,14 @@
 			dependencies = (
 				242F8E1523D6DFFC00F49853 /* PBXTargetDependency */,
 			);
-			name = "Personal ProjectTests";
+			name = FurryTests;
 			productName = "Personal ProjectTests";
-			productReference = 242F8E1323D6DFFC00F49853 /* Personal ProjectTests.xctest */;
+			productReference = 242F8E1323D6DFFC00F49853 /* FurryTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		242F8E1D23D6DFFC00F49853 /* Personal ProjectUITests */ = {
+		242F8E1D23D6DFFC00F49853 /* FurryUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 242F8E2D23D6DFFC00F49853 /* Build configuration list for PBXNativeTarget "Personal ProjectUITests" */;
+			buildConfigurationList = 242F8E2D23D6DFFC00F49853 /* Build configuration list for PBXNativeTarget "FurryUITests" */;
 			buildPhases = (
 				195D524720CEED14012E1C0A /* [CP] Check Pods Manifest.lock */,
 				242F8E1A23D6DFFC00F49853 /* Sources */,
@@ -474,9 +475,9 @@
 			dependencies = (
 				242F8E2023D6DFFC00F49853 /* PBXTargetDependency */,
 			);
-			name = "Personal ProjectUITests";
+			name = FurryUITests;
 			productName = "Personal ProjectUITests";
-			productReference = 242F8E1E23D6DFFC00F49853 /* Personal ProjectUITests.xctest */;
+			productReference = 242F8E1E23D6DFFC00F49853 /* FurryUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -502,7 +503,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 242F8DF823D6DFF700F49853 /* Build configuration list for PBXProject "Personal Project" */;
+			buildConfigurationList = 242F8DF823D6DFF700F49853 /* Build configuration list for PBXProject "Furry" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -518,9 +519,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				242F8DFC23D6DFF700F49853 /* Personal Project */,
-				242F8E1223D6DFFC00F49853 /* Personal ProjectTests */,
-				242F8E1D23D6DFFC00F49853 /* Personal ProjectUITests */,
+				242F8DFC23D6DFF700F49853 /* Furry */,
+				242F8E1223D6DFFC00F49853 /* FurryTests */,
+				242F8E1D23D6DFFC00F49853 /* FurryUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -579,6 +580,23 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
+		};
+		2422DC0F2407C1A200380D4F /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/Fabric/run\"\n";
 		};
 		5EE937484F3758771C65133E /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -764,12 +782,12 @@
 /* Begin PBXTargetDependency section */
 		242F8E1523D6DFFC00F49853 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 242F8DFC23D6DFF700F49853 /* Personal Project */;
+			target = 242F8DFC23D6DFF700F49853 /* Furry */;
 			targetProxy = 242F8E1423D6DFFC00F49853 /* PBXContainerItemProxy */;
 		};
 		242F8E2023D6DFFC00F49853 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 242F8DFC23D6DFF700F49853 /* Personal Project */;
+			target = 242F8DFC23D6DFF700F49853 /* Furry */;
 			targetProxy = 242F8E1F23D6DFFC00F49853 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -967,7 +985,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Personal Project.app/Personal Project";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Furry.app/Furry";
 			};
 			name = Debug;
 		};
@@ -990,7 +1008,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Personal Project.app/Personal Project";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Furry.app/Furry";
 			};
 			name = Release;
 		};
@@ -1039,7 +1057,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		242F8DF823D6DFF700F49853 /* Build configuration list for PBXProject "Personal Project" */ = {
+		242F8DF823D6DFF700F49853 /* Build configuration list for PBXProject "Furry" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				242F8E2523D6DFFC00F49853 /* Debug */,
@@ -1048,7 +1066,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		242F8E2723D6DFFC00F49853 /* Build configuration list for PBXNativeTarget "Personal Project" */ = {
+		242F8E2723D6DFFC00F49853 /* Build configuration list for PBXNativeTarget "Furry" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				242F8E2823D6DFFC00F49853 /* Debug */,
@@ -1057,7 +1075,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		242F8E2A23D6DFFC00F49853 /* Build configuration list for PBXNativeTarget "Personal ProjectTests" */ = {
+		242F8E2A23D6DFFC00F49853 /* Build configuration list for PBXNativeTarget "FurryTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				242F8E2B23D6DFFC00F49853 /* Debug */,
@@ -1066,7 +1084,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		242F8E2D23D6DFFC00F49853 /* Build configuration list for PBXNativeTarget "Personal ProjectUITests" */ = {
+		242F8E2D23D6DFFC00F49853 /* Build configuration list for PBXNativeTarget "FurryUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				242F8E2E23D6DFFC00F49853 /* Debug */,

@@ -263,23 +263,6 @@ extension VetPageController: CLLocationManagerDelegate {
         geoCoder.reverseGeocodeLocation(currentLocation) { (placemarks, error) -> Void in
             
             self.currentPlaceMarker = placemarks?.first
-            
-//            guard let address = placeMark.thoroughfare else {
-//                return
-//            }
-//
-//            guard let city = placeMark.subAdministrativeArea else {
-//                return
-//            }
-//
-//            guard let counrty = placeMark.country else {
-//                return
-//            }
-//
-//            self.currentAddress = "\(counrty) \(city) \(address)"
-//
-//            print("============")
-//            print(self.currentAddress)
         }
         
         // 地圖預設顯示的範圍大小 (數字越小越精確)
@@ -357,7 +340,6 @@ extension VetPageController: MKMapViewDelegate {
     func guideToVet(destination: String) {
         
         self.geoCoder.geocodeAddressString(destination) { (place: [CLPlacemark]?, _) -> Void in
-            
             
             guard let currentPlaceMarker = self.currentPlaceMarker,
                   let destination = place?.first

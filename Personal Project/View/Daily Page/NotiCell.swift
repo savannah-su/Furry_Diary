@@ -35,7 +35,6 @@ class NotiCell: UITableViewCell {
     
     var textFieldType: TextFieldType = .normal {
         
-        
         didSet {
             
             switch textFieldType {
