@@ -13,6 +13,7 @@ import FirebaseAuth
 import FirebaseFirestore
 import GoogleSignIn
 import IQKeyboardManagerSwift
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
@@ -20,6 +21,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        //Local Noti
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
+            if granted {
+                print("User gave permissions for local notis.")
+            }
+        }
+        UIApplication.shared.registerForRemoteNotifications()
+        
         // Override point for customization after application launch.
         FirebaseApp.configure()
         
@@ -47,7 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 //        UINavigationBar.appearance().standardAppearance = coloredAppearance
 //        UINavigationBar.appearance().scrollEdgeAppearance = coloredAppearance
         
-        if UserDefaults.standard.value(forKey: "logInOrNot") as? Bool != nil {
+        if UserDefaults.standard.value(forKey: "logInOrNot") != nil {
             
             toNextpage()
             
@@ -110,12 +120,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     func addToDatabase() {
         
         guard let userID = Auth.auth().currentUser?.uid,
-            let userEmail = Auth.auth().currentUser?.email,
-            let userName = Auth.auth().currentUser?.displayName,
-            let userPhoto = Auth.auth().currentUser?.photoURL?.absoluteString else { return }
+            let userEmail = Auth.auth().currentUser?.providerData.first?.email,
+            let userName = Auth.auth().currentUser?.providerData.first?.displayName,
+            let userPhoto = Auth.auth().currentUser?.providerData.first?.photoURL?.absoluteString
+        else {
+            
+            return
+        }
         
         let usersData = UsersData(name: userName, email: userEmail, image: userPhoto, id: userID)
-        
+       
         Firestore.firestore().collection("users").document(userID).setData(usersData.toDict, completion: { (error) in
             if error == nil {
                 

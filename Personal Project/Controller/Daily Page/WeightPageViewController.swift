@@ -47,6 +47,7 @@ class WeightPageViewController: UIViewController {
         
         navigationController?.popViewController(animated: true)
     }
+    @IBOutlet weak var saveButton: VerticalAlignedButton!
     @IBAction func saveButton(_ sender: Any) {
 
         toDataBase()
@@ -62,6 +63,7 @@ class WeightPageViewController: UIViewController {
     @IBOutlet weak var weightLabel: UILabel!
     @IBOutlet weak var secondBar: UIView!
     @IBOutlet weak var weightTextField: UITextField!
+    
     @IBOutlet weak var kgLabel: UILabel!
     
     let date = Date()
@@ -83,17 +85,27 @@ class WeightPageViewController: UIViewController {
     override func viewDidLoad() {
     
         super.viewDidLoad()
-    
-        topView.layer.cornerRadius = topView.bounds.height / 2
-        bottomView.layer.cornerRadius = bottomView.bounds.height / 2
         
         toGetRecord()
         setupDatePicker()
+        
+        weightTextField.delegate = self
+        
+        saveButton.isEnabled = false
     }
     
     override func viewDidAppear(_ animated: Bool) {
         
         super.viewDidAppear(animated)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        
+        super.viewDidLayoutSubviews()
+        
+        topView.layer.cornerRadius = topView.bounds.height / 2
+        bottomView.layer.cornerRadius = bottomView.bounds.height / 2
+        
     }
     
     func toGetRecord() {
@@ -136,7 +148,6 @@ class WeightPageViewController: UIViewController {
                     self.data.append(sortedKiloDouble)
                     
                     self.setupChart()
-                    
                 }
                 
             case .failure(let error):
@@ -234,5 +245,15 @@ class WeightPageViewController: UIViewController {
         
         view.addSubview(lineChart)
         
+    }
+}
+
+extension WeightPageViewController: UITextFieldDelegate {
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        
+        if weightTextField.text != "" {
+            saveButton.isEnabled = true
+        }
     }
 }

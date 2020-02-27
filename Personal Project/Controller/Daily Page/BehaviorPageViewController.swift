@@ -16,6 +16,7 @@ class BehaviorPageViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
+    @IBOutlet weak var saveButton: VerticalAlignedButton!
     @IBAction func saveButton(_ sender: Any) {
         toDataBase()
     }
@@ -49,9 +50,6 @@ class BehaviorPageViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         
-        topView.layer.cornerRadius = topView.bounds.height / 2
-        bottomView.layer.cornerRadius = bottomView.bounds.height / 2
-        
         memoTextView.delegate = self
         collectionView.allowsMultipleSelection = true
         setupTextView()
@@ -59,7 +57,19 @@ class BehaviorPageViewController: UIViewController {
         setupDatePiker()
         
         hideEnterBox()
+        
+        
+        saveButton.isEnabled = false
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidLayoutSubviews() {
+        
+        super.viewDidLayoutSubviews()
+        
+        topView.layer.cornerRadius = topView.bounds.height / 2
+        bottomView.layer.cornerRadius = bottomView.bounds.height / 2
+        
     }
     
     func uploadSuccess() {
@@ -137,7 +147,12 @@ class BehaviorPageViewController: UIViewController {
     }
     
     @objc func changeDate() {
+        
         timeTextField.text = showDateFormatter.string(from: datePiker.date)
+        
+        if selectDisease.count != 0 {
+            saveButton.isEnabled = true
+        }
     }
     
     func setupTextView() {
@@ -171,6 +186,10 @@ extension BehaviorPageViewController: UICollectionViewDelegate {
         
         showEnterBox()
         bottomViewLabel.isHidden = true
+        
+        if selectDisease.count == 0 {
+            saveButton.isEnabled = false
+        }
     }
 }
 
@@ -181,7 +200,7 @@ extension BehaviorPageViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 8
+        return (UIScreen.main.bounds.width - 370) / 4
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {

@@ -30,12 +30,9 @@ class SearchOwnerViewController: UIViewController {
             }
         })
         
-        print(selectedOwners)
-//        selectHandler?([ownerData[indexRow]])
-//
-//        dismiss(animated: true, completion: nil)
-//
-//        toNextpage()
+        selectHandler?(selectedOwners)
+
+        dismiss(animated: true, completion: nil)
     }
     
     var indexRow = 0
@@ -101,11 +98,6 @@ class SearchOwnerViewController: UIViewController {
             }
         }
     }
-    
-    func toNextpage() {
-
-        navigationController?.popViewController(animated: true)
-    }
 }
 
 extension SearchOwnerViewController: UITableViewDelegate{
@@ -120,7 +112,7 @@ extension SearchOwnerViewController: UITableViewDelegate{
         
         let cell = tableView.cellForRow(at: indexPath)
         
-        cell?.backgroundColor = ownerData[indexPath.row].isSelected ? .yellow : .white
+        cell?.backgroundColor = ownerData[indexPath.row].isSelected ? .Y2 : .white
     }
 }
 
@@ -141,7 +133,7 @@ extension SearchOwnerViewController: UITableViewDataSource{
         cell.ownerImage.image = UIImage(data: data)
         cell.ownerName.text = ownerData[indexPath.row].name
         
-        cell.backgroundColor = ownerData[indexPath.row].isSelected ? .yellow : .white
+        cell.backgroundColor = ownerData[indexPath.row].isSelected ? .Y2 : .white
         
         return cell
     }

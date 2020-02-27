@@ -14,6 +14,10 @@ class VetPageController: UIViewController {
     
     @IBOutlet weak var mapView: MKMapView!
     
+    private lazy var geoCoder: CLGeocoder = {
+        return CLGeocoder()
+    }()
+     
     var myLocationManager :CLLocationManager!
     
     let manager = GetDataManager()
@@ -37,6 +41,9 @@ class VetPageController: UIViewController {
     var vetLatitude: Double = 0.0
     var vetLongitude: Double = 0.0
     
+    var touchedVet = ""
+    var currentPlaceMarker: CLPlacemark?
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -49,9 +56,10 @@ class VetPageController: UIViewController {
         
         downloadVetData()
         
+        navigationController?.navigationBar.barStyle = .black
+        
 //        getVetData()
         
-        // Do any additional setup after loading the view.
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -89,8 +97,6 @@ class VetPageController: UIViewController {
         
         for index in 0 ..< vetData.count {
             
-            print("----", index)
-            
             let withoutWhitespace = vetData[index].vetAddress.trimmingCharacters(in: .whitespaces)
             
             manager.getVetPlacemark(addressString: withoutWhitespace) { [weak self] result in
@@ -102,8 +108,6 @@ class VetPageController: UIViewController {
                 case .success(let vetPlacemarks):
                     
                     strongSelf.vetPlacemarkInfo.append(vetPlacemarks)
-                    
-                    print("----=====", index)
                     
                     if index == strongSelf.vetData.count - 1 {
                         strongSelf.toFireBase()
@@ -234,12 +238,13 @@ class VetPageController: UIViewController {
         
         for count in 0 ..< vetPlacemark.count {
             
-            var objectAnnotation = MKPointAnnotation()
+            let objectAnnotation = MKPointAnnotation()
             
             objectAnnotation.coordinate = CLLocationCoordinate2D(latitude: vetPlacemark[count].vetLatitude, longitude: vetPlacemark[count].vetLongitude)
             
             objectAnnotation.title = "\(vetPlacemark[count].vetName)(\(vetPlacemark[count].vetPhone))"
             objectAnnotation.subtitle = vetPlacemark[count].vetAddress
+            
             mapView.addAnnotation(objectAnnotation)
         }
     }
@@ -253,11 +258,33 @@ extension VetPageController: CLLocationManagerDelegate {
         let currentLocation :CLLocation =
             locations[0] as CLLocation
         print("\(currentLocation.coordinate.latitude)")
-        print(", \(currentLocation.coordinate.longitude)")
+        print(" \(currentLocation.coordinate.longitude)")
+        
+        geoCoder.reverseGeocodeLocation(currentLocation) { (placemarks, error) -> Void in
+            
+            self.currentPlaceMarker = placemarks?.first
+            
+//            guard let address = placeMark.thoroughfare else {
+//                return
+//            }
+//
+//            guard let city = placeMark.subAdministrativeArea else {
+//                return
+//            }
+//
+//            guard let counrty = placeMark.country else {
+//                return
+//            }
+//
+//            self.currentAddress = "\(counrty) \(city) \(address)"
+//
+//            print("============")
+//            print(self.currentAddress)
+        }
         
         // 地圖預設顯示的範圍大小 (數字越小越精確)
-        let latDelta = 0.001
-        let longDelta = 0.001
+        let latDelta = 0.005
+        let longDelta = 0.005
         let currentLocationSpan: MKCoordinateSpan = MKCoordinateSpan(latitudeDelta: latDelta, longitudeDelta: longDelta)
         
         // 設置地圖顯示的範圍與中心點座標
@@ -269,14 +296,12 @@ extension VetPageController: CLLocationManagerDelegate {
             span: currentLocationSpan)
         
         mapView.setRegion(currentRegion, animated: true)
-        
     }
 }
 
 extension VetPageController: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        
         
         if annotation is MKUserLocation {
            return nil
@@ -295,22 +320,70 @@ extension VetPageController: MKMapViewDelegate {
             // 設置點擊大頭針後額外的視圖
             pinView?.canShowCallout = true
             //視窗右方資訊鍵
-            pinView?.rightCalloutAccessoryView = nil
+            //pinView?.rightCalloutAccessoryView = nil
             // 會以落下釘在地圖上的方式出現
             pinView?.animatesDrop = false
             // 大頭針的顏色
             pinView?.pinTintColor =
                 UIColor.red
-//            // 將視圖右邊資訊鍵設為一個按鈕
-//            pinView?.rightCalloutAccessoryView =
-//                UIButton(type: .detailDisclosure)
+            // 將視圖右邊資訊鍵設為一個按鈕
+            let infoBtn = UIButton(type: .detailDisclosure)
+            infoBtn.addTarget(self, action: #selector(infoDetail), for: .touchUpInside)
+            pinView?.rightCalloutAccessoryView = infoBtn
             
         } else {
             pinView?.annotation = annotation
         }
-        
         return pinView
+    }
+    
+    @objc func infoDetail() {
+        let alertController = UIAlertController(title: "選擇功能", message: nil, preferredStyle: .actionSheet)
+        let guideAction = UIAlertAction(title: "導航路線", style: .default) { (_) in
+            self.guideToVet(destination: self.touchedVet)
+        }
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+        alertController.addAction(guideAction)
+        alertController.addAction(cancelAction)
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        
+        touchedVet = (view.annotation?.subtitle ?? "") ?? ""
         
     }
     
+    func guideToVet(destination: String) {
+        
+        self.geoCoder.geocodeAddressString(destination) { (place: [CLPlacemark]?, _) -> Void in
+            
+            
+            guard let currentPlaceMarker = self.currentPlaceMarker,
+                  let destination = place?.first
+            else {
+                    return
+            }
+            
+            self.beginGuide(currentPlaceMarker, endPLCL: destination)
+        }
+    }
+    
+    // - 導航 -
+    func beginGuide(_ startPLCL: CLPlacemark, endPLCL: CLPlacemark) {
+        let startplMK: MKPlacemark = MKPlacemark(placemark: startPLCL)
+        let startItem: MKMapItem = MKMapItem(placemark: startplMK)
+        let endplMK: MKPlacemark = MKPlacemark(placemark: endPLCL)
+        let endItem: MKMapItem = MKMapItem(placemark: endplMK)
+        let mapItems: [MKMapItem] = [startItem, endItem]
+        let dic: [String: AnyObject] = [
+            // 导航模式:驾驶
+            MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving as AnyObject,
+            // 地图样式：标准样式
+            MKLaunchOptionsMapTypeKey: MKMapType.standard.rawValue as AnyObject,
+            // 显示交通：显示
+            MKLaunchOptionsShowsTrafficKey: true as AnyObject]
+        // 根据 MKMapItem 的起点和终点组成数组, 通过导航地图启动项参数字典, 调用系统的地图APP进行导航
+        MKMapItem.openMaps(with: mapItems, launchOptions: dic)
+    }
 }

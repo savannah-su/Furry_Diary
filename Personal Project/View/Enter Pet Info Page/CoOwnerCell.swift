@@ -14,11 +14,13 @@ class CoOwnerCell: UITableViewCell {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var searchButton: UIButton!
     
+    var data = PetInfo(petID: "", ownersID: [], ownersName: [], ownersImage: [], petImage: [], petName: "", species: "", gender: "", breed: "", color: "", birth: "", chip: "", neuter: false, neuterDate: "", memo: "")
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-//        
-//        collectionView.delegate = self
-//        collectionView.dataSource = self
+        
+        collectionView.delegate = self
+        collectionView.dataSource = self
         
         // Initialization code
     }
@@ -31,19 +33,35 @@ class CoOwnerCell: UITableViewCell {
 
 }
 
-//extension CoOwnerCell: UICollectionViewDataSource {
-//
-//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        <#code#>
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        <#code#>
-//    }
-//
-//
-//}
-//
-//extension CoOwnerCell: UICollectionViewDelegate {
-//
-//}
+extension CoOwnerCell: UICollectionViewDataSource {
+    
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return data.ownersImage.count
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CoOwner Collection Cell", for: indexPath) as? CoOwnerCollectionCell else {
+            return UICollectionViewCell()
+        }
+        
+        let url = URL(string: data.ownersImage[indexPath.item])
+        cell.ownerPhoto.kf.setImage(with: url)
+        cell.ownerPhoto.layer.cornerRadius = 15
+
+        return cell
+    }
+}
+
+extension CoOwnerCell: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 30, height: 30)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 5
+    }
+
+}

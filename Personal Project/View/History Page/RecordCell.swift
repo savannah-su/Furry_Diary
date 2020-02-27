@@ -36,9 +36,35 @@ class RecordCell: UITableViewCell {
     }
     @IBOutlet weak var recordDate: UILabel!
     
-    @IBOutlet weak var subitemCollection: UICollectionView!
+    @IBOutlet weak var subitemCollection: UICollectionView! {
+        
+        didSet {
+        
+            subitemCollection.dataSource = self
+            
+            subitemCollection.delegate = self
+        }
+    }
+    
     @IBOutlet weak var contentLabel: UILabel!
+    
     @IBOutlet weak var nextDateLabel: UILabel!
+    
+    var datas: [String] = [] {
+        
+        didSet {
+            
+            subitemCollection.reloadData()
+        }
+    }
+    
+    var cellColor: UIColor? = .clear {
+        
+        didSet {
+        
+            subitemCollection.reloadData()
+        }
+    }
     
     var cellType: CellType = .clean {
         
@@ -83,6 +109,53 @@ class RecordCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
         
         // Configure the view for the selected state
+    }
+    
+}
+
+extension RecordCell: UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        return datas.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Subitem Cell", for: indexPath) as? SubitemCell else {
+            return UICollectionViewCell()
+        }
+        
+        cell.backgroundColor = cellColor
+    
+        cell.subitemLabel.text = datas[indexPath.row]
+        
+        return cell
+    }
+}
+
+extension RecordCell: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        return CGSize(width: 100, height: 35)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        
+        return 20
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayot: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        
+        let itemCount = datas.count
+        
+        return UIEdgeInsets(
+            top: 0,
+            left: (UIScreen.main.bounds.width - 100 * CGFloat(itemCount) - 20 * CGFloat(itemCount - 1) - 40) / 2,
+            bottom: 0,
+            right: (UIScreen.main.bounds.width - 100 * CGFloat(itemCount) - 20 * CGFloat(itemCount - 1) - 40) / 2
+        )
     }
     
 }

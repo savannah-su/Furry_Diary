@@ -283,17 +283,14 @@ extension HistoryPageController: UITableViewDataSource {
             return UITableViewCell()
         }
         
-        cell.subitemCollection.delegate = self
-        cell.subitemCollection.dataSource = self
-        cell.subitemCollection.reloadData()
-        
         currentIndex = indexPath.row
+        cell.datas = currentDateData[indexPath.row].subitem ?? []
         
         switch currentDateData[indexPath.row].categoryType {
             
-            
         case "衛生清潔":
             cell.cellType = .clean
+            cell.cellColor = UIColor.R0
             cell.recordDate.text = formatter.string(from: currentDateData[indexPath.row].date)
             
             if currentDateData[indexPath.row].notiDate != "" {
@@ -304,6 +301,7 @@ extension HistoryPageController: UITableViewDataSource {
             
         case "預防計畫":
             cell.cellType = .prevent
+            cell.cellColor = UIColor.G1
             cell.recordDate.text = formatter.string(from: currentDateData[indexPath.row].date)
             cell.contentLabel.text = currentDateData[indexPath.row].medicineName
             
@@ -315,11 +313,13 @@ extension HistoryPageController: UITableViewDataSource {
             
         case "體重紀錄":
             cell.cellType = .weight
+            cell.cellColor = UIColor.B0
             cell.recordDate.text = formatter.string(from: currentDateData[indexPath.row].date)
             cell.contentLabel.text = "\(currentDateData[indexPath.row].kilo ?? "") KG"
             
         default:
             cell.cellType = .behavior
+            cell.cellColor = UIColor.P0
             cell.recordDate.text = formatter.string(from: currentDateData[indexPath.row].date)
             
             if currentDateData[indexPath.row].memo == "" || currentDateData[indexPath.row].memo == "輸入相關敘述或其他事件" {
@@ -337,8 +337,6 @@ extension HistoryPageController: UITableViewDataSource {
 extension HistoryPageController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        if collectionView == self.choosePetCollection {
             
             petID = UploadManager.shared.simplePetInfo[indexPath.item].petID
             
@@ -358,8 +356,6 @@ extension HistoryPageController: UICollectionViewDelegate {
             
             calendar.allowsSelection = true
             calendar.scrollEnabled = true
-            
-        }
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
@@ -380,59 +376,29 @@ extension HistoryPageController: UICollectionViewDelegate {
 extension HistoryPageController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-        if collectionView == self.choosePetCollection {
             
-            return UploadManager.shared.simplePetInfo.count
-        }
-        return currentDateData[currentIndex].subitem?.count ?? 0
+        return UploadManager.shared.simplePetInfo.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+            
+        guard let cellA = collectionView.dequeueReusableCell(withReuseIdentifier: "Pet Cell", for: indexPath) as? WhichPetCell else { return UICollectionViewCell() }
         
-        if collectionView == self.choosePetCollection {
-            
-            guard let cellA = collectionView.dequeueReusableCell(withReuseIdentifier: "Pet Cell", for: indexPath) as? WhichPetCell else { return UICollectionViewCell() }
-            
-            cellA.petName.text = UploadManager.shared.simplePetInfo[indexPath.item].petName
-            
-            let url = URL(string: UploadManager.shared.simplePetInfo[indexPath.item].petPhoto.randomElement()!)
-            cellA.petPhoto.kf.setImage(with: url)
-            cellA.petPhoto.contentMode = .scaleToFill
-            
-            let index = indexPath.item
-            if selectedStatus[index] == true {
-                cellA.petPhoto.layer.borderWidth = 5
-                cellA.petPhoto.layer.borderColor = UIColor.G3?.cgColor
-            } else {
-                cellA.petPhoto.layer.borderColor = UIColor.white.cgColor
-            }
-            
-            return cellA
-            
+        cellA.petName.text = UploadManager.shared.simplePetInfo[indexPath.item].petName
+        
+        let url = URL(string: UploadManager.shared.simplePetInfo[indexPath.item].petPhoto.randomElement()!)
+        cellA.petPhoto.kf.setImage(with: url)
+        cellA.petPhoto.contentMode = .scaleToFill
+        
+        let index = indexPath.item
+        if selectedStatus[index] == true {
+            cellA.petPhoto.layer.borderWidth = 5
+            cellA.petPhoto.layer.borderColor = UIColor.G4?.cgColor
         } else {
-            
-            guard let cellB = collectionView.dequeueReusableCell(withReuseIdentifier: "Subitem Cell", for: indexPath) as? SubitemCell else {
-                return UICollectionViewCell()
-            }
-            
-            guard let subitemData = currentDateData[currentIndex].subitem else { return UICollectionViewCell() }
-            
-            switch currentDateData[currentIndex].categoryType {
-                
-            case "衛生清潔":
-                cellB.layer.backgroundColor = UIColor.R0?.cgColor
-            case "預防計畫":
-                cellB.layer.backgroundColor = UIColor.G1?.cgColor
-            case "體重紀錄":
-                cellB.layer.backgroundColor = UIColor.B0?.cgColor
-            default:
-                cellB.layer.backgroundColor = UIColor.P0?.cgColor
-            }
-                cellB.subitemLabel.text = subitemData[indexPath.row]
-            
-            return cellB
+            cellA.petPhoto.layer.borderColor = UIColor.white.cgColor
         }
+        
+        return cellA
     }
 }
 
@@ -440,28 +406,16 @@ extension HistoryPageController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        if collectionView == self.choosePetCollection {
-            return CGSize(width: 80, height: 100)
-        }
-        return CGSize(width: 100, height: 35)
+        return CGSize(width: 80, height: 100)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         
-        if collectionView == self.choosePetCollection {
-            return 16
-        }
-        return 20
+        return 16
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayot: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         
-        if collectionView == self.choosePetCollection {
-            return UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
-        }
-        
-        guard let itemCount = currentDateData[section].subitem?.count else { return UIEdgeInsets() }
-        
-        return UIEdgeInsets(top: 0, left: (UIScreen.main.bounds.width - 100 * CGFloat(itemCount) - 20 * CGFloat(itemCount - 1) - 40) / 2, bottom: 0, right: (UIScreen.main.bounds.width - 100 * CGFloat(itemCount) - 20 * CGFloat(itemCount - 1) - 40) / 2)
+        return UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
     }
 }

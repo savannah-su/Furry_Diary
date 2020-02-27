@@ -13,6 +13,7 @@
 		2403C46B23E56D8900B73021 /* CreatePetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2403C46A23E56D8900B73021 /* CreatePetViewController.swift */; };
 		2403C46D23E5723A00B73021 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2403C46C23E5723A00B73021 /* UserManager.swift */; };
 		24188A1823F3E02E00DA250A /* WeightPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24188A1723F3E02E00DA250A /* WeightPageViewController.swift */; };
+		2422DC0E2406A3F800380D4F /* LocalNotiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2422DC0D2406A3F800380D4F /* LocalNotiManager.swift */; };
 		242357B223FBE5C5004C8150 /* WhichPetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242357B123FBE5C5004C8150 /* WhichPetCell.swift */; };
 		242357B623FD3F9F004C8150 /* HistoryPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242357B523FD3F9F004C8150 /* HistoryPageController.swift */; };
 		242357B923FD6BD2004C8150 /* RecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242357B823FD6BD2004C8150 /* RecordCell.swift */; };
@@ -33,6 +34,7 @@
 		2455D3DC23E95EA30095D039 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2455D3DB23E95EA30095D039 /* UIViewController+Extension.swift */; };
 		24569510240165AD007FAE98 /* GetDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2456950F240165AD007FAE98 /* GetDataManager.swift */; };
 		24569512240557DB007FAE98 /* CoOwnerCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24569511240557DA007FAE98 /* CoOwnerCollectionCell.swift */; };
+		2456951424064B2B007FAE98 /* OwnerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2456951324064B2B007FAE98 /* OwnerCell.swift */; };
 		24647FED23EBD08D005DB6E7 /* PetDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24647FEC23EBD08D005DB6E7 /* PetDetailViewController.swift */; };
 		24647FF023EBF580005DB6E7 /* DetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24647FEF23EBF580005DB6E7 /* DetailCell.swift */; };
 		246E0ECA24012E12008F044A /* VetPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246E0EC924012E12008F044A /* VetPageController.swift */; };
@@ -87,6 +89,7 @@
 		2403C46A23E56D8900B73021 /* CreatePetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePetViewController.swift; sourceTree = "<group>"; };
 		2403C46C23E5723A00B73021 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		24188A1723F3E02E00DA250A /* WeightPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightPageViewController.swift; sourceTree = "<group>"; };
+		2422DC0D2406A3F800380D4F /* LocalNotiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotiManager.swift; sourceTree = "<group>"; };
 		242357B123FBE5C5004C8150 /* WhichPetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhichPetCell.swift; sourceTree = "<group>"; };
 		242357B523FD3F9F004C8150 /* HistoryPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryPageController.swift; sourceTree = "<group>"; };
 		242357B823FD6BD2004C8150 /* RecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCell.swift; sourceTree = "<group>"; };
@@ -113,6 +116,7 @@
 		2455D3DB23E95EA30095D039 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		2456950F240165AD007FAE98 /* GetDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetDataManager.swift; sourceTree = "<group>"; };
 		24569511240557DA007FAE98 /* CoOwnerCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoOwnerCollectionCell.swift; sourceTree = "<group>"; };
+		2456951324064B2B007FAE98 /* OwnerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerCell.swift; sourceTree = "<group>"; };
 		24647FEC23EBD08D005DB6E7 /* PetDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PetDetailViewController.swift; path = "Personal Project/Controller/Home Page/PetDetailViewController.swift"; sourceTree = SOURCE_ROOT; };
 		24647FEF23EBF580005DB6E7 /* DetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCell.swift; sourceTree = "<group>"; };
 		246E0EC924012E12008F044A /* VetPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VetPageController.swift; sourceTree = "<group>"; };
@@ -212,6 +216,7 @@
 				246EF8F523F6A07E00A17F65 /* UploadManager.swift */,
 				2440D09C23FAD32B00E7A803 /* DownloadManager.swift */,
 				2456950F240165AD007FAE98 /* GetDataManager.swift */,
+				2422DC0D2406A3F800380D4F /* LocalNotiManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -307,8 +312,7 @@
 				24CACB2B23F576B30068EC7D /* HeaderView.swift */,
 				242357B123FBE5C5004C8150 /* WhichPetCell.swift */,
 			);
-			name = "Daily Page";
-			path = "History Page/Daily Page";
+			path = "Daily Page";
 			sourceTree = "<group>";
 		};
 		2430552B23F28C4800B9F4E6 /* Daily Page */ = {
@@ -327,6 +331,7 @@
 			isa = PBXGroup;
 			children = (
 				24647FEF23EBF580005DB6E7 /* DetailCell.swift */,
+				2456951324064B2B007FAE98 /* OwnerCell.swift */,
 			);
 			path = "Pet Detail Page";
 			sourceTree = "<group>";
@@ -389,6 +394,7 @@
 				2473A10523EADD4700C8FFE2 /* Home Page */,
 				24874E7923E71EF0007810B0 /* Enter Pet Info Page */,
 				24647FEE23EBF546005DB6E7 /* Pet Detail Page */,
+				2430552823F00C1400B9F4E6 /* Daily Page */,
 				24874E7823E71EC7007810B0 /* Search Owner Page */,
 				242357B723FD6B8B004C8150 /* History Page */,
 			);
@@ -401,7 +407,6 @@
 				2496DB7C23E2FA2600991F79 /* LoginViewController.swift */,
 				24647FF123EBF63D005DB6E7 /* Home Page */,
 				2430552B23F28C4800B9F4E6 /* Daily Page */,
-				2430552823F00C1400B9F4E6 /* Daily Page */,
 				242357B423FD3F76004C8150 /* History Page */,
 				246E0EC824012DCD008F044A /* Vet Page */,
 			);
@@ -694,6 +699,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2422DC0E2406A3F800380D4F /* LocalNotiManager.swift in Sources */,
 				24D50A5123EAA9460074DD51 /* VerticalAlignedButton.swift in Sources */,
 				248E9DCF23EC48B500388A3B /* ColoredNavController.swift in Sources */,
 				2402B3BF23E5542500E8D009 /* Data.swift in Sources */,
@@ -731,6 +737,7 @@
 				242357B923FD6BD2004C8150 /* RecordCell.swift in Sources */,
 				24B9958C23F41ECD005246AB /* PreventPageViewController.swift in Sources */,
 				24188A1823F3E02E00DA250A /* WeightPageViewController.swift in Sources */,
+				2456951424064B2B007FAE98 /* OwnerCell.swift in Sources */,
 				248E9DD123EC4F1700388A3B /* UIColor+Extension.swift in Sources */,
 				24CACB2A23F549140068EC7D /* NotiCell.swift in Sources */,
 			);

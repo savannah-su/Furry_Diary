@@ -25,6 +25,7 @@ class CleanPageViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
+    @IBOutlet weak var saveButton: VerticalAlignedButton!
     @IBAction func saveButton(_ sender: Any) {
         
         toDataBase()
@@ -47,6 +48,8 @@ class CleanPageViewController: UIViewController {
     var notiDate = ""
     var notiMemo = ""
     
+    let dateFormatter = DateFormatter()
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -59,12 +62,22 @@ class CleanPageViewController: UIViewController {
         tableView.delegate = self
         tableView.isHidden = true
         tableView.separatorColor = .clear
+
+        bottomViewButton.isHidden = true
+        
+        saveButton.isEnabled = false
+        
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidLayoutSubviews() {
+        
+        super.viewDidLayoutSubviews()
         
         topView.layer.cornerRadius = topView.bounds.height / 2
         bottomView.layer.cornerRadius = bottomView.bounds.height / 2
-        bottomViewButton.isHidden = true
         
-        // Do any additional setup after loading the view.
     }
     
     func uploadSuccess() {
@@ -122,11 +135,7 @@ extension CleanPageViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-        if collectionView == self.collectionView {
             return 5
-        }
-        return UploadManager.shared.simplePetInfo.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -167,12 +176,13 @@ extension CleanPageViewController: UICollectionViewDataSource {
 extension CleanPageViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+        return UIEdgeInsets(top: 16, left: 16, bottom: 0, right: 16)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 60, height: 85)
     }
+    
 }
 
 extension CleanPageViewController: UICollectionViewDelegate {
@@ -280,6 +290,10 @@ extension CleanPageViewController: UITableViewDataSource {
             cell.touchHandler = { [weak self] text in
                 
                 self?.doneDate = text
+                
+                if self?.doneDate != "" {
+                    self?.saveButton.isEnabled = true
+                }
             }
             
             return cell
@@ -289,6 +303,10 @@ extension CleanPageViewController: UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "Noti Cell", for: indexPath) as? NotiCell else {
                 return UITableViewCell()
             }
+
+            
+            var notificationDate: Date?
+            var nitificationContent: String?
             
             cell.notiSwitch.addTarget(self, action: #selector(changeSwitch), for: .valueChanged)
             cell.textFieldType = .normal
@@ -299,9 +317,22 @@ extension CleanPageViewController: UITableViewDataSource {
                 let date = text.components(separatedBy: "-")
                 
                 if date.count == 3 {
+                    
                     self?.notiDate = text
+                    
+                    notificationDate = self?.dateFormatter.date(from: text)
+                    
+                    guard let apple = self?.isSwitchOn else { return }
+                    
+                    if apple && self?.notiDate != "" {
+                        self?.saveButton.isEnabled = true
+                    }
+                    
                 } else {
+                    
                     self?.notiMemo = text
+                    
+                    LocalNotiManager.shared.setupNoti(notiDate: 10 , type: "毛孩的\(self?.subItemType)清潔通知", meaasge: text)
                 }
             }
             return cell
@@ -309,6 +340,8 @@ extension CleanPageViewController: UITableViewDataSource {
     }
     
     @objc func changeSwitch() {
+        
+        saveButton.isEnabled = false
         
         isSwitchOn = !isSwitchOn
         

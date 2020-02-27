@@ -116,7 +116,7 @@
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="AsI-Fe-Znh">
-                                <rect key="frame" x="30" y="280" width="354" height="336"/>
+                                <rect key="frame" x="10" y="280" width="394" height="336"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Q7i-Pa-qmD">
                                     <size key="itemSize" width="70" height="100"/>
@@ -253,12 +253,12 @@
                             <constraint firstItem="zcQ-M0-3mI" firstAttribute="top" secondItem="76Y-Lf-sS8" secondAttribute="top" constant="8" id="Ue9-jX-XZ8"/>
                             <constraint firstItem="OoI-at-aXQ" firstAttribute="centerX" secondItem="U34-OR-ZBk" secondAttribute="centerX" id="XIt-yI-H9U"/>
                             <constraint firstItem="AsI-Fe-Znh" firstAttribute="top" secondItem="OoI-at-aXQ" secondAttribute="bottom" id="YaL-Bl-jpX"/>
-                            <constraint firstItem="76Y-Lf-sS8" firstAttribute="trailing" secondItem="AsI-Fe-Znh" secondAttribute="trailing" constant="30" id="Zu3-gQ-Bsm"/>
+                            <constraint firstItem="76Y-Lf-sS8" firstAttribute="trailing" secondItem="AsI-Fe-Znh" secondAttribute="trailing" constant="10" id="Zu3-gQ-Bsm"/>
                             <constraint firstItem="a6I-3e-5DS" firstAttribute="height" secondItem="U34-OR-ZBk" secondAttribute="height" multiplier="1:1.6" id="deW-gB-UjS"/>
                             <constraint firstItem="zcQ-M0-3mI" firstAttribute="leading" secondItem="76Y-Lf-sS8" secondAttribute="leading" constant="25" id="jmR-zw-ICu"/>
                             <constraint firstItem="OoI-at-aXQ" firstAttribute="centerY" secondItem="U34-OR-ZBk" secondAttribute="top" id="kIU-RX-swf"/>
                             <constraint firstItem="76Y-Lf-sS8" firstAttribute="trailing" secondItem="vlL-86-32L" secondAttribute="trailing" constant="50" id="n0v-8T-ruR"/>
-                            <constraint firstItem="AsI-Fe-Znh" firstAttribute="leading" secondItem="76Y-Lf-sS8" secondAttribute="leading" constant="30" id="oMs-Qv-oWy"/>
+                            <constraint firstItem="AsI-Fe-Znh" firstAttribute="leading" secondItem="76Y-Lf-sS8" secondAttribute="leading" constant="10" id="oMs-Qv-oWy"/>
                             <constraint firstItem="BZ6-Dm-CCH" firstAttribute="leading" secondItem="76Y-Lf-sS8" secondAttribute="leading" constant="50" id="pr8-0J-NHa"/>
                             <constraint firstItem="qXw-5r-FTf" firstAttribute="top" secondItem="76Y-Lf-sS8" secondAttribute="top" constant="30" id="vke-qr-7fF"/>
                         </constraints>
@@ -272,6 +272,7 @@
                         <outlet property="firstBar" destination="KI5-kK-pzc" id="dw9-AK-8JA"/>
                         <outlet property="memoLabel" destination="cIN-6A-4rE" id="2Vi-M8-O4A"/>
                         <outlet property="memoTextView" destination="68L-9V-eZ2" id="3UB-bJ-iKn"/>
+                        <outlet property="saveButton" destination="4Jn-fx-gfD" id="hgc-h5-t2t"/>
                         <outlet property="secondBar" destination="NQO-Sl-nzd" id="gOg-qp-AJj"/>
                         <outlet property="timeTextField" destination="vlL-86-32L" id="WKn-um-t56"/>
                         <outlet property="topView" destination="OoI-at-aXQ" id="H3i-QB-qWY"/>
@@ -490,6 +491,7 @@
                         <outlet property="dateTextfield" destination="MBG-dC-3XL" id="EXg-3H-byb"/>
                         <outlet property="firstBar" destination="DNm-hu-R76" id="UYM-Sq-vtM"/>
                         <outlet property="kgLabel" destination="IoM-K8-e1b" id="0jN-KO-VLx"/>
+                        <outlet property="saveButton" destination="cgq-KG-bJI" id="ZQL-vh-ZQv"/>
                         <outlet property="secondBar" destination="xbS-I7-Nlt" id="Ii3-8Q-LOu"/>
                         <outlet property="topView" destination="E80-D4-i1v" id="Wmc-gv-D2H"/>
                         <outlet property="weightLabel" destination="QbF-jg-Tae" id="7wM-sc-s4X"/>
@@ -878,6 +880,7 @@
                         <outlet property="bottomViewButton" destination="OUz-km-wcZ" id="NeT-ck-cGy"/>
                         <outlet property="bottomViewLabel" destination="3kz-m1-bX7" id="FJF-b4-FSs"/>
                         <outlet property="collectionView" destination="D5s-qv-Wps" id="SKx-Kq-bTo"/>
+                        <outlet property="saveButton" destination="2QA-Iu-UeP" id="fjW-R9-SkP"/>
                         <outlet property="tableView" destination="c6d-pr-TRP" id="S64-Ka-eN0"/>
                         <outlet property="topView" destination="F1k-aN-gST" id="Knq-NW-Fhe"/>
                     </connections>
@@ -1052,7 +1055,7 @@
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5pI-7p-sUv">
-                                            <rect key="frame" x="16" y="8" width="48" height="34"/>
+                                            <rect key="frame" x="16" y="8" width="48" height="42"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -1061,7 +1064,7 @@
                                     <constraints>
                                         <constraint firstItem="5pI-7p-sUv" firstAttribute="leading" secondItem="wu1-ae-GXH" secondAttribute="leading" constant="16" id="2T8-KR-u3m"/>
                                         <constraint firstItem="5pI-7p-sUv" firstAttribute="top" secondItem="wu1-ae-GXH" secondAttribute="top" constant="8" id="IlP-lc-Qki"/>
-                                        <constraint firstAttribute="bottom" secondItem="5pI-7p-sUv" secondAttribute="bottom" constant="8" id="qht-2y-Ll6"/>
+                                        <constraint firstAttribute="bottom" secondItem="5pI-7p-sUv" secondAttribute="bottom" id="qht-2y-Ll6"/>
                                     </constraints>
                                     <connections>
                                         <outlet property="sectionTitle" destination="5pI-7p-sUv" id="ST2-QU-bMb"/>
@@ -1287,6 +1290,7 @@
                         <outlet property="bottomViewButton" destination="zA2-O3-Sxp" id="As8-wn-xfW"/>
                         <outlet property="bottomViewLabel" destination="0lW-z8-U9Q" id="eYz-gQ-gYm"/>
                         <outlet property="collectionView" destination="0ow-Sm-yXI" id="etP-o6-cZp"/>
+                        <outlet property="saveButton" destination="HD4-ou-bs8" id="5CF-H2-KFm"/>
                         <outlet property="tableView" destination="R6m-OJ-LTs" id="KoT-7X-cPz"/>
                         <outlet property="topView" destination="ewe-b0-ept" id="tRy-aQ-mc6"/>
                     </connections>

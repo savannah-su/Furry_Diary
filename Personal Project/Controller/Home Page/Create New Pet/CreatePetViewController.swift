@@ -28,19 +28,20 @@ class CreatePetViewController: UIViewController {
     
     var count = 0
     
-    var coOwnerImageURL = [""]
-    var coOwnerName = [""]
-    var coOwnerID = [""]
-    
     let picker = UIImagePickerController()
     //上傳圖片需要先轉jpeg形式，傳到Storage後，拿到URL，才可傳至DB
     var petPhotoURL: [String] = []
     var petID = UUID().uuidString
     var selectedPhoto: [UIImage] = []
     
-    let titleArray = ["名字", "種類", "性別", "品種", "特徵", "生日", "晶片號碼", "是否絕育", "個性喜好", "共同飼主"]
+    let titleArray = ["名字", "種類", "性別", "品種", "特徵", "生日", "晶片號碼", "是否絕育", "個性喜好", "毛孩飼主"]
     let placeholderArray = ["輸入毛孩名字", "選擇毛孩種類", "選擇毛孩性別", "輸入毛孩品種", "輸入毛孩特徵與毛色", "輸入毛孩生日", "輸入毛孩晶片號碼", "選擇是否絕育"]
-    var petInfo = PetInfo(petID: "", ownersID: [], ownersName: [], ownersImage: [], petImage: [], petName: "", species: "", gender: "", breed: "", color: "", birth: "", chip: "", neuter: false, neuterDate: "", memo: "")
+    var petInfo = PetInfo(petID: "", ownersID: [], ownersName: [], ownersImage: [], petImage: [], petName: "", species: "", gender: "", breed: "", color: "", birth: "", chip: "", neuter: false, neuterDate: "", memo: "") {
+        
+        didSet {
+            tableView.reloadData()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,6 +59,19 @@ class CreatePetViewController: UIViewController {
         tableView.sectionHeaderHeight = 140
         
         NotificationCenter.default.addObserver(self, selector: #selector(showAlert), name: Notification.Name("ShowAlert"), object: nil)
+        
+        addCurrentUser()
+    }
+    
+    func addCurrentUser() {
+        
+        guard let currentUserID = UserDefaults.standard.value(forKey: "userID") as? String else { return }
+        guard let currentUserName = UserDefaults.standard.value(forKey: "userName") as? String else { return }
+        guard let currentUserImage = UserDefaults.standard.value(forKey: "userPhoto") as? String else { return }
+        
+        self.petInfo.ownersID.append(currentUserID)
+        self.petInfo.ownersName.append(currentUserName)
+        self.petInfo.ownersImage.append(currentUserImage)
     }
     
     @objc func showAlert() {
@@ -83,7 +97,6 @@ class CreatePetViewController: UIViewController {
     }
     
     func picUpload() {
-        
         
         for index in 0 ..< selectedPhoto.count {
             
@@ -118,23 +131,17 @@ class CreatePetViewController: UIViewController {
                           self.count += 1
                     }
                 }
-                
             }
         }
     }
     
     func toDataBase() {
         
-        guard let currentUserID = UserDefaults.standard.value(forKey: "userID") else { return }
-        guard let currentUserName = UserDefaults.standard.value(forKey: "userName") else { return }
-        guard let currentUserImage = UserDefaults.standard.value(forKey: "userPhoto") else { return }
-        UserDefaults.standard.set(petID, forKey: "userID")
-        
-//        self.petInfo.ownersID = [currentUserID as! String, coOwnerID]
-//        self.petInfo.ownersName = [currentUserName as! String, coOwnerName]
-//        self.petInfo.ownersImage = [currentUserImage as! String, coOwnerImageURL]
-//        self.petInfo.petImage = petPhotoURL
-//        self.petInfo.petID = petID
+        guard UserDefaults.standard.value(forKey: "userID") != nil else { return }
+        guard UserDefaults.standard.value(forKey: "userName") != nil else { return }
+        guard UserDefaults.standard.value(forKey: "userPhoto") != nil else { return }
+
+        self.petInfo.petID = petID
         
         Firestore.firestore().collection("pets").document(petID).setData(petInfo.toDict, completion: { (error) in
             
@@ -262,27 +269,17 @@ extension CreatePetViewController: UITableViewDataSource {
             
             cell.titleLabel.text = titleArray[indexPath.row]
             
-            cell.collectionView.isHidden = true
-            
             cell.searchButton.isHidden = false
             
-//            if coOwnerImageURL != "" {
-//
-//                cell.searchButton.isHidden = true
-//                cell.collectionView.isHidden = false
-//
-//                let url = URL(string: coOwnerImageURL)
-//                let data = try! Data(contentsOf: url!)
-//                cell.ownerImage?.image = UIImage(data: data)
-//                cell.ownerImage?.layer.cornerRadius = 15
-//
-//            } else {
-//
-
-//                cell.collectionView.isHidden = true
-//            }
-            
             cell.searchButton.addTarget(self, action: #selector(searchOwner), for: .touchUpInside)
+            
+            cell.data = petInfo
+            
+            cell.collectionView.reloadData()
+            
+            if cell.data.ownersImage.count > 1 {
+                cell.searchButton.isHidden = true
+            }
             
             return cell
             
@@ -295,18 +292,9 @@ extension CreatePetViewController: UITableViewDataSource {
         
         vc.selectHandler = { data in
             
-            guard let currentUserID = UserDefaults.standard.value(forKey: "userID") as? String else { return }
-            guard let currentUserName = UserDefaults.standard.value(forKey: "userName") as? String else { return }
-            guard let currentUserImage = UserDefaults.standard.value(forKey: "userPhoto") as? String else { return }
-            guard let currentEmail = UserDefaults.standard.value(forKey: "email") as? String else { return }
-
-            let currentUser = UsersData(name: currentUserName, email: currentEmail, image: currentUserImage, id: currentUserID)
-            
-            let owners = data + [currentUser]
-            
-            self.petInfo.ownersID = owners.map{ $0.id }
-            self.petInfo.ownersName = owners.map{ $0.name }
-            self.petInfo.ownersImage = owners.map{ $0.image }
+            self.petInfo.ownersID.append(contentsOf: data.map{ $0.id })
+            self.petInfo.ownersName.append(contentsOf: data.map{ $0.name })
+            self.petInfo.ownersImage.append(contentsOf: data.map{ $0.image })
             
             print(self.petInfo.ownersID)
             print(self.petInfo.ownersName)

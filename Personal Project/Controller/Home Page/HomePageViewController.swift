@@ -67,12 +67,12 @@ class HomePageViewController: UIViewController {
             
             do {
                try Auth.auth().signOut()
+                UserDefaults.standard.set(nil, forKey: "logInOrNot")
+
             } catch {
                 print("登出失敗")
             }
-            
-            UserDefaults.standard.removeObject(forKey: "LogInOrNot")
-            
+                        
            let vc = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(identifier: "Login Page") as? LoginViewController
             self.view.window?.rootViewController = vc
         }

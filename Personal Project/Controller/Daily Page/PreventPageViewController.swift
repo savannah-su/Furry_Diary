@@ -23,6 +23,7 @@ class PreventPageViewController: UIViewController {
     @IBAction func backButton(_ sender: Any) {
         navigationController?.popViewController(animated: true)
     }
+    @IBOutlet weak var saveButton: VerticalAlignedButton!
     @IBAction func saveButton(_ sender: Any) {
         toDataBase()
     }
@@ -54,14 +55,23 @@ class PreventPageViewController: UIViewController {
         
         collectionView.allowsMultipleSelection = false
         
-        topView.layer.cornerRadius = topView.bounds.height / 2
-        bottomView.layer.cornerRadius = bottomView.bounds.height / 2
         bottomViewButton.isHidden = true
         
         tableView.separatorColor = .clear
         tableView.isHidden = true
         
+        saveButton.isEnabled = false
+        
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidLayoutSubviews() {
+        
+        super.viewDidLayoutSubviews()
+        
+        topView.layer.cornerRadius = topView.bounds.height / 2
+        bottomView.layer.cornerRadius = bottomView.bounds.height / 2
+        
     }
     
     func uploadSuccess() {
@@ -73,14 +83,6 @@ class PreventPageViewController: UIViewController {
        }
     
     func toDataBase() {
-        
-        print(petID)
-        print(subItemType)
-        print(medicineName)
-        print(doneDate)
-        print(isSwitchOn)
-        print(notiDate)
-        print(notiMemo)
         
         UploadManager.shared.uploadData(petID: petID, categoryType: "預防計畫", date: enterDate, subitem: subItemType, medicineName: medicineName, kilo: "", memo: "", notiOrNot: isSwitchOn ? "true" : "false", notiDate: notiDate, notiText: notiMemo) { result in
             
@@ -103,9 +105,7 @@ extension PreventPageViewController: UITableViewDelegate {
         if indexPath.row == 2 && isSwitchOn == true {
             return 140
         }
-        
         return 40
-        
     }
 }
 
@@ -127,7 +127,12 @@ extension PreventPageViewController: UITableViewDataSource {
             cell.contentText.placeholder = "例：三合一疫苗、蚤不到"
             cell.textFieldType = .normal
             cell.touchHandler = { [weak self] text in
+                
                 self?.medicineName = text
+                
+                if self?.medicineName != "" {
+                    self?.saveButton.isEnabled = true
+                }
             }
             return cell
             
