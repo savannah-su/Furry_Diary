@@ -124,6 +124,7 @@ class CreatePetViewController: UIViewController {
                     
                     if self.count == self.selectedPhoto.count - 1 {
                         
+                        self.petInfo.petImage = self.petPhotoURL
                         self.toDataBase()
                         
                     } else {
@@ -224,6 +225,8 @@ extension CreatePetViewController: UITableViewDataSource {
                 
                 self?.petInfo.birth = text
             }
+            
+            cell.contentField.text = petInfo.birth
             return cell
             
         case 6:

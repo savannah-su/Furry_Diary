@@ -56,23 +56,22 @@ extension DailyPageViewController: UICollectionViewDelegateFlowLayout {
         if collectionView == self.collectionView {
             return (UIScreen.main.bounds.width - 316) / 3
         }
-        return CGFloat()
+        return (UIScreen.main.bounds.width - 340) / 3
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         if collectionView == self.collectionView {
             return 26
         }
-        return (UIScreen.main.bounds.width - 150 * CGFloat(UploadManager.shared.simplePetInfo.count)) / CGFloat(UploadManager.shared.simplePetInfo.count + 2)
+        return 8
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         if collectionView == self.collectionView {
             return UIEdgeInsets(top: 26, left: (UIScreen.main.bounds.width - 316) / 3, bottom: 26, right: (UIScreen.main.bounds.width - 316) / 3)
         }
-        return UIEdgeInsets(top: 0, left: (UIScreen.main.bounds.width - 150 * CGFloat(UploadManager.shared.simplePetInfo.count)) / CGFloat(UploadManager.shared.simplePetInfo.count + 2), bottom: 0, right: (UIScreen.main.bounds.width - 150 * CGFloat(UploadManager.shared.simplePetInfo.count)) / CGFloat(UploadManager.shared.simplePetInfo.count + 2))
+        return UIEdgeInsets(top: 0, left: (UIScreen.main.bounds.width - 300) / 3, bottom: 0, right: (UIScreen.main.bounds.width - 300) / 3)
     }
-    
 }
 
 extension DailyPageViewController: UICollectionViewDataSource {

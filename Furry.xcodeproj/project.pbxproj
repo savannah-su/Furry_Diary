@@ -134,7 +134,7 @@
 		2496DB6F23E2CBD800991F79 /* Daily.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Daily.storyboard; sourceTree = "<group>"; };
 		2496DB7123E2CC1A00991F79 /* Medical.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Medical.storyboard; sourceTree = "<group>"; };
 		2496DB7C23E2FA2600991F79 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		24AFF65B24000EBA009895B8 /* Personal Project.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Personal Project.entitlements"; sourceTree = "<group>"; };
+		24A83AFF2407DC77000FF32B /* Personal Project.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Personal Project.entitlements"; sourceTree = "<group>"; };
 		24B9958B23F41ECD005246AB /* PreventPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreventPageViewController.swift; sourceTree = "<group>"; };
 		24B9958D23F41EDD005246AB /* CleanPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanPageViewController.swift; sourceTree = "<group>"; };
 		24CACB2923F549140068EC7D /* NotiCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotiCell.swift; sourceTree = "<group>"; };
@@ -285,7 +285,7 @@
 		242F8DFF23D6DFF700F49853 /* Furry */ = {
 			isa = PBXGroup;
 			children = (
-				24AFF65B24000EBA009895B8 /* Personal Project.entitlements */,
+				24A83AFF2407DC77000FF32B /* Personal Project.entitlements */,
 				242F8E0023D6DFF700F49853 /* AppDelegate.swift */,
 				2402B3C023E5599400E8D009 /* Model */,
 				2496DB7E23E3139700991F79 /* View */,
@@ -944,8 +944,10 @@
 			baseConfigurationReference = 6B374159552FBE4B249D9BCA /* Pods-Furry.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "Personal Project/Personal Project.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 65D6M8WUK7;
 				INFOPLIST_FILE = Furry/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -954,8 +956,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "savannahsu.com.Personal-Project";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -964,8 +967,10 @@
 			baseConfigurationReference = A06807A63FCB5856E792B261 /* Pods-Furry.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "Personal Project/Personal Project.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 65D6M8WUK7;
 				INFOPLIST_FILE = Furry/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -974,8 +979,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "savannahsu.com.Personal-Project";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

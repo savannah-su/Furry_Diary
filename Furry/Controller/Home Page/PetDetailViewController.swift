@@ -40,6 +40,8 @@ class PetDetailViewController: UIViewController {
         
         setupBannerView()
         
+        setupPageControl()
+        
     }
     
     func setupBannerView() {
