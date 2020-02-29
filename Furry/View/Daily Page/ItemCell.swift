@@ -21,6 +21,8 @@ class ItemCell: UICollectionViewCell {
         setupShadow()
     }
     
+    
+    
     func setupShadow() {
         background.backgroundColor = .white
         background.layer.borderWidth = 1

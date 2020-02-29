@@ -83,9 +83,11 @@ class HistoryPageController: UIViewController {
     var currentMonthlyData: [Record] = [] {
         
         didSet {
-            calendar.reloadData()
             currentDateData.removeAll()
+            
             tableView.reloadData()
+            
+            calendar.reloadData()
         }
     }
     
@@ -337,25 +339,29 @@ extension HistoryPageController: UITableViewDataSource {
 extension HistoryPageController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        calendar.calendarWeekdayView.removeFromSuperview()
+        
+        for index in 0 ..< UploadManager.shared.simplePetInfo.count {
             
-            petID = UploadManager.shared.simplePetInfo[indexPath.item].petID
-            
-            for index in 0 ..< UploadManager.shared.simplePetInfo.count {
-                
-                if index == indexPath.item {
-                    selectedStatus[index] = true
-                } else {
-                    selectedStatus[index] = false
-                }
+            if index == indexPath.item {
+                selectedStatus[index] = true
+            } else {
+                selectedStatus[index] = false
             }
-            choosePetCollection.reloadData()
-            
-            getMonthlyData()
-            
-            alertLabel.isHidden = true
-            
-            calendar.allowsSelection = true
-            calendar.scrollEnabled = true
+        }
+        
+        choosePetCollection.reloadData()
+        
+        alertLabel.isHidden = true
+        calendar.allowsSelection = true
+        calendar.scrollEnabled = true
+        
+        petID = UploadManager.shared.simplePetInfo[indexPath.item].petID
+        
+        getMonthlyData()
+        
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
