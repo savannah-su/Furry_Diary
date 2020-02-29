@@ -77,6 +77,8 @@ class DownloadManager {
             
             if error == nil {
                 
+                self.monthlyData = []
+                
                 for document in querySnapshot!.documents {
                     
                     do {
@@ -88,9 +90,8 @@ class DownloadManager {
                     } catch {
                         completion(.failure(download.downloadFail))
                     }
-                    
-                    completion(.success(self.monthlyData))
                 }
+                completion(.success(self.monthlyData))
             }
         }
     }

@@ -14,14 +14,15 @@ class ItemCell: UICollectionViewCell {
     @IBOutlet weak var itemLabel: UILabel!
     @IBOutlet weak var background: UIView!
     
-    
     override func awakeFromNib() {
         super.awakeFromNib()
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
         
         setupShadow()
     }
-    
-    
     
     func setupShadow() {
         background.backgroundColor = .white
