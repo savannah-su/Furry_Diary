@@ -1,11 +1,14 @@
 # Uncomment the next line to define a global platform for your project
-platform :ios, '10.0'
+# platform :ios, '9.0'
 
-target 'Personal Project' do
+target 'Furry' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
-  # Pods for Personal Project
+  # Pods for Furry
+#handle crash problem
+  pod 'Fabric', '~> 1.10.2'
+  pod 'Crashlytics', '~> 3.14.0'
 
   # add the Firebase pod for Google Analytics
   pod 'Firebase/Analytics'
@@ -35,15 +38,13 @@ target 'Personal Project' do
   #add Kingfisher
   pod 'Kingfisher'
 
-  # add pods for any other desired Firebase products
-  # https://firebase.google.com/docs/ios/setup#available-pods
-
-  target 'Personal ProjectTests' do
+  target 'FurryTests' do
     inherit! :search_paths
     # Pods for testing
   end
 
-  target 'Personal ProjectUITests' do
+
+  target 'FurryUITests' do
     # Pods for testing
   end
 
