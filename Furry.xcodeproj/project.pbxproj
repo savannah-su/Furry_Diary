@@ -37,6 +37,8 @@
 		24569510240165AD007FAE98 /* GetDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2456950F240165AD007FAE98 /* GetDataManager.swift */; };
 		24569512240557DB007FAE98 /* CoOwnerCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24569511240557DA007FAE98 /* CoOwnerCollectionCell.swift */; };
 		2456951424064B2B007FAE98 /* OwnerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2456951324064B2B007FAE98 /* OwnerCell.swift */; };
+		245958FC240A305400454C45 /* MedicineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245958FB240A305400454C45 /* MedicineViewController.swift */; };
+		245958FE240A329700454C45 /* DiagnosisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245958FD240A329700454C45 /* DiagnosisViewController.swift */; };
 		24647FF023EBF580005DB6E7 /* DetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24647FEF23EBF580005DB6E7 /* DetailCell.swift */; };
 		246E0ECA24012E12008F044A /* VetPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246E0EC924012E12008F044A /* VetPageController.swift */; };
 		246EF8F623F6A07E00A17F65 /* UploadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246EF8F523F6A07E00A17F65 /* UploadManager.swift */; };
@@ -118,6 +120,9 @@
 		2456950F240165AD007FAE98 /* GetDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetDataManager.swift; sourceTree = "<group>"; };
 		24569511240557DA007FAE98 /* CoOwnerCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoOwnerCollectionCell.swift; sourceTree = "<group>"; };
 		2456951324064B2B007FAE98 /* OwnerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerCell.swift; sourceTree = "<group>"; };
+		245958FB240A305400454C45 /* MedicineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineViewController.swift; sourceTree = "<group>"; };
+		245958FD240A329700454C45 /* DiagnosisViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagnosisViewController.swift; sourceTree = "<group>"; };
+		245958FF240A3A7B00454C45 /* Furry.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = Furry.entitlements; sourceTree = "<group>"; };
 		24647FEF23EBF580005DB6E7 /* DetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCell.swift; sourceTree = "<group>"; };
 		246E0EC924012E12008F044A /* VetPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VetPageController.swift; sourceTree = "<group>"; };
 		246EF8F523F6A07E00A17F65 /* UploadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadManager.swift; sourceTree = "<group>"; };
@@ -134,7 +139,6 @@
 		2496DB6F23E2CBD800991F79 /* Daily.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Daily.storyboard; sourceTree = "<group>"; };
 		2496DB7123E2CC1A00991F79 /* Medical.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Medical.storyboard; sourceTree = "<group>"; };
 		2496DB7C23E2FA2600991F79 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		24A83AFF2407DC77000FF32B /* Personal Project.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Personal Project.entitlements"; sourceTree = "<group>"; };
 		24B9958B23F41ECD005246AB /* PreventPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreventPageViewController.swift; sourceTree = "<group>"; };
 		24B9958D23F41EDD005246AB /* CleanPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanPageViewController.swift; sourceTree = "<group>"; };
 		24CACB2923F549140068EC7D /* NotiCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotiCell.swift; sourceTree = "<group>"; };
@@ -285,8 +289,8 @@
 		242F8DFF23D6DFF700F49853 /* Furry */ = {
 			isa = PBXGroup;
 			children = (
-				24A83AFF2407DC77000FF32B /* Personal Project.entitlements */,
 				242F8E0023D6DFF700F49853 /* AppDelegate.swift */,
+				245958FF240A3A7B00454C45 /* Furry.entitlements */,
 				2402B3C023E5599400E8D009 /* Model */,
 				2496DB7E23E3139700991F79 /* View */,
 				2496DB7F23E313B600991F79 /* Controller */,
@@ -336,6 +340,8 @@
 				24188A1723F3E02E00DA250A /* WeightPageViewController.swift */,
 				24B9958B23F41ECD005246AB /* PreventPageViewController.swift */,
 				24B9958D23F41EDD005246AB /* CleanPageViewController.swift */,
+				245958FD240A329700454C45 /* DiagnosisViewController.swift */,
+				245958FB240A305400454C45 /* MedicineViewController.swift */,
 			);
 			path = "Daily Page";
 			sourceTree = "<group>";
@@ -734,6 +740,7 @@
 				24D50A5123EAA9460074DD51 /* VerticalAlignedButton.swift in Sources */,
 				248E9DCF23EC48B500388A3B /* ColoredNavController.swift in Sources */,
 				2402B3BF23E5542500E8D009 /* Data.swift in Sources */,
+				245958FC240A305400454C45 /* MedicineViewController.swift in Sources */,
 				24569510240165AD007FAE98 /* GetDataManager.swift in Sources */,
 				24647FF023EBF580005DB6E7 /* DetailCell.swift in Sources */,
 				2430552A23F1616A00B9F4E6 /* Banner.swift in Sources */,
@@ -743,6 +750,7 @@
 				243230F623E83D34008C512B /* UploadIamgeCell.swift in Sources */,
 				24413D0123F5269400A07AAE /* EnterInfoCell.swift in Sources */,
 				2496DB7D23E2FA2600991F79 /* LoginViewController.swift in Sources */,
+				245958FE240A329700454C45 /* DiagnosisViewController.swift in Sources */,
 				24D50A4D23EA9C470074DD51 /* CoOwnerCell.swift in Sources */,
 				24B9958E23F41EDD005246AB /* CleanPageViewController.swift in Sources */,
 				2473A10423EADD1300C8FFE2 /* HomePageViewController.swift in Sources */,
@@ -944,10 +952,10 @@
 			baseConfigurationReference = 6B374159552FBE4B249D9BCA /* Pods-Furry.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_ENTITLEMENTS = Furry/Furry.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = 65D6M8WUK7;
 				INFOPLIST_FILE = Furry/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -967,10 +975,10 @@
 			baseConfigurationReference = A06807A63FCB5856E792B261 /* Pods-Furry.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_ENTITLEMENTS = Furry/Furry.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = 65D6M8WUK7;
 				INFOPLIST_FILE = Furry/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
