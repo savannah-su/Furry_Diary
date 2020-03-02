@@ -18,7 +18,7 @@ class BehaviorPageViewController: UIViewController {
     
     @IBOutlet weak var saveButton: VerticalAlignedButton!
     @IBAction func saveButton(_ sender: Any) {
-        toDataBase()
+            toDataBase()
     }
     
     @IBOutlet weak var collectionView: UICollectionView!
@@ -58,9 +58,7 @@ class BehaviorPageViewController: UIViewController {
         
         hideEnterBox()
         
-        
         saveButton.isEnabled = false
-        // Do any additional setup after loading the view.
     }
     
     override func viewDidLayoutSubviews() {
@@ -246,6 +244,10 @@ extension BehaviorPageViewController: UITextViewDelegate {
         if memoTextView.text.isEmpty {
             memoTextView.text = "輸入相關敘述或其他事件"
             memoTextView.textColor = UIColor(red: 211/255.0, green: 211/255.0, blue: 212/255.0, alpha: 1)
+        }
+        
+        if selectDisease.count != 0 {
+            saveButton.isEnabled = true
         }
     }
 }

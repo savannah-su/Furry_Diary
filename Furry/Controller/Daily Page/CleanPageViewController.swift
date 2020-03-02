@@ -82,7 +82,7 @@ class CleanPageViewController: UIViewController {
         
         saveButton.isEnabled = false
         
-        LocalNotiManager.shared.setupNoti(notiDate: 30 , type: "毛孩的清潔通知", meaasge: "Really")
+        //LocalNotiManager.shared.setupNoti(notiDate: 30 , type: "毛孩的清潔通知", meaasge: "Really")
     }
     
     override func viewDidLayoutSubviews() {

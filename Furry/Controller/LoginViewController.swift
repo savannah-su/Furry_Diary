@@ -95,23 +95,44 @@ class LoginViewController: UIViewController {
                     
                     print("Firebase Auth ok")
                     
-                    self.addToDatabase()
+                    self.addToDatabase(appleLogin: false)
                     
                     self.dismiss(animated: true, completion: nil)
                 }
                 
             } else {
+                
+                let alertController = UIAlertController(title: "存取使用者信箱權限", message: "請同意Furry存取您的信箱以建立使用者資料", preferredStyle: .alert)
+                let OKAction = UIAlertAction(title: "了解", style: .default)
+                
+                alertController.addAction(OKAction)
+                self?.present(alertController, animated: true, completion: nil)
+                
                 print("FB login failed")
             }
         }
     }
     
-    func addToDatabase() {
+    func addToDatabase(appleLogin: Bool) {
         
         guard let userID = Auth.auth().currentUser?.uid,
-            let userEmail = Auth.auth().currentUser?.email,
-            let userName = Auth.auth().currentUser?.displayName,
-            let userPhoto = Auth.auth().currentUser?.photoURL?.absoluteString else { return }
+            let userEmail = Auth.auth().currentUser?.providerData.first?.email else {
+                
+                return
+        }
+        
+        var userName = appleLogin ? userEmail : ""
+        var userPhoto = ""
+        
+        if !appleLogin {
+            
+            guard let Name = Auth.auth().currentUser?.displayName,
+                let Photo = Auth.auth().currentUser?.photoURL?.absoluteString else { return }
+            
+            userName = Name
+            userPhoto = Photo
+        }
+        
         
         let usersData = UsersData(name: userName, email: userEmail, image: userPhoto, id: userID)
         
@@ -176,7 +197,7 @@ class LoginViewController: UIViewController {
         let appleIDProvider = ASAuthorizationAppleIDProvider()
         let request = appleIDProvider.createRequest()
         request.requestedScopes = [.fullName, .email]
-//        request.nonce = sha256(nonce)
+        //        request.nonce = sha256(nonce)
         
         let authorizationController = ASAuthorizationController(authorizationRequests: [request])
         authorizationController.delegate = self
@@ -224,7 +245,8 @@ extension LoginViewController: ASAuthorizationControllerDelegate, ASAuthorizatio
                     return
                 }
                 
-                self.addToDatabase()
+                self.addToDatabase(appleLogin: true)
+                
             }
         }
     }
