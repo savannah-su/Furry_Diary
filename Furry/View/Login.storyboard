@@ -20,14 +20,14 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jli-id-65H">
-                                <rect key="frame" x="82" y="796" width="250" height="50"/>
+                                <rect key="frame" x="82" y="783" width="250" height="45"/>
                                 <color key="backgroundColor" red="0.85882352941176465" green="0.26666666666666666" blue="0.21568627450980393" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="Ma8-DD-KQe"/>
+                                    <constraint firstAttribute="height" constant="45" id="Ma8-DD-KQe"/>
                                     <constraint firstAttribute="width" constant="250" id="t9u-QC-bLy"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                <state key="normal" title="Log In With Google ID">
+                                <state key="normal" title="Sign In With Google ID">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -40,14 +40,14 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b4b-4s-XtW">
-                                <rect key="frame" x="82" y="730" width="250" height="50"/>
+                                <rect key="frame" x="82" y="730" width="250" height="45"/>
                                 <color key="backgroundColor" red="0.094117647058823528" green="0.46666666666666667" blue="0.94901960784313721" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="250" id="4S9-Yw-0yV"/>
-                                    <constraint firstAttribute="height" constant="50" id="oL4-yB-I5f"/>
+                                    <constraint firstAttribute="height" constant="45" id="oL4-yB-I5f"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                <state key="normal" title="Log In With Facebook ID">
+                                <state key="normal" title="Sign In With Facebook ID">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -60,11 +60,11 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YJy-C3-W4e">
-                                <rect key="frame" x="82" y="664" width="250" height="50"/>
+                                <rect key="frame" x="82" y="677" width="250" height="45"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="250" id="a45-7J-gie"/>
-                                    <constraint firstAttribute="height" constant="50" id="fnc-SU-b2l"/>
+                                    <constraint firstAttribute="height" constant="45" id="fnc-SU-b2l"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -72,21 +72,47 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="dMc-xW-VAZ">
+                                <rect key="frame" x="129" y="844" width="156" height="8"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="註冊登入即同意" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d14-V2-Wlw">
+                                        <rect key="frame" x="0.0" y="0.0" width="86" height="8"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="8" id="0g6-Us-UKr"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fru-RR-VCg">
+                                        <rect key="frame" x="94" y="0.0" width="62" height="8"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                        <state key="normal" title="隱私權政策">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="privateBtn:" destination="u1e-EP-nCX" eventType="touchUpInside" id="x9e-h8-l0r"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="dMc-xW-VAZ" firstAttribute="top" secondItem="Jli-id-65H" secondAttribute="bottom" constant="16" id="2NM-8V-NeI"/>
+                            <constraint firstItem="dMc-xW-VAZ" firstAttribute="centerX" secondItem="xQv-Wq-6q1" secondAttribute="centerX" id="8A9-VG-uAV"/>
                             <constraint firstItem="YJy-C3-W4e" firstAttribute="centerX" secondItem="xQv-Wq-6q1" secondAttribute="centerX" id="9Br-Cq-9gZ"/>
-                            <constraint firstItem="HUe-MP-PbA" firstAttribute="bottom" secondItem="Jli-id-65H" secondAttribute="bottom" constant="16" id="KbQ-AD-o39"/>
                             <constraint firstItem="Jli-id-65H" firstAttribute="trailing" secondItem="b4b-4s-XtW" secondAttribute="trailing" id="KiP-iC-yGT"/>
                             <constraint firstAttribute="bottom" secondItem="n84-mC-WlI" secondAttribute="bottom" id="SIH-D6-58E"/>
                             <constraint firstItem="Jli-id-65H" firstAttribute="centerX" secondItem="xQv-Wq-6q1" secondAttribute="centerX" id="Tml-MA-rTc"/>
                             <constraint firstItem="HUe-MP-PbA" firstAttribute="trailing" secondItem="n84-mC-WlI" secondAttribute="trailing" id="YkO-4P-wJy"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="dMc-xW-VAZ" secondAttribute="bottom" constant="10" id="f6R-d7-LhE"/>
                             <constraint firstItem="n84-mC-WlI" firstAttribute="top" secondItem="xQv-Wq-6q1" secondAttribute="top" id="ogq-1J-b3M"/>
                             <constraint firstItem="Jli-id-65H" firstAttribute="leading" secondItem="b4b-4s-XtW" secondAttribute="leading" id="pug-5T-tsT"/>
-                            <constraint firstItem="b4b-4s-XtW" firstAttribute="top" secondItem="YJy-C3-W4e" secondAttribute="bottom" constant="16" id="qU3-zp-No2"/>
+                            <constraint firstItem="b4b-4s-XtW" firstAttribute="top" secondItem="YJy-C3-W4e" secondAttribute="bottom" constant="8" id="qU3-zp-No2"/>
                             <constraint firstItem="n84-mC-WlI" firstAttribute="leading" secondItem="HUe-MP-PbA" secondAttribute="leading" id="rkU-pI-cVN"/>
                             <constraint firstItem="b4b-4s-XtW" firstAttribute="centerX" secondItem="xQv-Wq-6q1" secondAttribute="centerX" id="tNj-VN-xeR"/>
-                            <constraint firstItem="Jli-id-65H" firstAttribute="top" secondItem="b4b-4s-XtW" secondAttribute="bottom" constant="16" id="zXS-Cp-wb3"/>
+                            <constraint firstItem="Jli-id-65H" firstAttribute="top" secondItem="b4b-4s-XtW" secondAttribute="bottom" constant="8" id="zXS-Cp-wb3"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="HUe-MP-PbA"/>
                     </view>
@@ -575,6 +601,40 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DSK-yz-UT5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2921.739130434783" y="-304.01785714285711"/>
+        </scene>
+        <!--Private Web View Controller-->
+        <scene sceneID="Bdv-iP-Irq">
+            <objects>
+                <viewController storyboardIdentifier="Private Web Page" id="hYJ-lx-xBi" customClass="PrivateWebViewController" customModule="Furry" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="nhq-LU-2at">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ezk-Ob-7FA">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="hM1-n1-UWE" firstAttribute="bottom" secondItem="ezk-Ob-7FA" secondAttribute="bottom" id="5WK-Cs-1wI"/>
+                            <constraint firstItem="ezk-Ob-7FA" firstAttribute="top" secondItem="hM1-n1-UWE" secondAttribute="top" id="UDO-7i-ytO"/>
+                            <constraint firstItem="hM1-n1-UWE" firstAttribute="trailing" secondItem="ezk-Ob-7FA" secondAttribute="trailing" id="itI-yU-vut"/>
+                            <constraint firstItem="ezk-Ob-7FA" firstAttribute="leading" secondItem="hM1-n1-UWE" secondAttribute="leading" id="kz8-g7-IGq"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="hM1-n1-UWE"/>
+                    </view>
+                    <connections>
+                        <outlet property="webView" destination="ezk-Ob-7FA" id="Vtx-3u-ogJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lDo-lS-9wX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3606" y="-304"/>
         </scene>
     </scenes>
     <resources>

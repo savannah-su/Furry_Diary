@@ -27,6 +27,10 @@ class LoginViewController: UIViewController {
         GIDSignIn.sharedInstance()?.signIn()
     }
     
+    @IBAction func privateBtn(_ sender: Any) {
+        toPrivateWeb()
+    }
+    
     let appleLoginButton: ASAuthorizationAppleIDButton = {
         
         let button = ASAuthorizationAppleIDButton()
@@ -49,6 +53,14 @@ class LoginViewController: UIViewController {
         
         //google Login
         GIDSignIn.sharedInstance()?.presentingViewController = self
+    }
+    
+    func toPrivateWeb() {
+        
+        guard let vc = storyboard?.instantiateViewController(identifier: "Private Web Page") as? PrivateWebViewController else {
+            return
+        }
+        self.present(vc, animated: true, completion: nil)
     }
     
     @objc func toNextpage() {
