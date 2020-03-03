@@ -15,8 +15,8 @@ class DailyPageViewController: UIViewController {
     @IBOutlet weak var chooseView: UIView!
     @IBOutlet weak var navigationTitle: UILabel!
     
-    let item = ["衛生清潔", "預防計畫", "體重紀錄", "行為症狀"]
-    let itemImage = ["dog-treat", "shield", "libra-2", "pet"]
+    let item = ["衛生清潔", "預防計畫", "體重紀錄", "行為症狀", "醫療紀錄", "用藥紀錄"]
+    let itemImage = ["dog-treat", "shield", "libra-2", "pet", "report", "medicine"]
     var recordPetID = ""
     
     override func viewDidLoad() {
@@ -79,7 +79,7 @@ extension DailyPageViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         if collectionView == self.collectionView {
-            return 4
+            return item.count
         }
         return UploadManager.shared.simplePetInfo.count
     }
@@ -148,11 +148,25 @@ extension DailyPageViewController: UICollectionViewDelegate {
                 vc.petID = recordPetID
                 show(vc, sender: nil)
                 
+            } else if indexPath.row == 4 {
+            
+                guard let vc = UIStoryboard(name: "Medical", bundle: nil).instantiateViewController(identifier: "Diagnosis Page") as? DiagnosisViewController else { return }
+                
+                vc.petID = recordPetID
+                show(vc, sender: nil)
+                
+            } else if indexPath.row == 5 {
+                
+                guard let vc = UIStoryboard(name: "Medical", bundle: nil).instantiateViewController(identifier: "Medicine Page") as? MedicineViewController else { return }
+                
+                vc.petID = recordPetID
+                show(vc, sender: nil)
+                
             }
             
         } else if collectionView == self.choosePetCollectionView {
             
-            navigationTitle.text = "日常紀錄"
+            navigationTitle.text = "撰寫紀錄"
             chooseView.isHidden = true
             self.collectionView.isHidden = false
             

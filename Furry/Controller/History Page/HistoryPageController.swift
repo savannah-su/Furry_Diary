@@ -301,7 +301,7 @@ extension HistoryPageController: UITableViewDataSource {
             cell.contentLabel.isHidden = true
             }
             
-        case "預防計畫":
+        case "預防計畫", "醫療紀錄":
             cell.cellType = .prevent
             cell.cellColor = UIColor.G1
             cell.recordDate.text = formatter.string(from: currentDateData[indexPath.row].date)

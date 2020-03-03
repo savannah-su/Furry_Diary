@@ -156,10 +156,10 @@ class BehaviorPageViewController: UIViewController {
     func setupTextView() {
         memoTextView.text = "輸入相關敘述或其他事件"
         memoTextView.textColor = UIColor(red: 211/255.0, green: 211/255.0, blue: 212/255.0, alpha: 1)
+        memoTextView.layer.cornerRadius = 5
     }
-    
 }
-
+    
 extension BehaviorPageViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

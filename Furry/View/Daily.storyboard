@@ -11,7 +11,7 @@
         <!--Behavior Page View Controller-->
         <scene sceneID="W0N-I0-IP3">
             <objects>
-                <viewController storyboardIdentifier="Behavior Page" hidesBottomBarWhenPushed="YES" id="PlJ-dp-eLT" customClass="BehaviorPageViewController" customModule="Personal_Project" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Behavior Page" hidesBottomBarWhenPushed="YES" id="PlJ-dp-eLT" customClass="BehaviorPageViewController" customModule="Furry" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" clipsSubviews="YES" contentMode="scaleToFill" id="U34-OR-ZBk">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -22,7 +22,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6fx-VK-poc">
                                         <rect key="frame" x="412" y="332" width="50" height="50"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Jn-fx-gfD" customClass="VerticalAlignedButton" customModule="Personal_Project" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Jn-fx-gfD" customClass="VerticalAlignedButton" customModule="Furry" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -69,7 +69,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zcQ-M0-3mI">
                                         <rect key="frame" x="98" y="332" width="50" height="50"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o3T-g9-hic" customClass="VerticalAlignedButton" customModule="Personal_Project" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o3T-g9-hic" customClass="VerticalAlignedButton" customModule="Furry" customModuleProvider="target">
                                                 <rect key="frame" x="12.666666666666664" y="12.666666666666671" width="25" height="25"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -125,7 +125,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Item Cell" id="6zM-bR-TSW" customClass="ReuseItemCell" customModule="Personal_Project" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Item Cell" id="6zM-bR-TSW" customClass="ReuseItemCell" customModule="Furry" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="70" height="100"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="MTn-y9-30R">
@@ -199,43 +199,38 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="68L-9V-eZ2">
-                                        <rect key="frame" x="221.66666666666663" y="121" width="215.33333333333337" height="60"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="60" id="Wq5-4B-uxZ"/>
-                                        </constraints>
-                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                        <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="5"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </textView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="點選今天發生了什麼事件" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DAK-OV-odq">
                                         <rect key="frame" x="140.66666666666669" y="80" width="279" height="30"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="dlQ-9Z-t3Z">
+                                        <rect key="frame" x="221.66666666666663" y="121" width="215.33333333333337" height="100"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="100" id="q5L-UJ-gB6"/>
+                                        </constraints>
+                                        <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
+                                        <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.4431372549" green="0.71764705880000002" blue="0.71764705880000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstItem="dlQ-9Z-t3Z" firstAttribute="leading" secondItem="vlL-86-32L" secondAttribute="leading" id="0oW-VY-4lv"/>
                                     <constraint firstItem="DAK-OV-odq" firstAttribute="centerX" secondItem="a6I-3e-5DS" secondAttribute="centerX" id="4qL-P1-pTC"/>
+                                    <constraint firstItem="dlQ-9Z-t3Z" firstAttribute="top" secondItem="cIN-6A-4rE" secondAttribute="top" id="A8L-zj-RCZ"/>
                                     <constraint firstItem="cIN-6A-4rE" firstAttribute="leading" secondItem="BZ6-Dm-CCH" secondAttribute="leading" id="G54-BV-YnZ"/>
                                     <constraint firstAttribute="width" secondItem="a6I-3e-5DS" secondAttribute="height" multiplier="1:1" id="HNb-qR-B1Z"/>
                                     <constraint firstItem="BZ6-Dm-CCH" firstAttribute="top" secondItem="a6I-3e-5DS" secondAttribute="top" constant="70" id="O1W-uZ-UuO"/>
                                     <constraint firstItem="KI5-kK-pzc" firstAttribute="leading" secondItem="BZ6-Dm-CCH" secondAttribute="trailing" constant="13" id="PCI-3F-t2w"/>
+                                    <constraint firstItem="dlQ-9Z-t3Z" firstAttribute="trailing" secondItem="vlL-86-32L" secondAttribute="trailing" id="QAZ-lf-ags"/>
                                     <constraint firstItem="KI5-kK-pzc" firstAttribute="centerY" secondItem="BZ6-Dm-CCH" secondAttribute="centerY" id="R2Z-YW-5WS"/>
-                                    <constraint firstItem="68L-9V-eZ2" firstAttribute="leading" secondItem="vlL-86-32L" secondAttribute="leading" id="Rn1-Zd-0rM"/>
                                     <constraint firstItem="DAK-OV-odq" firstAttribute="top" secondItem="a6I-3e-5DS" secondAttribute="top" constant="80" id="S4N-XV-f1k"/>
-                                    <constraint firstItem="68L-9V-eZ2" firstAttribute="top" secondItem="cIN-6A-4rE" secondAttribute="top" id="Wa5-Et-ZFH"/>
                                     <constraint firstItem="NQO-Sl-nzd" firstAttribute="centerY" secondItem="cIN-6A-4rE" secondAttribute="centerY" id="ckC-6k-uTh"/>
                                     <constraint firstItem="NQO-Sl-nzd" firstAttribute="leading" secondItem="cIN-6A-4rE" secondAttribute="trailing" constant="13" id="ku9-Ly-qJy"/>
-                                    <constraint firstItem="68L-9V-eZ2" firstAttribute="trailing" secondItem="vlL-86-32L" secondAttribute="trailing" id="nou-B7-Vzm"/>
                                     <constraint firstItem="vlL-86-32L" firstAttribute="centerY" secondItem="BZ6-Dm-CCH" secondAttribute="centerY" id="si4-7u-CZl"/>
                                     <constraint firstItem="cIN-6A-4rE" firstAttribute="top" secondItem="BZ6-Dm-CCH" secondAttribute="bottom" constant="30" id="wUx-Ti-r5H"/>
                                     <constraint firstItem="vlL-86-32L" firstAttribute="leading" secondItem="KI5-kK-pzc" secondAttribute="trailing" constant="13" id="yGM-oi-0KV"/>
@@ -271,7 +266,7 @@
                         <outlet property="dateLabel" destination="BZ6-Dm-CCH" id="3zp-ik-b7L"/>
                         <outlet property="firstBar" destination="KI5-kK-pzc" id="dw9-AK-8JA"/>
                         <outlet property="memoLabel" destination="cIN-6A-4rE" id="2Vi-M8-O4A"/>
-                        <outlet property="memoTextView" destination="68L-9V-eZ2" id="3UB-bJ-iKn"/>
+                        <outlet property="memoTextView" destination="dlQ-9Z-t3Z" id="PHd-P3-LHA"/>
                         <outlet property="saveButton" destination="4Jn-fx-gfD" id="hgc-h5-t2t"/>
                         <outlet property="secondBar" destination="NQO-Sl-nzd" id="gOg-qp-AJj"/>
                         <outlet property="timeTextField" destination="vlL-86-32L" id="WKn-um-t56"/>
@@ -280,12 +275,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A24-wa-xJO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1351.2" y="-1599.8500749625189"/>
+            <point key="canvasLocation" x="1350.7246376811595" y="-1600.4464285714284"/>
         </scene>
         <!--Weight Page View Controller-->
         <scene sceneID="y9j-kr-pRv">
             <objects>
-                <viewController storyboardIdentifier="Weight Page" hidesBottomBarWhenPushed="YES" id="RPO-0p-b1G" customClass="WeightPageViewController" customModule="Personal_Project" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Weight Page" hidesBottomBarWhenPushed="YES" id="RPO-0p-b1G" customClass="WeightPageViewController" customModule="Furry" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" clipsSubviews="YES" contentMode="scaleToFill" id="gjg-wR-kIg">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -296,7 +291,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KQh-5x-ar9">
                                         <rect key="frame" x="412" y="332" width="50" height="50"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cgq-KG-bJI" customClass="VerticalAlignedButton" customModule="Personal_Project" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cgq-KG-bJI" customClass="VerticalAlignedButton" customModule="Furry" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -343,7 +338,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WO7-KX-yLO">
                                         <rect key="frame" x="98" y="332" width="50" height="50"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ask-4d-91u" customClass="VerticalAlignedButton" customModule="Personal_Project" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ask-4d-91u" customClass="VerticalAlignedButton" customModule="Furry" customModuleProvider="target">
                                                 <rect key="frame" x="12.666666666666664" y="12.666666666666671" width="25" height="25"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -505,7 +500,7 @@
         <!--Prevent Page View Controller-->
         <scene sceneID="Ika-JG-6pj">
             <objects>
-                <viewController storyboardIdentifier="Prevent Page" hidesBottomBarWhenPushed="YES" id="13z-mM-f83" customClass="PreventPageViewController" customModule="Personal_Project" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Prevent Page" hidesBottomBarWhenPushed="YES" id="13z-mM-f83" customClass="PreventPageViewController" customModule="Furry" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" clipsSubviews="YES" contentMode="scaleToFill" id="8sh-eS-3Rw">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -516,7 +511,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zCl-go-EH9">
                                         <rect key="frame" x="412" y="332" width="50" height="50"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2QA-Iu-UeP" customClass="VerticalAlignedButton" customModule="Personal_Project" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2QA-Iu-UeP" customClass="VerticalAlignedButton" customModule="Furry" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -563,7 +558,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aCn-pX-e12">
                                         <rect key="frame" x="98" y="332" width="50" height="50"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Clg-kh-WeB" customClass="VerticalAlignedButton" customModule="Personal_Project" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Clg-kh-WeB" customClass="VerticalAlignedButton" customModule="Furry" customModuleProvider="target">
                                                 <rect key="frame" x="12.666666666666664" y="12.666666666666671" width="25" height="25"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -624,7 +619,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Item Cell" id="7YJ-7Y-UVb" customClass="ReuseItemCell" customModule="Personal_Project" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Item Cell" id="7YJ-7Y-UVb" customClass="ReuseItemCell" customModule="Furry" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="70" height="100"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="IH1-d5-hvI">
@@ -665,7 +660,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="crI-aO-dvq">
                                 <rect key="frame" x="-73" y="616" width="560" height="560"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OUz-km-wcZ" customClass="VerticalAlignedButton" customModule="Personal_Project" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OUz-km-wcZ" customClass="VerticalAlignedButton" customModule="Furry" customModuleProvider="target">
                                         <rect key="frame" x="267.66666666666663" y="8" width="25" height="25"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -688,7 +683,7 @@
                                         <rect key="frame" x="108" y="58" width="344" height="172"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Enter Cell" rowHeight="48" id="nTN-bo-V3s" customClass="EnterInfoCell" customModule="Personal_Project" customModuleProvider="target">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Enter Cell" rowHeight="48" id="nTN-bo-V3s" customClass="EnterInfoCell" customModule="Furry" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="28" width="344" height="48"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nTN-bo-V3s" id="Jqe-lz-h9K">
@@ -733,7 +728,7 @@
                                                     <outlet property="titleLabel" destination="c48-8d-hLF" id="KIw-SY-vJ4"/>
                                                 </connections>
                                             </tableViewCell>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Noti Cell" rowHeight="140" id="uKz-e2-elG" customClass="NotiCell" customModule="Personal_Project" customModuleProvider="target">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Noti Cell" rowHeight="140" id="uKz-e2-elG" customClass="NotiCell" customModule="Furry" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="76" width="344" height="140"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="uKz-e2-elG" id="Is5-xX-VfI">
@@ -892,7 +887,7 @@
         <!--Clean Page View Controller-->
         <scene sceneID="RuZ-vu-D8W">
             <objects>
-                <viewController storyboardIdentifier="Clean Page" hidesBottomBarWhenPushed="YES" id="iLZ-HG-yJW" customClass="CleanPageViewController" customModule="Personal_Project" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Clean Page" hidesBottomBarWhenPushed="YES" id="iLZ-HG-yJW" customClass="CleanPageViewController" customModule="Furry" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" clipsSubviews="YES" contentMode="scaleToFill" id="rNr-Yj-lr6">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -903,7 +898,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ETw-0M-jnK">
                                         <rect key="frame" x="412" y="332" width="50" height="50"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HD4-ou-bs8" customClass="VerticalAlignedButton" customModule="Personal_Project" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HD4-ou-bs8" customClass="VerticalAlignedButton" customModule="Furry" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -950,7 +945,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="du1-oE-olK">
                                         <rect key="frame" x="98" y="332" width="50" height="50"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ya5-S9-nbP" customClass="VerticalAlignedButton" customModule="Personal_Project" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ya5-S9-nbP" customClass="VerticalAlignedButton" customModule="Furry" customModuleProvider="target">
                                                 <rect key="frame" x="12.666666666666664" y="12.666666666666671" width="25" height="25"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -1013,7 +1008,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Item Cell" id="sdp-HK-h5l" customClass="ReuseItemCell" customModule="Personal_Project" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Item Cell" id="sdp-HK-h5l" customClass="ReuseItemCell" customModule="Furry" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="60" height="85"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="r1X-5k-kWN">
@@ -1050,7 +1045,7 @@
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
-                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Header" id="wu1-ae-GXH" customClass="HeaderView" customModule="Personal_Project" customModuleProvider="target">
+                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Header" id="wu1-ae-GXH" customClass="HeaderView" customModule="Furry" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
@@ -1074,7 +1069,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NUU-Uk-9x9">
                                 <rect key="frame" x="-73" y="616" width="560" height="560"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zA2-O3-Sxp" customClass="VerticalAlignedButton" customModule="Personal_Project" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zA2-O3-Sxp" customClass="VerticalAlignedButton" customModule="Furry" customModuleProvider="target">
                                         <rect key="frame" x="267.66666666666663" y="8" width="25" height="25"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -1098,7 +1093,7 @@
                                         <rect key="frame" x="108" y="50" width="344" height="212"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Enter Cell" rowHeight="48" id="tTO-eM-gHU" customClass="EnterInfoCell" customModule="Personal_Project" customModuleProvider="target">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Enter Cell" rowHeight="48" id="tTO-eM-gHU" customClass="EnterInfoCell" customModule="Furry" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="28" width="344" height="48"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="tTO-eM-gHU" id="u7e-8g-IzC">
@@ -1143,7 +1138,7 @@
                                                     <outlet property="titleLabel" destination="Wuf-y1-25B" id="hNn-kL-6qf"/>
                                                 </connections>
                                             </tableViewCell>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Noti Cell" rowHeight="140" id="WGR-EQ-6Cz" customClass="NotiCell" customModule="Personal_Project" customModuleProvider="target">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Noti Cell" rowHeight="140" id="WGR-EQ-6Cz" customClass="NotiCell" customModule="Furry" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="76" width="344" height="140"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="WGR-EQ-6Cz" id="3jr-w6-aCL">

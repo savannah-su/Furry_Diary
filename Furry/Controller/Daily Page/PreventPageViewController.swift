@@ -79,7 +79,7 @@ class PreventPageViewController: UIViewController {
         
         saveButton.isEnabled = false
         
-        LocalNotiManager.shared.setupNoti(notiDate: 30 , type: "毛孩的清潔通知", meaasge: "Really")
+//        LocalNotiManager.shared.setupNoti(notiDate: 30 , type: "毛孩的清潔通知", meaasge: "Really")
     }
     
     override func viewDidLayoutSubviews() {
@@ -114,7 +114,7 @@ class PreventPageViewController: UIViewController {
             }
         }
         
-        LocalNotiManager.shared.setupNoti(notiDate: 10 , type: "毛孩的\(self.subItemType)清潔通知", meaasge: "Really")
+//        LocalNotiManager.shared.setupNoti(notiDate: 10 , type: "毛孩的\(self.subItemType)清潔通知", meaasge: "Really")
     }
     
     func checkUpdateStatus() {
