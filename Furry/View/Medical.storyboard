@@ -37,7 +37,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <action selector="saveButton:" destination="Xv9-sp-xIe" eventType="touchUpInside" id="qg5-1x-VRP"/>
+                                                    <action selector="saveButton:" destination="Xv9-sp-xIe" eventType="touchUpInside" id="kdX-HJ-8oq"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -56,11 +56,11 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </view>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="secure-shield" translatesAutoresizingMaskIntoConstraints="NO" id="cH5-JD-pvf">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="medicine-2" translatesAutoresizingMaskIntoConstraints="NO" id="cH5-JD-pvf">
                                         <rect key="frame" x="198" y="354" width="164" height="144.5"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="預防計畫" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6hZ-wA-u5l">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="用藥紀錄" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6hZ-wA-u5l">
                                         <rect key="frame" x="198" y="503.5" width="164" height="26.5"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -85,7 +85,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <action selector="backButton:" destination="Xv9-sp-xIe" eventType="touchUpInside" id="Wzp-oh-tAb"/>
+                                                    <action selector="backButton:" destination="Xv9-sp-xIe" eventType="touchUpInside" id="bed-ZS-fvf"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -171,27 +171,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gC2-LX-yyl">
                                 <rect key="frame" x="-73" y="616" width="560" height="560"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="54X-nD-r6t" customClass="VerticalAlignedButton" customModule="Furry" customModuleProvider="target">
-                                        <rect key="frame" x="267.5" y="8" width="25" height="25"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="25" id="5dy-ul-VG0"/>
-                                            <constraint firstAttribute="height" constant="25" id="OMI-Kc-sPG"/>
-                                        </constraints>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <inset key="contentEdgeInsets" minX="0.0" minY="10" maxX="0.0" maxY="0.0"/>
-                                        <state key="normal" image="chevron.down" catalog="system"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="15"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="bottomViewButton:" destination="Xv9-sp-xIe" eventType="touchUpInside" id="asN-na-L1t"/>
-                                        </connections>
-                                    </button>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9zi-LV-TrM">
-                                        <rect key="frame" x="108" y="58" width="344" height="172"/>
+                                        <rect key="frame" x="108" y="50" width="344" height="180"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Enter Cell" rowHeight="48" id="0ti-7a-bbY" customClass="EnterInfoCell" customModule="Furry" customModuleProvider="target">
@@ -275,7 +256,7 @@
                                                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="B2O-Pa-mYq">
                                                             <rect key="frame" x="279" y="5" width="51" height="31"/>
                                                         </switch>
-                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="選擇下次提醒日期" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ua2-Jk-WKk">
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="選擇下次服藥日期" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ua2-Jk-WKk">
                                                             <rect key="frame" x="114.5" y="44.5" width="216.5" height="34"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <textInputTraits key="textInputTraits"/>
@@ -334,8 +315,8 @@
                                             </tableViewCell>
                                         </prototypes>
                                     </tableView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="今天做了哪一項預防計畫？" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J50-wJ-FpW">
-                                        <rect key="frame" x="128" y="80" width="304" height="30"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="今天使用了哪種藥物？" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J50-wJ-FpW">
+                                        <rect key="frame" x="153.5" y="80" width="253.5" height="30"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -344,12 +325,10 @@
                                 <color key="backgroundColor" red="0.4431372549" green="0.71764705880000002" blue="0.71764705880000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="J50-wJ-FpW" firstAttribute="top" secondItem="gC2-LX-yyl" secondAttribute="top" constant="80" id="44p-b9-WZb"/>
-                                    <constraint firstItem="9zi-LV-TrM" firstAttribute="top" secondItem="54X-nD-r6t" secondAttribute="bottom" constant="25" id="O6I-kt-1aR"/>
+                                    <constraint firstItem="9zi-LV-TrM" firstAttribute="top" secondItem="gC2-LX-yyl" secondAttribute="top" constant="50" id="Jdz-b5-mtS"/>
                                     <constraint firstAttribute="width" secondItem="gC2-LX-yyl" secondAttribute="height" multiplier="1:1" id="TRb-ae-96o"/>
                                     <constraint firstItem="9zi-LV-TrM" firstAttribute="centerX" secondItem="gC2-LX-yyl" secondAttribute="centerX" id="Ydi-dn-xxZ"/>
                                     <constraint firstItem="J50-wJ-FpW" firstAttribute="centerX" secondItem="gC2-LX-yyl" secondAttribute="centerX" id="Ylu-DT-0A5"/>
-                                    <constraint firstItem="54X-nD-r6t" firstAttribute="centerX" secondItem="gC2-LX-yyl" secondAttribute="centerX" id="iHX-l6-fHd"/>
-                                    <constraint firstItem="54X-nD-r6t" firstAttribute="top" secondItem="gC2-LX-yyl" secondAttribute="top" constant="8" id="j6N-4I-PAu"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -382,13 +361,12 @@
                         <viewLayoutGuide key="safeArea" id="m3a-QP-A0c"/>
                     </view>
                     <connections>
-                        <outlet property="bottomView" destination="gC2-LX-yyl" id="RsO-ls-daP"/>
-                        <outlet property="bottomViewButton" destination="54X-nD-r6t" id="rks-sN-LbY"/>
-                        <outlet property="bottomViewLabel" destination="J50-wJ-FpW" id="1t2-42-III"/>
-                        <outlet property="collectionView" destination="qN0-Ry-yth" id="kfT-NO-1U0"/>
-                        <outlet property="saveButton" destination="2ne-XO-Tvj" id="eFJ-g4-q5H"/>
-                        <outlet property="tableView" destination="9zi-LV-TrM" id="T4b-ZL-tuy"/>
-                        <outlet property="topView" destination="8kP-by-fvP" id="mdJ-l6-Cdr"/>
+                        <outlet property="bottomLabel" destination="J50-wJ-FpW" id="B5C-CG-TLA"/>
+                        <outlet property="bottomView" destination="gC2-LX-yyl" id="92V-Dc-OtQ"/>
+                        <outlet property="collectionView" destination="qN0-Ry-yth" id="o1K-Hh-7q5"/>
+                        <outlet property="saveButton" destination="2ne-XO-Tvj" id="vqC-yy-CAy"/>
+                        <outlet property="tableView" destination="9zi-LV-TrM" id="tBT-13-rMs"/>
+                        <outlet property="topView" destination="8kP-by-fvP" id="OeC-0S-5lb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aJG-rL-lm9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -424,7 +402,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <action selector="saveButton:" destination="xuu-1x-uV6" eventType="touchUpInside" id="Jh5-DM-HAh"/>
+                                                    <action selector="saveButton:" destination="xuu-1x-uV6" eventType="touchUpInside" id="jNl-fv-83c"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -443,7 +421,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </view>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="secure-shield" translatesAutoresizingMaskIntoConstraints="NO" id="6Yx-lT-7rr">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="report-2" translatesAutoresizingMaskIntoConstraints="NO" id="6Yx-lT-7rr">
                                         <rect key="frame" x="198" y="354" width="164" height="144"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </imageView>
@@ -472,7 +450,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <action selector="backButton:" destination="xuu-1x-uV6" eventType="touchUpInside" id="7n7-TI-CiF"/>
+                                                    <action selector="backButton:" destination="xuu-1x-uV6" eventType="touchUpInside" id="mC7-hC-Zfo"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -559,7 +537,7 @@
                                 <rect key="frame" x="-73" y="616" width="560" height="560"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="A0P-S7-daL">
-                                        <rect key="frame" x="108" y="55" width="344" height="175"/>
+                                        <rect key="frame" x="108" y="50" width="344" height="180"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="344" id="W5s-zx-Svu"/>
@@ -623,7 +601,7 @@
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="提醒日期" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wxi-Po-Osr">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="回診日期" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wxi-Po-Osr">
                                                             <rect key="frame" x="16" y="51" width="69.5" height="21"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -646,7 +624,7 @@
                                                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="MmU-cq-moa">
                                                             <rect key="frame" x="279" y="5" width="51" height="31"/>
                                                         </switch>
-                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="選擇下次提醒日期" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="caw-0M-suu">
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="選擇下次追蹤日期" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="caw-0M-suu">
                                                             <rect key="frame" x="114.5" y="44.5" width="216.5" height="34"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <textInputTraits key="textInputTraits"/>
@@ -705,8 +683,8 @@
                                             </tableViewCell>
                                         </prototypes>
                                     </tableView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="今天做了哪一項預防計畫？" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tnn-wv-ZcS">
-                                        <rect key="frame" x="128" y="80" width="304" height="30"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="今天做了哪項醫療行為？" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tnn-wv-ZcS">
+                                        <rect key="frame" x="140.5" y="80" width="279" height="30"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -718,7 +696,7 @@
                                     <constraint firstItem="tnn-wv-ZcS" firstAttribute="top" secondItem="WwA-s9-nX1" secondAttribute="top" constant="80" id="Ulo-oV-TiN"/>
                                     <constraint firstItem="tnn-wv-ZcS" firstAttribute="centerX" secondItem="WwA-s9-nX1" secondAttribute="centerX" id="Wnm-Wr-Mhe"/>
                                     <constraint firstAttribute="width" secondItem="WwA-s9-nX1" secondAttribute="height" multiplier="1:1" id="hMd-QV-pee"/>
-                                    <constraint firstItem="A0P-S7-daL" firstAttribute="top" secondItem="WwA-s9-nX1" secondAttribute="top" constant="55" id="zHS-gn-9vB"/>
+                                    <constraint firstItem="A0P-S7-daL" firstAttribute="top" secondItem="WwA-s9-nX1" secondAttribute="top" constant="50" id="zHS-gn-9vB"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -754,7 +732,7 @@
                         <outlet property="bottomLabel" destination="tnn-wv-ZcS" id="Uj1-kK-Zs7"/>
                         <outlet property="bottomView" destination="WwA-s9-nX1" id="KQ4-Ln-QD9"/>
                         <outlet property="collectionView" destination="eOh-5t-qgj" id="KWe-mT-17g"/>
-                        <outlet property="saveButton" destination="6jj-oF-R0f" id="2bK-iK-pLi"/>
+                        <outlet property="saveButton" destination="6jj-oF-R0f" id="jhZ-pQ-2b9"/>
                         <outlet property="tableView" destination="A0P-S7-daL" id="Uco-Dj-hyE"/>
                         <outlet property="topView" destination="bk2-tq-ugZ" id="avn-4v-fQY"/>
                     </connections>
@@ -766,7 +744,7 @@
     </scenes>
     <resources>
         <image name="Icon_24px_Back" width="24" height="24"/>
-        <image name="chevron.down" catalog="system" width="64" height="36"/>
-        <image name="secure-shield" width="512" height="512"/>
+        <image name="medicine-2" width="512" height="512"/>
+        <image name="report-2" width="512" height="512"/>
     </resources>
 </document>

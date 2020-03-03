@@ -46,8 +46,8 @@ extension CoOwnerCell: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
-        let url = URL(string: data.ownersImage[indexPath.item])
-        cell.ownerPhoto.kf.setImage(with: url)
+//        let url = URL(string: data.ownersImage[indexPath.item])
+        cell.ownerPhoto.loadImage(data.ownersImage[indexPath.item], placeHolder: UIImage(named: "icon-selected"))
         cell.ownerPhoto.layer.cornerRadius = 15
 
         return cell

@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 import FirebaseAuth
 import FirebaseCore
+import Crashlytics
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
@@ -48,6 +49,9 @@ class HomePageViewController: UIViewController {
         
         super.viewDidLoad()
         
+        //製造Crash範例
+//        Fabric.sharedSDK().debug = true
+        
         tableView.dataSource = self
         tableView.delegate = self
         
@@ -61,6 +65,9 @@ class HomePageViewController: UIViewController {
     }
     
     func logout() {
+        
+        //製造Crash範例
+        Crashlytics.sharedInstance().crash()
         
         let alertController = UIAlertController(title: "確定要登出嗎？", message: "", preferredStyle: .alert)
         let OKAction = UIAlertAction(title: "確定", style: .default) { _ in

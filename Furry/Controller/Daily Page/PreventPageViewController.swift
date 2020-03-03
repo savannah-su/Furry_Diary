@@ -78,8 +78,9 @@ class PreventPageViewController: UIViewController {
         bottomViewButton.isHidden = true
         
         saveButton.isEnabled = false
+        saveButton.setTitleColor(UIColor.lightGray, for: .disabled)
         
-        LocalNotiManager.shared.setupNoti(notiDate: 30 , type: "毛孩的清潔通知", meaasge: "Really")
+//        LocalNotiManager.shared.setupNoti(notiDate: 30 , type: "毛孩的清潔通知", meaasge: "Really")
     }
     
     override func viewDidLayoutSubviews() {
@@ -114,19 +115,20 @@ class PreventPageViewController: UIViewController {
             }
         }
         
-        LocalNotiManager.shared.setupNoti(notiDate: 10 , type: "毛孩的\(self.subItemType)清潔通知", meaasge: "Really")
+//        LocalNotiManager.shared.setupNoti(notiDate: 10 , type: "毛孩的\(self.subItemType)清潔通知", meaasge: "Really")
     }
     
     func checkUpdateStatus() {
         
         if isSwitchOn {
-            
             saveButton.isEnabled = notiDate > doneDate
+            saveButton.setTitleColor(UIColor.G4, for: .normal)
             
         } else {
-            
             saveButton.isEnabled = medicineName != ""
+            saveButton.setTitleColor(UIColor.G4, for: .normal)
         }
+        saveButton.setTitleColor(UIColor.lightGray, for: .disabled)
     }
 }
 

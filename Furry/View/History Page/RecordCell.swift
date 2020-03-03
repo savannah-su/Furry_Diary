@@ -17,6 +17,10 @@ enum CellType {
     case weight
     
     case behavior
+    
+    case diagnosis
+    
+    case medicine
 }
 
 class RecordCell: UITableViewCell {
@@ -95,6 +99,18 @@ class RecordCell: UITableViewCell {
                 subitemCollection.isHidden = false
                 contentLabel.isHidden = false
                 nextDateLabel.isHidden = true
+                
+            case .diagnosis:
+                recordDate.isHidden = false
+                subitemCollection.isHidden = false
+                contentLabel.isHidden = false
+                nextDateLabel.isHidden = false
+                
+            case .medicine:
+                recordDate.isHidden = false
+                subitemCollection.isHidden = false
+                contentLabel.isHidden = false
+                nextDateLabel.isHidden = false
             }
             
         }

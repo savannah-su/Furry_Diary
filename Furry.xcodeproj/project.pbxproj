@@ -39,6 +39,8 @@
 		2456951424064B2B007FAE98 /* OwnerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2456951324064B2B007FAE98 /* OwnerCell.swift */; };
 		245958FC240A305400454C45 /* MedicineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245958FB240A305400454C45 /* MedicineViewController.swift */; };
 		245958FE240A329700454C45 /* DiagnosisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245958FD240A329700454C45 /* DiagnosisViewController.swift */; };
+		2462C016240CE2EA00880060 /* KingFisherWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2462C015240CE2EA00880060 /* KingFisherWrapper.swift */; };
+		2462C018240D04D200880060 /* PrivateWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2462C017240D04D200880060 /* PrivateWebViewController.swift */; };
 		24647FF023EBF580005DB6E7 /* DetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24647FEF23EBF580005DB6E7 /* DetailCell.swift */; };
 		246E0ECA24012E12008F044A /* VetPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246E0EC924012E12008F044A /* VetPageController.swift */; };
 		246EF8F623F6A07E00A17F65 /* UploadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246EF8F523F6A07E00A17F65 /* UploadManager.swift */; };
@@ -123,6 +125,8 @@
 		245958FB240A305400454C45 /* MedicineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineViewController.swift; sourceTree = "<group>"; };
 		245958FD240A329700454C45 /* DiagnosisViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagnosisViewController.swift; sourceTree = "<group>"; };
 		245958FF240A3A7B00454C45 /* Furry.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = Furry.entitlements; sourceTree = "<group>"; };
+		2462C015240CE2EA00880060 /* KingFisherWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KingFisherWrapper.swift; sourceTree = "<group>"; };
+		2462C017240D04D200880060 /* PrivateWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateWebViewController.swift; sourceTree = "<group>"; };
 		24647FEF23EBF580005DB6E7 /* DetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCell.swift; sourceTree = "<group>"; };
 		246E0EC924012E12008F044A /* VetPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VetPageController.swift; sourceTree = "<group>"; };
 		246EF8F523F6A07E00A17F65 /* UploadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadManager.swift; sourceTree = "<group>"; };
@@ -233,6 +237,7 @@
 				2440D09C23FAD32B00E7A803 /* DownloadManager.swift */,
 				2456950F240165AD007FAE98 /* GetDataManager.swift */,
 				2422DC0D2406A3F800380D4F /* LocalNotiManager.swift */,
+				2462C015240CE2EA00880060 /* KingFisherWrapper.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -424,6 +429,7 @@
 			isa = PBXGroup;
 			children = (
 				2496DB7C23E2FA2600991F79 /* LoginViewController.swift */,
+				2462C017240D04D200880060 /* PrivateWebViewController.swift */,
 				24647FF123EBF63D005DB6E7 /* Home Page */,
 				2430552B23F28C4800B9F4E6 /* Daily Page */,
 				242357B423FD3F76004C8150 /* History Page */,
@@ -756,6 +762,7 @@
 				2473A10423EADD1300C8FFE2 /* HomePageViewController.swift in Sources */,
 				246EF8F623F6A07E00A17F65 /* UploadManager.swift in Sources */,
 				2402B3BB23E4129000E8D009 /* SearchOwnerViewController.swift in Sources */,
+				2462C018240D04D200880060 /* PrivateWebViewController.swift in Sources */,
 				242F8E0123D6DFF700F49853 /* AppDelegate.swift in Sources */,
 				24866E5A23F2B89E003CC715 /* BehaviorPageViewController.swift in Sources */,
 				242357B223FBE5C5004C8150 /* WhichPetCell.swift in Sources */,
@@ -765,6 +772,7 @@
 				24CACB2C23F576B30068EC7D /* HeaderView.swift in Sources */,
 				24874E7723E71EBC007810B0 /* TextFieldCell.swift in Sources */,
 				24866E5E23F2D3CE003CC715 /* ReuseItemCell.swift in Sources */,
+				2462C016240CE2EA00880060 /* KingFisherWrapper.swift in Sources */,
 				2403C46B23E56D8900B73021 /* CreatePetViewController.swift in Sources */,
 				246E0ECA24012E12008F044A /* VetPageController.swift in Sources */,
 				2440D09D23FAD32B00E7A803 /* DownloadManager.swift in Sources */,
@@ -955,9 +963,11 @@
 				CODE_SIGN_ENTITLEMENTS = Furry/Furry.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 8;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 65D6M8WUK7;
 				INFOPLIST_FILE = Furry/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -978,9 +988,10 @@
 				CODE_SIGN_ENTITLEMENTS = Furry/Furry.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = 65D6M8WUK7;
 				INFOPLIST_FILE = Furry/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

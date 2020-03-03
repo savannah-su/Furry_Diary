@@ -18,6 +18,9 @@ class SearchOwnerViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var currentUserLabel: UILabel!
     @IBOutlet weak var backButton: UIButton!
+    @IBAction func backButton(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
     
     @IBAction func okButton(_ sender: Any) {
         
@@ -128,9 +131,10 @@ extension SearchOwnerViewController: UITableViewDataSource{
             return UITableViewCell()
         }
         
-        let url = URL(string: ownerData[indexPath.row].image)
-        let data = try! Data(contentsOf: url!)
-        cell.ownerImage.image = UIImage(data: data)
+//        let url = URL(string: ownerData[indexPath.row].image)
+//        let data = try! Data(contentsOf: url!)
+//        cell.ownerImage.image = UIImage(data: data)
+        cell.ownerImage.loadImage(ownerData[indexPath.row].image, placeHolder: UIImage(named: "icon-selected"))
         cell.ownerName.text = ownerData[indexPath.row].name
         
         cell.backgroundColor = ownerData[indexPath.row].isSelected ? .Y2 : .white

@@ -92,6 +92,7 @@ class WeightPageViewController: UIViewController {
         weightTextField.delegate = self
         
         saveButton.isEnabled = false
+        saveButton.setTitleColor(UIColor.lightGray, for: .disabled)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -254,6 +255,8 @@ extension WeightPageViewController: UITextFieldDelegate {
         
         if weightTextField.text != "" {
             saveButton.isEnabled = true
+            saveButton.setTitleColor(UIColor.G4, for: .normal)
         }
+        saveButton.setTitleColor(UIColor.lightGray, for: .disabled)
     }
 }

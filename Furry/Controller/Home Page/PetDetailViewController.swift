@@ -202,13 +202,13 @@ extension PetDetailViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
-        guard let urlString = petData?.ownersImage[indexPath.item] else {
-            return UICollectionViewCell()
-        }
-        guard let url = URL(string: urlString) else {
-             return UICollectionViewCell()
-        }
-        cell.ownerPhoto.kf.setImage(with: url)
+//        guard let urlString = petData?.ownersImage[indexPath.item] else {
+//            return UICollectionViewCell()
+//        }
+//        guard let url = URL(string: urlString) else {
+//             return UICollectionViewCell()
+//        }
+        cell.ownerPhoto.loadImage(petData?.ownersImage[indexPath.item], placeHolder: UIImage(named: "icon-selected"))
         cell.ownerPhoto.layer.cornerRadius = 15
 
         return cell
