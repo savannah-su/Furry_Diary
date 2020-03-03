@@ -59,6 +59,7 @@ class BehaviorPageViewController: UIViewController {
         hideEnterBox()
         
         saveButton.isEnabled = false
+        saveButton.setTitleColor(UIColor.lightGray, for: .disabled)
     }
     
     override func viewDidLayoutSubviews() {
@@ -150,6 +151,7 @@ class BehaviorPageViewController: UIViewController {
         
         if selectDisease.count != 0 {
             saveButton.isEnabled = true
+            saveButton.setTitleColor(UIColor.G4, for: .normal)
         }
     }
     
@@ -183,10 +185,15 @@ extension BehaviorPageViewController: UICollectionViewDelegate {
         subItemType = selectDisease
         
         showEnterBox()
+        
         bottomViewLabel.isHidden = true
+        
+        saveButton.isEnabled = true
+        saveButton.setTitleColor(UIColor.G4, for: .normal)
         
         if selectDisease.count == 0 {
             saveButton.isEnabled = false
+            saveButton.setTitleColor(UIColor.lightGray, for: .disabled)
         }
     }
 }
@@ -248,6 +255,7 @@ extension BehaviorPageViewController: UITextViewDelegate {
         
         if selectDisease.count != 0 {
             saveButton.isEnabled = true
+            saveButton.setTitleColor(UIColor.G4, for: .normal)
         }
     }
 }

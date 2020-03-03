@@ -62,6 +62,7 @@ class DiagnosisViewController: UIViewController {
         
         tableView.isHidden = true
         saveButton.isEnabled = false
+        saveButton.setTitleColor(UIColor.lightGray, for: .disabled)
 
     }
 
@@ -102,9 +103,12 @@ class DiagnosisViewController: UIViewController {
         
         if isSwitchOn {
             saveButton.isEnabled = notiDate > doneDate
+            saveButton.setTitleColor(UIColor.G4, for: .normal)
         } else {
             saveButton.isEnabled = desc != ""
+            saveButton.setTitleColor(UIColor.G4, for: .normal)
         }
+        saveButton.setTitleColor(UIColor.lightGray, for: .disabled)
     }
 }
 
@@ -148,7 +152,7 @@ extension DiagnosisViewController: UICollectionViewDelegate {
         
         for index in 0 ..< itemStatus.count {
 
-        if index == indexPath.row {
+        if index == indexPath.item {
             itemStatus[index] = true
             subItemType = [itemLabel[index]]
         } else {
@@ -255,9 +259,7 @@ extension DiagnosisViewController: UITableViewDataSource {
     @objc func changeSwitch() {
         
         saveButton.isEnabled = false
-        
         isSwitchOn = !isSwitchOn
-        
         tableView.reloadData()
     }
 }

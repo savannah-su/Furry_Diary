@@ -171,24 +171,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gC2-LX-yyl">
                                 <rect key="frame" x="-73" y="616" width="560" height="560"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="54X-nD-r6t" customClass="VerticalAlignedButton" customModule="Furry" customModuleProvider="target">
-                                        <rect key="frame" x="267.5" y="8" width="25" height="25"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="25" id="5dy-ul-VG0"/>
-                                            <constraint firstAttribute="height" constant="25" id="OMI-Kc-sPG"/>
-                                        </constraints>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <inset key="contentEdgeInsets" minX="0.0" minY="10" maxX="0.0" maxY="0.0"/>
-                                        <state key="normal" image="chevron.down" catalog="system"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="15"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </button>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9zi-LV-TrM">
-                                        <rect key="frame" x="108" y="58" width="344" height="172"/>
+                                        <rect key="frame" x="108" y="50" width="344" height="180"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Enter Cell" rowHeight="48" id="0ti-7a-bbY" customClass="EnterInfoCell" customModule="Furry" customModuleProvider="target">
@@ -272,7 +256,7 @@
                                                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="B2O-Pa-mYq">
                                                             <rect key="frame" x="279" y="5" width="51" height="31"/>
                                                         </switch>
-                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="選擇下次提醒日期" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ua2-Jk-WKk">
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="選擇下次服藥日期" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ua2-Jk-WKk">
                                                             <rect key="frame" x="114.5" y="44.5" width="216.5" height="34"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <textInputTraits key="textInputTraits"/>
@@ -341,12 +325,10 @@
                                 <color key="backgroundColor" red="0.4431372549" green="0.71764705880000002" blue="0.71764705880000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="J50-wJ-FpW" firstAttribute="top" secondItem="gC2-LX-yyl" secondAttribute="top" constant="80" id="44p-b9-WZb"/>
-                                    <constraint firstItem="9zi-LV-TrM" firstAttribute="top" secondItem="54X-nD-r6t" secondAttribute="bottom" constant="25" id="O6I-kt-1aR"/>
+                                    <constraint firstItem="9zi-LV-TrM" firstAttribute="top" secondItem="gC2-LX-yyl" secondAttribute="top" constant="50" id="Jdz-b5-mtS"/>
                                     <constraint firstAttribute="width" secondItem="gC2-LX-yyl" secondAttribute="height" multiplier="1:1" id="TRb-ae-96o"/>
                                     <constraint firstItem="9zi-LV-TrM" firstAttribute="centerX" secondItem="gC2-LX-yyl" secondAttribute="centerX" id="Ydi-dn-xxZ"/>
                                     <constraint firstItem="J50-wJ-FpW" firstAttribute="centerX" secondItem="gC2-LX-yyl" secondAttribute="centerX" id="Ylu-DT-0A5"/>
-                                    <constraint firstItem="54X-nD-r6t" firstAttribute="centerX" secondItem="gC2-LX-yyl" secondAttribute="centerX" id="iHX-l6-fHd"/>
-                                    <constraint firstItem="54X-nD-r6t" firstAttribute="top" secondItem="gC2-LX-yyl" secondAttribute="top" constant="8" id="j6N-4I-PAu"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -762,7 +744,6 @@
     </scenes>
     <resources>
         <image name="Icon_24px_Back" width="24" height="24"/>
-        <image name="chevron.down" catalog="system" width="64" height="36"/>
         <image name="medicine-2" width="512" height="512"/>
         <image name="report-2" width="512" height="512"/>
     </resources>

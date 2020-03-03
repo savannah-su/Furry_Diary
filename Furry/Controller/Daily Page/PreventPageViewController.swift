@@ -78,6 +78,7 @@ class PreventPageViewController: UIViewController {
         bottomViewButton.isHidden = true
         
         saveButton.isEnabled = false
+        saveButton.setTitleColor(UIColor.lightGray, for: .disabled)
         
 //        LocalNotiManager.shared.setupNoti(notiDate: 30 , type: "毛孩的清潔通知", meaasge: "Really")
     }
@@ -120,13 +121,14 @@ class PreventPageViewController: UIViewController {
     func checkUpdateStatus() {
         
         if isSwitchOn {
-            
             saveButton.isEnabled = notiDate > doneDate
+            saveButton.setTitleColor(UIColor.G4, for: .normal)
             
         } else {
-            
             saveButton.isEnabled = medicineName != ""
+            saveButton.setTitleColor(UIColor.G4, for: .normal)
         }
+        saveButton.setTitleColor(UIColor.lightGray, for: .disabled)
     }
 }
 

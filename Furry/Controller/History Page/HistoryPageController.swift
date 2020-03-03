@@ -263,8 +263,12 @@ extension HistoryPageController: UITableViewDelegate {
             return 172
         case "體重紀錄":
             return 141
-        default:
+        case "行為症狀":
             return 141
+        case "醫療紀錄":
+            return 172
+        default:
+            return 172
         }
     }
 }
@@ -301,7 +305,7 @@ extension HistoryPageController: UITableViewDataSource {
             cell.contentLabel.isHidden = true
             }
             
-        case "預防計畫", "醫療紀錄":
+        case "預防計畫":
             cell.cellType = .prevent
             cell.cellColor = UIColor.G1
             cell.recordDate.text = formatter.string(from: currentDateData[indexPath.row].date)
@@ -319,7 +323,7 @@ extension HistoryPageController: UITableViewDataSource {
             cell.recordDate.text = formatter.string(from: currentDateData[indexPath.row].date)
             cell.contentLabel.text = "\(currentDateData[indexPath.row].kilo ?? "") KG"
             
-        default:
+        case "行為症狀":
             cell.cellType = .behavior
             cell.cellColor = UIColor.P0
             cell.recordDate.text = formatter.string(from: currentDateData[indexPath.row].date)
@@ -328,6 +332,30 @@ extension HistoryPageController: UITableViewDataSource {
                 cell.contentLabel.isHidden = true
             } else {
                 cell.contentLabel.text = currentDateData[indexPath.row].memo ?? ""
+            }
+            
+        case "醫療紀錄":
+            cell.cellType = .diagnosis
+            cell.cellColor = UIColor.O0
+            cell.recordDate.text = formatter.string(from: currentDateData[indexPath.row].date)
+            cell.contentLabel.text = currentDateData[indexPath.row].medicineName
+            
+            if currentDateData[indexPath.row].notiDate != "" {
+                cell.nextDateLabel.text = "下次追蹤是\(currentDateData[indexPath.row].notiDate ?? "")"
+            } else {
+            cell.nextDateLabel.isHidden = true
+            }
+            
+        default:
+            cell.cellType = .medicine
+            cell.cellColor = UIColor.Y1
+            cell.recordDate.text = formatter.string(from: currentDateData[indexPath.row].date)
+            cell.contentLabel.text = currentDateData[indexPath.row].medicineName
+            
+            if currentDateData[indexPath.row].notiDate != "" {
+                cell.nextDateLabel.text = "下次用藥是\(currentDateData[indexPath.row].notiDate ?? "")"
+            } else {
+            cell.nextDateLabel.isHidden = true
             }
         }
         
@@ -360,8 +388,6 @@ extension HistoryPageController: UICollectionViewDelegate {
         petID = UploadManager.shared.simplePetInfo[indexPath.item].petID
         
         getMonthlyData()
-        
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {

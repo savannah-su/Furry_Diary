@@ -81,6 +81,7 @@ class CleanPageViewController: UIViewController {
         bottomViewButton.isHidden = true
         
         saveButton.isEnabled = false
+        saveButton.setTitleColor(UIColor.lightGray, for: .disabled)
         
         //LocalNotiManager.shared.setupNoti(notiDate: 30 , type: "毛孩的清潔通知", meaasge: "Really")
     }
@@ -123,13 +124,14 @@ class CleanPageViewController: UIViewController {
     func checkUpdateStatus() {
         
         if isSwitchOn {
-            
             saveButton.isEnabled = notiDate > doneDate
+            saveButton.setTitleColor(UIColor.G4, for: .normal)
             
         } else {
-            
             saveButton.isEnabled = true
+            saveButton.setTitleColor(UIColor.G4, for: .normal)
         }
+        saveButton.setTitleColor(UIColor.lightGray, for: .disabled)
     }
 }
 
@@ -250,6 +252,8 @@ extension CleanPageViewController: UICollectionViewDelegate {
         
         tableView.isHidden = false
         bottomViewLabel.isHidden = true
+        
+        self.checkUpdateStatus()
     }
     
     func upButtomView() {
@@ -312,7 +316,6 @@ extension CleanPageViewController: UITableViewDataSource {
             cell.dateUpdateHandler = { [weak self] text in
                 
                 self?.doneDate = text
-                
                 self?.checkUpdateStatus()
             }
             
