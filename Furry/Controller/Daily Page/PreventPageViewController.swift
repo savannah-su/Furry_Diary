@@ -247,21 +247,18 @@ extension PreventPageViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-            
-            guard let cellA = collectionView.dequeueReusableCell(withReuseIdentifier: "Item Cell", for: indexPath) as? ReuseItemCell else { return UICollectionViewCell() }
-            
-            for index in 0 ... 2 {
-                
-                let index = indexPath.row
-                cellA.itemLabel.text = itemLabel[index]
-                
-                if itemCellStatus[index] == true {
-                    cellA.image.image = UIImage(named: selectedImage[index])
-                } else {
-                    cellA.image.image = UIImage(named: itemImage[index])
-                }
-            }
-            return cellA
+        
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Item Cell", for: indexPath) as? ReuseItemCell else { return UICollectionViewCell() }
+        
+        let index = indexPath.row
+        cell.itemLabel.text = itemLabel[index]
+        
+        if itemCellStatus[index] == true {
+            cell.image.image = UIImage(named: selectedImage[index])
+        } else {
+            cell.image.image = UIImage(named: itemImage[index])
+        }
+        return cell
     }
 }
 

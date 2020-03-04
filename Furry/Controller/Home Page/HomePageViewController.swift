@@ -64,11 +64,6 @@ class HomePageViewController: UIViewController {
         addRefreshControl()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        getPetData()
-    }
-    
     func logout() {
         
         //製造Crash範例

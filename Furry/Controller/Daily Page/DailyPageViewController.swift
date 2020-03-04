@@ -89,14 +89,11 @@ extension DailyPageViewController: UICollectionViewDataSource {
         if collectionView == self.collectionView {
             
             guard let cellA = collectionView.dequeueReusableCell(withReuseIdentifier: "Item Cell", for: indexPath) as? ItemCell else { return UICollectionViewCell() }
-            
-            for index in 0 ... 3 {
                 
                 let index = indexPath.row
                 cellA.itemLabel.text = item[index]
                 cellA.image.image = UIImage(named: itemImage[index])
-                
-            }
+
             return cellA
             
         } else {

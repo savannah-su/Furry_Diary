@@ -140,9 +140,9 @@ class WeightPageViewController: UIViewController {
                     
                     showDateFormatter.dateFormat = "yyyy/MM"
                     
-                    var sortedDateString = showDateFormatter.string(from: info.date)
+                    let sortedDateString = showDateFormatter.string(from: info.date)
                     
-                    var sortedKiloDouble = dataKilo
+                    let sortedKiloDouble = dataKilo
                     
                     self.xLabels.append(sortedDateString)
                     

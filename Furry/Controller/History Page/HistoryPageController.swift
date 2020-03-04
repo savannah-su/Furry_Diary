@@ -160,6 +160,7 @@ class HistoryPageController: UIViewController {
                 self?.currentMonthlyData = monthlyData
                 
             case .failure(let error):
+                
                 print(error)
             }
         }
@@ -424,8 +425,8 @@ extension HistoryPageController: UICollectionViewDataSource {
         
         let index = indexPath.item
         if selectedStatus[index] == true {
-            cellA.petPhoto.layer.borderWidth = 5
-            cellA.petPhoto.layer.borderColor = UIColor.G4?.cgColor
+            cellA.petPhoto.layer.borderWidth = 4
+            cellA.petPhoto.layer.borderColor = UIColor.Y1?.cgColor
         } else {
             cellA.petPhoto.layer.borderColor = UIColor.white.cgColor
         }

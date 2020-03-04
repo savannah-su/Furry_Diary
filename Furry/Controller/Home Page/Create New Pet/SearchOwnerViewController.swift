@@ -14,8 +14,12 @@ import FirebaseFirestore
 
 class SearchOwnerViewController: UIViewController {
     
+    @IBOutlet weak var searchField: UITextField! {
+        didSet {
+            self.searchField.delegate = self
+        }
+    }
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var currentUserLabel: UILabel!
     @IBOutlet weak var backButton: UIButton!
     @IBAction func backButton(_ sender: Any) {
@@ -55,6 +59,8 @@ class SearchOwnerViewController: UIViewController {
         }
     }
     
+    var filterOwnerData = [UsersData]()
+    
     var selectHandler: (([UsersData]) -> Void)?
     
     override func viewDidLoad() {
@@ -62,7 +68,6 @@ class SearchOwnerViewController: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
-        searchBar.delegate = self
         
         guard let currentUser = UserDefaults.standard.value(forKey: "userName") else { return }
         currentUserLabel.text = "Hello, \(currentUser)!"
@@ -95,11 +100,36 @@ class SearchOwnerViewController: UIViewController {
                         let usersData = UsersData(name: name, email: email, image: image, id: id)
                         
                         self.ownerData.append(usersData)
+                        self.filterOwnerData = self.ownerData
                         
                     }
                 }
             }
         }
+    }
+    
+    func isSearchFieldEmpty() -> Bool {
+        
+        return searchField.text?.isEmpty ?? true
+    }
+    
+    func filterTextForSearchField(searchText: String) {
+        
+        filterOwnerData = ownerData.filter({ (userData: UsersData) -> Bool in
+            
+            if isSearchFieldEmpty() {
+                
+                filterOwnerData = ownerData
+                
+                return false
+                
+            } else {
+                
+                return true && userData.name.lowercased().contains(searchText.lowercased())
+            }
+        })
+        
+        tableView.reloadData()
     }
 }
 
@@ -111,11 +141,11 @@ extension SearchOwnerViewController: UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        ownerData[indexPath.row].isSelected = !ownerData[indexPath.row].isSelected
+        filterOwnerData[indexPath.row].isSelected = !filterOwnerData[indexPath.row].isSelected
         
         let cell = tableView.cellForRow(at: indexPath)
         
-        cell?.backgroundColor = ownerData[indexPath.row].isSelected ? .Y2 : .white
+        cell?.backgroundColor = filterOwnerData[indexPath.row].isSelected ? .Y2 : .white
     }
 }
 
@@ -123,7 +153,7 @@ extension SearchOwnerViewController: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return ownerData.count
+        return filterOwnerData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -134,22 +164,34 @@ extension SearchOwnerViewController: UITableViewDataSource{
 //        let url = URL(string: ownerData[indexPath.row].image)
 //        let data = try! Data(contentsOf: url!)
 //        cell.ownerImage.image = UIImage(data: data)
-        cell.ownerImage.loadImage(ownerData[indexPath.row].image, placeHolder: UIImage(named: "icon-selected"))
-        cell.ownerName.text = ownerData[indexPath.row].name
+        cell.ownerImage.loadImage(filterOwnerData[indexPath.row].image, placeHolder: UIImage(named: "icon-selected"))
+        cell.ownerName.text = filterOwnerData[indexPath.row].name
         
-        cell.backgroundColor = ownerData[indexPath.row].isSelected ? .Y2 : .white
+        cell.backgroundColor = filterOwnerData[indexPath.row].isSelected ? .Y2 : .white
         
         return cell
     }
 }
 
-extension SearchOwnerViewController: UISearchBarDelegate{
-
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+extension SearchOwnerViewController: UITextFieldDelegate {
+    
+    func textFieldDidChangeSelection(_ textField: UITextField) {
         
-        ownerData = ownerData.filter { user in
+        guard let text = searchField.text else {
+            return
+        }
+        
+        filterTextForSearchField(searchText: text)
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        
+        guard searchField.text != "" else {
             
-            return true
+            filterOwnerData = ownerData
+            
+            return tableView.reloadData()
+            
         }
     }
 }

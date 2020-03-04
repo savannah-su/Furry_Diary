@@ -126,8 +126,10 @@ struct Record: Codable {
     var subContent: String {
         switch categoryType {
         case "衛生清潔": return "下次清潔是\(notiDate ?? "")"
-        case "衛生清潔": return ""
-        default:return ""
+        case "預防計畫": return ""
+        case "體重紀錄": return ""
+        case "行為症狀": return ""
+        default: return ""
         }
     }
     
