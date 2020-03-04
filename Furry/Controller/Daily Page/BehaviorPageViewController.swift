@@ -83,11 +83,6 @@ class BehaviorPageViewController: UIViewController {
         
         getInfo()
         
-        print(petID)
-        print(subItemType)
-        print(doneDate)
-        print(memo)
-        
         UploadManager.shared.uploadData(petID: petID, categoryType: "行為症狀", date: datePiker.date, subitem: subItemType, medicineName: "", kilo: "", memo: memo, notiOrNot: "", notiDate: "", notiText: "") { result in
             
             switch result {

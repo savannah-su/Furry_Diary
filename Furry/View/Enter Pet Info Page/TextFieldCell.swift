@@ -108,8 +108,6 @@ extension TextFieldCell: UITextFieldDelegate {
         guard let text = textField.text else { return }
         
         touchHandler?(text)
-        
-        print("123")
     }
 }
 

@@ -89,6 +89,9 @@ class LoginViewController: UIViewController {
     func fbLogin() {
         
         let fbManager = LoginManager()
+        
+        fbManager.logOut()
+        
         fbManager.logIn(permissions: [.email], viewController: self) { [weak self] (result) in
             
             //fb log in
@@ -129,7 +132,6 @@ class LoginViewController: UIViewController {
         
         guard let userID = Auth.auth().currentUser?.uid,
             let userEmail = Auth.auth().currentUser?.providerData.first?.email else {
-                
                 return
         }
         
@@ -139,7 +141,9 @@ class LoginViewController: UIViewController {
         if !appleLogin {
             
             guard let Name = Auth.auth().currentUser?.displayName,
-                let Photo = Auth.auth().currentUser?.photoURL?.absoluteString else { return }
+                let Photo = Auth.auth().currentUser?.photoURL?.absoluteString else {
+                    return
+            }
             
             userName = Name
             userPhoto = Photo

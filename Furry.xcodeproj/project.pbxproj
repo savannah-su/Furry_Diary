@@ -341,10 +341,10 @@
 			isa = PBXGroup;
 			children = (
 				2430552323ED425000B9F4E6 /* DailyPageViewController.swift */,
-				24866E5923F2B89E003CC715 /* BehaviorPageViewController.swift */,
-				24188A1723F3E02E00DA250A /* WeightPageViewController.swift */,
-				24B9958B23F41ECD005246AB /* PreventPageViewController.swift */,
 				24B9958D23F41EDD005246AB /* CleanPageViewController.swift */,
+				24B9958B23F41ECD005246AB /* PreventPageViewController.swift */,
+				24188A1723F3E02E00DA250A /* WeightPageViewController.swift */,
+				24866E5923F2B89E003CC715 /* BehaviorPageViewController.swift */,
 				245958FD240A329700454C45 /* DiagnosisViewController.swift */,
 				245958FB240A305400454C45 /* MedicineViewController.swift */,
 			);
