@@ -119,45 +119,57 @@ extension DailyPageViewController: UICollectionViewDelegate {
             
             if indexPath.row == 0 {
                 
-                guard let vc = UIStoryboard(name: "Daily", bundle: nil).instantiateViewController(identifier: "Clean Page") as? CleanPageViewController else { return }
+                guard let viewController = UIStoryboard(name: "Daily", bundle: nil).instantiateViewController(identifier: "Clean Page") as? CleanPageViewController else {
+                    return
+                }
                 
-                vc.petID = recordPetID
-                show(vc, sender: nil)
+                viewController.petID = recordPetID
+                show(viewController, sender: nil)
                 
             } else if indexPath.row == 1 {
                 
-                guard let vc = UIStoryboard(name: "Daily", bundle: nil).instantiateViewController(identifier: "Prevent Page") as? PreventPageViewController else { return }
+                guard let viewController = UIStoryboard(name: "Daily", bundle: nil).instantiateViewController(identifier: "Prevent Page") as? PreventPageViewController else {
+                    return
+                }
                 
-                vc.petID = recordPetID
-                show(vc, sender: nil)
+                viewController.petID = recordPetID
+                show(viewController, sender: nil)
                 
             } else if indexPath.row == 2 {
                 
-                guard let vc = UIStoryboard(name: "Daily", bundle: nil).instantiateViewController(identifier: "Weight Page") as? WeightPageViewController else { return }
+                guard let viewController = UIStoryboard(name: "Daily", bundle: nil).instantiateViewController(identifier: "Weight Page") as? WeightPageViewController else {
+                    return
+                }
                 
-                vc.petID = recordPetID
-                show(vc, sender: nil)
+                viewController.petID = recordPetID
+                show(viewController, sender: nil)
                 
             } else if indexPath.row == 3 {
                 
-                guard let vc = UIStoryboard(name: "Daily", bundle: nil).instantiateViewController(identifier: "Behavior Page") as? BehaviorPageViewController else { return }
+                guard let viewController = UIStoryboard(name: "Daily", bundle: nil).instantiateViewController(identifier: "Behavior Page") as? BehaviorPageViewController else {
+                    return
+                }
                 
-                vc.petID = recordPetID
-                show(vc, sender: nil)
+                viewController.petID = recordPetID
+                show(viewController, sender: nil)
                 
             } else if indexPath.row == 4 {
             
-                guard let vc = UIStoryboard(name: "Medical", bundle: nil).instantiateViewController(identifier: "Diagnosis Page") as? DiagnosisViewController else { return }
+                guard let viewController = UIStoryboard(name: "Medical", bundle: nil).instantiateViewController(identifier: "Diagnosis Page") as? DiagnosisViewController else {
+                    return
+                }
                 
-                vc.petID = recordPetID
-                show(vc, sender: nil)
+                viewController.petID = recordPetID
+                show(viewController, sender: nil)
                 
             } else if indexPath.row == 5 {
                 
-                guard let vc = UIStoryboard(name: "Medical", bundle: nil).instantiateViewController(identifier: "Medicine Page") as? MedicineViewController else { return }
+                guard let viewController = UIStoryboard(name: "Medical", bundle: nil).instantiateViewController(identifier: "Medicine Page") as? MedicineViewController else {
+                    return
+                }
                 
-                vc.petID = recordPetID
-                show(vc, sender: nil)
+                viewController.petID = recordPetID
+                show(viewController, sender: nil)
                 
             }
             

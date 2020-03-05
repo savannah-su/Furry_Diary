@@ -23,12 +23,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         //Local Noti
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { (granted, _) in
             if granted {
                 print("User gave permissions for local notis.")
             }
         }
         UIApplication.shared.registerForRemoteNotifications()
+        
+        UNUserNotificationCenter.current().delegate = self
         
         // Override point for customization after application launch.
         FirebaseApp.configure()
@@ -43,19 +45,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         IQKeyboardManager.shared.enable = true
         
         //Change Large Nav Bar Style
-//        let coloredAppearance = UINavigationBarAppearance()
-//        coloredAppearance.configureWithOpaqueBackground()
-//        
-//        coloredAppearance.backgroundColor = .G2
-//        coloredAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-//        
-//        let button = UIBarButtonItemAppearance()
-//        button.normal.titleTextAttributes = [.foregroundColor: UIColor.white]
-//        coloredAppearance.buttonAppearance = button
-//        
-//               
-//        UINavigationBar.appearance().standardAppearance = coloredAppearance
-//        UINavigationBar.appearance().scrollEdgeAppearance = coloredAppearance
+        //        let coloredAppearance = UINavigationBarAppearance()
+        //        coloredAppearance.configureWithOpaqueBackground()
+        //
+        //        coloredAppearance.backgroundColor = .G2
+        //        coloredAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+        //
+        //        let button = UIBarButtonItemAppearance()
+        //        button.normal.titleTextAttributes = [.foregroundColor: UIColor.white]
+        //        coloredAppearance.buttonAppearance = button
+        //
+        //
+        //        UINavigationBar.appearance().standardAppearance = coloredAppearance
+        //        UINavigationBar.appearance().scrollEdgeAppearance = coloredAppearance
         
         if UserDefaults.standard.value(forKey: "logInOrNot") != nil {
             
@@ -63,9 +65,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             
         } else {
             
-            let vc = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(identifier: "Login Page") as? LoginViewController
+            let viewController = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(identifier: "Login Page") as? LoginViewController
             
-            window?.rootViewController = vc
+            window?.rootViewController = viewController
             
             window?.makeKeyAndVisible()
         }
@@ -73,7 +75,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         return true
     }
     
-    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
         
         //fb login
         ApplicationDelegate.shared.application(app, open: url, options: options)
@@ -94,7 +96,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         
         let googleCredential = GoogleAuthProvider.credential(withIDToken: googleAuthentication.idToken, accessToken: googleAuthentication.accessToken)
         
-        Auth.auth().signIn(with: googleCredential) { (result, error) in
+        Auth.auth().signIn(with: googleCredential) { (_, error) in
             
             if let error = error {
                 print(error.localizedDescription)
@@ -111,10 +113,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     
     @objc func toNextpage() {
         
-        guard let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "Tab Bar Controller") as? UITabBarController else {
+        guard let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "Tab Bar Controller") as? UITabBarController else {
             return
         }
-        window?.rootViewController = vc
+        window?.rootViewController = viewController
     }
     
     func addToDatabase() {
@@ -123,13 +125,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             let userEmail = Auth.auth().currentUser?.providerData.first?.email,
             let userName = Auth.auth().currentUser?.providerData.first?.displayName,
             let userPhoto = Auth.auth().currentUser?.providerData.first?.photoURL?.absoluteString
-        else {
-            
-            return
+            else {
+                
+                return
         }
         
         let usersData = UsersData(name: userName, email: userEmail, image: userPhoto, id: userID)
-       
+        
         Firestore.firestore().collection("users").document(userID).setData(usersData.toDict, completion: { (error) in
             if error == nil {
                 
@@ -150,5 +152,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                 print("Added failed")
             }
         })
+    }
+}
+
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert, .badge, .sound])
     }
 }

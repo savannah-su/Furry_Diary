@@ -85,9 +85,13 @@ class DiagnosisViewController: UIViewController {
     
     func toDatabase() {
         
-        guard let doneDate = dateFormatter.date(from: doneDate) else { return }
+        guard let doneDate = dateFormatter.date(from: doneDate) else {
+            return
+        }
         
-        UploadManager.shared.uploadData(petID: petID, categoryType: "醫療紀錄", date: doneDate, subitem: subItemType, medicineName: desc, kilo: "", memo: "", notiOrNot: isSwitchOn ? "true" : "false", notiDate: notiDate, notiText: notiMemo) { result in
+        let data = Record(categoryType: "醫療紀錄", subitem: subItemType, medicineName: desc, kilo: "", memo: "", date: doneDate, notiOrNot: isSwitchOn ? "true" : "false", notiDate: notiDate, notiText: notiMemo)
+        
+        UploadManager.shared.uploadData(petID: petID, data: data) { result in
             
             switch result {
             case .success(let success):
@@ -96,6 +100,14 @@ class DiagnosisViewController: UIViewController {
             case .failure(let error):
                 print(error.localizedDescription)
             }
+        }
+        
+        guard let notiDate = dateFormatter.date(from: notiDate) else {
+            return
+        }
+        
+        if isSwitchOn {
+        LocalNotiManager.shared.setupNoti(notiDate: notiDate.timeIntervalSinceNow, type: "毛孩的\(self.subItemType[0])醫療通知", meaasge: notiMemo == "" ? "記得追蹤毛孩的醫療況狀唷！" : notiMemo)
         }
     }
     
@@ -168,7 +180,6 @@ extension DiagnosisViewController: UICollectionViewDelegate {
 
 extension DiagnosisViewController: UICollectionViewDelegateFlowLayout {
     
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
             return CGSize(width: 70, height: 100)
     }
@@ -232,7 +243,6 @@ extension DiagnosisViewController: UITableViewDataSource {
                 self?.desc = text
                 self?.checkUpdateStatus()
             }
-            
             
             return cell
             

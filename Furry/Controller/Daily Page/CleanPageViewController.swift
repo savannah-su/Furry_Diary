@@ -18,9 +18,19 @@ class CleanPageViewController: UIViewController {
     @IBOutlet weak var bottomViewButton: VerticalAlignedButton!
     @IBAction func bottomViewButton(_ sender: Any) {}
     @IBOutlet weak var bottomViewLabel: UILabel!
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableView: UITableView! {
+        didSet {
+            tableView.dataSource = self
+            tableView.delegate = self
+        }
+    }
     
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var collectionView: UICollectionView! {
+        didSet{
+            collectionView.dataSource = self
+             collectionView.delegate = self
+        }
+    }
     @IBAction func backButton(_ sender: Any) {
         navigationController?.popViewController(animated: true)
     }
@@ -69,12 +79,8 @@ class CleanPageViewController: UIViewController {
         
         super.viewDidLoad()
         
-        collectionView.dataSource = self
-        collectionView.delegate = self
         collectionView.allowsMultipleSelection = false
         
-        tableView.dataSource = self
-        tableView.delegate = self
         tableView.isHidden = true
         tableView.separatorColor = .clear
 
@@ -82,8 +88,6 @@ class CleanPageViewController: UIViewController {
         
         saveButton.isEnabled = false
         saveButton.setTitleColor(UIColor.lightGray, for: .disabled)
-        
-        //LocalNotiManager.shared.setupNoti(notiDate: 30 , type: "毛孩的清潔通知", meaasge: "Really")
     }
     
     override func viewDidLayoutSubviews() {
@@ -107,7 +111,9 @@ class CleanPageViewController: UIViewController {
         
         guard let doneDate = dateFormatter.date(from: doneDate) else { return }
         
-        UploadManager.shared.uploadData(petID: petID, categoryType: "衛生清潔", date: doneDate, subitem: subItemType, medicineName: "", kilo: "", memo: "", notiOrNot: isSwitchOn ? "true" : "false", notiDate: notiDate, notiText: notiMemo) { result in
+        let data = Record(categoryType: "衛生清潔", subitem: subItemType, medicineName: "", kilo: "", memo: "", date: doneDate, notiOrNot: isSwitchOn ? "true" : "false", notiDate: notiDate, notiText: notiMemo)
+        
+        UploadManager.shared.uploadData(petID: petID, data: data) { result in
             
             switch result {
             case .success(let success):
@@ -118,7 +124,13 @@ class CleanPageViewController: UIViewController {
             }
         }
         
-        LocalNotiManager.shared.setupNoti(notiDate: 10 , type: "毛孩的\(self.subItemType)清潔通知", meaasge: "Really")
+        guard let notiDate = dateFormatter.date(from: notiDate) else {
+            return
+        }
+        
+        if isSwitchOn {
+        LocalNotiManager.shared.setupNoti(notiDate: notiDate.timeIntervalSinceNow, type: "毛孩的\(self.subItemType[0])清潔通知", meaasge: notiMemo == "" ? "記得協助毛孩用藥唷！" : notiMemo)
+        }
     }
     
     func checkUpdateStatus() {
@@ -164,7 +176,6 @@ extension CleanPageViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         
         guard let cellA = collectionView.dequeueReusableCell(withReuseIdentifier: "Item Cell", for: indexPath) as? ReuseItemCell else {
             return UICollectionViewCell()

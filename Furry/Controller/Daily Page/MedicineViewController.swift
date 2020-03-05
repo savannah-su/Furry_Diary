@@ -88,7 +88,9 @@ class MedicineViewController: UIViewController {
         
         guard let doneDate = dateFormatter.date(from: doneDate) else { return }
         
-        UploadManager.shared.uploadData(petID: petID, categoryType: "用藥紀錄", date: doneDate, subitem: subItemType, medicineName: medicine, kilo: "", memo: "", notiOrNot: isSwitchOn ? "true" : "false", notiDate: notiDate, notiText: notiMemo) { result in
+        let data = Record(categoryType: "用藥紀錄", subitem: subItemType, medicineName: medicine, kilo: "", memo: "", date: doneDate, notiOrNot: isSwitchOn ? "true" : "false", notiDate: notiDate, notiText: notiMemo)
+        
+        UploadManager.shared.uploadData(petID: petID, data: data) { result in
             
             switch result {
             case .success(let success):
@@ -97,6 +99,14 @@ class MedicineViewController: UIViewController {
             case .failure(let error):
                 print(error.localizedDescription)
             }
+        }
+        
+        guard let notiDate = dateFormatter.date(from: notiDate) else {
+            return
+        }
+        
+        if isSwitchOn {
+            LocalNotiManager.shared.setupNoti(notiDate: notiDate.timeIntervalSinceNow, type: "毛孩的\(self.subItemType[0])通知", meaasge: notiMemo == "" ? "記得協助毛孩用藥唷！" : notiMemo)
         }
     }
     
@@ -184,7 +194,7 @@ extension MedicineViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        if indexPath.row == 3 && isSwitchOn == true {
+        if indexPath.row == 2 && isSwitchOn == true {
             return 140
         }
         return 40

@@ -15,7 +15,6 @@ import FirebaseFirestore
 class UserManager {
     
     static let shared = UserManager()
-    private init(){}
-    
+    private init() {}
     
 }

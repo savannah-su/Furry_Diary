@@ -44,9 +44,4 @@ class LocalNotiManager {
             }
         }
     }
-    
-    
 }
-
-//notificationDate!
-//notiDate.timeIntervalSinceNow

@@ -22,17 +22,15 @@ protocol BannerViewDelegate: AnyObject {
 
 class BannerView: UIView {
     
-    
     weak var delegate: BannerViewDelegate?
     
-
     weak var dataSource: BannerViewDataSource? {
         
         didSet {
         
             guard self.dataSource != nil else {
                 
-                unitViews.forEach{ $0.removeFromSuperview() }
+                unitViews.forEach { $0.removeFromSuperview() }
                 
                 return
             }
@@ -101,7 +99,7 @@ class BannerView: UIView {
     
     private func setupBasicBannerPageViews() {
         
-        unitViews.forEach{ $0.removeFromSuperview() }
+        unitViews.forEach { $0.removeFromSuperview() }
         
         unitViews.removeAll()
         
@@ -136,7 +134,7 @@ class BannerView: UIView {
                 ])
             }
             
-            if index == unitViews.count - 1  {
+            if index == unitViews.count - 1 {
                 
                 NSLayoutConstraint.activate([
                     unitView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor)
@@ -146,7 +144,7 @@ class BannerView: UIView {
             NSLayoutConstraint.activate([
                 unitView.topAnchor.constraint(equalTo: scrollView.topAnchor),
                 unitView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-                unitView.widthAnchor.constraint(equalTo: widthAnchor),
+                unitView.widthAnchor.constraint(equalTo: widthAnchor)
             ])
         }
     }
@@ -215,9 +213,8 @@ class BannerUnitView: UIView {
                 contentView.centerXAnchor.constraint(equalTo: centerXAnchor),
                 widthConstraint!,
                 contentView.topAnchor.constraint(equalTo: topAnchor),
-                contentView.bottomAnchor.constraint(equalTo: bottomAnchor),
+                contentView.bottomAnchor.constraint(equalTo: bottomAnchor)
             ])
         }
     }
 }
-

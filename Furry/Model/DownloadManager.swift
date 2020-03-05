@@ -13,7 +13,7 @@ import FirebaseCore
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
-enum download: Error {
+enum Download: Error {
     
     case downloadFail
 }
@@ -48,7 +48,7 @@ class DownloadManager {
                         }
                         
                     } catch {
-                        completion(.failure(download.downloadFail))
+                        completion(.failure(Download.downloadFail))
                     }
                 }
                 
@@ -72,7 +72,7 @@ class DownloadManager {
         }
     }
     
-    func downloadMonthlyData(petID: String, startOfMonth:Date, endOfMonth:Date, completion: @escaping (Result<[Record], Error>) -> Void) {
+    func downloadMonthlyData(petID: String, startOfMonth: Date, endOfMonth: Date, completion: @escaping (Result<[Record], Error>) -> Void) {
         db.collection("pets").document(petID).collection("record").whereField("date", isGreaterThan: startOfMonth).whereField("date", isLessThan: endOfMonth).getDocuments { (querySnapshot, error) in
             
             if error == nil {
@@ -88,7 +88,7 @@ class DownloadManager {
                         }
                         
                     } catch {
-                        completion(.failure(download.downloadFail))
+                        completion(.failure(Download.downloadFail))
                     }
                 }
                 completion(.success(self.monthlyData))
@@ -100,7 +100,6 @@ class DownloadManager {
         
         vetPlacemark = []
 
-        
         db.collection("veterinary").getDocuments { (querySnapshot, error) in
             
             if error == nil {
@@ -115,14 +114,12 @@ class DownloadManager {
                         }
                         
                     } catch {
-                        completion(.failure(download.downloadFail))
+                        completion(.failure(Download.downloadFail))
                     }
                     
                 }
                 completion(.success(self.vetPlacemark))
             }
-            
-            
         }
     }
 }

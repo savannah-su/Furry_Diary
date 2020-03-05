@@ -22,7 +22,7 @@ extension Date {
 
 class HistoryPageController: UIViewController {
     
-    @IBOutlet weak var choosePetCollection: UICollectionView!{
+    @IBOutlet weak var choosePetCollection: UICollectionView! {
         
         didSet {
             choosePetCollection.delegate = self

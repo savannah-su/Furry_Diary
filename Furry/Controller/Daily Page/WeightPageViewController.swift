@@ -53,7 +53,6 @@ class WeightPageViewController: UIViewController {
         toDataBase()
     }
     
-    
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var bottomView: UIView!
     
@@ -95,11 +94,6 @@ class WeightPageViewController: UIViewController {
         saveButton.setTitleColor(UIColor.lightGray, for: .disabled)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        
-        super.viewDidAppear(animated)
-    }
-    
     override func viewDidLayoutSubviews() {
         
         super.viewDidLayoutSubviews()
@@ -124,7 +118,7 @@ class WeightPageViewController: UIViewController {
             case .success(let downloadWeightData):
                 
                 //(map, filet, reduce)給Array用的for in, 組成左邊新的array; filter是把右邊true的情況，組成左邊新的array
-                downloadWeightData.sorted{ return $0.date > $1.date }.prefix(5).reversed().forEach { info in
+                downloadWeightData.sorted { return $0.date > $1.date }.prefix(5).reversed().forEach { info in
                     
                     guard let kiloString = info.kilo else { return }
                     
@@ -169,7 +163,9 @@ class WeightPageViewController: UIViewController {
         
         getInfo()
         
-        UploadManager.shared.uploadData(petID: petID, categoryType: "體重紀錄", date: datePicker.date, subitem: ["體重紀錄"], medicineName: "", kilo: weight, memo: "", notiOrNot: "", notiDate: "", notiText: "") { result in
+        let data = Record(categoryType: "體重紀錄", subitem: ["體重紀錄"], medicineName: "", kilo: weight, memo: "", date: datePicker.date, notiOrNot: "", notiDate: "", notiText: "")
+        
+        UploadManager.shared.uploadData(petID: petID, data: data) { result in
             
             switch result {
             case .success(let success):
@@ -227,7 +223,7 @@ class WeightPageViewController: UIViewController {
         
         lineChart.showSmoothLines = true
         
-        chartData.color = UIColor(red:245.0 / 255.0, green:172.0 / 255.0, blue:26.0 / 255.0, alpha:1.0)
+        chartData.color = UIColor(red: 245.0 / 255.0, green: 172.0 / 255.0, blue: 26.0 / 255.0, alpha: 1.0)
         
         chartData.itemCount = UInt(exactly: Double(lineChart.xLabels.count))!
         

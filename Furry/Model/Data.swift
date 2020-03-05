@@ -89,7 +89,6 @@ struct PetInfo: Codable {
 //    case clean
 //}
 
-
 struct Record: Codable {
     
     static var dateFormatter: DateFormatter = {
@@ -180,7 +179,6 @@ struct VetData: Codable {
     let vetName: String
     let vetPhone: String
     let vetAddress: String
-    
     
     enum CodingKeys: String, CodingKey {
         

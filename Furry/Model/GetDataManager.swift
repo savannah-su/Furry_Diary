@@ -8,8 +8,6 @@
 
 import Foundation
 
-
-import Foundation
 class GetDataManager {
     func getData(urlString: String, completion: @escaping (Result<[VetData], Error>) -> Void) {
         

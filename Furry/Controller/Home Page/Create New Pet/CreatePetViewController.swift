@@ -26,9 +26,10 @@ class CreatePetViewController: UIViewController {
         
     }
     
-    var count = 0
+    var backURLCount = 1
     
     let picker = UIImagePickerController()
+    
     //上傳圖片需要先轉jpeg形式，傳到Storage後，拿到URL，才可傳至DB
     var petPhotoURL: [String] = []
     var petID = UUID().uuidString
@@ -37,7 +38,6 @@ class CreatePetViewController: UIViewController {
     let titleArray = ["名字", "種類", "性別", "品種", "特徵", "生日", "晶片號碼", "是否絕育", "個性喜好", "毛孩飼主"]
     let placeholderArray = ["輸入毛孩名字", "選擇毛孩種類", "選擇毛孩性別", "輸入毛孩品種", "輸入毛孩特徵與毛色", "輸入毛孩生日", "輸入毛孩晶片號碼", "選擇是否絕育"]
     var petInfo = PetInfo(petID: "", ownersID: [], ownersName: [], ownersImage: [], petImage: [], petName: "", species: "", gender: "", breed: "", color: "", birth: "", chip: "", neuter: false, neuterDate: "", memo: "") {
-        
         didSet {
             tableView.reloadData()
         }
@@ -122,14 +122,14 @@ class CreatePetViewController: UIViewController {
                     
                     self.petPhotoURL.append("\(backPhotoURL)")
                     
-                    if self.count == self.selectedPhoto.count - 1 {
+                    if self.backURLCount == self.selectedPhoto.count {
                         
                         self.petInfo.petImage = self.petPhotoURL
                         self.toDataBase()
                         
                     } else {
                         
-                          self.count += 1
+                          self.backURLCount += 1
                     }
                 }
             }
@@ -189,7 +189,6 @@ extension CreatePetViewController: UITableViewDataSource {
                 self?.petInfo.species = text
             }
             return cell
-            
             
         case 2:
             cell.contentField.placeholder = placeholderArray[2]
@@ -280,10 +279,6 @@ extension CreatePetViewController: UITableViewDataSource {
             
             cell.collectionView.reloadData()
             
-            if cell.data.ownersImage.count > 1 {
-                cell.searchButton.isHidden = true
-            }
-            
             return cell
             
         }
@@ -291,20 +286,24 @@ extension CreatePetViewController: UITableViewDataSource {
     
     @objc func searchOwner() {
         
-        guard let vc = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(identifier: "Search Owner Page") as? SearchOwnerViewController else { return }
-        
-        vc.selectHandler = { data in
-            
-            self.petInfo.ownersID.append(contentsOf: data.map{ $0.id })
-            self.petInfo.ownersName.append(contentsOf: data.map{ $0.name })
-            self.petInfo.ownersImage.append(contentsOf: data.map{ $0.image })
-            
-            print(self.petInfo.ownersID)
-            print(self.petInfo.ownersName)
-            print(self.petInfo.ownersImage)
+        guard let viewController = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(identifier: "Search Owner Page") as? SearchOwnerViewController else {
+            return
         }
         
-        show(vc, sender: self)
+        petInfo.ownersID.removeAll()
+        petInfo.ownersName.removeAll()
+        petInfo.ownersImage.removeAll()
+        
+        addCurrentUser()
+        
+        viewController.selectHandler = { data in
+            
+            self.petInfo.ownersID.append(contentsOf: data.map { $0.id })
+            self.petInfo.ownersName.append(contentsOf: data.map { $0.name })
+            self.petInfo.ownersImage.append(contentsOf: data.map { $0.image })
+        }
+        
+        show(viewController, sender: self)
     }
 }
 
@@ -327,8 +326,6 @@ extension CreatePetViewController: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Image Cell", for: indexPath) as? UploadIamgeCell else { return UICollectionViewCell() }
         
         cell.layer.borderColor = UIColor(red: 199/255.0, green: 199/255.0, blue: 199/255.0, alpha: 1).cgColor
-        
-        
         
         if indexPath.row >= selectedPhoto.count {
             cell.imageButton.isHidden = false
@@ -384,7 +381,7 @@ extension CreatePetViewController: UIImagePickerControllerDelegate, UINavigation
         self.getPhotoWay(type: 2)
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         var selectedImageFromPicker: UIImage?
         if let pickedImage = info[.originalImage] as? UIImage {
             selectedImageFromPicker = pickedImage

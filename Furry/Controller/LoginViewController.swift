@@ -57,19 +57,19 @@ class LoginViewController: UIViewController {
     
     func toPrivateWeb() {
         
-        guard let vc = storyboard?.instantiateViewController(identifier: "Private Web Page") as? PrivateWebViewController else {
+        guard let viewController = storyboard?.instantiateViewController(identifier: "Private Web Page") as? PrivateWebViewController else {
             return
         }
-        self.present(vc, animated: true, completion: nil)
+        self.present(viewController, animated: true, completion: nil)
     }
     
     @objc func toNextpage() {
         
-        guard let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "Tab Bar Controller") as? UITabBarController else {
+        guard let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "Tab Bar Controller") as? UITabBarController else {
             return
         }
         
-        self.view.window?.rootViewController = vc
+        self.view.window?.rootViewController = viewController
         
     }
     
@@ -101,7 +101,7 @@ class LoginViewController: UIViewController {
                 let fbCredential = FacebookAuthProvider.credential(withAccessToken: AccessToken.current!.tokenString)
                 
                 //create firebase auth
-                Auth.auth().signIn(with: fbCredential) { [weak self] (result, error) in
+                Auth.auth().signIn(with: fbCredential) { [weak self] (_, error) in
                     guard let self = self else { return }
                     guard error == nil else {
                         print(error?.localizedDescription as Any)
@@ -135,20 +135,19 @@ class LoginViewController: UIViewController {
                 return
         }
         
-        var userName = appleLogin ? userEmail : ""
+        var userName = appleLogin ? userEmail : "隱藏信箱資訊的Apple使用者"
         var userPhoto = ""
         
         if !appleLogin {
             
-            guard let Name = Auth.auth().currentUser?.displayName,
-                let Photo = Auth.auth().currentUser?.photoURL?.absoluteString else {
+            guard let name = Auth.auth().currentUser?.displayName,
+                let photo = Auth.auth().currentUser?.photoURL?.absoluteString else {
                     return
             }
             
-            userName = Name
-            userPhoto = Photo
+            userName = name
+            userPhoto = photo
         }
-        
         
         let usersData = UsersData(name: userName, email: userEmail, image: userPhoto, id: userID)
         
@@ -181,12 +180,14 @@ class LoginViewController: UIViewController {
         var remainingLength = length
         
         while remainingLength > 0 {
+            
             let randoms: [UInt8] = (0 ..< 16).map { _ in
                 var random: UInt8 = 0
                 let errorCode = SecRandomCopyBytes(kSecRandomDefault, 1, &random)
                 if errorCode != errSecSuccess {
                     fatalError("Unable to generate nonce. SecRandomCopyBytes failed with OSStatus \(errorCode)")
                 }
+                
                 return random
             }
             
@@ -208,6 +209,7 @@ class LoginViewController: UIViewController {
     fileprivate var currentNonce: String?
     
     @objc func startSignInWithAppleFlow() {
+        
         let nonce = randomNonceString()
         currentNonce = nonce
         let appleIDProvider = ASAuthorizationAppleIDProvider()
@@ -255,7 +257,7 @@ extension LoginViewController: ASAuthorizationControllerDelegate, ASAuthorizatio
             let credential = OAuthProvider.credential(withProviderID: "apple.com", idToken: idTokenString, rawNonce: nonce)
             
             // Sign in with Firebase.
-            Auth.auth().signIn(with: credential) { (authResult, error) in
+            Auth.auth().signIn(with: credential) { (_, error) in
                 if let error = error {
                     print(error.localizedDescription)
                     return
@@ -272,4 +274,3 @@ extension LoginViewController: ASAuthorizationControllerDelegate, ASAuthorizatio
         print("Sign in with Apple errored: \(error)")
     }
 }
-

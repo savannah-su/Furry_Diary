@@ -53,4 +53,3 @@ extension TextViewCell: UITextViewDelegate {
         touchHandler?(text)
     }
 }
-

@@ -49,12 +49,6 @@ class PetDetailViewController: UIViewController {
         
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        
-    }
-    
     func setupPageControl() {
         
         pageControl.numberOfPages = petData?.petImage.count ?? 0

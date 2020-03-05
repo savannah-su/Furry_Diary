@@ -28,7 +28,7 @@ class SearchOwnerViewController: UIViewController {
     
     @IBAction func okButton(_ sender: Any) {
         
-        let selectedOwners: [UsersData] = ownerData.compactMap({ owner in
+        let selectedOwners: [UsersData] = filterOwnerData.compactMap({ owner in
             
             if owner.isSelected {
                 return owner
@@ -133,7 +133,7 @@ class SearchOwnerViewController: UIViewController {
     }
 }
 
-extension SearchOwnerViewController: UITableViewDelegate{
+extension SearchOwnerViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
@@ -145,11 +145,11 @@ extension SearchOwnerViewController: UITableViewDelegate{
         
         let cell = tableView.cellForRow(at: indexPath)
         
-        cell?.backgroundColor = filterOwnerData[indexPath.row].isSelected ? .Y2 : .white
+        cell?.backgroundColor = filterOwnerData[indexPath.row].isSelected ? .GY0 : .white
     }
 }
 
-extension SearchOwnerViewController: UITableViewDataSource{
+extension SearchOwnerViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -167,7 +167,7 @@ extension SearchOwnerViewController: UITableViewDataSource{
         cell.ownerImage.loadImage(filterOwnerData[indexPath.row].image, placeHolder: UIImage(named: "icon-selected"))
         cell.ownerName.text = filterOwnerData[indexPath.row].name
         
-        cell.backgroundColor = filterOwnerData[indexPath.row].isSelected ? .Y2 : .white
+        cell.backgroundColor = filterOwnerData[indexPath.row].isSelected ? .GY0 : .white
         
         return cell
     }

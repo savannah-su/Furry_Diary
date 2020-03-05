@@ -104,7 +104,9 @@ class PreventPageViewController: UIViewController {
         
         guard let doneDate = dateFormatter.date(from: doneDate) else { return }
         
-        UploadManager.shared.uploadData(petID: petID, categoryType: "預防計畫", date: doneDate, subitem: subItemType, medicineName: medicineName, kilo: "", memo: "", notiOrNot: isSwitchOn ? "true" : "false", notiDate: notiDate, notiText: notiMemo) { result in
+        let data = Record(categoryType: "預防計畫", subitem: subItemType, medicineName: medicineName, kilo: "", memo: "", date: doneDate, notiOrNot: isSwitchOn ? "true" : "false", notiDate: notiDate, notiText: notiMemo)
+        
+        UploadManager.shared.uploadData(petID: petID, data: data) { result in
             
             switch result {
             case .success(let success):
@@ -115,7 +117,13 @@ class PreventPageViewController: UIViewController {
             }
         }
         
-//        LocalNotiManager.shared.setupNoti(notiDate: 10 , type: "毛孩的\(self.subItemType)清潔通知", meaasge: "Really")
+        guard let notiDate = dateFormatter.date(from: notiDate) else {
+            return
+        }
+        
+        if isSwitchOn {
+        LocalNotiManager.shared.setupNoti(notiDate: notiDate.timeIntervalSinceNow, type: "毛孩的\(self.subItemType[0])通知", meaasge: notiMemo == "" ? "記得毛孩的預防計畫唷！" : notiMemo)
+        }
     }
     
     func checkUpdateStatus() {
@@ -184,7 +192,6 @@ extension PreventPageViewController: UITableViewDataSource {
                 
             }
             return cell
-            
             
         default:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "Noti Cell", for: indexPath) as? NotiCell else {

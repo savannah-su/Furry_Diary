@@ -24,8 +24,6 @@
 		242F8E0823D6DFF700F49853 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 242F8E0623D6DFF700F49853 /* Main.storyboard */; };
 		242F8E0A23D6DFFB00F49853 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 242F8E0923D6DFFB00F49853 /* Assets.xcassets */; };
 		242F8E0D23D6DFFB00F49853 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 242F8E0B23D6DFFB00F49853 /* LaunchScreen.storyboard */; };
-		242F8E1823D6DFFC00F49853 /* Personal_ProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242F8E1723D6DFFC00F49853 /* Personal_ProjectTests.swift */; };
-		242F8E2323D6DFFC00F49853 /* Personal_ProjectUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242F8E2223D6DFFC00F49853 /* Personal_ProjectUITests.swift */; };
 		242F8E3123D6E23A00F49853 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 242F8E3023D6E23A00F49853 /* GoogleService-Info.plist */; };
 		2430552423ED425000B9F4E6 /* DailyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2430552323ED425000B9F4E6 /* DailyPageViewController.swift */; };
 		2430552723ED42C000B9F4E6 /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2430552623ED42C000B9F4E6 /* ItemCell.swift */; };
@@ -106,10 +104,8 @@
 		242F8E0C23D6DFFB00F49853 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		242F8E0E23D6DFFB00F49853 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		242F8E1323D6DFFC00F49853 /* FurryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FurryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		242F8E1723D6DFFC00F49853 /* Personal_ProjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Personal_ProjectTests.swift; sourceTree = "<group>"; };
 		242F8E1923D6DFFC00F49853 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		242F8E1E23D6DFFC00F49853 /* FurryUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FurryUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		242F8E2223D6DFFC00F49853 /* Personal_ProjectUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Personal_ProjectUITests.swift; sourceTree = "<group>"; };
 		242F8E2423D6DFFC00F49853 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		242F8E3023D6E23A00F49853 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2430552323ED425000B9F4E6 /* DailyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyPageViewController.swift; sourceTree = "<group>"; };
@@ -309,7 +305,6 @@
 		242F8E1623D6DFFC00F49853 /* FurryTests */ = {
 			isa = PBXGroup;
 			children = (
-				242F8E1723D6DFFC00F49853 /* Personal_ProjectTests.swift */,
 				242F8E1923D6DFFC00F49853 /* Info.plist */,
 			);
 			path = FurryTests;
@@ -318,7 +313,6 @@
 		242F8E2123D6DFFC00F49853 /* FurryUITests */ = {
 			isa = PBXGroup;
 			children = (
-				242F8E2223D6DFFC00F49853 /* Personal_ProjectUITests.swift */,
 				242F8E2423D6DFFC00F49853 /* Info.plist */,
 			);
 			path = FurryUITests;
@@ -638,7 +632,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/Fabric/run\"\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/Fabric/run\"\n\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
 		};
 		5C72EFBD2EED7E6D8B3A0EAA /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -794,7 +788,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				242F8E1823D6DFFC00F49853 /* Personal_ProjectTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -802,7 +795,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				242F8E2323D6DFFC00F49853 /* Personal_ProjectUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -963,7 +955,7 @@
 				CODE_SIGN_ENTITLEMENTS = Furry/Furry.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 9;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 65D6M8WUK7;
 				INFOPLIST_FILE = Furry/Info.plist;
@@ -988,7 +980,7 @@
 				CODE_SIGN_ENTITLEMENTS = Furry/Furry.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = 65D6M8WUK7;
 				INFOPLIST_FILE = Furry/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
