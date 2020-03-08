@@ -77,7 +77,7 @@ struct PetInfo: Codable {
             "pet color": color as Any,
             "pet birth": birth as Any,
             "pet chip": chip as Any,
-            "neuter or not": neuter,
+            "neuter or not": neuter as Any,
             "neuter Date": neuterDate as Any,
             "memo": memo as Any
         ]

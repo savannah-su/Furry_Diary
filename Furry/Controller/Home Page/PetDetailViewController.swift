@@ -44,7 +44,21 @@ class PetDetailViewController: UIViewController {
     
     let titleArray = ["名字", "種類", "性別", "品種", "特徵", "生日", "晶片號碼", "是否絕育", "個性喜好", "毛孩飼主"]
     
-    var petData: PetInfo?
+    var petData: PetInfo? {
+        didSet {
+            guard let viewController = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(identifier: "Create Pet Page") as? CreatePetViewController else { return }
+            
+            viewController.petDataHandler = { [weak self] data in
+                
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.petData = data
+                strongSelf.bannerView.reloadData()
+                strongSelf.tableView.reloadData()
+            }
+        }
+    }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
