@@ -43,6 +43,10 @@ class BehaviorPageViewController: UIViewController {
     var memo = ""
     var selectDisease: [String] = []
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()

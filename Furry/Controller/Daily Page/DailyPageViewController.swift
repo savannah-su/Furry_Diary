@@ -19,6 +19,10 @@ class DailyPageViewController: UIViewController {
     let itemImage = ["dog-treat", "shield", "libra-2", "pet", "report", "medicine"]
     var recordPetID = ""
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

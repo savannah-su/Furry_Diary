@@ -44,6 +44,10 @@ class VetPageController: UIViewController {
     var touchedVet = ""
     var currentPlaceMarker: CLPlacemark?
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()

@@ -63,6 +63,10 @@ class SearchOwnerViewController: UIViewController {
     
     var selectHandler: (([UsersData]) -> Void)?
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

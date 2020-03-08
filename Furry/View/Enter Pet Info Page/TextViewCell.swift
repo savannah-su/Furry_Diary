@@ -21,7 +21,6 @@ class TextViewCell: UITableViewCell {
         contentTextView.delegate = self
         contentTextView.text = "輸入寵物喜好及個性"
         contentTextView.textColor = .lightGray
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

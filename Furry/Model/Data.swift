@@ -40,7 +40,7 @@ struct PetInfo: Codable {
     var color: String?
     var birth: String?
     var chip: String?
-    var neuter: Bool
+    var neuter: Bool?
     var neuterDate: String?
     var memo: String?
     

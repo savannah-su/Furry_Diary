@@ -45,6 +45,10 @@ class HomePageViewController: UIViewController {
     
     var refreshControl: UIRefreshControl!
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -191,6 +195,7 @@ extension HomePageViewController: UITableViewDataSource {
         }
         
         viewController.petData = petData[indexPath.row]
+        
         show(viewController, sender: nil)
     }
     

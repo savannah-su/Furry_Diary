@@ -26,9 +26,9 @@ class CleanPageViewController: UIViewController {
     }
     
     @IBOutlet weak var collectionView: UICollectionView! {
-        didSet{
+        didSet {
             collectionView.dataSource = self
-             collectionView.delegate = self
+            collectionView.delegate = self
         }
     }
     @IBAction func backButton(_ sender: Any) {
@@ -41,6 +41,7 @@ class CleanPageViewController: UIViewController {
         toDataBase()
     }
     
+    //let cellModels = [CellModel(labelName: "洗澡", imageName: "洗澡"), CellModel(labelName: "毛髮", imageName: "毛髮")]
     let sectionOneLabel = ["洗澡", "毛髮", "指甲", "耳朵", "牙齒"]
     let sectionOneImage = ["洗澡", "毛髮", "指甲", "耳朵", "牙齒"]
     let sectionOneSelected = ["洗澡-selected", "毛髮-selected", "指甲-selected", "耳朵-selected", "牙齒-selected"]
@@ -74,6 +75,10 @@ class CleanPageViewController: UIViewController {
         
         return dateFormatter
     }()
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
     
     override func viewDidLoad() {
         
@@ -172,6 +177,7 @@ extension CleanPageViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        return cellModels.count
             return 5
     }
     
@@ -185,6 +191,7 @@ extension CleanPageViewController: UICollectionViewDataSource {
         
         if indexPath.section == 0 {
             
+            //cellA.setCell(model: cellModels[indexPath.row])
             cellA.itemLabel.text = sectionOneLabel[indexPath.row]
             
             let index = indexPath.row

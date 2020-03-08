@@ -11,24 +11,22 @@ import UIKit
 class CoOwnerCell: UITableViewCell {
     
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var collectionView: UICollectionView! {
+        didSet {
+            collectionView.delegate = self
+            collectionView.dataSource = self
+        }
+    }
     @IBOutlet weak var searchButton: UIButton!
     
     var data = PetInfo(petID: "", ownersID: [], ownersName: [], ownersImage: [], petImage: [], petName: "", species: "", gender: "", breed: "", color: "", birth: "", chip: "", neuter: false, neuterDate: "", memo: "")
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
 
 }
@@ -45,10 +43,28 @@ extension CoOwnerCell: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
-//        let url = URL(string: data.ownersImage[indexPath.item])
+        //        let url = URL(string: data.ownersImage[indexPath.item])
         cell.ownerPhoto.loadImage(data.ownersImage[indexPath.item], placeHolder: UIImage(named: "icon-selected"))
         cell.ownerPhoto.layer.cornerRadius = 15
-
+        
+        guard let currentUserImage = UserDefaults.standard.value(forKey: "userPhoto") as? String else {
+            return UICollectionViewCell()
+        }
+        
+        if data.ownersImage[indexPath.item] != currentUserImage {
+            
+            cell.removeBtnView.isHidden = false
+            
+            cell.removeHandler = { [weak self] in
+                guard let strongSelf = self else { return }
+                strongSelf.data.ownersImage.remove(at: indexPath.item)
+                collectionView.reloadData()
+            }
+            
+        } else {
+            cell.removeBtnView.isHidden = true
+        }
+        
         return cell
     }
 }
@@ -56,11 +72,11 @@ extension CoOwnerCell: UICollectionViewDataSource {
 extension CoOwnerCell: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 30, height: 30)
+        return CGSize(width: 35, height: 35)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 5
+        return 0
     }
 
 }
