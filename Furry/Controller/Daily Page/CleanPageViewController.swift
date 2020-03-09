@@ -151,7 +151,7 @@ class CleanPageViewController: UIViewController {
     func checkUpdateStatus() {
         
         if isSwitchOn {
-            saveButton.isEnabled = notiDate > doneDate
+            saveButton.isEnabled = notiDate > doneDate && notiDate != dateFormatter.string(from: Date())
             saveButton.setTitleColor(UIColor.G4, for: .normal)
             
         } else {

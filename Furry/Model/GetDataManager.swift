@@ -9,6 +9,7 @@
 import Foundation
 
 class GetDataManager {
+    
     func getData(urlString: String, completion: @escaping (Result<[VetData], Error>) -> Void) {
         
         var request = URLRequest(url: URL(string: urlString)!)
@@ -36,12 +37,12 @@ class GetDataManager {
                 let decoder = JSONDecoder()
                 let result = try decoder.decode([VetData].self, from: data)
                 completion(.success(result))
-                //                print(result)
             } catch {
                 print(error)
             }
         }.resume()
     }
+    
     func getVetPlacemark(addressString: String, completion: @escaping (Result<VetPlacemarkData, Error>) -> Void) {
         
         var urlComponent = URLComponents(string: "https://maps.googleapis.com/maps/api/geocode/json")!
@@ -76,7 +77,6 @@ class GetDataManager {
                 
                 let decoder = JSONDecoder()
                 let result = try decoder.decode(VetPlacemarkData.self, from: data)
-                print(result)
                 completion(.success(result))
                 
             } catch {

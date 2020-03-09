@@ -43,8 +43,8 @@ class HistoryPageController: UIViewController {
     @IBOutlet weak var tableView: UITableView! {
         
         didSet {
-            tableView.delegate = self
-            tableView.dataSource = self
+            self.tableView.delegate = self
+            self.tableView.dataSource = self
         }
     }
     
@@ -260,7 +260,7 @@ extension HistoryPageController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        switch currentDateData[indexPath.section].categoryType {
+        switch currentDateData[indexPath.row].categoryType {
             
         case "衛生清潔":
             return 141
@@ -305,7 +305,7 @@ extension HistoryPageController: UITableViewDataSource {
             cell.recordDate.text = formatter.string(from: currentDateData[indexPath.row].date)
             
             if currentDateData[indexPath.row].notiDate != "" {
-                cell.contentLabel.text = "下次清潔\(currentDateData[indexPath.row].notiDate ?? "")"
+                cell.contentLabel.text = "下次清潔\(currentDateData[indexPath.row].notiDate!)"
             } else {
             cell.contentLabel.isHidden = true
             }
@@ -317,7 +317,7 @@ extension HistoryPageController: UITableViewDataSource {
             cell.contentLabel.text = currentDateData[indexPath.row].medicineName
             
             if currentDateData[indexPath.row].notiDate != "" {
-                cell.nextDateLabel.text = "下次施作是\(currentDateData[indexPath.row].notiDate ?? "")"
+                cell.nextDateLabel.text = "下次施作是\(currentDateData[indexPath.row].notiDate!)"
             } else {
             cell.nextDateLabel.isHidden = true
             }
@@ -346,7 +346,7 @@ extension HistoryPageController: UITableViewDataSource {
             cell.contentLabel.text = currentDateData[indexPath.row].medicineName
             
             if currentDateData[indexPath.row].notiDate != "" {
-                cell.nextDateLabel.text = "下次追蹤是\(currentDateData[indexPath.row].notiDate ?? "")"
+                cell.nextDateLabel.text = "下次追蹤是\(currentDateData[indexPath.row].notiDate!)"
             } else {
             cell.nextDateLabel.isHidden = true
             }
@@ -358,7 +358,7 @@ extension HistoryPageController: UITableViewDataSource {
             cell.contentLabel.text = currentDateData[indexPath.row].medicineName
             
             if currentDateData[indexPath.row].notiDate != "" {
-                cell.nextDateLabel.text = "下次用藥是\(currentDateData[indexPath.row].notiDate ?? "")"
+                cell.nextDateLabel.text = "下次用藥是\(currentDateData[indexPath.row].notiDate!)"
             } else {
             cell.nextDateLabel.isHidden = true
             }
