@@ -116,7 +116,17 @@ class CleanPageViewController: UIViewController {
         
         guard let doneDate = dateFormatter.date(from: doneDate) else { return }
         
-        let data = Record(categoryType: "衛生清潔", subitem: subItemType, medicineName: "", kilo: "", memo: "", date: doneDate, notiOrNot: isSwitchOn ? "true" : "false", notiDate: notiDate, notiText: notiMemo)
+        let data = Record(
+            categoryType: "衛生清潔",
+            subitem: subItemType,
+            medicineName: "",
+            kilo: "",
+            memo: "",
+            date: doneDate,
+            notiOrNot: isSwitchOn ? "true" : "false",
+            notiDate: notiDate == dateFormatter.string(from: doneDate) ? "" : notiDate,
+            notiText: notiMemo
+        )
         
         UploadManager.shared.uploadData(petID: petID, data: data) { result in
             
@@ -347,15 +357,17 @@ extension CleanPageViewController: UITableViewDataSource {
 
             cell.notiSwitch.addTarget(self, action: #selector(changeSwitch), for: .valueChanged)
             
-            cell.notiText.text = notiMemo
-            
             cell.textFieldType = .date(notiDate, "yyyy-MM-dd")
             
             cell.dateUpdateHandler = { [weak self] text in
-                
                 self?.notiDate = text
-            
                 self?.checkUpdateStatus()
+            }
+            
+            if notiDate == dateFormatter.string(from: Date()) {
+                cell.notiText.text = ""
+            } else {
+                cell.notiText.text = notiMemo
             }
             
             cell.contentUpdateHandler = { [weak self] text in

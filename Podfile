@@ -47,7 +47,6 @@ target 'Furry' do
     # Pods for testing
   end
 
-
   target 'FurryUITests' do
     # Pods for testing
   end

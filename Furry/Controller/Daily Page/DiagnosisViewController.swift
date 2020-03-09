@@ -93,7 +93,17 @@ class DiagnosisViewController: UIViewController {
             return
         }
         
-        let data = Record(categoryType: "醫療紀錄", subitem: subItemType, medicineName: desc, kilo: "", memo: "", date: doneDate, notiOrNot: isSwitchOn ? "true" : "false", notiDate: notiDate, notiText: notiMemo)
+        let data = Record(
+            categoryType: "醫療紀錄",
+            subitem: subItemType,
+            medicineName: desc,
+            kilo: "",
+            memo: "",
+            date: doneDate,
+            notiOrNot: isSwitchOn ? "true" : "false",
+            notiDate: notiDate == dateFormatter.string(from: doneDate) ? "" : notiDate,
+            notiText: notiMemo
+        )
         
         UploadManager.shared.uploadData(petID: petID, data: data) { result in
             

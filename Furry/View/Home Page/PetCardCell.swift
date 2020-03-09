@@ -78,8 +78,8 @@ extension PetCardCell: BannerViewDataSource {
     func viewFor(bannerView: BannerView, at index: Int) -> UIView {
         
         let imageView = UIImageView()
-        
-        imageView.kf.setImage(with: URL(string: petImage[index]))
+//        kf.setImage(with: URL(string: ))
+        imageView.loadImage(petImage[index], placeHolder: UIImage(named: "icon-selected"))
         
         imageView.backgroundColor = .white
         

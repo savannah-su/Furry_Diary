@@ -108,7 +108,17 @@ class PreventPageViewController: UIViewController {
         
         guard let doneDate = dateFormatter.date(from: doneDate) else { return }
         
-        let data = Record(categoryType: "預防計畫", subitem: subItemType, medicineName: medicineName, kilo: "", memo: "", date: doneDate, notiOrNot: isSwitchOn ? "true" : "false", notiDate: notiDate, notiText: notiMemo)
+        let data = Record(
+            categoryType: "預防計畫",
+            subitem: subItemType,
+            medicineName: medicineName,
+            kilo: "",
+            memo: "",
+            date: doneDate,
+            notiOrNot: isSwitchOn ? "true" : "false",
+            notiDate: notiDate == dateFormatter.string(from: doneDate) ? "" : notiDate,
+            notiText: notiMemo
+        )
         
         UploadManager.shared.uploadData(petID: petID, data: data) { result in
             

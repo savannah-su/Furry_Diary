@@ -92,7 +92,16 @@ class MedicineViewController: UIViewController {
         
         guard let doneDate = dateFormatter.date(from: doneDate) else { return }
         
-        let data = Record(categoryType: "用藥紀錄", subitem: subItemType, medicineName: medicine, kilo: "", memo: "", date: doneDate, notiOrNot: isSwitchOn ? "true" : "false", notiDate: notiDate, notiText: notiMemo)
+        let data = Record(
+            categoryType: "用藥紀錄",
+            subitem: subItemType,
+            medicineName: medicine,
+            kilo: "", memo: "",
+            date: doneDate,
+            notiOrNot: isSwitchOn ? "true" : "false",
+            notiDate: notiDate == dateFormatter.string(from: doneDate) ? "" : notiDate,
+            notiText: notiMemo
+        )
         
         UploadManager.shared.uploadData(petID: petID, data: data) { result in
             
