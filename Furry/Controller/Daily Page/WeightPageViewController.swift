@@ -8,38 +8,6 @@
 
 import UIKit
 import PNChart
-import JGProgressHUD
-
-/*
- 
- PNLineChart * lineChart = [[PNLineChart alloc] initWithFrame:CGRectMake(0, 135.0, SCREEN_WIDTH, 200.0)];
- [lineChart setXLabels:@[@"SEP 1",@"SEP 2",@"SEP 3",@"SEP 4",@"SEP 5"]];
- 
- // Line Chart No.1
- NSArray * data01Array = @[@60.1, @160.1, @126.4, @262.2, @186.2];
- PNLineChartData *data01 = [PNLineChartData new];
- data01.color = PNFreshGreen;
- data01.itemCount = lineChart.xLabels.count;
- data01.getData = ^(NSUInteger index) {
- CGFloat yValue = [data01Array[index] floatValue];
- return [PNLineChartDataItem dataItemWithY:yValue];
- };
- // Line Chart No.2
- NSArray * data02Array = @[@20.1, @180.1, @26.4, @202.2, @126.2];
- PNLineChartData *data02 = [PNLineChartData new];
- data02.color = PNTwitterColor;
- data02.itemCount = lineChart.xLabels.count;
- data02.getData = ^(NSUInteger index) {
- CGFloat yValue = [data02Array[index] floatValue];
- return [PNLineChartDataItem dataItemWithY:yValue];
- };
- 
- lineChart.chartData = @[data01, data02];
- [lineChart strokeChart];
- You can choose to show smooth lines.
- 
- lineChart.showSmoothLines = YES;
- */
 
 class WeightPageViewController: UIViewController {
     
@@ -115,7 +83,7 @@ class WeightPageViewController: UIViewController {
                            
         self.data.removeAll()
         
-        DownloadManager.shared.downloadData(type: 2, petID: petID) { result in
+        DownloadManager.shared.downloadRecordData(categoryType: 2, petID: petID) { result in
             
             switch result {
                 
@@ -155,14 +123,6 @@ class WeightPageViewController: UIViewController {
         }
     }
     
-    func uploadSuccess() {
-           let hud = JGProgressHUD(style: .dark)
-           hud.textLabel.text = "Success!"
-           hud.show(in: self.view)
-           hud.dismiss(afterDelay: 3.0)
-           hud.indicatorView = JGProgressHUDSuccessIndicatorView()
-       }
-    
     func toDataBase() {
         
         getInfo()
@@ -173,10 +133,11 @@ class WeightPageViewController: UIViewController {
             
             switch result {
             case .success(let success):
+                UploadManager.shared.uploadSuccess(text: "上傳成功！")
                 print(success)
-                self.uploadSuccess()
                 self.toGetRecord()
             case .failure(let error):
+                UploadManager.shared.uploadFail(text: "上傳失敗！")
                 print(error.localizedDescription)
             }
         }

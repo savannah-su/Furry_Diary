@@ -22,12 +22,18 @@ class HomePageViewController: UIViewController {
     
     @IBAction func createButton(_ sender: Any) {
        
-        guard let viewController = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(identifier: "Create Pet Page") as? CreatePetViewController else { return }
-        
+        guard let viewController = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(identifier: "Create Pet Page") as? CreatePetViewController else {
+            return
+        }
         present(viewController, animated: true, completion: nil)
     }
     
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableView: UITableView! {
+        didSet {
+            self.tableView.dataSource = self
+            self.tableView.delegate = self
+        }
+    }
     
     var petData = [PetInfo]() {
         
@@ -56,16 +62,15 @@ class HomePageViewController: UIViewController {
         //製造Crash範例
         //Fabric.sharedSDK().debug = true
         
-        tableView.dataSource = self
-        tableView.delegate = self
-        
         NotificationCenter.default.addObserver(self, selector: #selector(getPetData), name: Notification.Name("Create New Pet"), object: nil)
-        
-        tableView.separatorColor = .clear
         
         getPetData()
         
         addRefreshControl()
+    }
+    
+    override func viewWillLayoutSubviews() {
+        tableView.separatorColor = .clear
     }
     
     func logout() {
@@ -106,31 +111,17 @@ class HomePageViewController: UIViewController {
     @objc func getPetData() {
         
         UploadManager.shared.simplePetInfo.removeAll()
+        DownloadManager.shared.petData.removeAll()
         
-        Firestore.firestore().collection("pets").whereField("owners ID", arrayContains: Auth.auth().currentUser!.uid).getDocuments { (querySnapshot, error) in
+        DownloadManager.shared.downloadPetData { result in
             
-            var petDataFromDB = [PetInfo]()
-            
-            if error == nil {
+            switch result {
                 
-                for document in querySnapshot!.documents {
-                    
-                    do {
-                        
-                        if let petInfo = try document.data(as: PetInfo.self, decoder: Firestore.Decoder()) {
-                        
-                            petDataFromDB.append(petInfo)
-                            
-                            let simplePet = SimplePetInfo(petName: petInfo.petName, petID: petInfo.petID, petPhoto: petInfo.petImage)
-  
-                            UploadManager.shared.simplePetInfo.append(simplePet)
-                        }
-                        
-                    } catch {
-                        print(error)
-                    }
-                }
-                self.petData = petDataFromDB
+            case .success(let downloadPetData):
+                self.petData = downloadPetData
+                
+            case . failure(let error):
+                print(error)
             }
         }
     }
@@ -173,17 +164,15 @@ extension HomePageViewController: UITableViewDataSource {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "Pet Card Cell", for: indexPath) as? PetCardCell else { return UITableViewCell() }
         
-        cell.petName.text = petData[indexPath.row].petName
-        cell.genderAndOld.text = petData[indexPath.row].gender
-        cell.petImage = petData[indexPath.row].petImage
+        cell.setCell(model: petData[indexPath.row])
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(toDetailPage(_:)))
+        let tap = UITapGestureRecognizer(target: self, action: #selector(toPetDetailPage(_:)))
         cell.background.addGestureRecognizer(tap)
 
         return cell
     }
     
-    @objc func toDetailPage(_ sender: UIGestureRecognizer) {
+    @objc func toPetDetailPage(_ sender: UIGestureRecognizer) {
         
         guard let viewController = UIStoryboard(name: "PetDetail", bundle: nil).instantiateViewController(identifier: "Pet Detail Page") as? PetDetailViewController else { return }
 

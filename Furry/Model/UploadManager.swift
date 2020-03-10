@@ -12,6 +12,7 @@ import FirebaseAuth
 import FirebaseCore
 import FirebaseFirestore
 import FirebaseFirestoreSwift
+import JGProgressHUD
 
 enum Upload: Error {
     
@@ -37,6 +38,10 @@ class UploadManager {
     lazy var db = Firestore.firestore()
     
     var simplePetInfo: [SimplePetInfo] = []
+    
+    var view: UIView {
+        return AppDelegate.shared.window!.rootViewController!.view
+    }
     
     func uploadData(petID: String, data: Record, completion: @escaping (Result<String, Error>) -> Void) {
         
@@ -65,5 +70,32 @@ class UploadManager {
             completion(.success("Success"))
             
         }
+    }
+    
+    func uploadSuccess(text: String) {
+        
+        let hud = JGProgressHUD(style: .dark)
+        
+        hud.textLabel.text = text
+        
+        hud.show(in: view)
+        
+        hud.dismiss(afterDelay: 3.0)
+        
+        hud.indicatorView = JGProgressHUDSuccessIndicatorView()
+        
+    }
+    
+    func uploadFail(text: String) {
+        
+        let hud = JGProgressHUD(style: .dark)
+        
+        hud.textLabel.text = text
+        
+        hud.show(in: view)
+        
+        hud.dismiss(afterDelay: 3.0)
+        
+        hud.indicatorView = JGProgressHUDErrorIndicatorView()
     }
 }

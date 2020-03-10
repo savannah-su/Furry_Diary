@@ -166,6 +166,9 @@ class LoginViewController: UIViewController {
                 print("DB added successfully")
                 
             } else {
+                
+                UploadManager.shared.uploadFail(text: "登入失敗！")
+                
                 print("Added failed")
             }
         })

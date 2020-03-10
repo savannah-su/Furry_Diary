@@ -153,7 +153,7 @@ class HistoryPageController: UIViewController {
         
         DownloadManager.shared.monthlyData.removeAll()
         
-        DownloadManager.shared.downloadMonthlyData(petID:
+        DownloadManager.shared.downloadMonthlyRecordData(petID:
         petID, startOfMonth: calendar.currentPage.startOfMonth(), endOfMonth: calendar.currentPage.endOfMonth()) { [weak self] result in
             
             switch result {

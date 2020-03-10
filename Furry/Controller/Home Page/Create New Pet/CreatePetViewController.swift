@@ -168,8 +168,15 @@ class CreatePetViewController: UIViewController {
         Firestore.firestore().collection("pets").document(petID).setData(petInfo.toDict, completion: { (error) in
             
             if error == nil {
+                
+                UploadManager.shared.uploadSuccess(text: "上傳成功！")
+                
                 print("DB added successfully")
+                
             } else {
+                
+                UploadManager.shared.uploadFail(text: "上傳失敗！")
+                
                 print("DB added failed")
             }
         })

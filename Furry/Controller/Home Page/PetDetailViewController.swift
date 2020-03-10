@@ -61,10 +61,14 @@ class PetDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        setupPageControl()
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
         
         tableView.contentInset = UIEdgeInsets(top: 200, left: 0, bottom: 0, right: 0)
-        
-        setupPageControl()
     }
     
     func setupPageControl() {
@@ -101,7 +105,6 @@ extension PetDetailViewController: BannerViewDataSource {
         imageView.kf.setImage(with: URL(string: petData?.petImage[index] ?? ""))
         
         imageView.contentMode = .scaleAspectFill
-        
         imageView.clipsToBounds = true
         
         return imageView
@@ -211,12 +214,6 @@ extension PetDetailViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
-        //        guard let urlString = petData?.ownersImage[indexPath.item] else {
-        //            return UICollectionViewCell()
-        //        }
-        //        guard let url = URL(string: urlString) else {
-        //             return UICollectionViewCell()
-        //        }
         cell.ownerPhoto.loadImage(petData?.ownersImage[indexPath.item], placeHolder: UIImage(named: "icon-selected"))
         cell.ownerPhoto.layer.cornerRadius = 15
         

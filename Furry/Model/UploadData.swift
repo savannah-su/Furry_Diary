@@ -89,6 +89,19 @@ struct PetInfo: Codable {
 //    case clean
 //}
 
+struct TimeMagic {
+        
+    static var dateFormatter: DateFormatter {
+        
+        let formatter = DateFormatter()
+        
+        formatter.dateFormat = "yyyy-MM-dd"
+                
+        return formatter
+        
+    }
+}
+
 struct Record: Codable {
     
     static var dateFormatter: DateFormatter = {

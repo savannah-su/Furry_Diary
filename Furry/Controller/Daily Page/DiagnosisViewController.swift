@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import JGProgressHUD
 
 class DiagnosisViewController: UIViewController {
 
@@ -79,14 +78,6 @@ class DiagnosisViewController: UIViewController {
         tableView.separatorColor = .clear
     }
     
-    func uploadSuccess() {
-        let hud = JGProgressHUD(style: .dark)
-        hud.textLabel.text = "Success!"
-        hud.show(in: self.view)
-        hud.dismiss(afterDelay: 3.0)
-        hud.indicatorView = JGProgressHUDSuccessIndicatorView()
-    }
-    
     func toDatabase() {
         
         guard let doneDate = dateFormatter.date(from: doneDate) else {
@@ -109,9 +100,10 @@ class DiagnosisViewController: UIViewController {
             
             switch result {
             case .success(let success):
+                UploadManager.shared.uploadSuccess(text: "上傳成功！")
                 print(success)
-                self.uploadSuccess()
             case .failure(let error):
+                UploadManager.shared.uploadFail(text: "上傳失敗！")
                 print(error.localizedDescription)
             }
         }

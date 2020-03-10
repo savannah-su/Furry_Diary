@@ -31,7 +31,6 @@ class BannerView: UIView {
             guard self.dataSource != nil else {
                 
                 unitViews.forEach { $0.removeFromSuperview() }
-                
                 return
             }
             
@@ -58,13 +57,9 @@ class BannerView: UIView {
         let scrollView = UIScrollView()
         
         scrollView.contentInsetAdjustmentBehavior = .never
-        
         scrollView.showsHorizontalScrollIndicator = false
-        
         scrollView.showsVerticalScrollIndicator = false
-        
         scrollView.translatesAutoresizingMaskIntoConstraints = false
-        
         scrollView.delegate = self
         
         self.addSubview(scrollView)
@@ -75,7 +70,6 @@ class BannerView: UIView {
     func manipulateWidthConstraints(with constant: CGFloat) {
         
         for unitView in unitViews {
-            
             unitView.widthConstraint?.constant = constant
         }
     }
@@ -103,7 +97,9 @@ class BannerView: UIView {
         
         unitViews.removeAll()
         
-        guard let dataSource = dataSource else { return }
+        guard let dataSource = dataSource else {
+            return
+        }
         
         let pages = dataSource.numberOfPages(in: self)
         
@@ -114,7 +110,6 @@ class BannerView: UIView {
             unitView.contentView = dataSource.viewFor(bannerView: self, at: index)
             
             unitViews.append(unitView)
-        
             scrollView.addSubview(unitView)
         }
         

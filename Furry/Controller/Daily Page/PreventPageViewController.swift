@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import JGProgressHUD
 
 class PreventPageViewController: UIViewController {
     
@@ -96,14 +95,6 @@ class PreventPageViewController: UIViewController {
         
     }
     
-    func uploadSuccess() {
-           let hud = JGProgressHUD(style: .dark)
-           hud.textLabel.text = "Success!"
-           hud.show(in: self.view)
-           hud.dismiss(afterDelay: 3.0)
-           hud.indicatorView = JGProgressHUDSuccessIndicatorView()
-       }
-    
     func toDataBase() {
         
         guard let doneDate = dateFormatter.date(from: doneDate) else { return }
@@ -124,9 +115,10 @@ class PreventPageViewController: UIViewController {
             
             switch result {
             case .success(let success):
+                UploadManager.shared.uploadSuccess(text: "上傳成功！")
                 print(success)
-                self.uploadSuccess()
             case .failure(let error):
+                UploadManager.shared.uploadFail(text: "上傳失敗！")
                 print(error.localizedDescription)
             }
         }

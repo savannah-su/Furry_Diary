@@ -34,14 +34,14 @@ class PetCardCell: UITableViewCell {
         super.awakeFromNib()
         
         setupShadow()
-        
         setupBannerView()
         
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
+    
+    func setCell(model: PetInfo) {
+        self.petName.text = model.petName
+        self.genderAndOld.text = model.gender
+        self.petImage = model.petImage
     }
     
     func setupPageControl() {
