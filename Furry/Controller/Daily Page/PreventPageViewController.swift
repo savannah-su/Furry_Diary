@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import IQKeyboardManagerSwift
 
 class PreventPageViewController: UIViewController {
     
@@ -14,8 +15,9 @@ class PreventPageViewController: UIViewController {
     
     @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var buttomViewConstraint: NSLayoutConstraint!
-    @IBOutlet weak var bottomViewButton: VerticalAlignedButton!
-    @IBAction func bottomViewButton(_ sender: Any) {}
+    @IBAction func bottomViewButton(_ sender: Any) {
+        
+    }
     @IBOutlet weak var bottomViewLabel: UILabel!
     @IBOutlet weak var tableView: UITableView! {
         didSet {
@@ -79,8 +81,6 @@ class PreventPageViewController: UIViewController {
         
         tableView.isHidden = true
         tableView.separatorColor = .clear
-        
-        bottomViewButton.isHidden = true
         
         saveButton.isEnabled = false
         saveButton.setTitleColor(UIColor.lightGray, for: .disabled)
@@ -175,6 +175,8 @@ extension PreventPageViewController: UITableViewDataSource {
             cell.contentText.text = medicineName
             cell.textFieldType = .normal
             cell.contentUpdateHandler = { [weak self] text in
+                
+                print(IQKeyboardManager.shared.keyboardShowing)
                 
                 self?.medicineName = text
                 
@@ -297,8 +299,6 @@ extension PreventPageViewController: UICollectionViewDelegate {
             self.view.layoutIfNeeded()
         }
         move.startAnimation()
-        
-        bottomViewButton.isHidden = false
     }
     
     func downButtomView() {
@@ -311,8 +311,5 @@ extension PreventPageViewController: UICollectionViewDelegate {
             self.view.layoutIfNeeded()
         }
         move.startAnimation()
-        
-        bottomViewButton.isHidden = true
-        
     }
 }

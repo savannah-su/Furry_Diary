@@ -128,6 +128,10 @@ class LoginViewController: UIViewController {
         }
     }
     
+    func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> Void) {
+        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
+    }
+    
     func addToDatabase(appleLogin: Bool) {
         
         guard let userID = Auth.auth().currentUser?.uid,
@@ -137,6 +141,7 @@ class LoginViewController: UIViewController {
         
         var userName = appleLogin ? userEmail : "隱藏信箱資訊的Apple使用者"
         var userPhoto = ""
+        var userPhotoString = ""
         
         if !appleLogin {
             
@@ -149,29 +154,78 @@ class LoginViewController: UIViewController {
             userPhoto = photo
         }
         
-        let usersData = UsersData(name: userName, email: userEmail, image: userPhoto, id: userID)
+        guard let fbPhoto = URL(string: userPhoto) else {
+            return
+        }
         
-        Firestore.firestore().collection("users").document(userID).setData(usersData.toDict, completion: { (error) in
+        let group = DispatchGroup()
+        
+        group.enter()
+        getData(from: fbPhoto) { (data, response, error) in
             
-            if error == nil {
-                
-                UserDefaults.standard.set(true, forKey: "logInOrNot")
-                UserDefaults.standard.set(userEmail, forKey: "email")
-                UserDefaults.standard.set(userName, forKey: "userName")
-                UserDefaults.standard.set(userPhoto, forKey: "userPhoto")
-                UserDefaults.standard.set(userID, forKey: "userID")
-                
-                self.toNextpage()
-                
-                print("DB added successfully")
-                
-            } else {
-                
-                UploadManager.shared.uploadFail(text: "登入失敗！")
-                
-                print("Added failed")
+            guard let data = data else {
+                return
             }
-        })
+            
+            guard let image = UIImage(data: data) else {
+                return
+            }
+            
+            guard let photo = image.jpegData(compressionQuality: 0.5) else {
+                return
+            }
+            
+            let storageRef = Storage.storage().reference().child("UserPhoto").child("\(userID).jpeg")
+            
+            storageRef.putData(photo, metadata: nil) { (_, error) in
+                
+                if error != nil {
+                    print("To Storage Failed")
+                    return
+                }
+                storageRef.downloadURL { (url, error) in
+                    
+                    if error != nil {
+                        print("Get URL Failed")
+                        return
+                    }
+                    
+                    guard let backUserPhoto = url?.absoluteString else {
+                        return
+                    }
+                    userPhotoString = backUserPhoto
+                    group.leave()
+                }
+            }
+            
+            group.notify(queue: DispatchQueue.main) {
+                
+                let usersData = UsersData(name: userName, email: userEmail, image: userPhotoString, id: userID)
+                
+                Firestore.firestore().collection("users").document(userID).setData(usersData.toDict, completion: { (error) in
+                    
+                    if error == nil {
+                        
+                        UserDefaults.standard.set(true, forKey: "logInOrNot")
+                        UserDefaults.standard.set(userEmail, forKey: "email")
+                        UserDefaults.standard.set(userName, forKey: "userName")
+                        UserDefaults.standard.set(userPhotoString, forKey: "userPhoto")
+                        UserDefaults.standard.set(userID, forKey: "userID")
+                        
+                        self.toNextpage()
+                        
+                        print("DB added successfully")
+                        
+                    } else {
+                        
+                        UploadManager.shared.uploadFail(text: "登入失敗！")
+                        
+                        print("Added failed")
+                    }
+                })
+            }
+            
+        }
     }
     
     //Apple ID Sign In

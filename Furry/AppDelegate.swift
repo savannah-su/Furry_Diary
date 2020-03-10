@@ -122,39 +122,92 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         window?.rootViewController = viewController
     }
     
+    func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> Void) {
+        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
+    }
+    
     func addToDatabase() {
         
         guard let userID = Auth.auth().currentUser?.uid,
             let userEmail = Auth.auth().currentUser?.providerData.first?.email,
             let userName = Auth.auth().currentUser?.providerData.first?.displayName,
-            let userPhoto = Auth.auth().currentUser?.providerData.first?.photoURL?.absoluteString
-            else {
-                
+            let userPhoto = Auth.auth().currentUser?.providerData.first?.photoURL?.absoluteString else {
                 return
         }
         
-        let usersData = UsersData(name: userName, email: userEmail, image: userPhoto, id: userID)
+        var userPhotoString = ""
         
-        Firestore.firestore().collection("users").document(userID).setData(usersData.toDict, completion: { (error) in
-            if error == nil {
-                
-                UserDefaults.standard.set(true, forKey: "logInOrNot")
-                UserDefaults.standard.set(userEmail, forKey: "email")
-                UserDefaults.standard.set(userName, forKey: "userName")
-                UserDefaults.standard.set(userPhoto, forKey: "userPhoto")
-                UserDefaults.standard.set(userID, forKey: "userID")
-                
-                //self.toNextpage()
-                NotificationCenter.default.post(name: Notification.Name("toSearchOwnerPage"), object: nil)
-                
-                print("DB added successfully")
-                
-                self.toNextpage()
-                
-            } else {
-                print("Added failed")
+        guard let googlelPhoto = URL(string: userPhoto) else {
+            return
+        }
+        
+        let group = DispatchGroup()
+        
+        group.enter()
+        getData(from: googlelPhoto) { (data, response, error) in
+            
+            guard let data = data else {
+                return
             }
-        })
+            
+            guard let image = UIImage(data: data) else {
+                return
+            }
+            
+            guard let photo = image.jpegData(compressionQuality: 0.5) else {
+                return
+            }
+            
+            let storageRef = Storage.storage().reference().child("UserPhoto").child("\(userID).jpeg")
+            
+            storageRef.putData(photo, metadata: nil) { (_, error) in
+                
+                if error != nil {
+                    print("To Storage Failed")
+                    return
+                }
+                storageRef.downloadURL { (url, error) in
+                    
+                    if error != nil {
+                        print("Get URL Failed")
+                        return
+                    }
+                    
+                    guard let backUserPhoto = url?.absoluteString else {
+                        return
+                    }
+                    userPhotoString = backUserPhoto
+                    group.leave()
+                }
+            }
+            
+            group.notify(queue: DispatchQueue.main) {
+                
+                let usersData = UsersData(name: userName, email: userEmail, image: userPhotoString, id: userID)
+                
+                Firestore.firestore().collection("users").document(userID).setData(usersData.toDict, completion: { (error) in
+                    if error == nil {
+                        
+                        UserDefaults.standard.set(true, forKey: "logInOrNot")
+                        UserDefaults.standard.set(userEmail, forKey: "email")
+                        UserDefaults.standard.set(userName, forKey: "userName")
+                        UserDefaults.standard.set(userPhotoString, forKey: "userPhoto")
+                        UserDefaults.standard.set(userID, forKey: "userID")
+                        
+                        //self.toNextpage()
+                        NotificationCenter.default.post(name: Notification.Name("toSearchOwnerPage"), object: nil)
+                        
+                        print("DB added successfully")
+                        
+                        self.toNextpage()
+                        
+                    } else {
+                        print("Added failed")
+                    }
+                })
+            }
+            
+        }
     }
 }
 

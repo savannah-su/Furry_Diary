@@ -98,8 +98,8 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Furry Diary" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d3N-eT-F5z">
-                                <rect key="frame" x="26.5" y="29" width="361" height="169"/>
-                                <fontDescription key="fontDescription" name="Zapfino" family="Zapfino" pointSize="50"/>
+                                <rect key="frame" x="25" y="34" width="364" height="152"/>
+                                <fontDescription key="fontDescription" name="Zapfino" family="Zapfino" pointSize="45"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -110,8 +110,10 @@
                             <constraint firstItem="dMc-xW-VAZ" firstAttribute="centerX" secondItem="xQv-Wq-6q1" secondAttribute="centerX" id="8A9-VG-uAV"/>
                             <constraint firstItem="YJy-C3-W4e" firstAttribute="centerX" secondItem="xQv-Wq-6q1" secondAttribute="centerX" id="9Br-Cq-9gZ"/>
                             <constraint firstItem="d3N-eT-F5z" firstAttribute="centerX" secondItem="xQv-Wq-6q1" secondAttribute="centerX" id="HBs-VN-8Es"/>
+                            <constraint firstItem="HUe-MP-PbA" firstAttribute="trailing" secondItem="d3N-eT-F5z" secondAttribute="trailing" constant="25" id="JfX-FK-ZvR"/>
                             <constraint firstItem="Jli-id-65H" firstAttribute="trailing" secondItem="b4b-4s-XtW" secondAttribute="trailing" id="KiP-iC-yGT"/>
-                            <constraint firstItem="d3N-eT-F5z" firstAttribute="top" secondItem="HUe-MP-PbA" secondAttribute="top" constant="-15" id="PPG-px-0V4"/>
+                            <constraint firstItem="d3N-eT-F5z" firstAttribute="leading" secondItem="HUe-MP-PbA" secondAttribute="leading" constant="25" id="Kwd-26-iTc"/>
+                            <constraint firstItem="d3N-eT-F5z" firstAttribute="top" secondItem="HUe-MP-PbA" secondAttribute="top" constant="-10" id="PPG-px-0V4"/>
                             <constraint firstAttribute="bottom" secondItem="n84-mC-WlI" secondAttribute="bottom" id="SIH-D6-58E"/>
                             <constraint firstItem="Jli-id-65H" firstAttribute="centerX" secondItem="xQv-Wq-6q1" secondAttribute="centerX" id="Tml-MA-rTc"/>
                             <constraint firstItem="HUe-MP-PbA" firstAttribute="trailing" secondItem="n84-mC-WlI" secondAttribute="trailing" id="YkO-4P-wJy"/>
