@@ -29,7 +29,11 @@ class WeightPageViewController: UIViewController {
     @IBOutlet weak var dateTextfield: UITextField!
     @IBOutlet weak var weightLabel: UILabel!
     @IBOutlet weak var secondBar: UIView!
-    @IBOutlet weak var weightTextField: UITextField!
+    @IBOutlet weak var weightTextField: UITextField! {
+        didSet {
+            self.weightTextField.delegate = self
+        }
+    }
     
     @IBOutlet weak var kgLabel: UILabel!
     
@@ -59,8 +63,6 @@ class WeightPageViewController: UIViewController {
         
         toGetRecord()
         setupDatePicker()
-        
-        weightTextField.delegate = self
         
         saveButton.isEnabled = false
         saveButton.setTitleColor(UIColor.lightGray, for: .disabled)

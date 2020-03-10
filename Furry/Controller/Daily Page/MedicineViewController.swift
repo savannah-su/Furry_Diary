@@ -39,10 +39,8 @@ class MedicineViewController: UIViewController {
         return dateFormatter
     }()
     
-    let itemLabel = ["外用藥", "內用藥"]
-    let itemImage = ["外用藥", "內用藥"]
-    let itemSelected = ["外用藥-selected", "內用藥-selected"]
-    var itemStatus = [false, false]
+    var item = [DailyPageContent(lbl: "外用藥", image: "外用藥", selectedImage: "外用藥-selected"),
+                DailyPageContent(lbl: "內用藥", image: "內用藥", selectedImage: "內用藥-selected")]
     
     var petID = ""
     var subItemType = [""]
@@ -63,7 +61,9 @@ class MedicineViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.separatorColor = .clear
         tableView.isHidden = true
+        
         saveButton.isEnabled = false
         saveButton.setTitleColor(UIColor.lightGray, for: .disabled)
 
@@ -75,8 +75,6 @@ class MedicineViewController: UIViewController {
         
         topView.layer.cornerRadius = topView.bounds.height / 2
         bottomView.layer.cornerRadius = bottomView.bounds.height / 2
-        
-        tableView.separatorColor = .clear
     }
     
     func toDatabase() {
@@ -132,13 +130,15 @@ extension MedicineViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        for index in 0 ..< itemStatus.count {
+        for index in 0 ..< item.count {
             
             if index == indexPath.item {
-                itemStatus[index] = true
-                subItemType = [itemLabel[index]]
+                
+                item[index].status = true
+                subItemType = [item[index].titel]
+                
             } else {
-                itemStatus[index] = false
+                item[index].status = false
             }
         }
         collectionView.reloadData()
@@ -174,7 +174,7 @@ extension MedicineViewController: UICollectionViewDelegateFlowLayout {
 extension MedicineViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return itemLabel.count
+        return item.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -183,13 +183,9 @@ extension MedicineViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
-        cell.itemLabel.text = itemLabel[indexPath.item]
+        cell.setCell(model: item[indexPath.item])
         
-        let isCellSelected = itemStatus[indexPath.item]
-        
-        cell.image.image = isCellSelected
-            ? UIImage(named: itemSelected[indexPath.item])
-            : UIImage(named: itemImage[indexPath.item])
+        cell.image.image = item[indexPath.item].status ? UIImage(named: item[indexPath.item].selectedImage) : UIImage(named: item[indexPath.item].image)
         
         return cell
     }

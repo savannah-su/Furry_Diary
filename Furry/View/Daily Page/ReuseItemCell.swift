@@ -13,8 +13,8 @@ class ReuseItemCell: UICollectionViewCell {
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var itemLabel: UILabel!
     
-    func setCell(model: PageContent) {
+    func setCell(model: DailyPageContent) {
         self.image.image = UIImage(named: model.image)
-        self.itemLabel.text = model.lbl
+        self.itemLabel.text = model.titel
     }
 }

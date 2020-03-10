@@ -19,15 +19,15 @@ class CleanPageViewController: UIViewController {
     @IBOutlet weak var bottomViewLabel: UILabel!
     @IBOutlet weak var tableView: UITableView! {
         didSet {
-            tableView.dataSource = self
-            tableView.delegate = self
+            self.tableView.dataSource = self
+            self.tableView.delegate = self
         }
     }
     
     @IBOutlet weak var collectionView: UICollectionView! {
         didSet {
-            collectionView.dataSource = self
-            collectionView.delegate = self
+            self.collectionView.dataSource = self
+            self.collectionView.delegate = self
         }
     }
     @IBAction func backButton(_ sender: Any) {
@@ -40,17 +40,17 @@ class CleanPageViewController: UIViewController {
         toDataBase()
     }
     
-    var sectionOne = [PageContent(lbl: "洗澡", image: "洗澡", selectedImage: "洗澡-selected"),
-                      PageContent(lbl: "毛髮", image: "毛髮", selectedImage: "毛髮-selected"),
-                      PageContent(lbl: "指甲", image: "指甲", selectedImage: "指甲-selected"),
-                      PageContent(lbl: "耳朵", image: "耳朵", selectedImage: "耳朵-selected"),
-                      PageContent(lbl: "牙齒", image: "牙齒", selectedImage: "牙齒-selected")]
+    var sectionOne = [DailyPageContent(lbl: "洗澡", image: "洗澡", selectedImage: "洗澡-selected"),
+                      DailyPageContent(lbl: "毛髮", image: "毛髮", selectedImage: "毛髮-selected"),
+                      DailyPageContent(lbl: "指甲", image: "指甲", selectedImage: "指甲-selected"),
+                      DailyPageContent(lbl: "耳朵", image: "耳朵", selectedImage: "耳朵-selected"),
+                      DailyPageContent(lbl: "牙齒", image: "牙齒", selectedImage: "牙齒-selected")]
     
-    var sectionTwo = [PageContent(lbl: "碗盤", image: "碗盤", selectedImage: "碗盤-selected"),
-                      PageContent(lbl: "小窩", image: "小窩", selectedImage: "小窩-selected"),
-                      PageContent(lbl: "玩具", image: "玩具", selectedImage: "玩具-selected"),
-                      PageContent(lbl: "衣物", image: "衣物", selectedImage: "衣物-selected"),
-                      PageContent(lbl: "外出用品", image: "外出用品", selectedImage: "外出用品-selected")]
+    var sectionTwo = [DailyPageContent(lbl: "碗盤", image: "碗盤", selectedImage: "碗盤-selected"),
+                      DailyPageContent(lbl: "小窩", image: "小窩", selectedImage: "小窩-selected"),
+                      DailyPageContent(lbl: "玩具", image: "玩具", selectedImage: "玩具-selected"),
+                      DailyPageContent(lbl: "衣物", image: "衣物", selectedImage: "衣物-selected"),
+                      DailyPageContent(lbl: "外出用品", image: "外出用品", selectedImage: "外出用品-selected")]
     
     var petID = ""
     
@@ -86,7 +86,11 @@ class CleanPageViewController: UIViewController {
         super.viewDidLoad()
         
         tableView.isHidden = true
+        tableView.separatorColor = .clear
+
         saveButton.isEnabled = false
+        saveButton.setTitleColor(UIColor.lightGray, for: .disabled)
+        
         bottomViewButton.isHidden = true
         
     }
@@ -97,11 +101,6 @@ class CleanPageViewController: UIViewController {
         
         topView.layer.cornerRadius = topView.bounds.height / 2
         bottomView.layer.cornerRadius = bottomView.bounds.height / 2
-        
-        tableView.separatorColor = .clear
-        
-        saveButton.setTitleColor(UIColor.lightGray, for: .disabled)
-        
     }
     
     func toDataBase() {
@@ -235,7 +234,7 @@ extension CleanPageViewController: UICollectionViewDelegate {
                     
                     sectionOne[index].status = true
                     sectionTwo[index].status = false
-                    subItemType = [sectionOne[index].lbl]
+                    subItemType = [sectionOne[index].titel]
                     
                 } else {
                     
@@ -252,7 +251,7 @@ extension CleanPageViewController: UICollectionViewDelegate {
                     
                     sectionOne[index].status = false
                     sectionTwo[index].status = true
-                    subItemType = [sectionOne[index].lbl]
+                    subItemType = [sectionOne[index].titel]
                     
                 } else {
                     
@@ -361,13 +360,9 @@ extension CleanPageViewController: UITableViewDataSource {
 //                let date = text.components(separatedBy: "-")
 //                
 //                if date.count == 3 {
-//                    
 //                    self?.notiDate = text
-//                    
 //                } else {
-//                    
 //                    self?.notiMemo = text
-
 //                }
 //            }
             return cell

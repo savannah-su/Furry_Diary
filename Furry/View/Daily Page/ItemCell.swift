@@ -33,4 +33,9 @@ class ItemCell: UICollectionViewCell {
         background.layer.shadowRadius = 3
         background.layer.shadowColor = UIColor(red: 44.0/255.0, green: 62.0/255.0, blue: 80.0/255.0, alpha: 1).cgColor
     }
+    
+    func setCell(model: RecordCategoryPage) {
+        self.itemLabel.text = model.title
+        self.image.image = UIImage(named: model.image)
+    }
 }

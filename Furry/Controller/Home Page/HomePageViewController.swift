@@ -62,15 +62,13 @@ class HomePageViewController: UIViewController {
         //製造Crash範例
         //Fabric.sharedSDK().debug = true
         
+        tableView.separatorColor = .clear
+        
         NotificationCenter.default.addObserver(self, selector: #selector(getPetData), name: Notification.Name("Create New Pet"), object: nil)
         
         getPetData()
         
         addRefreshControl()
-    }
-    
-    override func viewWillLayoutSubviews() {
-        tableView.separatorColor = .clear
     }
     
     func logout() {

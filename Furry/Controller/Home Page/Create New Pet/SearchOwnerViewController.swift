@@ -19,7 +19,12 @@ class SearchOwnerViewController: UIViewController {
             self.searchField.delegate = self
         }
     }
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableView: UITableView! {
+        didSet {
+            self.tableView.delegate = self
+            self.tableView.dataSource = self
+        }
+    }
     @IBOutlet weak var currentUserLabel: UILabel!
     @IBOutlet weak var backButton: UIButton!
     @IBAction func backButton(_ sender: Any) {
@@ -70,10 +75,9 @@ class SearchOwnerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.delegate = self
-        tableView.dataSource = self
-        
-        guard let currentUser = UserDefaults.standard.value(forKey: "userName") else { return }
+        guard let currentUser = UserDefaults.standard.value(forKey: "userName") else {
+            return
+        }
         currentUserLabel.text = "Hello, \(currentUser)!"
         
         getOwnerData()
@@ -165,10 +169,7 @@ extension SearchOwnerViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         
-//        let url = URL(string: ownerData[indexPath.row].image)
-//        let data = try! Data(contentsOf: url!)
-//        cell.ownerImage.image = UIImage(data: data)
-        cell.ownerImage.loadImage(filterOwnerData[indexPath.row].image, placeHolder: UIImage(named: "icon-selected"))
+        cell.ownerImage.loadImage(filterOwnerData[indexPath.row].image, placeHolder: UIImage(named: "FurryLogo"))
         cell.ownerName.text = filterOwnerData[indexPath.row].name
         
         cell.backgroundColor = filterOwnerData[indexPath.row].isSelected ? .GY0 : .white

@@ -23,18 +23,16 @@ extension Date {
 class HistoryPageController: UIViewController {
     
     @IBOutlet weak var choosePetCollection: UICollectionView! {
-        
         didSet {
-            choosePetCollection.delegate = self
-            choosePetCollection.dataSource = self
+            self.choosePetCollection.delegate = self
+            self.choosePetCollection.dataSource = self
         }
     }
     
     @IBOutlet weak var calendar: FSCalendar! {
-        
         didSet {
-            calendar.delegate = self
-            calendar.dataSource = self
+            self.calendar.delegate = self
+            self.calendar.dataSource = self
         }
     }
     
@@ -225,7 +223,6 @@ extension HistoryPageController: FSCalendarDataSource {
                 return 1
             }
         }
-        
         return 0
     }
 }

@@ -17,7 +17,12 @@ class PreventPageViewController: UIViewController {
     @IBOutlet weak var bottomViewButton: VerticalAlignedButton!
     @IBAction func bottomViewButton(_ sender: Any) {}
     @IBOutlet weak var bottomViewLabel: UILabel!
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableView: UITableView! {
+        didSet {
+            self.tableView.dataSource = self
+            self.tableView.delegate = self
+        }
+    }
     
     @IBAction func backButton(_ sender: Any) {
         navigationController?.popViewController(animated: true)
@@ -26,12 +31,16 @@ class PreventPageViewController: UIViewController {
     @IBAction func saveButton(_ sender: Any) {
         toDataBase()
     }
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var collectionView: UICollectionView! {
+        didSet {
+            self.collectionView.delegate = self
+            self.collectionView.dataSource = self
+        }
+    }
     
-    let itemLabel = ["疫苗施打", "體內驅蟲", "體外驅蟲"]
-    let itemImage = ["疫苗施打", "體內驅蟲", "體外驅蟲"]
-    let selectedImage = ["疫苗施打-selected", "體內驅蟲-selected", "體外驅蟲-selected"]
-    var itemCellStatus = [false, false, false]
+    var item = [DailyPageContent(lbl: "疫苗施打", image: "疫苗施打", selectedImage: "疫苗施打-selected"),
+                DailyPageContent(lbl: "體內驅蟲", image: "體內驅蟲", selectedImage: "體內驅蟲-selected"),
+                DailyPageContent(lbl: "體外驅蟲", image: "體外驅蟲", selectedImage: "體外驅蟲-selected")]
     
     var petID = ""
     
@@ -68,22 +77,13 @@ class PreventPageViewController: UIViewController {
         
         super.viewDidLoad()
         
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.separatorColor = .clear
         tableView.isHidden = true
-        
-        collectionView.allowsMultipleSelection = false
+        tableView.separatorColor = .clear
         
         bottomViewButton.isHidden = true
         
         saveButton.isEnabled = false
         saveButton.setTitleColor(UIColor.lightGray, for: .disabled)
-        
-//        LocalNotiManager.shared.setupNoti(notiDate: 30 , type: "毛孩的清潔通知", meaasge: "Really")
     }
     
     override func viewDidLayoutSubviews() {
@@ -92,7 +92,6 @@ class PreventPageViewController: UIViewController {
         
         topView.layer.cornerRadius = topView.bounds.height / 2
         bottomView.layer.cornerRadius = bottomView.bounds.height / 2
-        
     }
     
     func toDataBase() {
@@ -128,7 +127,7 @@ class PreventPageViewController: UIViewController {
         }
         
         if isSwitchOn {
-        LocalNotiManager.shared.setupNoti(notiDate: notiDate.timeIntervalSinceNow, type: "毛孩的\(self.subItemType[0])通知", meaasge: notiMemo == "" ? "記得毛孩的預防計畫唷！" : notiMemo)
+            LocalNotiManager.shared.setupNoti(notiDate: notiDate.timeIntervalSinceNow, type: "毛孩的\(self.subItemType[0])通知", meaasge: notiMemo == "" ? "記得毛孩的預防計畫唷！" : notiMemo)
         }
     }
     
@@ -204,15 +203,12 @@ extension PreventPageViewController: UITableViewDataSource {
                 return UITableViewCell()
             }
             cell.notiSwitch.addTarget(self, action: #selector(changeSwitch), for: .valueChanged)
-            
-           cell.notiText.text = notiMemo
-            
+            cell.notiText.text = notiMemo
             cell.textFieldType = .date(notiDate, "yyyy-MM-dd")
-            
             cell.dateUpdateHandler = { [weak self] text in
                 
                 self?.notiDate = text
-            
+                
                 self?.checkUpdateStatus()
             }
             
@@ -220,7 +216,6 @@ extension PreventPageViewController: UITableViewDataSource {
                 
                 self?.notiMemo = text
             }
-            
             return cell
         }
     }
@@ -228,9 +223,7 @@ extension PreventPageViewController: UITableViewDataSource {
     @objc func changeSwitch() {
         
         saveButton.isEnabled = false
-        
         isSwitchOn = !isSwitchOn
-        
         tableView.reloadData()
     }
 }
@@ -238,7 +231,7 @@ extension PreventPageViewController: UITableViewDataSource {
 extension PreventPageViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-            return CGSize(width: 70, height: 100)
+        return CGSize(width: 70, height: 100)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
@@ -249,28 +242,24 @@ extension PreventPageViewController: UICollectionViewDelegateFlowLayout {
         
         let inset = (UIScreen.main.bounds.height - topView.bounds.height - 100) / 2
         
-            return UIEdgeInsets(top: inset, left: 50, bottom: inset, right: 50)
+        return UIEdgeInsets(top: inset, left: 50, bottom: inset, right: 50)
     }
 }
 
 extension PreventPageViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-            return 3
+        return item.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Item Cell", for: indexPath) as? ReuseItemCell else { return UICollectionViewCell() }
         
-        let index = indexPath.row
-        cell.itemLabel.text = itemLabel[index]
+        cell.setCell(model: item[indexPath.item])
         
-        if itemCellStatus[index] == true {
-            cell.image.image = UIImage(named: selectedImage[index])
-        } else {
-            cell.image.image = UIImage(named: itemImage[index])
-        }
+        cell.image.image = item[indexPath.item].status ? UIImage(named: item[indexPath.item].selectedImage) : UIImage(named: item[indexPath.item].image)
+        
         return cell
     }
 }
@@ -279,22 +268,23 @@ extension PreventPageViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-            for index in 0 ..< itemCellStatus.count {
+        for index in 0 ..< item.count {
+            
+            if index == indexPath.row {
                 
-                if index == indexPath.row {
-                    
-                    itemCellStatus[index] = true
-                    
-                    subItemType = [itemLabel[index]]
-                } else {
-                    itemCellStatus[index] = false
-                }
+                item[index].status = true
+                subItemType = [item[index].titel]
+                
+            } else {
+                item[index].status = false
             }
-            collectionView.reloadData()
-            
-            bottomViewLabel.isHidden = true
-            tableView.isHidden = false
-            
+        }
+        
+        collectionView.reloadData()
+        
+        bottomViewLabel.isHidden = true
+        tableView.isHidden = false
+        
     }
     
     func upButtomView() {

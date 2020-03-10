@@ -12,7 +12,11 @@ import CoreLocation
 
 class VetPageController: UIViewController {
     
-    @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var mapView: MKMapView! {
+        didSet {
+            self.mapView.delegate = self
+        }
+    }
     
     private lazy var geoCoder: CLGeocoder = {
         return CLGeocoder()
@@ -49,10 +53,7 @@ class VetPageController: UIViewController {
     }
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
-        
-        mapView.delegate = self
         
         setupLocation()
         
@@ -105,7 +106,9 @@ class VetPageController: UIViewController {
             
             manager.getVetPlacemark(addressString: withoutWhitespace) { [weak self] result in
                 
-                guard let strongSelf = self else { return }
+                guard let strongSelf = self else {
+                    return
+                }
                 
                 switch result {
                     
@@ -118,7 +121,6 @@ class VetPageController: UIViewController {
                     }
                     
                 case .failure(let error):
-                    
                     print(error)
                 }
             }
@@ -132,13 +134,10 @@ class VetPageController: UIViewController {
             switch result {
                 
             case .success(let downloadVetData):
-                
                 print(downloadVetData.count)
-                
                 self?.setupPin()
                 
             case .failure(let error):
-                
                 print(error)
             }
         }
@@ -336,9 +335,7 @@ extension VetPageController: MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        
         touchedVet = (view.annotation?.subtitle ?? "") ?? ""
-        
     }
     
     func guideToVet(destination: String) {
@@ -350,7 +347,6 @@ extension VetPageController: MKMapViewDelegate {
             else {
                     return
             }
-            
             self.beginGuide(currentPlaceMarker, endPLCL: destination)
         }
     }

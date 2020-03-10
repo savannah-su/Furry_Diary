@@ -13,8 +13,8 @@ class CoOwnerCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView! {
         didSet {
-            collectionView.delegate = self
-            collectionView.dataSource = self
+            self.collectionView.delegate = self
+            self.collectionView.dataSource = self
         }
     }
     @IBOutlet weak var searchButton: UIButton!
@@ -43,9 +43,7 @@ extension CoOwnerCell: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
-        //        let url = URL(string: data.ownersImage[indexPath.item])
-        cell.ownerPhoto.loadImage(data.ownersImage[indexPath.item], placeHolder: UIImage(named: "icon-selected"))
-        cell.ownerPhoto.layer.cornerRadius = 15
+        cell.ownerPhoto.loadImage(data.ownersImage[indexPath.item], placeHolder: UIImage(named: "FurryLogo"))
         
         guard let currentUserImage = UserDefaults.standard.value(forKey: "userPhoto") as? String else {
             return UICollectionViewCell()

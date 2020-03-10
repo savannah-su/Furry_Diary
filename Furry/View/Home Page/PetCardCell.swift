@@ -79,7 +79,7 @@ extension PetCardCell: BannerViewDataSource {
         
         let imageView = UIImageView()
 //        kf.setImage(with: URL(string: ))
-        imageView.loadImage(petImage[index], placeHolder: UIImage(named: "icon-selected"))
+        imageView.loadImage(petImage[index], placeHolder: UIImage(named: "FurryLogo_white"))
         
         imageView.backgroundColor = .white
         

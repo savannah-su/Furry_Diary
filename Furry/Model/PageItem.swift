@@ -8,16 +8,27 @@
 
 import Foundation
 
-struct PageContent {
+struct DailyPageContent {
     
-    let lbl: String
+    let titel: String
     let image: String
     let selectedImage: String
     var status: Bool = false
     
     init(lbl: String, image: String, selectedImage: String) {
-        self.lbl = lbl
+        self.titel = lbl
         self.image = image
         self.selectedImage = selectedImage
+    }
+}
+
+struct RecordCategoryPage {
+    
+    let title: String
+    let image: String
+    
+    init(title: String, image: String) {
+        self.title = title
+        self.image = image
     }
 }

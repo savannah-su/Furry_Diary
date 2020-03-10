@@ -18,4 +18,10 @@ class CoOwnerCollectionCell: UICollectionViewCell {
     }
     
     var removeHandler: ( () -> Void )?
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        ownerPhoto.layer.cornerRadius = 15
+    }
 }

@@ -17,5 +17,6 @@ class WhichPetCell: UICollectionViewCell {
         super.layoutSubviews()
         
         petPhoto.layer.cornerRadius = petPhoto.bounds.width / 2
+        petPhoto.contentMode = .scaleToFill
     }
 }

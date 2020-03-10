@@ -64,6 +64,8 @@ class CreatePetViewController: UIViewController {
         
         picker.delegate = self
         
+        tableView.separatorColor = .clear
+        
         NotificationCenter.default.addObserver(self, selector: #selector(showAlert), name: Notification.Name("ShowAlert"), object: nil)
         
         addCurrentUser()
@@ -72,7 +74,6 @@ class CreatePetViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        tableView.separatorColor = .white
         tableView.sectionHeaderHeight = 120
     }
     
@@ -258,8 +259,6 @@ extension CreatePetViewController: UITableViewDataSource {
                 
                 self?.petInfo.birth = text
             }
-            
-            cell.contentField.text = petInfo.birth
             return cell
             
         case 6:
@@ -298,7 +297,6 @@ extension CreatePetViewController: UITableViewDataSource {
             }
             
             cell.titleLabel.text = titleArray[indexPath.row]
-            cell.contentTextView.layer.borderColor = UIColor(red: 199/255.0, green: 199/255.0, blue: 199/255.0, alpha: 1).cgColor
             
             if petInfo.memo != "" {
                 cell.contentTextView.text = petInfo.memo

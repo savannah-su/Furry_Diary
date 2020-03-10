@@ -214,7 +214,7 @@ extension PetDetailViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
-        cell.ownerPhoto.loadImage(petData?.ownersImage[indexPath.item], placeHolder: UIImage(named: "icon-selected"))
+        cell.ownerPhoto.loadImage(petData?.ownersImage[indexPath.item], placeHolder: UIImage(named: "FurryLogo_white"))
         cell.ownerPhoto.layer.cornerRadius = 15
         
         return cell

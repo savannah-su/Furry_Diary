@@ -39,10 +39,9 @@ class DiagnosisViewController: UIViewController {
         return dateFormatter
     }()
     
-    let itemLabel = ["就診", "手術", "例行檢查"]
-    let itemImage = ["就診", "手術", "例行檢查"]
-    let itemSelected = ["就診-selected", "手術-selected", "例行檢查-selected"]
-    var itemStatus = [false, false, false]
+    var item = [DailyPageContent(lbl: "就診", image: "就診", selectedImage: "就診-selected"),
+                DailyPageContent(lbl: "手術", image: "手術", selectedImage: "手術-selected"),
+                DailyPageContent(lbl: "例行檢查", image: "例行檢查", selectedImage: "例行檢查-selected")]
     
     var petID = ""
     var subItemType = [""]
@@ -133,7 +132,7 @@ class DiagnosisViewController: UIViewController {
 extension DiagnosisViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return itemLabel.count
+        return item.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -142,14 +141,10 @@ extension DiagnosisViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
-        cell.itemLabel.text = itemLabel[indexPath.item]
+        cell.setCell(model: item[indexPath.item])
         
-        let isCellSelected = itemStatus[indexPath.item]
-        
-        cell.image.image = isCellSelected
-            ? UIImage(named: itemSelected[indexPath.item])
-            : UIImage(named: itemImage[indexPath.item])
-        
+        cell.image.image = item[indexPath.item].status ? UIImage(named: item[indexPath.item].selectedImage) : UIImage(named: item[indexPath.item].image)
+
         return cell
     }
     
@@ -168,13 +163,15 @@ extension DiagnosisViewController: UICollectionViewDelegate {
 //            ? UIImage(named: itemSelected[indexPath.row])
 //            : UIImage(named: itemImage[indexPath.row])
         
-        for index in 0 ..< itemStatus.count {
+        for index in 0 ..< item.count {
 
         if index == indexPath.item {
-            itemStatus[index] = true
-            subItemType = [itemLabel[index]]
+            
+            item[index].status = true
+            subItemType = [item[index].titel]
+            
         } else {
-            itemStatus[index] = false
+            item[index].status = false
             }
         }
         collectionView.reloadData()
