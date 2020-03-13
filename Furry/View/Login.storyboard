@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="u1e-EP-nCX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="u1e-EP-nCX">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15703"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -17,6 +17,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="寵物背景-2" translatesAutoresizingMaskIntoConstraints="NO" id="fYh-lh-lQf">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jli-id-65H">
                                 <rect key="frame" x="82" y="783" width="250" height="45"/>
                                 <color key="backgroundColor" red="0.85882352941176465" green="0.26666666666666666" blue="0.21568627450980393" alpha="1" colorSpace="calibratedRGB"/>
@@ -104,6 +107,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="dMc-xW-VAZ" firstAttribute="top" secondItem="Jli-id-65H" secondAttribute="bottom" constant="16" id="2NM-8V-NeI"/>
+                            <constraint firstItem="fYh-lh-lQf" firstAttribute="leading" secondItem="HUe-MP-PbA" secondAttribute="leading" id="4im-01-Nnj"/>
                             <constraint firstItem="dMc-xW-VAZ" firstAttribute="centerX" secondItem="xQv-Wq-6q1" secondAttribute="centerX" id="8A9-VG-uAV"/>
                             <constraint firstItem="YJy-C3-W4e" firstAttribute="centerX" secondItem="xQv-Wq-6q1" secondAttribute="centerX" id="9Br-Cq-9gZ"/>
                             <constraint firstItem="d3N-eT-F5z" firstAttribute="centerX" secondItem="xQv-Wq-6q1" secondAttribute="centerX" id="HBs-VN-8Es"/>
@@ -112,7 +116,10 @@
                             <constraint firstItem="d3N-eT-F5z" firstAttribute="leading" secondItem="HUe-MP-PbA" secondAttribute="leading" constant="25" id="Kwd-26-iTc"/>
                             <constraint firstItem="d3N-eT-F5z" firstAttribute="top" secondItem="HUe-MP-PbA" secondAttribute="top" constant="-15" id="PPG-px-0V4"/>
                             <constraint firstItem="Jli-id-65H" firstAttribute="centerX" secondItem="xQv-Wq-6q1" secondAttribute="centerX" id="Tml-MA-rTc"/>
+                            <constraint firstItem="HUe-MP-PbA" firstAttribute="trailing" secondItem="fYh-lh-lQf" secondAttribute="trailing" id="UyO-tB-Vdp"/>
+                            <constraint firstAttribute="bottom" secondItem="fYh-lh-lQf" secondAttribute="bottom" id="VmJ-nx-KB8"/>
                             <constraint firstAttribute="bottomMargin" secondItem="dMc-xW-VAZ" secondAttribute="bottom" constant="10" id="f6R-d7-LhE"/>
+                            <constraint firstItem="fYh-lh-lQf" firstAttribute="top" secondItem="xQv-Wq-6q1" secondAttribute="top" id="i2h-np-z6c"/>
                             <constraint firstItem="Jli-id-65H" firstAttribute="leading" secondItem="b4b-4s-XtW" secondAttribute="leading" id="pug-5T-tsT"/>
                             <constraint firstItem="b4b-4s-XtW" firstAttribute="top" secondItem="YJy-C3-W4e" secondAttribute="bottom" constant="8" id="qU3-zp-No2"/>
                             <constraint firstItem="b4b-4s-XtW" firstAttribute="centerX" secondItem="xQv-Wq-6q1" secondAttribute="centerX" id="tNj-VN-xeR"/>
@@ -714,6 +721,7 @@
         <image name="Icon_24px_Search" width="24" height="24"/>
         <image name="camera" catalog="system" width="64" height="48"/>
         <image name="cats and dogs" width="512" height="512"/>
+        <image name="寵物背景-2" width="3652" height="5479"/>
         <namedColor name="Y1">
             <color red="0.93199998140335083" green="0.69199997186660767" blue="0.2630000114440918" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
