@@ -142,8 +142,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         }
         
         let group = DispatchGroup()
-        
         group.enter()
+        
         getData(from: googlelPhoto) { (data, response, error) in
             
             guard let data = data else {
@@ -206,7 +206,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                     }
                 })
             }
-            
         }
     }
 }

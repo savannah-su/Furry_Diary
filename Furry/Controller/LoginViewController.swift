@@ -68,9 +68,7 @@ class LoginViewController: UIViewController {
         guard let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "Tab Bar Controller") as? UITabBarController else {
             return
         }
-        
         self.view.window?.rootViewController = viewController
-        
     }
     
     func setupAppleBotton() {
@@ -132,57 +130,31 @@ class LoginViewController: UIViewController {
         URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
     }
     
-    func addToDatabase(appleLogin: Bool) {
+    func photoToStorage(photo: String, userID: String, completion: @escaping (String) -> Void) {
         
-        guard let userID = Auth.auth().currentUser?.uid,
-            let userEmail = Auth.auth().currentUser?.providerData.first?.email else {
-                return
-        }
-        
-        var userName = appleLogin ? userEmail : "隱藏信箱資訊的Apple使用者"
-        var userPhoto = ""
         var userPhotoString = ""
         
-        if !appleLogin {
-            
-            guard let name = Auth.auth().currentUser?.displayName,
-                let photo = Auth.auth().currentUser?.photoURL?.absoluteString else {
-                    return
-            }
-            
-            userName = name
-            userPhoto = photo
-        }
-        
-        guard let fbPhoto = URL(string: userPhoto) else {
+        guard let photoURL = URL(string: photo) else {
             return
         }
         
-        let group = DispatchGroup()
-        
-        group.enter()
-        getData(from: fbPhoto) { (data, response, error) in
+        getData(from: photoURL) { (data, response, error) in
             
-            guard let data = data else {
-                return
-            }
-            
-            guard let image = UIImage(data: data) else {
-                return
-            }
-            
-            guard let photo = image.jpegData(compressionQuality: 0.5) else {
-                return
+            guard let data = data ,
+                let image = UIImage(data: data),
+                let photoJPEG = image.jpegData(compressionQuality: 0.5) else {
+                    return
             }
             
             let storageRef = Storage.storage().reference().child("UserPhoto").child("\(userID).jpeg")
             
-            storageRef.putData(photo, metadata: nil) { (_, error) in
+            storageRef.putData(photoJPEG, metadata: nil) { (_, error) in
                 
                 if error != nil {
                     print("To Storage Failed")
                     return
                 }
+                
                 storageRef.downloadURL { (url, error) in
                     
                     if error != nil {
@@ -194,38 +166,69 @@ class LoginViewController: UIViewController {
                         return
                     }
                     userPhotoString = backUserPhoto
-                    group.leave()
+                    completion(userPhotoString)
                 }
             }
-            
-            group.notify(queue: DispatchQueue.main) {
-                
-                let usersData = UsersData(name: userName, email: userEmail, image: userPhotoString, id: userID)
-                
-                Firestore.firestore().collection("users").document(userID).setData(usersData.toDict, completion: { (error) in
-                    
-                    if error == nil {
-                        
-                        UserDefaults.standard.set(true, forKey: "logInOrNot")
-                        UserDefaults.standard.set(userEmail, forKey: "email")
-                        UserDefaults.standard.set(userName, forKey: "userName")
-                        UserDefaults.standard.set(userPhotoString, forKey: "userPhoto")
-                        UserDefaults.standard.set(userID, forKey: "userID")
-                        
-                        self.toNextpage()
-                        
-                        print("DB added successfully")
-                        
-                    } else {
-                        
-                        UploadManager.shared.uploadFail(text: "登入失敗！")
-                        
-                        print("Added failed")
-                    }
-                })
-            }
-            
         }
+        
+    }
+    
+    func addToDatabase(appleLogin: Bool) {
+        
+        let group = DispatchGroup()
+        
+        guard let userID = Auth.auth().currentUser?.uid,
+            let userEmail = Auth.auth().currentUser?.providerData.first?.email else {
+                return
+        }
+        
+        var userName = appleLogin ? userEmail : "隱藏信箱資訊的Apple使用者"
+        var userPhoto = ""
+        //        var userPhotoString = ""
+        
+        if !appleLogin {
+            
+            guard let name = Auth.auth().currentUser?.displayName,
+                let photo = Auth.auth().currentUser?.photoURL?.absoluteString else {
+                    return
+            }
+            userName = name
+            
+            group.enter()
+            
+            photoToStorage(photo: photo, userID: userID) { (photoString) in
+                userPhoto = photoString
+                group.leave()
+            }
+        }
+       
+        group.notify(queue: DispatchQueue.main) {
+            
+            let usersData = UsersData(name: userName, email: userEmail, image: userPhoto, id: userID)
+            
+            Firestore.firestore().collection("users").document(userID).setData(usersData.toDict, completion: { (error) in
+                
+                if error == nil {
+                    
+                    UserDefaults.standard.set(true, forKey: "logInOrNot")
+                    UserDefaults.standard.set(userEmail, forKey: "email")
+                    UserDefaults.standard.set(userName, forKey: "userName")
+                    UserDefaults.standard.set(userPhoto, forKey: "userPhoto")
+                    UserDefaults.standard.set(userID, forKey: "userID")
+                    
+                    self.toNextpage()
+                    
+                    print("DB added successfully")
+                    
+                } else {
+                    
+                    UploadManager.shared.uploadFail(text: "登入失敗！")
+                    
+                    print("Added failed")
+                }
+            })
+        }
+        
     }
     
     //Apple ID Sign In
@@ -244,7 +247,6 @@ class LoginViewController: UIViewController {
                 if errorCode != errSecSuccess {
                     fatalError("Unable to generate nonce. SecRandomCopyBytes failed with OSStatus \(errorCode)")
                 }
-                
                 return random
             }
             
@@ -319,9 +321,7 @@ extension LoginViewController: ASAuthorizationControllerDelegate, ASAuthorizatio
                     print(error.localizedDescription)
                     return
                 }
-                
                 self.addToDatabase(appleLogin: true)
-                
             }
         }
     }

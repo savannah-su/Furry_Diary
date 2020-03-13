@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="u1e-EP-nCX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="u1e-EP-nCX">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -17,9 +17,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ak0a2-44oor" translatesAutoresizingMaskIntoConstraints="NO" id="n84-mC-WlI">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jli-id-65H">
                                 <rect key="frame" x="82" y="783" width="250" height="45"/>
                                 <color key="backgroundColor" red="0.85882352941176465" green="0.26666666666666666" blue="0.21568627450980393" alpha="1" colorSpace="calibratedRGB"/>
@@ -98,7 +95,7 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Furry Diary" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d3N-eT-F5z">
-                                <rect key="frame" x="25" y="34" width="364" height="152"/>
+                                <rect key="frame" x="25" y="29" width="364" height="152"/>
                                 <fontDescription key="fontDescription" name="Zapfino" family="Zapfino" pointSize="45"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -113,15 +110,11 @@
                             <constraint firstItem="HUe-MP-PbA" firstAttribute="trailing" secondItem="d3N-eT-F5z" secondAttribute="trailing" constant="25" id="JfX-FK-ZvR"/>
                             <constraint firstItem="Jli-id-65H" firstAttribute="trailing" secondItem="b4b-4s-XtW" secondAttribute="trailing" id="KiP-iC-yGT"/>
                             <constraint firstItem="d3N-eT-F5z" firstAttribute="leading" secondItem="HUe-MP-PbA" secondAttribute="leading" constant="25" id="Kwd-26-iTc"/>
-                            <constraint firstItem="d3N-eT-F5z" firstAttribute="top" secondItem="HUe-MP-PbA" secondAttribute="top" constant="-10" id="PPG-px-0V4"/>
-                            <constraint firstAttribute="bottom" secondItem="n84-mC-WlI" secondAttribute="bottom" id="SIH-D6-58E"/>
+                            <constraint firstItem="d3N-eT-F5z" firstAttribute="top" secondItem="HUe-MP-PbA" secondAttribute="top" constant="-15" id="PPG-px-0V4"/>
                             <constraint firstItem="Jli-id-65H" firstAttribute="centerX" secondItem="xQv-Wq-6q1" secondAttribute="centerX" id="Tml-MA-rTc"/>
-                            <constraint firstItem="HUe-MP-PbA" firstAttribute="trailing" secondItem="n84-mC-WlI" secondAttribute="trailing" id="YkO-4P-wJy"/>
                             <constraint firstAttribute="bottomMargin" secondItem="dMc-xW-VAZ" secondAttribute="bottom" constant="10" id="f6R-d7-LhE"/>
-                            <constraint firstItem="n84-mC-WlI" firstAttribute="top" secondItem="xQv-Wq-6q1" secondAttribute="top" id="ogq-1J-b3M"/>
                             <constraint firstItem="Jli-id-65H" firstAttribute="leading" secondItem="b4b-4s-XtW" secondAttribute="leading" id="pug-5T-tsT"/>
                             <constraint firstItem="b4b-4s-XtW" firstAttribute="top" secondItem="YJy-C3-W4e" secondAttribute="bottom" constant="8" id="qU3-zp-No2"/>
-                            <constraint firstItem="n84-mC-WlI" firstAttribute="leading" secondItem="HUe-MP-PbA" secondAttribute="leading" id="rkU-pI-cVN"/>
                             <constraint firstItem="b4b-4s-XtW" firstAttribute="centerX" secondItem="xQv-Wq-6q1" secondAttribute="centerX" id="tNj-VN-xeR"/>
                             <constraint firstItem="Jli-id-65H" firstAttribute="top" secondItem="b4b-4s-XtW" secondAttribute="bottom" constant="8" id="zXS-Cp-wb3"/>
                         </constraints>
@@ -719,7 +712,6 @@
         <image name="Icon_24px_Cancel" width="24" height="24"/>
         <image name="Icon_24px_Check" width="24" height="24"/>
         <image name="Icon_24px_Search" width="24" height="24"/>
-        <image name="ak0a2-44oor" width="3265" height="5477"/>
         <image name="camera" catalog="system" width="64" height="48"/>
         <image name="cats and dogs" width="512" height="512"/>
         <namedColor name="Y1">
