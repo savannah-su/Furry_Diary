@@ -10,7 +10,6 @@ import UIKit
 
 class OwnerTableViewCell: UITableViewCell {
 
-    
     @IBOutlet weak var ownerImage: UIImageView!
     @IBOutlet weak var ownerName: UILabel!
     

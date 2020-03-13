@@ -12,13 +12,17 @@ import CoreLocation
 
 class VetPageController: UIViewController {
     
-    @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var mapView: MKMapView! {
+        didSet {
+            self.mapView.delegate = self
+        }
+    }
     
     private lazy var geoCoder: CLGeocoder = {
         return CLGeocoder()
     }()
      
-    var myLocationManager :CLLocationManager!
+    var myLocationManager: CLLocationManager!
     
     let manager = GetDataManager()
     
@@ -44,11 +48,12 @@ class VetPageController: UIViewController {
     var touchedVet = ""
     var currentPlaceMarker: CLPlacemark?
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     override func viewDidLoad() {
-        
         super.viewDidLoad()
-        
-        mapView.delegate = self
         
         setupLocation()
         
@@ -62,9 +67,9 @@ class VetPageController: UIViewController {
         
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         
-        super.viewDidAppear(animated)
+        super.viewWillAppear(animated)
         
         locationAuth()
     }
@@ -101,7 +106,9 @@ class VetPageController: UIViewController {
             
             manager.getVetPlacemark(addressString: withoutWhitespace) { [weak self] result in
                 
-                guard let strongSelf = self else { return }
+                guard let strongSelf = self else {
+                    return
+                }
                 
                 switch result {
                     
@@ -114,7 +121,6 @@ class VetPageController: UIViewController {
                     }
                     
                 case .failure(let error):
-                    
                     print(error)
                 }
             }
@@ -128,13 +134,10 @@ class VetPageController: UIViewController {
             switch result {
                 
             case .success(let downloadVetData):
-                
                 print(downloadVetData.count)
-                
                 self?.setupPin()
                 
             case .failure(let error):
-                
                 print(error)
             }
         }
@@ -201,7 +204,7 @@ class VetPageController: UIViewController {
                 "如要變更權限，請至 設定 > 隱私權 > 定位服務 開啟",
                 preferredStyle: .alert)
             let okAction = UIAlertAction(
-                title: "確認", style: .default, handler:nil)
+                title: "確認", style: .default, handler: nil)
             alertController.addAction(okAction)
             self.present(
                 alertController,
@@ -255,12 +258,12 @@ extension VetPageController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
         // 印出目前所在位置座標
-        let currentLocation :CLLocation =
+        let currentLocation: CLLocation =
             locations[0] as CLLocation
         print("\(currentLocation.coordinate.latitude)")
         print(" \(currentLocation.coordinate.longitude)")
         
-        geoCoder.reverseGeocodeLocation(currentLocation) { (placemarks, error) -> Void in
+        geoCoder.reverseGeocodeLocation(currentLocation) { (placemarks, _) -> Void in
             
             self.currentPlaceMarker = placemarks?.first
         }
@@ -332,9 +335,7 @@ extension VetPageController: MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        
         touchedVet = (view.annotation?.subtitle ?? "") ?? ""
-        
     }
     
     func guideToVet(destination: String) {
@@ -346,7 +347,6 @@ extension VetPageController: MKMapViewDelegate {
             else {
                     return
             }
-            
             self.beginGuide(currentPlaceMarker, endPLCL: destination)
         }
     }
@@ -359,13 +359,13 @@ extension VetPageController: MKMapViewDelegate {
         let endItem: MKMapItem = MKMapItem(placemark: endplMK)
         let mapItems: [MKMapItem] = [startItem, endItem]
         let dic: [String: AnyObject] = [
-            // 导航模式:驾驶
+            // 導航模式:駕駛
             MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving as AnyObject,
-            // 地图样式：标准样式
+            // 地圖樣式：標準樣式
             MKLaunchOptionsMapTypeKey: MKMapType.standard.rawValue as AnyObject,
-            // 显示交通：显示
+            // 顯示交通：顯示
             MKLaunchOptionsShowsTrafficKey: true as AnyObject]
-        // 根据 MKMapItem 的起点和终点组成数组, 通过导航地图启动项参数字典, 调用系统的地图APP进行导航
+        // 依據 MKMapItem 的起點和終點組成數組, 通過導航地圖啟動參數字典, 調用系統地圖進行導航
         MKMapItem.openMaps(with: mapItems, launchOptions: dic)
     }
 }

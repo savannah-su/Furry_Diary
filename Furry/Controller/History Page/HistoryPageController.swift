@@ -22,19 +22,17 @@ extension Date {
 
 class HistoryPageController: UIViewController {
     
-    @IBOutlet weak var choosePetCollection: UICollectionView!{
-        
+    @IBOutlet weak var choosePetCollection: UICollectionView! {
         didSet {
-            choosePetCollection.delegate = self
-            choosePetCollection.dataSource = self
+            self.choosePetCollection.delegate = self
+            self.choosePetCollection.dataSource = self
         }
     }
     
     @IBOutlet weak var calendar: FSCalendar! {
-        
         didSet {
-            calendar.delegate = self
-            calendar.dataSource = self
+            self.calendar.delegate = self
+            self.calendar.dataSource = self
         }
     }
     
@@ -43,8 +41,8 @@ class HistoryPageController: UIViewController {
     @IBOutlet weak var tableView: UITableView! {
         
         didSet {
-            tableView.delegate = self
-            tableView.dataSource = self
+            self.tableView.delegate = self
+            self.tableView.dataSource = self
         }
     }
     
@@ -108,6 +106,10 @@ class HistoryPageController: UIViewController {
         }
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -149,7 +151,7 @@ class HistoryPageController: UIViewController {
         
         DownloadManager.shared.monthlyData.removeAll()
         
-        DownloadManager.shared.downloadMonthlyData(petID:
+        DownloadManager.shared.downloadMonthlyRecordData(petID:
         petID, startOfMonth: calendar.currentPage.startOfMonth(), endOfMonth: calendar.currentPage.endOfMonth()) { [weak self] result in
             
             switch result {
@@ -160,6 +162,7 @@ class HistoryPageController: UIViewController {
                 self?.currentMonthlyData = monthlyData
                 
             case .failure(let error):
+                
                 print(error)
             }
         }
@@ -220,7 +223,6 @@ extension HistoryPageController: FSCalendarDataSource {
                 return 1
             }
         }
-        
         return 0
     }
 }
@@ -255,7 +257,7 @@ extension HistoryPageController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        switch currentDateData[indexPath.section].categoryType {
+        switch currentDateData[indexPath.row].categoryType {
             
         case "衛生清潔":
             return 141
@@ -300,7 +302,7 @@ extension HistoryPageController: UITableViewDataSource {
             cell.recordDate.text = formatter.string(from: currentDateData[indexPath.row].date)
             
             if currentDateData[indexPath.row].notiDate != "" {
-                cell.contentLabel.text = "下次清潔\(currentDateData[indexPath.row].notiDate ?? "")"
+                cell.contentLabel.text = "下次清潔\(currentDateData[indexPath.row].notiDate!)"
             } else {
             cell.contentLabel.isHidden = true
             }
@@ -312,7 +314,7 @@ extension HistoryPageController: UITableViewDataSource {
             cell.contentLabel.text = currentDateData[indexPath.row].medicineName
             
             if currentDateData[indexPath.row].notiDate != "" {
-                cell.nextDateLabel.text = "下次施作是\(currentDateData[indexPath.row].notiDate ?? "")"
+                cell.nextDateLabel.text = "下次施作是\(currentDateData[indexPath.row].notiDate!)"
             } else {
             cell.nextDateLabel.isHidden = true
             }
@@ -341,7 +343,7 @@ extension HistoryPageController: UITableViewDataSource {
             cell.contentLabel.text = currentDateData[indexPath.row].medicineName
             
             if currentDateData[indexPath.row].notiDate != "" {
-                cell.nextDateLabel.text = "下次追蹤是\(currentDateData[indexPath.row].notiDate ?? "")"
+                cell.nextDateLabel.text = "下次追蹤是\(currentDateData[indexPath.row].notiDate!)"
             } else {
             cell.nextDateLabel.isHidden = true
             }
@@ -353,7 +355,7 @@ extension HistoryPageController: UITableViewDataSource {
             cell.contentLabel.text = currentDateData[indexPath.row].medicineName
             
             if currentDateData[indexPath.row].notiDate != "" {
-                cell.nextDateLabel.text = "下次用藥是\(currentDateData[indexPath.row].notiDate ?? "")"
+                cell.nextDateLabel.text = "下次用藥是\(currentDateData[indexPath.row].notiDate!)"
             } else {
             cell.nextDateLabel.isHidden = true
             }
@@ -424,8 +426,8 @@ extension HistoryPageController: UICollectionViewDataSource {
         
         let index = indexPath.item
         if selectedStatus[index] == true {
-            cellA.petPhoto.layer.borderWidth = 5
-            cellA.petPhoto.layer.borderColor = UIColor.G4?.cgColor
+            cellA.petPhoto.layer.borderWidth = 4
+            cellA.petPhoto.layer.borderColor = UIColor.Y1?.cgColor
         } else {
             cellA.petPhoto.layer.borderColor = UIColor.white.cgColor
         }

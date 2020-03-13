@@ -22,6 +22,7 @@ private enum GHColor: String {
     case Y2
     case O0
     case Y1
+    case GY0
 }
 
 extension UIColor {
@@ -37,15 +38,10 @@ extension UIColor {
     static let Y2 = GHColor(.Y2)
     static let Y1 = GHColor(.Y1)
     static let O0 = GHColor(.O0)
+    static let GY0 = GHColor(.GY0)
 
     // swiftlint:enable identifier_name
     private static func GHColor(_ color: GHColor) -> UIColor? {
         return UIColor(named: color.rawValue)
     }
 }
-
-
-
-
-
-

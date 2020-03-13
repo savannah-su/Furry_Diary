@@ -22,12 +22,18 @@ class HomePageViewController: UIViewController {
     
     @IBAction func createButton(_ sender: Any) {
        
-        guard let vc = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(identifier: "Create Pet Page") as? CreatePetViewController else { return }
-        
-        present(vc, animated: true, completion: nil)
+        guard let viewController = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(identifier: "Create Pet Page") as? CreatePetViewController else {
+            return
+        }
+        present(viewController, animated: true, completion: nil)
     }
     
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableView: UITableView! {
+        didSet {
+            self.tableView.dataSource = self
+            self.tableView.delegate = self
+        }
+    }
     
     var petData = [PetInfo]() {
         
@@ -45,6 +51,10 @@ class HomePageViewController: UIViewController {
     
     var refreshControl: UIRefreshControl!
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -52,21 +62,13 @@ class HomePageViewController: UIViewController {
         //製造Crash範例
         //Fabric.sharedSDK().debug = true
         
-        tableView.dataSource = self
-        tableView.delegate = self
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(loadData), name: Notification.Name("Create New Pet"), object: nil)
-        
         tableView.separatorColor = .clear
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(getPetData), name: Notification.Name("Create New Pet"), object: nil)
         
         getPetData()
         
         addRefreshControl()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        getPetData()
     }
     
     func logout() {
@@ -85,8 +87,8 @@ class HomePageViewController: UIViewController {
                 print("登出失敗")
             }
                         
-           let vc = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(identifier: "Login Page") as? LoginViewController
-            self.view.window?.rootViewController = vc
+           let viewController = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(identifier: "Login Page") as? LoginViewController
+            self.view.window?.rootViewController = viewController
         }
         
         let cancelAction = UIAlertAction(title: "取消", style: .default, handler: nil)
@@ -100,44 +102,24 @@ class HomePageViewController: UIViewController {
         
         refreshControl = UIRefreshControl()
         tableView.addSubview(refreshControl)
-        refreshControl.addTarget(self, action: #selector(loadData), for: .valueChanged)
+        refreshControl.addTarget(self, action: #selector(getPetData), for: .valueChanged)
         
     }
     
-    @objc func loadData() {
-        
-        getPetData()
-    }
-    
-    func getPetData() {
+    @objc func getPetData() {
         
         UploadManager.shared.simplePetInfo.removeAll()
+        DownloadManager.shared.petData.removeAll()
         
-        Firestore.firestore().collection("pets").whereField("owners ID", arrayContains: Auth.auth().currentUser!.uid).getDocuments { (querySnapshot, error) in
+        DownloadManager.shared.downloadPetData { result in
             
-            var petDataFromDB = [PetInfo]()
-            
-            if error == nil {
+            switch result {
                 
-                for document in querySnapshot!.documents {
-                    
-                    do {
-                        
-                        if let petInfo = try document.data(as: PetInfo.self, decoder: Firestore.Decoder()) {
-                        
-                            petDataFromDB.append(petInfo)
-                            
-                            let simplePet = simplePetInfo(petName: petInfo.petName, petID: petInfo.petID, petPhoto: petInfo.petImage)
-  
-                            UploadManager.shared.simplePetInfo.append(simplePet)
-                            
-                        }
-                        
-                    } catch {
-                        print(error)
-                    }
-                }
-                self.petData = petDataFromDB
+            case .success(let downloadPetData):
+                self.petData = downloadPetData
+                
+            case . failure(let error):
+                print(error)
             }
         }
     }
@@ -152,14 +134,19 @@ extension HomePageViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
         let spring = UISpringTimingParameters(dampingRatio: 0.7, initialVelocity: CGVector(dx: 1.0, dy: 0.2))
+        
         let animator = UIViewPropertyAnimator(duration: 0.5, timingParameters: spring)
+        
                cell.alpha = 0
+        
                cell.transform = CGAffineTransform(translationX: 0, y: 100 * 0.6)
+        
                animator.addAnimations {
                    cell.alpha = 1
                    cell.transform = .identity
                  self.tableView.layoutIfNeeded()
                }
+        
                animator.startAnimation(afterDelay: 0.1 * Double(indexPath.item))
     }
     
@@ -175,19 +162,17 @@ extension HomePageViewController: UITableViewDataSource {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "Pet Card Cell", for: indexPath) as? PetCardCell else { return UITableViewCell() }
         
-        cell.petName.text = petData[indexPath.row].petName
-        cell.genderAndOld.text = petData[indexPath.row].gender
-        cell.petImage = petData[indexPath.row].petImage
+        cell.setCell(model: petData[indexPath.row])
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(toDetailPage(_:)))
+        let tap = UITapGestureRecognizer(target: self, action: #selector(toPetDetailPage(_:)))
         cell.background.addGestureRecognizer(tap)
 
         return cell
     }
     
-    @objc func toDetailPage(_ sender: UIGestureRecognizer) {
+    @objc func toPetDetailPage(_ sender: UIGestureRecognizer) {
         
-        guard let vc = UIStoryboard(name: "PetDetail", bundle: nil).instantiateViewController(identifier: "Pet Detail Page") as? PetDetailViewController else { return }
+        guard let viewController = UIStoryboard(name: "PetDetail", bundle: nil).instantiateViewController(identifier: "Pet Detail Page") as? PetDetailViewController else { return }
 
         guard let cell = sender.view?.superview?.superview as? PetCardCell,
               let indexPath = tableView.indexPath(for: cell)
@@ -196,8 +181,9 @@ extension HomePageViewController: UITableViewDataSource {
             return
         }
         
-        vc.petData = petData[indexPath.row]
-        show(vc, sender: nil)
+        viewController.petData = petData[indexPath.row]
+        
+        show(viewController, sender: nil)
     }
     
 }

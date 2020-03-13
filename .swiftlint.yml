@@ -1,0 +1,24 @@
+excluded:
+  - Pods
+disabled_rules:
+  - trailing_whitespace
+  - line_length
+  - function_body_length
+identifier_name:
+  excluded: # excluded via string array
+    - id
+    - URL
+    - url
+    - app
+    - db
+file_length:
+  warning: 1000
+  error: 1200
+type_body_length:
+  - 500 # warning
+  - 700 # error
+max_length: # warning and error
+  warning: 100
+  error: 200
+cyclomatic_complexity:
+ignores_case_statements: true

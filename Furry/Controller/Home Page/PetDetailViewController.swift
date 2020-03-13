@@ -11,8 +11,18 @@ import UIKit
 class PetDetailViewController: UIViewController {
     
     @IBOutlet weak var pageControl: UIPageControl!
-    @IBOutlet weak var bannerView: BannerView!
-    @IBOutlet weak var tableView: PetTableView!
+    @IBOutlet weak var bannerView: BannerView! {
+        didSet {
+            self.bannerView.dataSource = self
+            self.bannerView.delegate = self
+        }
+    }
+    @IBOutlet weak var tableView: PetTableView! {
+        didSet {
+            self.tableView.dataSource = self
+            self.tableView.delegate = self
+        }
+    }
     @IBOutlet weak var topConstraint: NSLayoutConstraint!
     @IBOutlet weak var heightConstraint: NSLayoutConstraint!
     @IBOutlet weak var widthConstraint: NSLayoutConstraint!
@@ -24,40 +34,48 @@ class PetDetailViewController: UIViewController {
     }
     
     @IBAction func editButton(_ sender: Any) {
+        
+        guard let viewController = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(identifier: "Create Pet Page") as? CreatePetViewController else { return }
+        
+        viewController.petInfo = petData
+        
+        viewController.petDataHandler = { [weak self] data in
+            
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.petData = data
+            strongSelf.bannerView.reloadData()
+            strongSelf.tableView.reloadData()
+        }
+        present(viewController, animated: true, completion: nil)
     }
     
     let titleArray = ["名字", "種類", "性別", "品種", "特徵", "生日", "晶片號碼", "是否絕育", "個性喜好", "毛孩飼主"]
     
     var petData: PetInfo?
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        tableView.dataSource = self
-        tableView.delegate = self
-        
-        tableView.contentInset = UIEdgeInsets(top: 200, left: 0, bottom: 0, right: 0)
-        
-        setupBannerView()
-        
-        setupPageControl()
-        
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
     
-    func setupBannerView() {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        setupPageControl()
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
         
-        bannerView.dataSource = self
-        
-        bannerView.delegate = self
+        tableView.contentInset = UIEdgeInsets(top: 200, left: 0, bottom: 0, right: 0)
     }
     
     func setupPageControl() {
         
         pageControl.numberOfPages = petData?.petImage.count ?? 0
         pageControl.currentPageIndicatorTintColor = .white
-        
     }
-    
 }
 
 class PetTableView: UITableView {
@@ -65,11 +83,8 @@ class PetTableView: UITableView {
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         
         if point.y < 0 {
-            
             return nil
-            
         } else {
-            
             return super.hitTest(point, with: event)
         }
     }
@@ -90,7 +105,6 @@ extension PetDetailViewController: BannerViewDataSource {
         imageView.kf.setImage(with: URL(string: petData?.petImage[index] ?? ""))
         
         imageView.contentMode = .scaleAspectFill
-        
         imageView.clipsToBounds = true
         
         return imageView
@@ -108,8 +122,6 @@ extension PetDetailViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "Detail Cell", for: indexPath) as? DetailCell else { return UITableViewCell() }
         
         cell.titleLabel.text = titleArray[indexPath.row]
-        
-        print(petData)
         
         switch indexPath.row {
             
@@ -152,12 +164,12 @@ extension PetDetailViewController: UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "Owner Cell", for: indexPath) as? OwnerCell else { return UITableViewCell() }
             
             cell.titleLabel.text = titleArray[indexPath.row]
-
+            
             cell.collectionView.dataSource = self
             cell.collectionView.delegate = self
             
             return cell
-   
+            
         }
         
         if indexPath.row == 0 {
@@ -202,21 +214,15 @@ extension PetDetailViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
-//        guard let urlString = petData?.ownersImage[indexPath.item] else {
-//            return UICollectionViewCell()
-//        }
-//        guard let url = URL(string: urlString) else {
-//             return UICollectionViewCell()
-//        }
-        cell.ownerPhoto.loadImage(petData?.ownersImage[indexPath.item], placeHolder: UIImage(named: "icon-selected"))
+        cell.ownerPhoto.loadImage(petData?.ownersImage[indexPath.item], placeHolder: UIImage(named: "FurryLogo_white"))
         cell.ownerPhoto.layer.cornerRadius = 15
-
+        
         return cell
     }
 }
 
 extension PetDetailViewController: UICollectionViewDelegateFlowLayout {
- 
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 30, height: 30)
     }
@@ -224,11 +230,11 @@ extension PetDetailViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 5
     }
-
+    
 }
 
 extension PetDetailViewController: BannerViewDelegate {
-
+    
     func didScrollToPage(_ bannerView: BannerView, page: Int) {
         
         pageControl.currentPage = page

@@ -34,14 +34,14 @@ class PetCardCell: UITableViewCell {
         super.awakeFromNib()
         
         setupShadow()
-        
         setupBannerView()
         
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
+    
+    func setCell(model: PetInfo) {
+        self.petName.text = model.petName
+        self.genderAndOld.text = model.gender
+        self.petImage = model.petImage
     }
     
     func setupPageControl() {
@@ -78,8 +78,8 @@ extension PetCardCell: BannerViewDataSource {
     func viewFor(bannerView: BannerView, at index: Int) -> UIView {
         
         let imageView = UIImageView()
-        
-        imageView.kf.setImage(with: URL(string: petImage[index]))
+//        kf.setImage(with: URL(string: ))
+        imageView.loadImage(petImage[index], placeHolder: UIImage(named: "FurryLogo_white"))
         
         imageView.backgroundColor = .white
         

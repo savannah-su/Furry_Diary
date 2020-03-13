@@ -40,7 +40,7 @@ struct PetInfo: Codable {
     var color: String?
     var birth: String?
     var chip: String?
-    var neuter: Bool
+    var neuter: Bool?
     var neuterDate: String?
     var memo: String?
     
@@ -77,7 +77,7 @@ struct PetInfo: Codable {
             "pet color": color as Any,
             "pet birth": birth as Any,
             "pet chip": chip as Any,
-            "neuter or not": neuter,
+            "neuter or not": neuter as Any,
             "neuter Date": neuterDate as Any,
             "memo": memo as Any
         ]
@@ -89,6 +89,18 @@ struct PetInfo: Codable {
 //    case clean
 //}
 
+struct TimeMagic {
+        
+    static var dateFormatter: DateFormatter {
+        
+        let formatter = DateFormatter()
+        
+        formatter.dateFormat = "yyyy-MM-dd"
+                
+        return formatter
+        
+    }
+}
 
 struct Record: Codable {
     
@@ -126,8 +138,10 @@ struct Record: Codable {
     var subContent: String {
         switch categoryType {
         case "衛生清潔": return "下次清潔是\(notiDate ?? "")"
-        case "衛生清潔": return ""
-        default:return ""
+        case "預防計畫": return ""
+        case "體重紀錄": return ""
+        case "行為症狀": return ""
+        default: return ""
         }
     }
     
@@ -178,7 +192,6 @@ struct VetData: Codable {
     let vetName: String
     let vetPhone: String
     let vetAddress: String
-    
     
     enum CodingKeys: String, CodingKey {
         

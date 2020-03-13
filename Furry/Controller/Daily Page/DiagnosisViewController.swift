@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import JGProgressHUD
 
 class DiagnosisViewController: UIViewController {
 
@@ -40,10 +39,9 @@ class DiagnosisViewController: UIViewController {
         return dateFormatter
     }()
     
-    let itemLabel = ["就診", "手術", "例行檢查"]
-    let itemImage = ["就診", "手術", "例行檢查"]
-    let itemSelected = ["就診-selected", "手術-selected", "例行檢查-selected"]
-    var itemStatus = [false, false, false]
+    var item = [DailyPageContent(lbl: "就診", image: "就診", selectedImage: "就診-selected"),
+                DailyPageContent(lbl: "手術", image: "手術", selectedImage: "手術-selected"),
+                DailyPageContent(lbl: "例行檢查", image: "例行檢查", selectedImage: "例行檢查-selected")]
     
     var petID = ""
     var subItemType = [""]
@@ -55,6 +53,10 @@ class DiagnosisViewController: UIViewController {
         didSet {
             checkUpdateStatus()
         }
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
     
     override func viewDidLoad() {
@@ -75,34 +77,49 @@ class DiagnosisViewController: UIViewController {
         tableView.separatorColor = .clear
     }
     
-    func uploadSuccess() {
-        let hud = JGProgressHUD(style: .dark)
-        hud.textLabel.text = "Success!"
-        hud.show(in: self.view)
-        hud.dismiss(afterDelay: 3.0)
-        hud.indicatorView = JGProgressHUDSuccessIndicatorView()
-    }
-    
     func toDatabase() {
         
-        guard let doneDate = dateFormatter.date(from: doneDate) else { return }
+        guard let doneDate = dateFormatter.date(from: doneDate) else {
+            return
+        }
         
-        UploadManager.shared.uploadData(petID: petID, categoryType: "醫療紀錄", date: doneDate, subitem: subItemType, medicineName: desc, kilo: "", memo: "", notiOrNot: isSwitchOn ? "true" : "false", notiDate: notiDate, notiText: notiMemo) { result in
+        let data = Record(
+            categoryType: "醫療紀錄",
+            subitem: subItemType,
+            medicineName: desc,
+            kilo: "",
+            memo: "",
+            date: doneDate,
+            notiOrNot: isSwitchOn ? "true" : "false",
+            notiDate: notiDate == dateFormatter.string(from: doneDate) ? "" : notiDate,
+            notiText: notiMemo
+        )
+        
+        UploadManager.shared.uploadData(petID: petID, data: data) { result in
             
             switch result {
             case .success(let success):
+                UploadManager.shared.uploadSuccess(text: "上傳成功！")
                 print(success)
-                self.uploadSuccess()
             case .failure(let error):
+                UploadManager.shared.uploadFail(text: "上傳失敗！")
                 print(error.localizedDescription)
             }
+        }
+        
+        guard let notiDate = dateFormatter.date(from: notiDate) else {
+            return
+        }
+        
+        if isSwitchOn {
+        LocalNotiManager.shared.setupNoti(notiDate: notiDate.timeIntervalSinceNow, type: "毛孩的\(self.subItemType[0])醫療通知", meaasge: notiMemo == "" ? "記得追蹤毛孩的醫療況狀唷！" : notiMemo)
         }
     }
     
     func checkUpdateStatus() {
         
         if isSwitchOn {
-            saveButton.isEnabled = notiDate > doneDate
+            saveButton.isEnabled = notiDate > doneDate && notiDate != dateFormatter.string(from: Date())
             saveButton.setTitleColor(UIColor.G4, for: .normal)
         } else {
             saveButton.isEnabled = desc != ""
@@ -115,7 +132,7 @@ class DiagnosisViewController: UIViewController {
 extension DiagnosisViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return itemLabel.count
+        return item.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -124,14 +141,10 @@ extension DiagnosisViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
-        cell.itemLabel.text = itemLabel[indexPath.item]
+        cell.setCell(model: item[indexPath.item])
         
-        let isCellSelected = itemStatus[indexPath.item]
-        
-        cell.image.image = isCellSelected
-            ? UIImage(named: itemSelected[indexPath.item])
-            : UIImage(named: itemImage[indexPath.item])
-        
+        cell.image.image = item[indexPath.item].status ? UIImage(named: item[indexPath.item].selectedImage) : UIImage(named: item[indexPath.item].image)
+
         return cell
     }
     
@@ -150,13 +163,15 @@ extension DiagnosisViewController: UICollectionViewDelegate {
 //            ? UIImage(named: itemSelected[indexPath.row])
 //            : UIImage(named: itemImage[indexPath.row])
         
-        for index in 0 ..< itemStatus.count {
+        for index in 0 ..< item.count {
 
         if index == indexPath.item {
-            itemStatus[index] = true
-            subItemType = [itemLabel[index]]
+            
+            item[index].status = true
+            subItemType = [item[index].titel]
+            
         } else {
-            itemStatus[index] = false
+            item[index].status = false
             }
         }
         collectionView.reloadData()
@@ -167,7 +182,6 @@ extension DiagnosisViewController: UICollectionViewDelegate {
 }
 
 extension DiagnosisViewController: UICollectionViewDelegateFlowLayout {
-    
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
             return CGSize(width: 70, height: 100)
@@ -232,7 +246,6 @@ extension DiagnosisViewController: UITableViewDataSource {
                 self?.desc = text
                 self?.checkUpdateStatus()
             }
-            
             
             return cell
             

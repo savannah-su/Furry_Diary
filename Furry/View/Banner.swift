@@ -22,18 +22,15 @@ protocol BannerViewDelegate: AnyObject {
 
 class BannerView: UIView {
     
-    
     weak var delegate: BannerViewDelegate?
     
-
     weak var dataSource: BannerViewDataSource? {
         
         didSet {
         
             guard self.dataSource != nil else {
                 
-                unitViews.forEach{ $0.removeFromSuperview() }
-                
+                unitViews.forEach { $0.removeFromSuperview() }
                 return
             }
             
@@ -60,13 +57,9 @@ class BannerView: UIView {
         let scrollView = UIScrollView()
         
         scrollView.contentInsetAdjustmentBehavior = .never
-        
         scrollView.showsHorizontalScrollIndicator = false
-        
         scrollView.showsVerticalScrollIndicator = false
-        
         scrollView.translatesAutoresizingMaskIntoConstraints = false
-        
         scrollView.delegate = self
         
         self.addSubview(scrollView)
@@ -77,7 +70,6 @@ class BannerView: UIView {
     func manipulateWidthConstraints(with constant: CGFloat) {
         
         for unitView in unitViews {
-            
             unitView.widthConstraint?.constant = constant
         }
     }
@@ -101,11 +93,13 @@ class BannerView: UIView {
     
     private func setupBasicBannerPageViews() {
         
-        unitViews.forEach{ $0.removeFromSuperview() }
+        unitViews.forEach { $0.removeFromSuperview() }
         
         unitViews.removeAll()
         
-        guard let dataSource = dataSource else { return }
+        guard let dataSource = dataSource else {
+            return
+        }
         
         let pages = dataSource.numberOfPages(in: self)
         
@@ -116,7 +110,6 @@ class BannerView: UIView {
             unitView.contentView = dataSource.viewFor(bannerView: self, at: index)
             
             unitViews.append(unitView)
-        
             scrollView.addSubview(unitView)
         }
         
@@ -136,7 +129,7 @@ class BannerView: UIView {
                 ])
             }
             
-            if index == unitViews.count - 1  {
+            if index == unitViews.count - 1 {
                 
                 NSLayoutConstraint.activate([
                     unitView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor)
@@ -146,7 +139,7 @@ class BannerView: UIView {
             NSLayoutConstraint.activate([
                 unitView.topAnchor.constraint(equalTo: scrollView.topAnchor),
                 unitView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-                unitView.widthAnchor.constraint(equalTo: widthAnchor),
+                unitView.widthAnchor.constraint(equalTo: widthAnchor)
             ])
         }
     }
@@ -215,9 +208,8 @@ class BannerUnitView: UIView {
                 contentView.centerXAnchor.constraint(equalTo: centerXAnchor),
                 widthConstraint!,
                 contentView.topAnchor.constraint(equalTo: topAnchor),
-                contentView.bottomAnchor.constraint(equalTo: bottomAnchor),
+                contentView.bottomAnchor.constraint(equalTo: bottomAnchor)
             ])
         }
     }
 }
-

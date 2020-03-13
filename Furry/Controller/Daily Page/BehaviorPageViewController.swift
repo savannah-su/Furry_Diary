@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import JGProgressHUD
 
 class BehaviorPageViewController: UIViewController {
     
@@ -21,7 +20,12 @@ class BehaviorPageViewController: UIViewController {
             toDataBase()
     }
     
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var collectionView: UICollectionView! {
+        didSet {
+            self.collectionView.delegate = self
+            self.collectionView.dataSource = self
+        }
+    }
     @IBOutlet weak var bottomViewLabel: UILabel!
     
     @IBOutlet weak var bottomView: UIView!
@@ -30,7 +34,11 @@ class BehaviorPageViewController: UIViewController {
     @IBOutlet weak var timeTextField: UITextField!
     @IBOutlet weak var memoLabel: UILabel!
     @IBOutlet weak var secondBar: UIView!
-    @IBOutlet weak var memoTextView: UITextView!
+    @IBOutlet weak var memoTextView: UITextView! {
+        didSet {
+            self.memoTextView.delegate = self
+        }
+    }
     
     let datePiker = UIDatePicker()
     let showDateFormatter = DateFormatter()
@@ -43,15 +51,15 @@ class BehaviorPageViewController: UIViewController {
     var memo = ""
     var selectDisease: [String] = []
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        
-        memoTextView.delegate = self
-        collectionView.allowsMultipleSelection = true
+//        collectionView.allowsMultipleSelection = true
         setupTextView()
         
         setupDatePiker()
@@ -71,25 +79,20 @@ class BehaviorPageViewController: UIViewController {
         
     }
     
-    func uploadSuccess() {
-           let hud = JGProgressHUD(style: .dark)
-           hud.textLabel.text = "Success!"
-           hud.show(in: self.view)
-           hud.dismiss(afterDelay: 3.0)
-           hud.indicatorView = JGProgressHUDSuccessIndicatorView()
-       }
-    
     func toDataBase() {
         
         getInfo()
         
-        UploadManager.shared.uploadData(petID: petID, categoryType: "行為症狀", date: datePiker.date, subitem: subItemType, medicineName: "", kilo: "", memo: memo, notiOrNot: "", notiDate: "", notiText: "") { result in
+        let data = Record(categoryType: "行為症狀", subitem: subItemType, medicineName: "", kilo: "", memo: memo, date: datePiker.date, notiOrNot: "", notiDate: "", notiText: "")
+        
+        UploadManager.shared.uploadData(petID: petID, data: data) { result in
             
             switch result {
             case .success(let success):
+                UploadManager.shared.uploadSuccess(text: "上傳成功！")
                 print(success)
-                self.uploadSuccess()
             case .failure(let error):
+                UploadManager.shared.uploadFail(text: "上傳失敗！")
                 print(error.localizedDescription)
             }
         }
@@ -162,13 +165,16 @@ extension BehaviorPageViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         guard let cell = collectionView.cellForItem(at: indexPath) as?
-            ReuseItemCell else { return }
+            ReuseItemCell else {
+                return
+        }
         
         guard let disease = cell.itemLabel.text else { return }
         
         if selectDisease.contains(disease) {
-            cell.image.image = UIImage(named: "icon")
+            
             guard let order = selectDisease.firstIndex(of: disease) else { return }
+            cell.image.image = UIImage(named: "icon")
             selectDisease.remove(at: order)
             
         } else {
@@ -179,9 +185,8 @@ extension BehaviorPageViewController: UICollectionViewDelegate {
         
         subItemType = selectDisease
         
-        showEnterBox()
-        
         bottomViewLabel.isHidden = true
+        showEnterBox()
         
         saveButton.isEnabled = true
         saveButton.setTitleColor(UIColor.G4, for: .normal)

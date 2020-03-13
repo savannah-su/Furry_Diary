@@ -11,23 +11,24 @@ import UIKit
 class TextViewCell: UITableViewCell {
 
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var contentTextView: UITextView!
+    @IBOutlet weak var contentTextView: UITextView! {
+        didSet {
+            self.contentTextView.delegate = self
+            contentTextView.text = "輸入寵物喜好及個性"
+        }
+    }
     
     var touchHandler: ( (String) -> Void )?
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        contentTextView.delegate = self
-        contentTextView.text = "輸入寵物喜好及個性"
-        contentTextView.textColor = .lightGray
-        // Initialization code
     }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+        contentTextView.textColor = UIColor(red: 199/255.0, green: 199/255.0, blue: 199/255.0, alpha: 1)
+        contentTextView.layer.borderColor = UIColor(red: 199/255.0, green: 199/255.0, blue: 199/255.0, alpha: 1).cgColor
     }
 
 }
@@ -48,9 +49,9 @@ extension TextViewCell: UITextViewDelegate {
             contentTextView.textColor = UIColor.lightGray
         }
         
-        guard let text = contentTextView.text else { return }
-        
+        guard let text = contentTextView.text else {
+            return
+        }
         touchHandler?(text)
     }
 }
-

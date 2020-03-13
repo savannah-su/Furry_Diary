@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import JGProgressHUD
+import IQKeyboardManagerSwift
 
 class PreventPageViewController: UIViewController {
     
@@ -15,10 +15,16 @@ class PreventPageViewController: UIViewController {
     
     @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var buttomViewConstraint: NSLayoutConstraint!
-    @IBOutlet weak var bottomViewButton: VerticalAlignedButton!
-    @IBAction func bottomViewButton(_ sender: Any) {}
+    @IBAction func bottomViewButton(_ sender: Any) {
+        
+    }
     @IBOutlet weak var bottomViewLabel: UILabel!
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableView: UITableView! {
+        didSet {
+            self.tableView.dataSource = self
+            self.tableView.delegate = self
+        }
+    }
     
     @IBAction func backButton(_ sender: Any) {
         navigationController?.popViewController(animated: true)
@@ -27,12 +33,16 @@ class PreventPageViewController: UIViewController {
     @IBAction func saveButton(_ sender: Any) {
         toDataBase()
     }
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var collectionView: UICollectionView! {
+        didSet {
+            self.collectionView.delegate = self
+            self.collectionView.dataSource = self
+        }
+    }
     
-    let itemLabel = ["疫苗施打", "體內驅蟲", "體外驅蟲"]
-    let itemImage = ["疫苗施打", "體內驅蟲", "體外驅蟲"]
-    let selectedImage = ["疫苗施打-selected", "體內驅蟲-selected", "體外驅蟲-selected"]
-    var itemCellStatus = [false, false, false]
+    var item = [DailyPageContent(lbl: "疫苗施打", image: "疫苗施打", selectedImage: "疫苗施打-selected"),
+                DailyPageContent(lbl: "體內驅蟲", image: "體內驅蟲", selectedImage: "體內驅蟲-selected"),
+                DailyPageContent(lbl: "體外驅蟲", image: "體外驅蟲", selectedImage: "體外驅蟲-selected")]
     
     var petID = ""
     
@@ -61,26 +71,19 @@ class PreventPageViewController: UIViewController {
         return dateFormatter
     }()
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.separatorColor = .clear
         tableView.isHidden = true
-        
-        collectionView.allowsMultipleSelection = false
-        
-        bottomViewButton.isHidden = true
+        tableView.separatorColor = .clear
         
         saveButton.isEnabled = false
         saveButton.setTitleColor(UIColor.lightGray, for: .disabled)
-        
-//        LocalNotiManager.shared.setupNoti(notiDate: 30 , type: "毛孩的清潔通知", meaasge: "Really")
     }
     
     override func viewDidLayoutSubviews() {
@@ -89,39 +92,49 @@ class PreventPageViewController: UIViewController {
         
         topView.layer.cornerRadius = topView.bounds.height / 2
         bottomView.layer.cornerRadius = bottomView.bounds.height / 2
-        
     }
-    
-    func uploadSuccess() {
-           let hud = JGProgressHUD(style: .dark)
-           hud.textLabel.text = "Success!"
-           hud.show(in: self.view)
-           hud.dismiss(afterDelay: 3.0)
-           hud.indicatorView = JGProgressHUDSuccessIndicatorView()
-       }
     
     func toDataBase() {
         
         guard let doneDate = dateFormatter.date(from: doneDate) else { return }
         
-        UploadManager.shared.uploadData(petID: petID, categoryType: "預防計畫", date: doneDate, subitem: subItemType, medicineName: medicineName, kilo: "", memo: "", notiOrNot: isSwitchOn ? "true" : "false", notiDate: notiDate, notiText: notiMemo) { result in
+        let data = Record(
+            categoryType: "預防計畫",
+            subitem: subItemType,
+            medicineName: medicineName,
+            kilo: "",
+            memo: "",
+            date: doneDate,
+            notiOrNot: isSwitchOn ? "true" : "false",
+            notiDate: notiDate == dateFormatter.string(from: doneDate) ? "" : notiDate,
+            notiText: notiMemo
+        )
+        
+        UploadManager.shared.uploadData(petID: petID, data: data) { result in
             
             switch result {
             case .success(let success):
+                UploadManager.shared.uploadSuccess(text: "上傳成功！")
                 print(success)
-                self.uploadSuccess()
             case .failure(let error):
+                UploadManager.shared.uploadFail(text: "上傳失敗！")
                 print(error.localizedDescription)
             }
         }
         
-//        LocalNotiManager.shared.setupNoti(notiDate: 10 , type: "毛孩的\(self.subItemType)清潔通知", meaasge: "Really")
+        guard let notiDate = dateFormatter.date(from: notiDate) else {
+            return
+        }
+        
+        if isSwitchOn {
+            LocalNotiManager.shared.setupNoti(notiDate: notiDate.timeIntervalSinceNow, type: "毛孩的\(self.subItemType[0])通知", meaasge: notiMemo == "" ? "記得毛孩的預防計畫唷！" : notiMemo)
+        }
     }
     
     func checkUpdateStatus() {
         
         if isSwitchOn {
-            saveButton.isEnabled = notiDate > doneDate
+            saveButton.isEnabled = notiDate > doneDate && notiDate != dateFormatter.string(from: Date())
             saveButton.setTitleColor(UIColor.G4, for: .normal)
             
         } else {
@@ -163,6 +176,8 @@ extension PreventPageViewController: UITableViewDataSource {
             cell.textFieldType = .normal
             cell.contentUpdateHandler = { [weak self] text in
                 
+                print(IQKeyboardManager.shared.keyboardShowing)
+                
                 self?.medicineName = text
                 
                 self?.checkUpdateStatus()
@@ -185,21 +200,17 @@ extension PreventPageViewController: UITableViewDataSource {
             }
             return cell
             
-            
         default:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "Noti Cell", for: indexPath) as? NotiCell else {
                 return UITableViewCell()
             }
             cell.notiSwitch.addTarget(self, action: #selector(changeSwitch), for: .valueChanged)
-            
-           cell.notiText.text = notiMemo
-            
+            cell.notiText.text = notiMemo
             cell.textFieldType = .date(notiDate, "yyyy-MM-dd")
-            
             cell.dateUpdateHandler = { [weak self] text in
                 
                 self?.notiDate = text
-            
+                
                 self?.checkUpdateStatus()
             }
             
@@ -207,7 +218,6 @@ extension PreventPageViewController: UITableViewDataSource {
                 
                 self?.notiMemo = text
             }
-            
             return cell
         }
     }
@@ -215,9 +225,7 @@ extension PreventPageViewController: UITableViewDataSource {
     @objc func changeSwitch() {
         
         saveButton.isEnabled = false
-        
         isSwitchOn = !isSwitchOn
-        
         tableView.reloadData()
     }
 }
@@ -225,7 +233,7 @@ extension PreventPageViewController: UITableViewDataSource {
 extension PreventPageViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-            return CGSize(width: 70, height: 100)
+        return CGSize(width: 70, height: 100)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
@@ -236,32 +244,25 @@ extension PreventPageViewController: UICollectionViewDelegateFlowLayout {
         
         let inset = (UIScreen.main.bounds.height - topView.bounds.height - 100) / 2
         
-            return UIEdgeInsets(top: inset, left: 50, bottom: inset, right: 50)
+        return UIEdgeInsets(top: inset, left: 50, bottom: inset, right: 50)
     }
 }
 
 extension PreventPageViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-            return 3
+        return item.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-            
-            guard let cellA = collectionView.dequeueReusableCell(withReuseIdentifier: "Item Cell", for: indexPath) as? ReuseItemCell else { return UICollectionViewCell() }
-            
-            for index in 0 ... 2 {
-                
-                let index = indexPath.row
-                cellA.itemLabel.text = itemLabel[index]
-                
-                if itemCellStatus[index] == true {
-                    cellA.image.image = UIImage(named: selectedImage[index])
-                } else {
-                    cellA.image.image = UIImage(named: itemImage[index])
-                }
-            }
-            return cellA
+        
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Item Cell", for: indexPath) as? ReuseItemCell else { return UICollectionViewCell() }
+        
+        cell.setCell(model: item[indexPath.item])
+        
+        cell.image.image = item[indexPath.item].status ? UIImage(named: item[indexPath.item].selectedImage) : UIImage(named: item[indexPath.item].image)
+        
+        return cell
     }
 }
 
@@ -269,22 +270,23 @@ extension PreventPageViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-            for index in 0 ..< itemCellStatus.count {
+        for index in 0 ..< item.count {
+            
+            if index == indexPath.row {
                 
-                if index == indexPath.row {
-                    
-                    itemCellStatus[index] = true
-                    
-                    subItemType = [itemLabel[index]]
-                } else {
-                    itemCellStatus[index] = false
-                }
+                item[index].status = true
+                subItemType = [item[index].titel]
+                
+            } else {
+                item[index].status = false
             }
-            collectionView.reloadData()
-            
-            bottomViewLabel.isHidden = true
-            tableView.isHidden = false
-            
+        }
+        
+        collectionView.reloadData()
+        
+        bottomViewLabel.isHidden = true
+        tableView.isHidden = false
+        
     }
     
     func upButtomView() {
@@ -297,8 +299,6 @@ extension PreventPageViewController: UICollectionViewDelegate {
             self.view.layoutIfNeeded()
         }
         move.startAnimation()
-        
-        bottomViewButton.isHidden = false
     }
     
     func downButtomView() {
@@ -311,8 +311,5 @@ extension PreventPageViewController: UICollectionViewDelegate {
             self.view.layoutIfNeeded()
         }
         move.startAnimation()
-        
-        bottomViewButton.isHidden = true
-        
     }
 }

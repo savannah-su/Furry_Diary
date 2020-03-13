@@ -1,21 +1,16 @@
 //
 //  UserManager.swift
-//  Personal Project
+//  Furry
 //
-//  Created by Savannah Su on 2020/2/1.
+//  Created by Savannah Su on 2020/3/9.
 //  Copyright © 2020 Savannah Su. All rights reserved.
 //
 
 import Foundation
-import Firebase
-import FacebookCore
-import FirebaseAuth
-import FirebaseFirestore
 
 class UserManager {
     
-    static let shared = UserManager()
-    private init(){}
+    static var shared = UserManager()
     
-    
+    private init() {}
 }

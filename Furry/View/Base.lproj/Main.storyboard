@@ -40,7 +40,7 @@
                                                     <rect key="frame" x="187.66666666666666" y="190" width="39" height="37"/>
                                                 </pageControl>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FattyJim" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fAz-QY-Phv">
-                                                    <rect key="frame" x="32" y="140" width="146" height="42"/>
+                                                    <rect key="frame" x="32" y="140" width="362" height="42"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-BoldItalic" family="Helvetica Neue" pointSize="35"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -56,6 +56,7 @@
                                                 <constraint firstAttribute="bottom" secondItem="EeL-z7-KAg" secondAttribute="bottom" constant="16" id="DWC-cF-eSX"/>
                                                 <constraint firstAttribute="bottom" secondItem="Vps-Mh-fR7" secondAttribute="bottom" id="L0r-XO-tVY"/>
                                                 <constraint firstItem="Vps-Mh-fR7" firstAttribute="top" secondItem="pd4-sI-Oqi" secondAttribute="top" constant="16" id="WzL-uv-DIJ"/>
+                                                <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="fAz-QY-Phv" secondAttribute="trailing" constant="20" symbolic="YES" id="Xqg-8p-5Mp"/>
                                                 <constraint firstAttribute="bottom" secondItem="Ybo-OV-yxS" secondAttribute="bottom" constant="5" id="YbV-rq-amQ"/>
                                                 <constraint firstAttribute="trailing" secondItem="Vps-Mh-fR7" secondAttribute="trailing" constant="16" id="aIB-UB-Xja"/>
                                                 <constraint firstItem="EeL-z7-KAg" firstAttribute="leading" secondItem="pd4-sI-Oqi" secondAttribute="leading" constant="32" id="cgY-zS-0SV"/>
@@ -63,6 +64,7 @@
                                                 <constraint firstAttribute="bottom" secondItem="fAz-QY-Phv" secondAttribute="bottom" constant="50" id="eQH-Xw-mpT"/>
                                                 <constraint firstItem="Vps-Mh-fR7" firstAttribute="leading" secondItem="pd4-sI-Oqi" secondAttribute="leading" constant="16" id="hdU-fL-PCP"/>
                                                 <constraint firstItem="fAz-QY-Phv" firstAttribute="leading" secondItem="pd4-sI-Oqi" secondAttribute="leading" constant="32" id="qqg-1n-lg0"/>
+                                                <constraint firstItem="Ybo-OV-yxS" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="EeL-z7-KAg" secondAttribute="trailing" constant="8" symbolic="YES" id="vTX-NQ-BRA"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -116,7 +118,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wO3-aC-yBH">
                                         <rect key="frame" x="363" y="108.33333333333333" width="35" height="32.999999999999986"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="35" id="SRS-zf-sHs"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="35" id="SRS-zf-sHs"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                         <state key="normal" title="登出">
@@ -129,6 +131,7 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.4431372549" green="0.71764705880000002" blue="0.71764705880000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstItem="wO3-aC-yBH" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Ksp-z6-Ol6" secondAttribute="trailing" constant="2" id="0Zn-3D-Ai3"/>
                                     <constraint firstAttribute="bottom" secondItem="Ksp-z6-Ol6" secondAttribute="bottom" constant="8" id="H42-zV-CRH"/>
                                     <constraint firstItem="Ksp-z6-Ol6" firstAttribute="leading" secondItem="AJX-07-lG8" secondAttribute="leading" constant="16" id="LjL-sa-mEU"/>
                                     <constraint firstAttribute="trailing" secondItem="Ksp-z6-Ol6" secondAttribute="trailing" constant="53" id="Qz8-2H-3p9"/>

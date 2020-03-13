@@ -13,7 +13,7 @@ import FirebaseCore
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
-enum download: Error {
+enum Download: Error {
     
     case downloadFail
 }
@@ -26,16 +26,19 @@ class DownloadManager {
     
     lazy var db = Firestore.firestore()
     
+    var petData: [PetInfo] = []
+    
     var petRecord = [Record]()
     
     var monthlyData = [Record]()
     
     var vetPlacemark = [VetDataToDB]()
     
-    let category = ["衛生清潔", "預防計畫", "體重紀錄", "行為症狀"]
+    let category = ["衛生清潔", "預防計畫", "體重紀錄", "行為症狀", "醫療紀錄", "用藥紀錄"]
     
-    func downloadData(type: Int, petID: String, completion: @escaping (Result<[Record], Error>) -> Void) {
-        db.collection("pets").document(petID).collection("record").getDocuments { (querySnapshot, error) in
+    func downloadPetData(completion: @escaping (Result<[PetInfo], Error>) -> Void) {
+        
+        db.collection("pets").whereField("owners ID", arrayContains: Auth.auth().currentUser!.uid).getDocuments { (querySnapshot, error) in
             
             if error == nil {
                 
@@ -43,36 +46,64 @@ class DownloadManager {
                     
                     do {
                         
+                        if let downloadPetData = try document.data(as: PetInfo.self, decoder: Firestore.Decoder()) {
+                            
+                            self.petData.append(downloadPetData)
+                            
+                            let simplePet = SimplePetInfo(petName: downloadPetData.petName, petID: downloadPetData.petID, petPhoto: downloadPetData.petImage)
+                            
+                            UploadManager.shared.simplePetInfo.append(simplePet)
+                        }
+                        
+                    } catch {
+                        completion(.failure(Download.downloadFail))
+                    }
+                }
+            }
+            completion(.success(self.petData))
+        }
+    }
+    
+    func downloadRecordData(categoryType: Int, petID: String, completion: @escaping (Result<[Record], Error>) -> Void) {
+        
+        db.collection("pets").document(petID).collection("record").getDocuments { (querySnapshot, error) in
+            
+            if error == nil {
+                
+                for document in querySnapshot!.documents {
+                    
+                    do {
                         if let downloadData = try document.data(as: Record.self, decoder: Firestore.Decoder()) {
                             self.petRecord.append(downloadData)
                         }
                         
                     } catch {
-                        completion(.failure(download.downloadFail))
+                        completion(.failure(Download.downloadFail))
                     }
                 }
                 
-                if type == 4 {
-                    
-                    completion(.success(self.petRecord))
-                    
-                } else {
+                if categoryType == 2 {
                     
                     let categoryData = self.petRecord.filter { info in
                         
-                        if info.categoryType == self.category[type] {
+                        if info.categoryType == self.category[categoryType] {
                             return true
                         } else {
                             return false
                         }
                     }
+                    
                     completion(.success(categoryData))
+                    
+                } else {
+                    completion(.success(self.petRecord))
                 }
             }
         }
     }
     
-    func downloadMonthlyData(petID: String, startOfMonth:Date, endOfMonth:Date, completion: @escaping (Result<[Record], Error>) -> Void) {
+    func downloadMonthlyRecordData(petID: String, startOfMonth: Date, endOfMonth: Date, completion: @escaping (Result<[Record], Error>) -> Void) {
+        
         db.collection("pets").document(petID).collection("record").whereField("date", isGreaterThan: startOfMonth).whereField("date", isLessThan: endOfMonth).getDocuments { (querySnapshot, error) in
             
             if error == nil {
@@ -88,7 +119,7 @@ class DownloadManager {
                         }
                         
                     } catch {
-                        completion(.failure(download.downloadFail))
+                        completion(.failure(Download.downloadFail))
                     }
                 }
                 completion(.success(self.monthlyData))
@@ -100,7 +131,6 @@ class DownloadManager {
         
         vetPlacemark = []
 
-        
         db.collection("veterinary").getDocuments { (querySnapshot, error) in
             
             if error == nil {
@@ -115,14 +145,12 @@ class DownloadManager {
                         }
                         
                     } catch {
-                        completion(.failure(download.downloadFail))
+                        completion(.failure(Download.downloadFail))
                     }
                     
                 }
                 completion(.success(self.vetPlacemark))
             }
-            
-            
         }
     }
 }

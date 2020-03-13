@@ -6,7 +6,11 @@ target 'Furry' do
   use_frameworks!
 
   # Pods for Furry
-#handle crash problem
+
+  #add SwiftLint
+  pod 'SwiftLint'
+
+  #handle crash problem
   pod 'Fabric', '~> 1.10.2'
   pod 'Crashlytics', '~> 3.14.0'
 
@@ -42,7 +46,6 @@ target 'Furry' do
     inherit! :search_paths
     # Pods for testing
   end
-
 
   target 'FurryUITests' do
     # Pods for testing

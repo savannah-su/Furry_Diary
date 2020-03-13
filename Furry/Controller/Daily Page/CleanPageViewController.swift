@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import JGProgressHUD
 
 class CleanPageViewController: UIViewController {
     
@@ -18,9 +17,19 @@ class CleanPageViewController: UIViewController {
     @IBOutlet weak var bottomViewButton: VerticalAlignedButton!
     @IBAction func bottomViewButton(_ sender: Any) {}
     @IBOutlet weak var bottomViewLabel: UILabel!
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableView: UITableView! {
+        didSet {
+            self.tableView.dataSource = self
+            self.tableView.delegate = self
+        }
+    }
     
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var collectionView: UICollectionView! {
+        didSet {
+            self.collectionView.dataSource = self
+            self.collectionView.delegate = self
+        }
+    }
     @IBAction func backButton(_ sender: Any) {
         navigationController?.popViewController(animated: true)
     }
@@ -31,14 +40,17 @@ class CleanPageViewController: UIViewController {
         toDataBase()
     }
     
-    let sectionOneLabel = ["洗澡", "毛髮", "指甲", "耳朵", "牙齒"]
-    let sectionOneImage = ["洗澡", "毛髮", "指甲", "耳朵", "牙齒"]
-    let sectionOneSelected = ["洗澡-selected", "毛髮-selected", "指甲-selected", "耳朵-selected", "牙齒-selected"]
-    let sectionTwoLabel = ["碗盤", "小窩", "玩具", "衣物", "外出用品"]
-    let sectionTwoImage = ["碗盤", "小窩", "玩具", "衣物", "外出用品"]
-    let sectionTwoSelected = ["碗盤-selected", "小窩-selected", "玩具-selected", "衣物-selected", "外出用品-selected"]
-    var sectionOneStatus = [false, false, false, false, false]
-    var sectionTwoStatus = [false, false, false, false, false]
+    var sectionOne = [DailyPageContent(lbl: "洗澡", image: "洗澡", selectedImage: "洗澡-selected"),
+                      DailyPageContent(lbl: "毛髮", image: "毛髮", selectedImage: "毛髮-selected"),
+                      DailyPageContent(lbl: "指甲", image: "指甲", selectedImage: "指甲-selected"),
+                      DailyPageContent(lbl: "耳朵", image: "耳朵", selectedImage: "耳朵-selected"),
+                      DailyPageContent(lbl: "牙齒", image: "牙齒", selectedImage: "牙齒-selected")]
+    
+    var sectionTwo = [DailyPageContent(lbl: "碗盤", image: "碗盤", selectedImage: "碗盤-selected"),
+                      DailyPageContent(lbl: "小窩", image: "小窩", selectedImage: "小窩-selected"),
+                      DailyPageContent(lbl: "玩具", image: "玩具", selectedImage: "玩具-selected"),
+                      DailyPageContent(lbl: "衣物", image: "衣物", selectedImage: "衣物-selected"),
+                      DailyPageContent(lbl: "外出用品", image: "外出用品", selectedImage: "外出用品-selected")]
     
     var petID = ""
     
@@ -65,25 +77,22 @@ class CleanPageViewController: UIViewController {
         return dateFormatter
     }()
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        collectionView.allowsMultipleSelection = false
-        
-        tableView.dataSource = self
-        tableView.delegate = self
         tableView.isHidden = true
         tableView.separatorColor = .clear
 
-        bottomViewButton.isHidden = true
-        
         saveButton.isEnabled = false
         saveButton.setTitleColor(UIColor.lightGray, for: .disabled)
         
-        //LocalNotiManager.shared.setupNoti(notiDate: 30 , type: "毛孩的清潔通知", meaasge: "Really")
+        bottomViewButton.isHidden = true
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -92,39 +101,51 @@ class CleanPageViewController: UIViewController {
         
         topView.layer.cornerRadius = topView.bounds.height / 2
         bottomView.layer.cornerRadius = bottomView.bounds.height / 2
-        
-    }
-    
-    func uploadSuccess() {
-        let hud = JGProgressHUD(style: .dark)
-        hud.textLabel.text = "Success!"
-        hud.show(in: self.view)
-        hud.dismiss(afterDelay: 3.0)
-        hud.indicatorView = JGProgressHUDSuccessIndicatorView()
     }
     
     func toDataBase() {
         
-        guard let doneDate = dateFormatter.date(from: doneDate) else { return }
+        guard let doneDate = dateFormatter.date(from: doneDate) else {
+            return
+        }
         
-        UploadManager.shared.uploadData(petID: petID, categoryType: "衛生清潔", date: doneDate, subitem: subItemType, medicineName: "", kilo: "", memo: "", notiOrNot: isSwitchOn ? "true" : "false", notiDate: notiDate, notiText: notiMemo) { result in
+        let data = Record(
+            categoryType: "衛生清潔",
+            subitem: subItemType,
+            medicineName: "",
+            kilo: "",
+            memo: "",
+            date: doneDate,
+            notiOrNot: isSwitchOn ? "true" : "false",
+            notiDate: notiDate == dateFormatter.string(from: doneDate) ? "" : notiDate,
+            notiText: notiMemo
+        )
+        
+        UploadManager.shared.uploadData(petID: petID, data: data) { result in
             
             switch result {
             case .success(let success):
+                UploadManager.shared.uploadSuccess(text: "上傳成功！")
                 print(success)
-                self.uploadSuccess()
             case .failure(let error):
+                UploadManager.shared.uploadFail(text: "上傳失敗！")
                 print(error.localizedDescription)
             }
         }
         
-        LocalNotiManager.shared.setupNoti(notiDate: 10 , type: "毛孩的\(self.subItemType)清潔通知", meaasge: "Really")
+        guard let notiDate = dateFormatter.date(from: notiDate) else {
+            return
+        }
+        
+        if isSwitchOn {
+            LocalNotiManager.shared.setupNoti(notiDate: notiDate.timeIntervalSinceNow, type: "毛孩的\(self.subItemType[0])清潔通知", meaasge: notiMemo == "" ? "記得協助毛孩用藥唷！" : notiMemo)
+        }
     }
     
     func checkUpdateStatus() {
         
         if isSwitchOn {
-            saveButton.isEnabled = notiDate > doneDate
+            saveButton.isEnabled = notiDate > doneDate && notiDate != dateFormatter.string(from: Date())
             saveButton.setTitleColor(UIColor.G4, for: .normal)
             
         } else {
@@ -160,11 +181,10 @@ extension CleanPageViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-            return 5
+        return sectionOne.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         
         guard let cellA = collectionView.dequeueReusableCell(withReuseIdentifier: "Item Cell", for: indexPath) as? ReuseItemCell else {
             return UICollectionViewCell()
@@ -174,25 +194,17 @@ extension CleanPageViewController: UICollectionViewDataSource {
         
         if indexPath.section == 0 {
             
-            cellA.itemLabel.text = sectionOneLabel[indexPath.row]
+            cellA.setCell(model: sectionOne[indexPath.row])
             
             let index = indexPath.row
-            if sectionOneStatus[index] == true {
-                cellA.image.image = UIImage(named: sectionOneSelected[index])
-            } else {
-                cellA.image.image = UIImage(named: sectionOneImage[index])
-            }
+            cellA.image.image = sectionOne[index].status ? UIImage(named: sectionOne[index].selectedImage) : UIImage(named: sectionOne[index].image)
             
         } else if indexPath.section == 1 {
             
-            cellA.itemLabel.text = sectionTwoLabel[indexPath.row]
+            cellA.setCell(model: sectionTwo[indexPath.row])
             
             let index = indexPath.row
-            if sectionTwoStatus[index] == true {
-                cellA.image.image = UIImage(named: sectionTwoSelected[index])
-            } else {
-                cellA.image.image = UIImage(named: sectionTwoImage[index])
-            }
+            cellA.image.image = sectionTwo[index].status ? UIImage(named: sectionTwo[index].selectedImage) : UIImage(named: sectionTwo[index].image)
         }
         return cellA
     }
@@ -220,30 +232,31 @@ extension CleanPageViewController: UICollectionViewDelegate {
                 
                 if index == indexPath.row {
                     
-                    sectionOneStatus[index] = true
-                    sectionTwoStatus[index] = false
-                    
-                    subItemType = [sectionOneLabel[index]]
+                    sectionOne[index].status = true
+                    sectionTwo[index].status = false
+                    subItemType = [sectionOne[index].titel]
                     
                 } else {
-                    sectionOneStatus[index] = false
-                    sectionTwoStatus[index] = false
+                    
+                    sectionOne[index].status = false
+                    sectionTwo[index].status = false
                 }
             }
+            
         } else {
             
             for index in 0 ..< 5 {
                 
                 if index == indexPath.row {
                     
-                    sectionOneStatus[index] = false
-                    sectionTwoStatus[index] = true
-                    
-                    subItemType = [sectionTwoLabel[index]]
+                    sectionOne[index].status = false
+                    sectionTwo[index].status = true
+                    subItemType = [sectionOne[index].titel]
                     
                 } else {
-                    sectionOneStatus[index] = false
-                    sectionTwoStatus[index] = false
+                    
+                    sectionOne[index].status = false
+                    sectionTwo[index].status = false
                 }
             }
         }
@@ -329,14 +342,10 @@ extension CleanPageViewController: UITableViewDataSource {
 
             cell.notiSwitch.addTarget(self, action: #selector(changeSwitch), for: .valueChanged)
             
-            cell.notiText.text = notiMemo
-            
             cell.textFieldType = .date(notiDate, "yyyy-MM-dd")
             
             cell.dateUpdateHandler = { [weak self] text in
-                
                 self?.notiDate = text
-            
                 self?.checkUpdateStatus()
             }
             
@@ -351,13 +360,9 @@ extension CleanPageViewController: UITableViewDataSource {
 //                let date = text.components(separatedBy: "-")
 //                
 //                if date.count == 3 {
-//                    
 //                    self?.notiDate = text
-//                    
 //                } else {
-//                    
 //                    self?.notiMemo = text
-
 //                }
 //            }
             return cell

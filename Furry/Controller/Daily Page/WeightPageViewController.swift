@@ -8,38 +8,6 @@
 
 import UIKit
 import PNChart
-import JGProgressHUD
-
-/*
- 
- PNLineChart * lineChart = [[PNLineChart alloc] initWithFrame:CGRectMake(0, 135.0, SCREEN_WIDTH, 200.0)];
- [lineChart setXLabels:@[@"SEP 1",@"SEP 2",@"SEP 3",@"SEP 4",@"SEP 5"]];
- 
- // Line Chart No.1
- NSArray * data01Array = @[@60.1, @160.1, @126.4, @262.2, @186.2];
- PNLineChartData *data01 = [PNLineChartData new];
- data01.color = PNFreshGreen;
- data01.itemCount = lineChart.xLabels.count;
- data01.getData = ^(NSUInteger index) {
- CGFloat yValue = [data01Array[index] floatValue];
- return [PNLineChartDataItem dataItemWithY:yValue];
- };
- // Line Chart No.2
- NSArray * data02Array = @[@20.1, @180.1, @26.4, @202.2, @126.2];
- PNLineChartData *data02 = [PNLineChartData new];
- data02.color = PNTwitterColor;
- data02.itemCount = lineChart.xLabels.count;
- data02.getData = ^(NSUInteger index) {
- CGFloat yValue = [data02Array[index] floatValue];
- return [PNLineChartDataItem dataItemWithY:yValue];
- };
- 
- lineChart.chartData = @[data01, data02];
- [lineChart strokeChart];
- You can choose to show smooth lines.
- 
- lineChart.showSmoothLines = YES;
- */
 
 class WeightPageViewController: UIViewController {
     
@@ -53,7 +21,6 @@ class WeightPageViewController: UIViewController {
         toDataBase()
     }
     
-    
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var bottomView: UIView!
     
@@ -62,7 +29,11 @@ class WeightPageViewController: UIViewController {
     @IBOutlet weak var dateTextfield: UITextField!
     @IBOutlet weak var weightLabel: UILabel!
     @IBOutlet weak var secondBar: UIView!
-    @IBOutlet weak var weightTextField: UITextField!
+    @IBOutlet weak var weightTextField: UITextField! {
+        didSet {
+            self.weightTextField.delegate = self
+        }
+    }
     
     @IBOutlet weak var kgLabel: UILabel!
     
@@ -82,6 +53,10 @@ class WeightPageViewController: UIViewController {
     
     var weightData = [WeightData]()
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     override func viewDidLoad() {
     
         super.viewDidLoad()
@@ -89,15 +64,8 @@ class WeightPageViewController: UIViewController {
         toGetRecord()
         setupDatePicker()
         
-        weightTextField.delegate = self
-        
         saveButton.isEnabled = false
         saveButton.setTitleColor(UIColor.lightGray, for: .disabled)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        
-        super.viewDidAppear(animated)
     }
     
     override func viewDidLayoutSubviews() {
@@ -117,14 +85,14 @@ class WeightPageViewController: UIViewController {
                            
         self.data.removeAll()
         
-        DownloadManager.shared.downloadData(type: 2, petID: petID) { result in
+        DownloadManager.shared.downloadRecordData(categoryType: 2, petID: petID) { result in
             
             switch result {
                 
             case .success(let downloadWeightData):
                 
                 //(map, filet, reduce)給Array用的for in, 組成左邊新的array; filter是把右邊true的情況，組成左邊新的array
-                downloadWeightData.sorted{ return $0.date > $1.date }.prefix(5).reversed().forEach { info in
+                downloadWeightData.sorted { return $0.date > $1.date }.prefix(5).reversed().forEach { info in
                     
                     guard let kiloString = info.kilo else { return }
                     
@@ -140,9 +108,9 @@ class WeightPageViewController: UIViewController {
                     
                     showDateFormatter.dateFormat = "yyyy/MM"
                     
-                    var sortedDateString = showDateFormatter.string(from: info.date)
+                    let sortedDateString = showDateFormatter.string(from: info.date)
                     
-                    var sortedKiloDouble = dataKilo
+                    let sortedKiloDouble = dataKilo
                     
                     self.xLabels.append(sortedDateString)
                     
@@ -157,26 +125,21 @@ class WeightPageViewController: UIViewController {
         }
     }
     
-    func uploadSuccess() {
-           let hud = JGProgressHUD(style: .dark)
-           hud.textLabel.text = "Success!"
-           hud.show(in: self.view)
-           hud.dismiss(afterDelay: 3.0)
-           hud.indicatorView = JGProgressHUDSuccessIndicatorView()
-       }
-    
     func toDataBase() {
         
         getInfo()
         
-        UploadManager.shared.uploadData(petID: petID, categoryType: "體重紀錄", date: datePicker.date, subitem: ["體重紀錄"], medicineName: "", kilo: weight, memo: "", notiOrNot: "", notiDate: "", notiText: "") { result in
+        let data = Record(categoryType: "體重紀錄", subitem: ["體重紀錄"], medicineName: "", kilo: weight, memo: "", date: datePicker.date, notiOrNot: "", notiDate: "", notiText: "")
+        
+        UploadManager.shared.uploadData(petID: petID, data: data) { result in
             
             switch result {
             case .success(let success):
+                UploadManager.shared.uploadSuccess(text: "上傳成功！")
                 print(success)
-                self.uploadSuccess()
                 self.toGetRecord()
             case .failure(let error):
+                UploadManager.shared.uploadFail(text: "上傳失敗！")
                 print(error.localizedDescription)
             }
         }
@@ -227,7 +190,7 @@ class WeightPageViewController: UIViewController {
         
         lineChart.showSmoothLines = true
         
-        chartData.color = UIColor(red:245.0 / 255.0, green:172.0 / 255.0, blue:26.0 / 255.0, alpha:1.0)
+        chartData.color = UIColor(red: 245.0 / 255.0, green: 172.0 / 255.0, blue: 26.0 / 255.0, alpha: 1.0)
         
         chartData.itemCount = UInt(exactly: Double(lineChart.xLabels.count))!
         

@@ -10,5 +10,18 @@ import UIKit
 
 class CoOwnerCollectionCell: UICollectionViewCell {
     
+    @IBOutlet weak var removeBtnView: UIView!
     @IBOutlet weak var ownerPhoto: UIImageView!
+    @IBOutlet weak var removeButton: UIButton!
+    @IBAction func removeButton(_ sender: Any) {
+        removeHandler?()
+    }
+    
+    var removeHandler: ( () -> Void )?
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        ownerPhoto.layer.cornerRadius = 15
+    }
 }

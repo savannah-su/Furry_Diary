@@ -27,7 +27,7 @@ class RecordCell: UITableViewCell {
     
     @IBOutlet weak var background: UIView! {
         
-        didSet{
+        didSet {
             background.backgroundColor = .white
             background.layer.borderWidth = 1
             background.layer.borderColor = UIColor.black.cgColor

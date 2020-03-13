@@ -10,23 +10,36 @@ import UIKit
 
 class DailyPageViewController: UIViewController {
     
-    @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var choosePetCollectionView: UICollectionView!
+    @IBOutlet weak var collectionView: UICollectionView! {
+        didSet {
+            self.collectionView.delegate = self
+            self.collectionView.dataSource = self
+        }
+    }
+    @IBOutlet weak var choosePetCollectionView: UICollectionView! {
+        didSet {
+            self.choosePetCollectionView.delegate = self
+            self.choosePetCollectionView.dataSource = self
+        }
+    }
     @IBOutlet weak var chooseView: UIView!
     @IBOutlet weak var navigationTitle: UILabel!
     
-    let item = ["衛生清潔", "預防計畫", "體重紀錄", "行為症狀", "醫療紀錄", "用藥紀錄"]
-    let itemImage = ["dog-treat", "shield", "libra-2", "pet", "report", "medicine"]
+    let recordCategory = [RecordCategoryPage(title: "衛生清潔", image: "dog-treat"),
+                          RecordCategoryPage(title: "預防計畫", image: "shield"),
+                          RecordCategoryPage(title: "體重紀錄", image: "libra-2"),
+                          RecordCategoryPage(title: "行為症狀", image: "pet"),
+                          RecordCategoryPage(title: "醫療紀錄", image: "report"),
+                          RecordCategoryPage(title: "用藥紀錄", image: "medicine")]
+    
     var recordPetID = ""
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        
-        choosePetCollectionView.delegate = self
-        choosePetCollectionView.dataSource = self
         // Do any additional setup after loading the view.
     }
     
@@ -79,7 +92,7 @@ extension DailyPageViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         if collectionView == self.collectionView {
-            return item.count
+            return recordCategory.count
         }
         return UploadManager.shared.simplePetInfo.count
     }
@@ -89,14 +102,9 @@ extension DailyPageViewController: UICollectionViewDataSource {
         if collectionView == self.collectionView {
             
             guard let cellA = collectionView.dequeueReusableCell(withReuseIdentifier: "Item Cell", for: indexPath) as? ItemCell else { return UICollectionViewCell() }
+                
+            cellA.setCell(model: recordCategory[indexPath.item])
             
-            for index in 0 ... 3 {
-                
-                let index = indexPath.row
-                cellA.itemLabel.text = item[index]
-                cellA.image.image = UIImage(named: itemImage[index])
-                
-            }
             return cellA
             
         } else {
@@ -105,9 +113,8 @@ extension DailyPageViewController: UICollectionViewDataSource {
             
             cellB.petName.text = UploadManager.shared.simplePetInfo[indexPath.row].petName
             
-            let url = URL(string: UploadManager.shared.simplePetInfo[indexPath.row].petPhoto.randomElement()!)
-            cellB.petPhoto.kf.setImage(with: url)
-            cellB.petPhoto.contentMode = .scaleToFill
+            let urlString = UploadManager.shared.simplePetInfo[indexPath.row].petPhoto.randomElement()!
+            cellB.petPhoto.loadImage(urlString, placeHolder: UIImage(named: "FurryLogo_white"))
             
             return cellB
         }
@@ -122,45 +129,57 @@ extension DailyPageViewController: UICollectionViewDelegate {
             
             if indexPath.row == 0 {
                 
-                guard let vc = UIStoryboard(name: "Daily", bundle: nil).instantiateViewController(identifier: "Clean Page") as? CleanPageViewController else { return }
+                guard let viewController = UIStoryboard(name: "Daily", bundle: nil).instantiateViewController(identifier: "Clean Page") as? CleanPageViewController else {
+                    return
+                }
                 
-                vc.petID = recordPetID
-                show(vc, sender: nil)
+                viewController.petID = recordPetID
+                show(viewController, sender: nil)
                 
             } else if indexPath.row == 1 {
                 
-                guard let vc = UIStoryboard(name: "Daily", bundle: nil).instantiateViewController(identifier: "Prevent Page") as? PreventPageViewController else { return }
+                guard let viewController = UIStoryboard(name: "Daily", bundle: nil).instantiateViewController(identifier: "Prevent Page") as? PreventPageViewController else {
+                    return
+                }
                 
-                vc.petID = recordPetID
-                show(vc, sender: nil)
+                viewController.petID = recordPetID
+                show(viewController, sender: nil)
                 
             } else if indexPath.row == 2 {
                 
-                guard let vc = UIStoryboard(name: "Daily", bundle: nil).instantiateViewController(identifier: "Weight Page") as? WeightPageViewController else { return }
+                guard let viewController = UIStoryboard(name: "Daily", bundle: nil).instantiateViewController(identifier: "Weight Page") as? WeightPageViewController else {
+                    return
+                }
                 
-                vc.petID = recordPetID
-                show(vc, sender: nil)
+                viewController.petID = recordPetID
+                show(viewController, sender: nil)
                 
             } else if indexPath.row == 3 {
                 
-                guard let vc = UIStoryboard(name: "Daily", bundle: nil).instantiateViewController(identifier: "Behavior Page") as? BehaviorPageViewController else { return }
+                guard let viewController = UIStoryboard(name: "Daily", bundle: nil).instantiateViewController(identifier: "Behavior Page") as? BehaviorPageViewController else {
+                    return
+                }
                 
-                vc.petID = recordPetID
-                show(vc, sender: nil)
+                viewController.petID = recordPetID
+                show(viewController, sender: nil)
                 
             } else if indexPath.row == 4 {
             
-                guard let vc = UIStoryboard(name: "Medical", bundle: nil).instantiateViewController(identifier: "Diagnosis Page") as? DiagnosisViewController else { return }
+                guard let viewController = UIStoryboard(name: "Medical", bundle: nil).instantiateViewController(identifier: "Diagnosis Page") as? DiagnosisViewController else {
+                    return
+                }
                 
-                vc.petID = recordPetID
-                show(vc, sender: nil)
+                viewController.petID = recordPetID
+                show(viewController, sender: nil)
                 
             } else if indexPath.row == 5 {
                 
-                guard let vc = UIStoryboard(name: "Medical", bundle: nil).instantiateViewController(identifier: "Medicine Page") as? MedicineViewController else { return }
+                guard let viewController = UIStoryboard(name: "Medical", bundle: nil).instantiateViewController(identifier: "Medicine Page") as? MedicineViewController else {
+                    return
+                }
                 
-                vc.petID = recordPetID
-                show(vc, sender: nil)
+                viewController.petID = recordPetID
+                show(viewController, sender: nil)
                 
             }
             

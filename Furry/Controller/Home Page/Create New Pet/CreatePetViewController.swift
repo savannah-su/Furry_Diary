@@ -16,51 +16,65 @@ import FirebaseFirestoreSwift
 
 class CreatePetViewController: UIViewController {
     
-    @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var collectionView: UICollectionView! {
+        didSet {
+            collectionView.dataSource = self
+            collectionView.delegate = self
+        }
+    }
+    @IBOutlet weak var tableView: UITableView! {
+        didSet {
+            tableView.dataSource = self
+        }
+    }
+    @IBOutlet weak var createButton: UIButton!
     @IBAction func createButton(_ sender: Any) {
         
         picUpload()
         
-        dismiss(animated: true, completion: nil)
+        petDataHandler?(petInfo)
         
+        dismiss(animated: true, completion: nil)
     }
     
-    var count = 0
+    var backURLCount = 1
     
     let picker = UIImagePickerController()
+    
     //上傳圖片需要先轉jpeg形式，傳到Storage後，拿到URL，才可傳至DB
     var petPhotoURL: [String] = []
-    var petID = UUID().uuidString
+    var petID = ""
     var selectedPhoto: [UIImage] = []
     
     let titleArray = ["名字", "種類", "性別", "品種", "特徵", "生日", "晶片號碼", "是否絕育", "個性喜好", "毛孩飼主"]
     let placeholderArray = ["輸入毛孩名字", "選擇毛孩種類", "選擇毛孩性別", "輸入毛孩品種", "輸入毛孩特徵與毛色", "輸入毛孩生日", "輸入毛孩晶片號碼", "選擇是否絕育"]
-    var petInfo = PetInfo(petID: "", ownersID: [], ownersName: [], ownersImage: [], petImage: [], petName: "", species: "", gender: "", breed: "", color: "", birth: "", chip: "", neuter: false, neuterDate: "", memo: "") {
-        
-        didSet {
-            tableView.reloadData()
-        }
-    }
+    var petInfo: PetInfo!
+    
+    var petDataHandler: ( (PetInfo) -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.dataSource = self
-        
-        collectionView.dataSource = self
-        collectionView.delegate = self
+        if petInfo != nil {
+            createButton.setTitle("更新寵物日誌", for: .normal)
+            return
+        } else {
+            petInfo = PetInfo(petID: UUID().uuidString, ownersID: [], ownersName: [], ownersImage: [], petImage: [], petName: "", species: "", gender: "", breed: "", color: "", birth: "", chip: "", neuter: nil, neuterDate: "", memo: "")
+        }
         
         picker.delegate = self
         
-        tableView.separatorColor = .white
-        //setBirthPicker()
-        
-        tableView.sectionHeaderHeight = 140
+        tableView.separatorColor = .clear
         
         NotificationCenter.default.addObserver(self, selector: #selector(showAlert), name: Notification.Name("ShowAlert"), object: nil)
         
         addCurrentUser()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        tableView.sectionHeaderHeight = 120
     }
     
     func addCurrentUser() {
@@ -98,41 +112,46 @@ class CreatePetViewController: UIViewController {
     
     func picUpload() {
         
-        for index in 0 ..< selectedPhoto.count {
+        if selectedPhoto.count > 0 {
             
-            guard let uploadPhoto = selectedPhoto[index].jpegData(compressionQuality: 0.5) else { return }
-            
-            let storageRef = Storage.storage().reference().child("PetPhoto").child("\(petID)-\(index).jpeg")
-            
-            storageRef.putData(uploadPhoto, metadata: nil) { (_, error) in
+            for index in 0 ..< selectedPhoto.count {
                 
-                if error != nil {
-                    print("To Storage Failed")
-                    return
-                }
+                guard let uploadPhoto = selectedPhoto[index].jpegData(compressionQuality: 0.5) else { return }
                 
-                storageRef.downloadURL { (url, error) in
+                let storageRef = Storage.storage().reference().child("PetPhoto").child("\(petID)-\(index).jpeg")
+                
+                storageRef.putData(uploadPhoto, metadata: nil) { (_, error) in
                     
                     if error != nil {
-                        print("Get URL Failed")
+                        print("To Storage Failed")
                         return
                     }
                     
-                    guard let backPhotoURL = url else { return }
-                    
-                    self.petPhotoURL.append("\(backPhotoURL)")
-                    
-                    if self.count == self.selectedPhoto.count - 1 {
+                    storageRef.downloadURL { (url, error) in
                         
-                        self.petInfo.petImage = self.petPhotoURL
-                        self.toDataBase()
+                        if error != nil {
+                            print("Get URL Failed")
+                            return
+                        }
                         
-                    } else {
+                        guard let backPhotoURL = url else { return }
                         
-                          self.count += 1
+                        self.petPhotoURL.append("\(backPhotoURL)")
+                        
+                        if self.backURLCount == self.selectedPhoto.count {
+                            
+                            self.petInfo.petImage = self.petPhotoURL
+                            self.toDataBase()
+                            
+                        } else {
+                            self.backURLCount += 1
+                        }
                     }
                 }
             }
+            
+        } else {
+            toDataBase()
         }
     }
     
@@ -141,14 +160,24 @@ class CreatePetViewController: UIViewController {
         guard UserDefaults.standard.value(forKey: "userID") != nil else { return }
         guard UserDefaults.standard.value(forKey: "userName") != nil else { return }
         guard UserDefaults.standard.value(forKey: "userPhoto") != nil else { return }
-
-        self.petInfo.petID = petID
+        
+        petID = self.petInfo.petID
+        
+//        Firestore.firestore().collection("pets").document(petID).setData(petInfo.toDict, merge: true)
+//        Firestore.firestore().collection("pets").document(petID).removeObserver(<#T##observer: NSObject##NSObject#>, forKeyPath: <#T##String#>)
         
         Firestore.firestore().collection("pets").document(petID).setData(petInfo.toDict, completion: { (error) in
             
             if error == nil {
+                
+                UploadManager.shared.uploadSuccess(text: "上傳成功！")
+                
                 print("DB added successfully")
+                
             } else {
+                
+                UploadManager.shared.uploadFail(text: "上傳失敗！")
+                
                 print("DB added failed")
             }
         })
@@ -174,6 +203,7 @@ extension CreatePetViewController: UITableViewDataSource {
             
         case 0:
             cell.contentField.placeholder = placeholderArray[0]
+            cell.contentField.text = petInfo.petName
             cell.keyboardType = .normal
             cell.touchHandler = { [weak self] text in
                 
@@ -183,6 +213,7 @@ extension CreatePetViewController: UITableViewDataSource {
             
         case 1:
             cell.contentField.placeholder = placeholderArray[1]
+            cell.contentField.text = petInfo.species
             cell.keyboardType = .picker(["汪汪", "喵嗚", "其他"])
             cell.touchHandler = { [weak self] text in
                 
@@ -190,9 +221,9 @@ extension CreatePetViewController: UITableViewDataSource {
             }
             return cell
             
-            
         case 2:
             cell.contentField.placeholder = placeholderArray[2]
+            cell.contentField.text = petInfo.gender
             cell.keyboardType = .picker(["男生", "女生"])
             cell.touchHandler = { [weak self] text in
                 
@@ -202,6 +233,7 @@ extension CreatePetViewController: UITableViewDataSource {
             
         case 3:
             cell.contentField.placeholder = placeholderArray[3]
+            cell.contentField.text = petInfo.breed
             cell.keyboardType = .normal
             cell.touchHandler = { [weak self] text in
                 
@@ -211,6 +243,7 @@ extension CreatePetViewController: UITableViewDataSource {
             
         case 4:
             cell.contentField.placeholder = placeholderArray[4]
+            cell.contentField.text = petInfo.color
             cell.keyboardType = .normal
             cell.touchHandler = { [weak self] text in
                 
@@ -220,17 +253,17 @@ extension CreatePetViewController: UITableViewDataSource {
             
         case 5:
             cell.contentField.placeholder = placeholderArray[5]
+            cell.contentField.text = petInfo.birth
             cell.keyboardType = .date(Date(), "yyyy-MM-dd")
             cell.touchHandler = { [weak self] text in
                 
                 self?.petInfo.birth = text
             }
-            
-            cell.contentField.text = petInfo.birth
             return cell
             
         case 6:
             cell.contentField.placeholder = placeholderArray[6]
+            cell.contentField.text = petInfo.chip
             cell.keyboardType = .normal
             cell.touchHandler = { [weak self] text in
                 
@@ -240,6 +273,12 @@ extension CreatePetViewController: UITableViewDataSource {
             
         case 7:
             cell.contentField.placeholder = placeholderArray[7]
+            
+            if petInfo.neuter != nil {
+                cell.contentField.text = petInfo.neuter! ? "已經結紮嘍！" : "還沒結紮唷！"
+            } else {
+                cell.contentField.text = ""
+            }
             cell.keyboardType = .picker(["已絕育", "尚未絕育"])
             cell.touchHandler = { [weak self] text in
                 
@@ -258,7 +297,12 @@ extension CreatePetViewController: UITableViewDataSource {
             }
             
             cell.titleLabel.text = titleArray[indexPath.row]
-            cell.contentTextView.layer.borderColor = UIColor(red: 199/255.0, green: 199/255.0, blue: 199/255.0, alpha: 1).cgColor
+            
+            if petInfo.memo != "" {
+                cell.contentTextView.text = petInfo.memo
+                cell.contentTextView.textColor = .black
+            }
+            
             cell.touchHandler = { [weak self] text in
                 
                 self?.petInfo.memo = text
@@ -273,38 +317,38 @@ extension CreatePetViewController: UITableViewDataSource {
             cell.titleLabel.text = titleArray[indexPath.row]
             
             cell.searchButton.isHidden = false
-            
             cell.searchButton.addTarget(self, action: #selector(searchOwner), for: .touchUpInside)
             
             cell.data = petInfo
             
             cell.collectionView.reloadData()
             
-            if cell.data.ownersImage.count > 1 {
-                cell.searchButton.isHidden = true
-            }
-            
             return cell
-            
         }
     }
     
     @objc func searchOwner() {
         
-        guard let vc = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(identifier: "Search Owner Page") as? SearchOwnerViewController else { return }
-        
-        vc.selectHandler = { data in
-            
-            self.petInfo.ownersID.append(contentsOf: data.map{ $0.id })
-            self.petInfo.ownersName.append(contentsOf: data.map{ $0.name })
-            self.petInfo.ownersImage.append(contentsOf: data.map{ $0.image })
-            
-            print(self.petInfo.ownersID)
-            print(self.petInfo.ownersName)
-            print(self.petInfo.ownersImage)
+        guard let viewController = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(identifier: "Search Owner Page") as? SearchOwnerViewController else {
+            return
         }
         
-        show(vc, sender: self)
+        petInfo.ownersID.removeAll()
+        petInfo.ownersName.removeAll()
+        petInfo.ownersImage.removeAll()
+        
+        addCurrentUser()
+        
+        viewController.selectHandler = { data in
+            
+            self.petInfo.ownersID.append(contentsOf: data.map { $0.id })
+            self.petInfo.ownersName.append(contentsOf: data.map { $0.name })
+            self.petInfo.ownersImage.append(contentsOf: data.map { $0.image })
+            
+            self.tableView.reloadData()
+        }
+        
+        show(viewController, sender: self)
     }
 }
 
@@ -312,13 +356,14 @@ extension CreatePetViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        if selectedPhoto.count == 0 {
-            
-            return 2
-            
+        if petInfo.petImage.count > 0 {
+            return petInfo.petImage.count + 1
         } else {
-            
-            return selectedPhoto.count + 1
+            if selectedPhoto.count == 0 {
+                return 2
+            } else {
+                return selectedPhoto.count + 1
+            }
         }
     }
     
@@ -326,17 +371,40 @@ extension CreatePetViewController: UICollectionViewDataSource {
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Image Cell", for: indexPath) as? UploadIamgeCell else { return UICollectionViewCell() }
         
-        cell.layer.borderColor = UIColor(red: 199/255.0, green: 199/255.0, blue: 199/255.0, alpha: 1).cgColor
-        
-        
-        
-        if indexPath.row >= selectedPhoto.count {
-            cell.imageButton.isHidden = false
-            cell.uplodaImage.isHidden = true
+        if petInfo.petImage.count > 0 {
+            
+            if indexPath.row >= petInfo.petImage.count {
+                cell.removeButton.isHidden = true
+                cell.imageButton.isHidden = false
+                cell.uplodaImage.isHidden = true
+                
+            } else {
+                
+                cell.imageButton.isHidden = true
+                cell.uplodaImage.isHidden = false
+                
+                let url = URL(string: petInfo.petImage[indexPath.item])
+                cell.uplodaImage.kf.setImage(with: url)
+                
+                cell.removeButton.isHidden = false
+                cell.removeHandler = { [weak self] in
+                    guard let strongSelf = self else { return }
+                    strongSelf.petInfo.petImage.remove(at: indexPath.item)
+                    collectionView.reloadData()
+                }
+            }
+            
         } else {
-            cell.imageButton.isHidden = true
-            cell.uplodaImage.isHidden = false
-            cell.uplodaImage.image = selectedPhoto[indexPath.row]
+            
+            if indexPath.row >= selectedPhoto.count {
+                cell.imageButton.isHidden = false
+                cell.uplodaImage.isHidden = true
+                
+            } else {
+                cell.imageButton.isHidden = true
+                cell.uplodaImage.isHidden = false
+                cell.uplodaImage.image = selectedPhoto[indexPath.item]
+            }
         }
         
         return cell
@@ -351,7 +419,7 @@ extension CreatePetViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 100, height: 100)
+        return CGSize(width: 100, height: 120)
     }
     
 }
@@ -384,16 +452,16 @@ extension CreatePetViewController: UIImagePickerControllerDelegate, UINavigation
         self.getPhotoWay(type: 2)
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         var selectedImageFromPicker: UIImage?
         if let pickedImage = info[.originalImage] as? UIImage {
             selectedImageFromPicker = pickedImage
             selectedPhoto.append(selectedImageFromPicker!)
         }
-        // 可以自動產生一組獨一無二的 ID 號碼，方便等一下上傳圖片的命名
+        // 產生一組獨一無二的ID ，方便等一下上傳圖片的命名
         let uniqueString = NSUUID().uuidString
         
-        // 當判斷有 selectedImage 時，我們會在 if 判斷式裡將圖片上傳
+        // 當判斷有selectedImage時，在 if 判斷式裡將圖片上傳
         if let selectedImage = selectedImageFromPicker {
             print("\(uniqueString), \(selectedImage)")
         }
