@@ -9,7 +9,7 @@
 import UIKit
 
 class TextViewCell: UITableViewCell {
-
+    
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var contentTextView: UITextView! {
         didSet {
@@ -22,15 +22,10 @@ class TextViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-
+        
         contentTextView.textColor = UIColor(red: 199/255.0, green: 199/255.0, blue: 199/255.0, alpha: 1)
         contentTextView.layer.borderColor = UIColor(red: 199/255.0, green: 199/255.0, blue: 199/255.0, alpha: 1).cgColor
     }
-
 }
 
 extension TextViewCell: UITextViewDelegate {
