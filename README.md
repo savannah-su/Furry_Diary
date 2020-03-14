@@ -17,12 +17,12 @@ Furry Diary是款協助你照料毛小孩的app，透過將各項紀錄上傳，
 + 拖曳毛孩資訊列表有```縮放效果```
 + 點選編輯可更新毛孩資料
 
- </a><img src="FurryPNG/Home Page.png" width="300"></a><img src="FurryPNG/Pet Detail Page.png" width="260"></a><img src="FurryPNG/Edit Page.png" width="260">
+ </a><img src="FurryPNG/Home Page.png" width="300"></a><img src="FurryPNG/Pet Detail Page.png" width="300"></a><img src="FurryPNG/Edit Page.png" width="300">
 
 ### 撰寫紀錄
 + 先點選要替哪隻毛孩紀錄已進入紀錄類別頁面
     
-</a><img src="FurryPNG/Choose Page.png" width="300"></a><img src="FurryPNG/Category Page.png" width="260">
+</a><img src="FurryPNG/Choose Page.png" width="300"></a><img src="FurryPNG/Category Page.png" width="300">
 
 ### 輸入頁面
 + 衛生清潔：包含毛孩自身清潔與生活起居，可開啟提醒功能
