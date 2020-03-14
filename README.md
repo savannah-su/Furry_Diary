@@ -5,33 +5,53 @@ Furry Diary是款協助你照料毛小孩的app，透過將各項紀錄上傳，
 還可以選擇朋友或家人成為共同飼主，雙方同步更新毛孩紀錄，一同照顧你們的毛小孩。
 
 ## Features & ScreenShots
-### 選擇運動項目
-+ 有四個身體部位可以選擇：全身運動、腹部運動、手臂運動、腿部運動
-+ 在選擇運動項目時隨著手勢會有 ```全螢幕``` 的效果
+### 建立毛孩日誌
++ 輸入毛孩詳細資訊
++ 在選擇共同飼主欄位的放大鏡時可以 ```搜尋其他使用者``` 
 
- <img src="https://i.imgur.com/NOiiiwo.gif" width="300"></a><img src="https://i.imgur.com/ykmpvrb.gif" width="300"></a>
+ <img src="FurryPNG/Create Pet Page.png" width="300"></a><img src="FurryPNG/Search Owner Page.png" width="300"></a>
 
-### 運動畫面
-+ 運動畫面，秒數搭配動畫更清晰
-+ 對於本次運動的強度進行個人評分
+### 我的毛孩
++ 顯示所有你有上傳的毛孩
++ 點選圖片可以看到毛孩詳細資料
++ 拖曳毛孩資訊列表有```縮放效果```
++ 點選編輯可更新毛孩資料
 
- <img src="https://i.imgur.com/T4R2tsy.gif" width="300"><img src="https://i.imgur.com/iJL2Fhk.png" width="260">
+ </a><img src="FurryPNG/Home Page.png" width="300"></a><img src="FurryPNG/Pet Detail Page.png" width="260"></a><img src="FurryPNG/Edit Page.png" width="260">
 
-### 紀錄運動頁面
-+ 空值畫面建立與流程引導
-+ 紀錄運動軌跡
+### 撰寫紀錄
++ 先點選要替哪隻毛孩紀錄已進入紀錄類別頁面
     
-</a><img src="https://i.imgur.com/6kILhkX.gif" width="300"></a><img src="https://i.imgur.com/80RMDQQ.png" width="260">
+</a><img src="FurryPNG/Choose Page.png" width="300"></a><img src="FurryPNG/Category Page.png" width="260">
 
-### 推播
-+ 設定每日推播運動的時間，並處理拒絕推播後的重啟流程。
+### 輸入頁面
++ 衛生清潔：包含毛孩自身清潔與生活起居，可開啟提醒功能
++ 預防計畫：包含疫苗及驅蟲紀錄，可開啟提醒功能
++ 體重紀錄：紀錄毛孩體重變化，可即時更新曲線圖以利追蹤
++ 行為症狀：紀錄毛孩的特殊反應與狀況，可於歷史頁面觀看及追蹤
++ 醫療紀錄：包含毛孩就診、手術及例行檢查，可開啟提醒功能
++ 用藥紀錄：包含毛孩內、外用藥紀錄，可開啟提醒功能
 
-</a><img src="https://i.imgur.com/VTp5boP.png" width="300"></a><img src="https://i.imgur.com/7gaxkNs.png" width="300">
+</a><img src="FurryPNG/Clean Page.png" width="300"></a><img src="FurryPNG/Prevent Page.png" width="300"></a><img src="FurryPNG/Weight Page.png" width="300"></a><img src="FurryPNG/Behavior Page.png" width="300"></a><img src="FurryPNG/Diagnosis Page.png" width="300"></a><img src="FurryPNG/Medicine Page.png" width="300">
 
-### Health Kit
-+ 連接 Health Kit ，統整所有運動數據。
+### 推播功能
++ 於紀錄時開啟提醒功能，可於指定日期提醒你毛孩的重要事項
 
-</a><img src="https://i.imgur.com/5Tg7Odg.png" width="300"></a><img src="https://i.imgur.com/lSrysy1.png" width="300">
+</a><img src="FurryPNG/Clean Page.png" width="300"></a><img src="FurryPNG/Reminder.png" width="300">
+
+### 歷史紀錄
++ 先點選要觀看哪隻毛孩的歷史紀錄
++ 使用月曆方式呈現，有紀錄事件的日期下方會有黃色點點
++ 點擊之後將顯示所有紀錄內容
+    
+</a><img src="FurryPNG/Calendar Page.png" width="300">
+
+### 附近獸醫院
++ 可自動定位使用者當前位置，並顯示附近獸醫院
++ 點選大頭針顯示獸醫院資料
++ 點選獸醫院視窗可進行```導航```
+
+</a><img src="FurryPNG/Vet PAge.png" width="300"></a><img src="FurryPNG/Nevigation Page.png" width="300">
 
 
 ## Libraries
