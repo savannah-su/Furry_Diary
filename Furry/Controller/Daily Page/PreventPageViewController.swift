@@ -14,7 +14,6 @@ class PreventPageViewController: UIViewController {
     @IBOutlet weak var topView: UIView!
     
     @IBOutlet weak var bottomView: UIView!
-    @IBOutlet weak var buttomViewConstraint: NSLayoutConstraint!
     @IBAction func bottomViewButton(_ sender: Any) {
         
     }
@@ -175,13 +174,12 @@ extension PreventPageViewController: UITableViewDataSource {
             cell.contentText.text = medicineName
             cell.textFieldType = .normal
             cell.contentUpdateHandler = { [weak self] text in
-                
-                print(IQKeyboardManager.shared.keyboardShowing)
-                
+                    
                 self?.medicineName = text
                 
                 self?.checkUpdateStatus()
             }
+            
             return cell
             
         case 1:
@@ -198,6 +196,7 @@ extension PreventPageViewController: UITableViewDataSource {
                 self?.checkUpdateStatus()
                 
             }
+            
             return cell
             
         default:
@@ -287,29 +286,5 @@ extension PreventPageViewController: UICollectionViewDelegate {
         bottomViewLabel.isHidden = true
         tableView.isHidden = false
         
-    }
-    
-    func upButtomView() {
-        
-        let move = UIViewPropertyAnimator(duration: 0.2, curve: .easeInOut) {
-            
-            self.buttomViewConstraint.isActive = false
-            self.buttomViewConstraint = self.bottomView.topAnchor.constraint(equalTo: self.topView.bottomAnchor, constant: 200)
-            self.buttomViewConstraint.isActive = true
-            self.view.layoutIfNeeded()
-        }
-        move.startAnimation()
-    }
-    
-    func downButtomView() {
-        
-        let move = UIViewPropertyAnimator(duration: 1, curve: .easeInOut) {
-            
-            self.buttomViewConstraint.isActive = false
-            self.buttomViewConstraint = self.bottomView.topAnchor.constraint(equalTo: self.topView.bottomAnchor, constant: 304)
-            self.buttomViewConstraint.isActive = true
-            self.view.layoutIfNeeded()
-        }
-        move.startAnimation()
     }
 }

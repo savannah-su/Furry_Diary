@@ -13,7 +13,6 @@ class CleanPageViewController: UIViewController {
     @IBOutlet weak var topView: UIView!
     
     @IBOutlet weak var bottomView: UIView!
-    @IBOutlet weak var bottomViewConstraint: NSLayoutConstraint!
     @IBOutlet weak var bottomViewButton: VerticalAlignedButton!
     @IBAction func bottomViewButton(_ sender: Any) {}
     @IBOutlet weak var bottomViewLabel: UILabel!
@@ -138,7 +137,7 @@ class CleanPageViewController: UIViewController {
         }
         
         if isSwitchOn {
-            LocalNotiManager.shared.setupNoti(notiDate: notiDate.timeIntervalSinceNow, type: "毛孩的\(self.subItemType[0])清潔通知", meaasge: notiMemo == "" ? "記得協助毛孩用藥唷！" : notiMemo)
+            LocalNotiManager.shared.setupNoti(notiDate: 5, type: "毛孩的\(self.subItemType[0])清潔通知", meaasge: notiMemo == "" ? "記得協助毛孩用藥唷！" : notiMemo)
         }
     }
     
@@ -267,35 +266,6 @@ extension CleanPageViewController: UICollectionViewDelegate {
         bottomViewLabel.isHidden = true
         
         self.checkUpdateStatus()
-    }
-    
-    func upButtomView() {
-        
-        let move = UIViewPropertyAnimator(duration: 0.2, curve: .easeInOut) {
-            
-            self.bottomViewConstraint.isActive = false
-            self.bottomViewConstraint = self.bottomView.topAnchor.constraint(equalTo: self.topView.bottomAnchor, constant: 250)
-            self.bottomViewConstraint.isActive = true
-            self.view.layoutIfNeeded()
-        }
-        move.startAnimation()
-        
-        bottomViewButton.isHidden = false
-    }
-    
-    func downButtomView() {
-        
-        let move = UIViewPropertyAnimator(duration: 1, curve: .easeInOut) {
-            
-            self.bottomViewConstraint.isActive = false
-            self.bottomViewConstraint = self.bottomView.topAnchor.constraint(equalTo: self.topView.bottomAnchor, constant: 350)
-            self.bottomViewConstraint.isActive = true
-            self.view.layoutIfNeeded()
-        }
-        move.startAnimation()
-        
-        bottomViewButton.isHidden = true
-        
     }
 }
 

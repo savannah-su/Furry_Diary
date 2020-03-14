@@ -25,6 +25,8 @@ class EnterInfoCell: UITableViewCell {
     
     var contentUpdateHandler: ( (String) -> Void )?
     
+    var tapOnTextFieldHandler: ( () -> Void )?
+    
     var pickerData: [String] = []
     
     lazy var datePicker: UIDatePicker = {
@@ -96,6 +98,12 @@ extension EnterInfoCell: UITextFieldDelegate {
         }
         
         contentUpdateHandler?(text)
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        
+        tapOnTextFieldHandler?()
+        
     }
 }
     
