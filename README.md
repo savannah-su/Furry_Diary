@@ -7,17 +7,20 @@ Furry Diary是款協助你照料毛小孩的app，透過將各項紀錄上傳，
 ## Features & ScreenShots
 ### 建立毛孩日誌
 + 輸入毛孩詳細資訊
++ 可上傳```多張```毛孩漂亮照片
 + 在選擇共同飼主欄位的放大鏡時可以 ```搜尋其他使用者``` 
 
  <img src="FurryPNG/Create Pet Page.png" width="300"><img src="FurryPNG/Search Owner Page.png" width="300"></a>
 
 ### 我的毛孩
 + 顯示所有你有上傳的毛孩
++ 可```滑動```觀賞毛孩照片
 + 點選圖片可以看到毛孩詳細資料
 + 拖曳毛孩資訊列表有```縮放效果```
 + 點選編輯可更新毛孩資料
 
- </a><img src="FurryPNG/Home Page.png" width="300"></a><img src="FurryPNG/Pet Detail Page.png" width="300"></a><img src="FurryPNG/Edit Page.png" width="300">
+ </a><img src="FurryPNG/Home Page.png" width="300"><img src="https://imgur.com/MMO0fAW" width="300">
+ </a><img src="FurryPNG/Pet Detail Page.png" width="300"></a><img src="FurryPNG/Edit Page.png" width="300">   
 
 ### 撰寫紀錄
 + 先點選要替哪隻毛孩紀錄已進入紀錄類別頁面
