@@ -1,4 +1,4 @@
-# Furry Diary  <img src="Furry/Assets.xcassets/AppIcon.appiconset/Icon-40.png" height="40" cornerRadius="10"></a><a href="https://apps.apple.com/tw/app/furry-diary/id1500735959"><img src="https://i.imgur.com/Pc1KdHw.png" height="40"></a>
+# Furry Diary  <img src="Furry/Assets.xcassets/AppIcon.appiconset/Icon-40.png" height="40"></a><a href="https://apps.apple.com/tw/app/furry-diary/id1500735959"><img src="https://i.imgur.com/Pc1KdHw.png" height="40"></a>
 
 Furry Diary是款協助你照料毛小孩的app，透過將各項紀錄上傳，細心維持毛孩良好的生活起居與身體健康狀態。
 開啟提醒功能，不會漏掉任何需要處理的毛孩大小事。
