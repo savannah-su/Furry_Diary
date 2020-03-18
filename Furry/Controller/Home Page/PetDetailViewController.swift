@@ -61,18 +61,17 @@ class PetDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.contentInset = UIEdgeInsets(top: 200, left: 0, bottom: 0, right: 0)
 
         setupPageControl()
     }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        
-        tableView.contentInset = UIEdgeInsets(top: 200, left: 0, bottom: 0, right: 0)
     }
     
     func setupPageControl() {
-        
         pageControl.numberOfPages = petData?.petImage.count ?? 0
         pageControl.currentPageIndicatorTintColor = .white
     }
