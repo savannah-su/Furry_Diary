@@ -28,6 +28,7 @@ class HomePageViewController: UIViewController {
         present(viewController, animated: true, completion: nil)
     }
     
+    @IBOutlet weak var alertView: UIView!
     @IBOutlet weak var tableView: UITableView! {
         didSet {
             self.tableView.dataSource = self
@@ -62,12 +63,12 @@ class HomePageViewController: UIViewController {
         //製造Crash範例
         //Fabric.sharedSDK().debug = true
         
+        getPetData()
+        
         tableView.separatorColor = .clear
         
         NotificationCenter.default.addObserver(self, selector: #selector(getPetData), name: Notification.Name("Create New Pet"), object: nil)
-        
-        getPetData()
-        
+
         addRefreshControl()
     }
     
@@ -117,7 +118,7 @@ class HomePageViewController: UIViewController {
                 
             case .success(let downloadPetData):
                 self.petData = downloadPetData
-                
+                self.alertView.isHidden = self.petData.count != 0
             case . failure(let error):
                 print(error)
             }

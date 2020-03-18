@@ -184,7 +184,6 @@ class LoginViewController: UIViewController {
         
         var userName = appleLogin ? userEmail : "隱藏信箱資訊的Apple使用者"
         var userPhoto = ""
-        //        var userPhotoString = ""
         
         if !appleLogin {
             
@@ -192,11 +191,16 @@ class LoginViewController: UIViewController {
                 let photo = Auth.auth().currentUser?.photoURL?.absoluteString else {
                     return
             }
+            
+            let size = "?width=400&height=400"
+            
+            let picture = "\(photo + size)"
+            
             userName = name
             
             group.enter()
             
-            photoToStorage(photo: photo, userID: userID) { (photoString) in
+            photoToStorage(photo: picture, userID: userID) { (photoString) in
                 userPhoto = photoString
                 group.leave()
             }

@@ -46,7 +46,7 @@ class PetCardCell: UITableViewCell {
     
     func setupPageControl() {
         
-        pageControl.numberOfPages = petImage.count
+        pageControl.numberOfPages = petImage.count != 0 ? petImage.count : 0
         pageControl.currentPageIndicatorTintColor = .white
         
     }

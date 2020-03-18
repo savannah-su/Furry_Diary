@@ -47,10 +47,27 @@ class DailyPageViewController: UIViewController {
         
         super.viewWillAppear(animated)
         
-        navigationTitle.text = "要幫哪個毛孩紀錄呢？"
-        collectionView.isHidden = true
-        chooseView.isHidden = false
-        choosePetCollectionView.reloadData()
+        petNumberStatus()
+        
+    }
+    
+    func petNumberStatus() {
+        
+        if UploadManager.shared.simplePetInfo.count > 1 {
+            
+            navigationTitle.text = "要幫哪個毛孩紀錄呢？"
+            collectionView.isHidden = true
+            chooseView.isHidden = false
+            choosePetCollectionView.reloadData()
+            
+        } else {
+            
+            recordPetID = UploadManager.shared.simplePetInfo.count == 1 ? UploadManager.shared.simplePetInfo[0].petID : ""
+            
+            navigationTitle.text = "歷史紀錄"
+            collectionView.isHidden = false
+            chooseView.isHidden = true
+        }
     }
 }
 

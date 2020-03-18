@@ -108,9 +108,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             print("Google Login Sucessfully!")
             
             self.addToDatabase()
-            
-            self.toNextpage()
-            
         }
     }
     
@@ -137,7 +134,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         
         var userPhotoString = ""
         
-        guard let googlelPhoto = URL(string: userPhoto) else {
+        let size = "?width=400&height=400"
+        
+        let userPicture = "\(userPhoto + size)"
+        
+        guard let googlelPhoto = URL(string: userPicture) else {
             return
         }
         

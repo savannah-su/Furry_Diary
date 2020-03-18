@@ -61,7 +61,8 @@ class WeightPageViewController: UIViewController {
     
         super.viewDidLoad()
         
-        toGetRecord()
+        petID == "" ? setupChart() : toGetRecord()
+        
         setupDatePicker()
         
         saveButton.isEnabled = false
@@ -216,7 +217,7 @@ extension WeightPageViewController: UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         
-        if weightTextField.text != "" {
+        if weightTextField.text != "" || petID != "" {
             saveButton.isEnabled = true
             saveButton.setTitleColor(UIColor.G4, for: .normal)
         }

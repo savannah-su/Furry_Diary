@@ -124,6 +124,8 @@ class HistoryPageController: UIViewController {
         
         super.viewWillAppear(animated)
         
+        alertLabel.text = UploadManager.shared.simplePetInfo.count == 0 ? "沒有歷史紀錄唷！" : "點選毛孩後，才能觀看紀錄唷！"
+        
         selectedStatus = Array(repeating: false, count: UploadManager.shared.simplePetInfo.count)
         
         currentDateData.removeAll()
@@ -420,8 +422,8 @@ extension HistoryPageController: UICollectionViewDataSource {
         
         cellA.petName.text = UploadManager.shared.simplePetInfo[indexPath.item].petName
         
-        let url = URL(string: UploadManager.shared.simplePetInfo[indexPath.item].petPhoto.randomElement()!)
-        cellA.petPhoto.kf.setImage(with: url)
+        let urlString = UploadManager.shared.simplePetInfo[indexPath.item].petPhoto.randomElement()
+        cellA.petPhoto.loadImage(urlString, placeHolder: UIImage(named: "FurryLogo_white"))
         cellA.petPhoto.contentMode = .scaleToFill
         
         let index = indexPath.item

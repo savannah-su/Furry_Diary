@@ -116,10 +116,10 @@ class MedicineViewController: UIViewController {
     func checkUpdateStatus() {
         
         if isSwitchOn {
-            saveButton.isEnabled = notiDate > doneDate && notiDate != dateFormatter.string(from: Date())
+            saveButton.isEnabled = notiDate > doneDate && notiDate != dateFormatter.string(from: Date()) && petID != ""
             saveButton.setTitleColor(UIColor.G4, for: .normal)
         } else {
-            saveButton.isEnabled = medicine != ""
+            saveButton.isEnabled = medicine != "" && petID != ""
             saveButton.setTitleColor(UIColor.G4, for: .normal)
         }
         saveButton.setTitleColor(UIColor.lightGray, for: .disabled)

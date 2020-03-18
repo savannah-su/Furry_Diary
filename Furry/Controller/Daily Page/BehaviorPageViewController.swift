@@ -188,12 +188,12 @@ extension BehaviorPageViewController: UICollectionViewDelegate {
         bottomViewLabel.isHidden = true
         showEnterBox()
         
-        saveButton.isEnabled = true
-        saveButton.setTitleColor(UIColor.G4, for: .normal)
-        
-        if selectDisease.count == 0 {
+        if selectDisease.count == 0 || petID == "" {
             saveButton.isEnabled = false
             saveButton.setTitleColor(UIColor.lightGray, for: .disabled)
+        } else {
+            saveButton.isEnabled = true
+            saveButton.setTitleColor(UIColor.G4, for: .normal)
         }
     }
 }
@@ -253,7 +253,7 @@ extension BehaviorPageViewController: UITextViewDelegate {
             memoTextView.textColor = UIColor(red: 211/255.0, green: 211/255.0, blue: 212/255.0, alpha: 1)
         }
         
-        if selectDisease.count != 0 {
+        if selectDisease.count != 0 && petID != "" {
             saveButton.isEnabled = true
             saveButton.setTitleColor(UIColor.G4, for: .normal)
         }

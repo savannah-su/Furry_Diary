@@ -59,7 +59,7 @@ class CreatePetViewController: UIViewController {
             createButton.setTitle("更新寵物日誌", for: .normal)
             return
         } else {
-            petInfo = PetInfo(petID: UUID().uuidString, ownersID: [], ownersName: [], ownersImage: [], petImage: [], petName: "", species: "", gender: "", breed: "", color: "", birth: "", chip: "", neuter: nil, neuterDate: "", memo: "")
+            petInfo = PetInfo(petID: UUID().uuidString, ownersID: [], ownersName: [], ownersImage: [], petImage: [""], petName: "", species: "", gender: "", breed: "", color: "", birth: "", chip: "", neuter: nil, neuterDate: "", memo: "")
         }
         
         picker.delegate = self
@@ -171,6 +171,8 @@ class CreatePetViewController: UIViewController {
             if error == nil {
                 
                 UploadManager.shared.uploadSuccess(text: "上傳成功！")
+                
+                NotificationCenter.default.post(name: Notification.Name("Create New Pet"), object: nil)
                 
                 print("DB added successfully")
                 
@@ -314,13 +316,10 @@ extension CreatePetViewController: UITableViewDataSource {
             
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "Co Owner Cell", for: indexPath) as? CoOwnerCell else { return UITableViewCell() }
             
+            cell.data = petInfo
             cell.titleLabel.text = titleArray[indexPath.row]
-            
             cell.searchButton.isHidden = false
             cell.searchButton.addTarget(self, action: #selector(searchOwner), for: .touchUpInside)
-            
-            cell.data = petInfo
-            
             cell.collectionView.reloadData()
             
             return cell
@@ -371,9 +370,10 @@ extension CreatePetViewController: UICollectionViewDataSource {
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Image Cell", for: indexPath) as? UploadIamgeCell else { return UICollectionViewCell() }
         
-        if petInfo.petImage.count > 0 {
+        if petInfo.petImage.count > 0 && petInfo.petImage[0] != "" {
             
             if indexPath.row >= petInfo.petImage.count {
+                
                 cell.removeButton.isHidden = true
                 cell.imageButton.isHidden = false
                 cell.uplodaImage.isHidden = true
@@ -397,13 +397,16 @@ extension CreatePetViewController: UICollectionViewDataSource {
         } else {
             
             if indexPath.row >= selectedPhoto.count {
+                
                 cell.imageButton.isHidden = false
                 cell.uplodaImage.isHidden = true
                 
             } else {
+                
                 cell.imageButton.isHidden = true
                 cell.uplodaImage.isHidden = false
                 cell.uplodaImage.image = selectedPhoto[indexPath.item]
+                
             }
         }
         
