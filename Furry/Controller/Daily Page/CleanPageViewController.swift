@@ -137,7 +137,7 @@ class CleanPageViewController: UIViewController {
         }
         
         if isSwitchOn {
-            LocalNotiManager.shared.setupNoti(notiDate: 5, type: "毛孩的\(self.subItemType[0])清潔通知", meaasge: notiMemo == "" ? "記得協助毛孩用藥唷！" : notiMemo)
+            LocalNotiManager.shared.setupNoti(notiDate: notiDate.timeIntervalSinceNow, type: "毛孩的\(self.subItemType[0])清潔通知", meaasge: notiMemo == "" ? "記得協助毛孩用藥唷！" : notiMemo)
         }
     }
     
@@ -160,6 +160,7 @@ extension CleanPageViewController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 2
     }
+    
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
