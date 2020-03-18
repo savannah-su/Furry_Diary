@@ -97,7 +97,7 @@
 		242357B523FD3F9F004C8150 /* HistoryPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryPageController.swift; sourceTree = "<group>"; };
 		242357B823FD6BD2004C8150 /* RecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCell.swift; sourceTree = "<group>"; };
 		242357BA23FD74F1004C8150 /* SubitemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubitemCell.swift; sourceTree = "<group>"; };
-		242F8DFD23D6DFF700F49853 /* Furry.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Furry.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		242F8DFD23D6DFF700F49853 /* Furry Diary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Furry Diary.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		242F8E0023D6DFF700F49853 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		242F8E0723D6DFF700F49853 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		242F8E0923D6DFFB00F49853 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -282,7 +282,7 @@
 		242F8DFE23D6DFF700F49853 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				242F8DFD23D6DFF700F49853 /* Furry.app */,
+				242F8DFD23D6DFF700F49853 /* Furry Diary.app */,
 				242F8E1323D6DFFC00F49853 /* FurryTests.xctest */,
 				242F8E1E23D6DFFC00F49853 /* FurryUITests.xctest */,
 			);
@@ -459,7 +459,7 @@
 				2496DB7A23E2F85100991F79 /* FacebookLogin */,
 			);
 			productName = "Personal Project";
-			productReference = 242F8DFD23D6DFF700F49853 /* Furry.app */;
+			productReference = 242F8DFD23D6DFF700F49853 /* Furry Diary.app */;
 			productType = "com.apple.product-type.application";
 		};
 		242F8E1223D6DFFC00F49853 /* FurryTests */ = {
@@ -968,9 +968,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.0;
+				MARKETING_VERSION = 1.3.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "savannahsu.com.Personal-Project";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Furry Diary";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -993,9 +993,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.0;
+				MARKETING_VERSION = 1.3.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "savannahsu.com.Personal-Project";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Furry Diary";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

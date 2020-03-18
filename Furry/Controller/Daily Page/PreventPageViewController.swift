@@ -114,6 +114,9 @@ class PreventPageViewController: UIViewController {
             switch result {
             case .success(let success):
                 UploadManager.shared.uploadSuccess(text: "上傳成功！")
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                    self.navigationController?.popViewController(animated: true)
+                }
                 print(success)
             case .failure(let error):
                 UploadManager.shared.uploadFail(text: "上傳失敗！")
@@ -133,11 +136,11 @@ class PreventPageViewController: UIViewController {
     func checkUpdateStatus() {
         
         if isSwitchOn {
-            saveButton.isEnabled = notiDate > doneDate && notiDate != dateFormatter.string(from: Date())
+            saveButton.isEnabled = notiDate > doneDate && notiDate != dateFormatter.string(from: Date()) && petID != ""
             saveButton.setTitleColor(UIColor.G4, for: .normal)
             
         } else {
-            saveButton.isEnabled = medicineName != ""
+            saveButton.isEnabled = medicineName != "" || petID != ""
             saveButton.setTitleColor(UIColor.G4, for: .normal)
         }
         saveButton.setTitleColor(UIColor.lightGray, for: .disabled)

@@ -29,6 +29,26 @@ class CoOwnerCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
 
+//    func fetchImage() {
+//        var storeData: [String] = []
+//        
+//        data.ownersID.forEach { uid in
+//         
+//            DownloadManager.shared.fetchUserInfo(uid: uid) {[weak self]result in
+//                guard let strongSelf = self else { return }
+//                switch result {
+//                case .success(let image):
+//                    storeData.append(image)
+//                    if storeData.count == strongSelf.data.ownersImage.count {
+//                        strongSelf.data.ownersImage = storeData
+//                        strongSelf.collectionView.reloadData()
+//                    }
+//                case .failure(let error):
+//                    print(error.localizedDescription)
+//                }
+//            }
+//        }
+//    }
 }
 
 extension CoOwnerCell: UICollectionViewDataSource {
@@ -60,6 +80,7 @@ extension CoOwnerCell: UICollectionViewDataSource {
             }
             
         } else {
+            
             cell.removeBtnView.isHidden = true
         }
         

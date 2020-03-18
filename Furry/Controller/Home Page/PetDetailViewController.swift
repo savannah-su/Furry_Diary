@@ -30,7 +30,6 @@ class PetDetailViewController: UIViewController {
         
         navigationController?.popViewController(animated: true)
         
-        NotificationCenter.default.post(name: Notification.Name("Create New Pet"), object: nil)
     }
     
     @IBAction func editButton(_ sender: Any) {
@@ -51,6 +50,28 @@ class PetDetailViewController: UIViewController {
         present(viewController, animated: true, completion: nil)
     }
     
+    func fetchImage() {
+        var storeData: [String] = []
+        
+        guard let data = petData else { return }
+        
+        data.ownersID.forEach { uid in
+         
+            DownloadManager.shared.fetchUserInfo(uid: uid) {[weak self]result in
+                guard let strongSelf = self else { return }
+                switch result {
+                case .success(let image):
+                    storeData.append(image)
+                    if storeData.count == data.ownersImage.count {
+                        strongSelf.petData?.ownersImage = storeData
+                    }
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+        }
+    }
+    
     let titleArray = ["名字", "種類", "性別", "品種", "特徵", "生日", "晶片號碼", "是否絕育", "個性喜好", "毛孩飼主"]
     
     var petData: PetInfo?
@@ -61,6 +82,7 @@ class PetDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchImage()
         
         tableView.contentInset = UIEdgeInsets(top: 200, left: 0, bottom: 0, right: 0)
 
@@ -101,7 +123,7 @@ extension PetDetailViewController: BannerViewDataSource {
         
         let imageView = UIImageView()
         
-        imageView.kf.setImage(with: URL(string: petData?.petImage[index] ?? ""))
+        imageView.loadImage(petData?.petImage[index] ?? "", placeHolder: UIImage(named: "FurryLogo_white"))
         
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
@@ -198,7 +220,6 @@ extension PetDetailViewController: UITableViewDelegate {
             heightConstraint.constant = 530 - (tableView.contentOffset.y - (-200))
         }
     }
-    
 }
 
 extension PetDetailViewController: UICollectionViewDataSource {
@@ -229,7 +250,6 @@ extension PetDetailViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 5
     }
-    
 }
 
 extension PetDetailViewController: BannerViewDelegate {

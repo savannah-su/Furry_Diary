@@ -153,4 +153,21 @@ class DownloadManager {
             }
         }
     }
+    
+    func fetchUserInfo(uid: String, completion: @escaping (Result<String, Error>) -> Void) {
+        db.collection("users").whereField("id", isEqualTo: uid).getDocuments { (quarySnapshot, error) in
+            
+            if error == nil {
+                
+                guard let quary = quarySnapshot?.documents[0] else { return }
+                
+                    guard let image = quary.data()["image"] as? String else {
+                        completion(.failure(Download.downloadFail))
+                        return
+                    }
+                    
+                    completion(.success(image))
+            }
+        }
+    }
 }

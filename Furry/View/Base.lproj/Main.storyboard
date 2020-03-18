@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -11,7 +11,7 @@
         <!--我的寵物-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="Home Page" id="BYZ-38-t0r" customClass="HomePageViewController" customModule="Furry" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Home Page" id="BYZ-38-t0r" customClass="HomePageViewController" customModule="Furry_Diary" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -20,14 +20,14 @@
                                 <rect key="frame" x="0.0" y="149.33333333333331" width="414" height="663.66666666666674"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Pet Card Cell" rowHeight="232" id="y0d-Uq-Go6" customClass="PetCardCell" customModule="Furry" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Pet Card Cell" rowHeight="232" id="y0d-Uq-Go6" customClass="PetCardCell" customModule="Furry_Diary" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="232"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="y0d-Uq-Go6" id="pd4-sI-Oqi">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="232"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vps-Mh-fR7" customClass="BannerView" customModule="Furry" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vps-Mh-fR7" customClass="BannerView" customModule="Furry_Diary" customModuleProvider="target">
                                                     <rect key="frame" x="16" y="16" width="382" height="216"/>
                                                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <userDefinedRuntimeAttributes>
@@ -139,14 +139,68 @@
                                     <constraint firstAttribute="trailing" secondItem="wO3-aC-yBH" secondAttribute="trailing" constant="16" id="uDw-yC-znR"/>
                                 </constraints>
                             </view>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xD1-dQ-d5E">
+                                <rect key="frame" x="50" y="199.33333333333331" width="314" height="555.66666666666674"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="catsAndDogs" translatesAutoresizingMaskIntoConstraints="NO" id="yzc-AQ-5Ff">
+                                        <rect key="frame" x="30" y="127.99999999999997" width="254" height="130.00000000000003"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="130" id="zm6-ZZ-Y32"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="還沒上傳毛孩資料唷！" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hla-jh-kXY">
+                                        <rect key="frame" x="57" y="265" width="200" height="26"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="auQ-hu-CWe"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="MarkerFelt-Wide" family="Marker Felt" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="點選右下方黃色➕" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VZu-04-zHx">
+                                        <rect key="frame" x="57" y="298" width="200" height="26"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="5JI-mT-zPc"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="MarkerFelt-Wide" family="Marker Felt" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="幫毛孩建立日誌吧！" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RG6-hN-R7b">
+                                        <rect key="frame" x="57" y="331" width="200" height="26"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="kLy-tW-7qn"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="MarkerFelt-Wide" family="Marker Felt" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="hla-jh-kXY" firstAttribute="top" secondItem="yzc-AQ-5Ff" secondAttribute="bottom" constant="7" id="9JC-sA-kMm"/>
+                                    <constraint firstAttribute="trailing" secondItem="yzc-AQ-5Ff" secondAttribute="trailing" constant="30" id="Dot-KY-c4f"/>
+                                    <constraint firstItem="yzc-AQ-5Ff" firstAttribute="leading" secondItem="xD1-dQ-d5E" secondAttribute="leading" constant="30" id="Gqt-bK-0P6"/>
+                                    <constraint firstItem="VZu-04-zHx" firstAttribute="top" secondItem="hla-jh-kXY" secondAttribute="bottom" constant="7" id="aLh-rP-6J4"/>
+                                    <constraint firstItem="hla-jh-kXY" firstAttribute="centerY" secondItem="xD1-dQ-d5E" secondAttribute="centerY" id="hza-fD-UK6"/>
+                                    <constraint firstItem="RG6-hN-R7b" firstAttribute="centerX" secondItem="hla-jh-kXY" secondAttribute="centerX" id="jBz-Ah-bbh"/>
+                                    <constraint firstItem="VZu-04-zHx" firstAttribute="centerX" secondItem="hla-jh-kXY" secondAttribute="centerX" id="jEB-ny-2EZ"/>
+                                    <constraint firstItem="hla-jh-kXY" firstAttribute="centerX" secondItem="xD1-dQ-d5E" secondAttribute="centerX" id="vKL-4M-Jgi"/>
+                                    <constraint firstItem="RG6-hN-R7b" firstAttribute="top" secondItem="VZu-04-zHx" secondAttribute="bottom" constant="7" id="zYb-q7-vZl"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="sch-wJ-Wz8" firstAttribute="top" secondItem="xD1-dQ-d5E" secondAttribute="bottom" id="C1J-ac-KvA"/>
                             <constraint firstItem="z9N-pW-KJf" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="EJR-eH-aNU"/>
+                            <constraint firstItem="xD1-dQ-d5E" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="50" id="IaC-Hy-U92"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="sch-wJ-Wz8" secondAttribute="trailing" constant="8" id="PYS-d3-pIp"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="xD1-dQ-d5E" secondAttribute="trailing" constant="50" id="V3r-rK-SzB"/>
                             <constraint firstItem="z9N-pW-KJf" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="WZq-fB-6fa"/>
                             <constraint firstItem="z9N-pW-KJf" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="fmo-VO-cfq"/>
                             <constraint firstItem="z9N-pW-KJf" firstAttribute="top" secondItem="AJX-07-lG8" secondAttribute="bottom" id="fyt-7S-FUz"/>
+                            <constraint firstItem="xD1-dQ-d5E" firstAttribute="top" secondItem="AJX-07-lG8" secondAttribute="bottom" constant="50" id="hG1-2V-80T"/>
                             <constraint firstItem="AJX-07-lG8" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="iEV-Mt-RG9"/>
                             <constraint firstItem="AJX-07-lG8" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="pYB-Ak-ncY"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="sch-wJ-Wz8" secondAttribute="bottom" constant="8" id="rhr-Yg-qJZ"/>
@@ -157,6 +211,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="我的寵物" id="vdW-Fw-FXG"/>
                     <connections>
+                        <outlet property="alertView" destination="xD1-dQ-d5E" id="oEn-MC-Hlb"/>
                         <outlet property="tableView" destination="z9N-pW-KJf" id="8gp-z5-NmK"/>
                     </connections>
                 </viewController>
@@ -167,7 +222,7 @@
         <!--Data Source-->
         <scene sceneID="Ydg-mS-g1l">
             <objects>
-                <viewController id="nIc-Km-2A9" customClass="HistoryPageController" customModule="Furry" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="nIc-Km-2A9" customClass="HistoryPageController" customModule="Furry_Diary" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="udf-ec-Gew">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -251,7 +306,7 @@
                                 <rect key="frame" x="0.0" y="569.33333333333337" width="414" height="243.66666666666663"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Record Cell" rowHeight="220" id="06g-D5-EEc" customClass="RecordCell" customModule="Furry" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Record Cell" rowHeight="220" id="06g-D5-EEc" customClass="RecordCell" customModule="Furry_Diary" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="220"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="06g-D5-EEc" id="4MD-np-4hj">
@@ -283,7 +338,7 @@
                                                                 <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                             </collectionViewFlowLayout>
                                                             <cells>
-                                                                <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Subitem Cell" id="bZN-4K-bIy" customClass="SubitemCell" customModule="Furry" customModuleProvider="target">
+                                                                <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Subitem Cell" id="bZN-4K-bIy" customClass="SubitemCell" customModule="Furry_Diary" customModuleProvider="target">
                                                                     <rect key="frame" x="0.0" y="0.0" width="100" height="35"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                     <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="fPJ-Ms-w9A">
@@ -384,7 +439,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Pet Cell" id="sgr-FD-rEc" customClass="WhichPetCell" customModule="Furry" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Pet Cell" id="sgr-FD-rEc" customClass="WhichPetCell" customModule="Furry_Diary" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="80" height="100"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="xZS-bV-mCj">
@@ -479,7 +534,7 @@
         <!--附近獸醫-->
         <scene sceneID="JgR-D4-j1G">
             <objects>
-                <viewController id="3NG-0H-6rN" customClass="VetPageController" customModule="Furry" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="3NG-0H-6rN" customClass="VetPageController" customModule="Furry_Diary" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Or3-ZZ-h89">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -553,7 +608,7 @@
         <!--日常紀錄-->
         <scene sceneID="bwK-6g-Dwu">
             <objects>
-                <viewController id="0YW-HL-uka" customClass="DailyPageViewController" customModule="Furry" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="0YW-HL-uka" customClass="DailyPageViewController" customModule="Furry_Diary" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5Dl-x8-Zzi">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -585,7 +640,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Item Cell" id="zcD-wD-foH" customClass="ItemCell" customModule="Furry" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Item Cell" id="zcD-wD-foH" customClass="ItemCell" customModule="Furry_Diary" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="150" height="200"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="oHS-1g-zyA">
@@ -642,7 +697,7 @@
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         </collectionViewFlowLayout>
                                         <cells>
-                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Pet Cell" id="wgY-Sg-W5S" customClass="WhichPetCell" customModule="Furry" customModuleProvider="target">
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Pet Cell" id="wgY-Sg-W5S" customClass="WhichPetCell" customModule="Furry_Diary" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="150" height="200"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="8Lx-vG-2Ot">
@@ -805,6 +860,7 @@
         <image name="Icon_24px_Plus" width="24" height="24"/>
         <image name="calendar" width="32" height="32"/>
         <image name="calendar-selected" width="32" height="32"/>
+        <image name="catsAndDogs" width="512" height="512"/>
         <image name="daily" width="32" height="32"/>
         <image name="daily-selected" width="32" height="32"/>
         <image name="home" width="32" height="32"/>

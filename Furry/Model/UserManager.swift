@@ -6,11 +6,12 @@
 //  Copyright © 2020 Savannah Su. All rights reserved.
 //
 
-import Foundation
-
-class UserManager {
-    
-    static var shared = UserManager()
-    
-    private init() {}
-}
+//import Foundation
+//import <#module#>
+//
+//class UserManager {
+//
+//    static var shared = UserManager()
+//
+//    private init() {}
+//}
