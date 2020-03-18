@@ -138,7 +138,7 @@ class LoginViewController: UIViewController {
             return
         }
         
-        getData(from: photoURL) { (data, response, error) in
+        getData(from: photoURL) { (data, _, error) in
             
             guard let data = data ,
                 let image = UIImage(data: data),

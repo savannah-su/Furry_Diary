@@ -161,7 +161,6 @@ extension CleanPageViewController: UICollectionViewDataSource {
         return 2
     }
     
-    
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
         if collectionView == self.collectionView {
