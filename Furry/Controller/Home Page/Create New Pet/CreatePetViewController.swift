@@ -318,6 +318,7 @@ extension CreatePetViewController: UITableViewDataSource {
             
             cell.data = petInfo
             cell.titleLabel.text = titleArray[indexPath.row]
+            cell.delegate = self
             cell.searchButton.isHidden = false
             cell.searchButton.addTarget(self, action: #selector(searchOwner), for: .touchUpInside)
             cell.collectionView.reloadData()
@@ -346,7 +347,6 @@ extension CreatePetViewController: UITableViewDataSource {
             
             self.tableView.reloadData()
         }
-        
         show(viewController, sender: self)
     }
 }
@@ -477,5 +477,12 @@ extension CreatePetViewController: UIImagePickerControllerDelegate, UINavigation
     // 圖片picker控制器任務結束回呼
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
+    }
+}
+
+extension CreatePetViewController: RemoveOwnerDelegate {
+    
+    func removeOwner(index: Int) {
+        petInfo.ownersImage.remove(at: index)
     }
 }

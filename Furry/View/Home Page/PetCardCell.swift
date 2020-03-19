@@ -33,6 +33,8 @@ class PetCardCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        selectionStyle = .none
+        
         setupShadow()
         setupBannerView()
         

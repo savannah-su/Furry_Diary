@@ -70,6 +70,8 @@ class EnterInfoCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        selectionStyle = .none
+        
         contentText.delegate = self
         // Initialization code
     }

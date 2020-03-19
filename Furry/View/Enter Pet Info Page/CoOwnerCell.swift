@@ -21,34 +21,17 @@ class CoOwnerCell: UITableViewCell {
     
     var data = PetInfo(petID: "", ownersID: [], ownersName: [], ownersImage: [], petImage: [], petName: "", species: "", gender: "", breed: "", color: "", birth: "", chip: "", neuter: false, neuterDate: "", memo: "")
     
+    weak var delegate: RemoveOwnerDelegate?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        selectionStyle = .none
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-
-//    func fetchImage() {
-//        var storeData: [String] = []
-//        
-//        data.ownersID.forEach { uid in
-//         
-//            DownloadManager.shared.fetchUserInfo(uid: uid) {[weak self]result in
-//                guard let strongSelf = self else { return }
-//                switch result {
-//                case .success(let image):
-//                    storeData.append(image)
-//                    if storeData.count == strongSelf.data.ownersImage.count {
-//                        strongSelf.data.ownersImage = storeData
-//                        strongSelf.collectionView.reloadData()
-//                    }
-//                case .failure(let error):
-//                    print(error.localizedDescription)
-//                }
-//            }
-//        }
-//    }
 }
 
 extension CoOwnerCell: UICollectionViewDataSource {
@@ -76,6 +59,9 @@ extension CoOwnerCell: UICollectionViewDataSource {
             cell.removeHandler = { [weak self] in
                 guard let strongSelf = self else { return }
                 strongSelf.data.ownersImage.remove(at: indexPath.item)
+                
+                self?.delegate?.removeOwner(index: indexPath.item)
+                
                 collectionView.reloadData()
             }
             
@@ -98,4 +84,8 @@ extension CoOwnerCell: UICollectionViewDelegateFlowLayout {
         return 0
     }
 
+}
+
+protocol RemoveOwnerDelegate: AnyObject {
+    func removeOwner(index: Int)
 }

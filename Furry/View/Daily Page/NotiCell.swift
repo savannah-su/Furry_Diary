@@ -62,6 +62,8 @@ class NotiCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        selectionStyle = .none
 
         notiText.delegate = self
         // Initialization code
