@@ -85,6 +85,8 @@ class TextFieldCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        selectionStyle = .none
+        
         contentField.delegate = self
     }
 

@@ -50,6 +50,33 @@ class PetDetailViewController: UIViewController {
         present(viewController, animated: true, completion: nil)
     }
     
+    let titleArray = ["名字", "種類", "性別", "品種", "特徵", "生日", "晶片號碼", "是否絕育", "個性喜好", "毛孩飼主"]
+    
+    var petData: PetInfo?
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        fetchImage()
+        
+        tableView.contentInset = UIEdgeInsets(top: 200, left: 0, bottom: 0, right: 0)
+
+        setupPageControl()
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+    }
+    
+    func setupPageControl() {
+        pageControl.numberOfPages = petData?.petImage.count ?? 0
+        pageControl.currentPageIndicatorTintColor = .white
+    }
+    
     func fetchImage() {
         var storeData: [String] = []
         
@@ -70,32 +97,6 @@ class PetDetailViewController: UIViewController {
                 }
             }
         }
-    }
-    
-    let titleArray = ["名字", "種類", "性別", "品種", "特徵", "生日", "晶片號碼", "是否絕育", "個性喜好", "毛孩飼主"]
-    
-    var petData: PetInfo?
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        fetchImage()
-        
-        tableView.contentInset = UIEdgeInsets(top: 200, left: 0, bottom: 0, right: 0)
-
-        setupPageControl()
-    }
-    
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-    }
-    
-    func setupPageControl() {
-        pageControl.numberOfPages = petData?.petImage.count ?? 0
-        pageControl.currentPageIndicatorTintColor = .white
     }
 }
 

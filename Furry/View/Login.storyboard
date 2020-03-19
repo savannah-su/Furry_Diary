@@ -12,7 +12,7 @@
         <!--登入-->
         <scene sceneID="R4T-DZ-FHp">
             <objects>
-                <viewController storyboardIdentifier="Login Page" id="u1e-EP-nCX" customClass="LoginViewController" customModule="Furry" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Login Page" id="u1e-EP-nCX" customClass="LoginViewController" customModule="Furry_Diary" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xQv-Wq-6q1">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -140,7 +140,7 @@
         <!--搜尋共同飼主-->
         <scene sceneID="2EF-ic-tah">
             <objects>
-                <viewController storyboardIdentifier="Search Owner Page" modalPresentationStyle="fullScreen" id="rQK-cx-CvF" customClass="SearchOwnerViewController" customModule="Furry" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Search Owner Page" modalPresentationStyle="fullScreen" id="rQK-cx-CvF" customClass="SearchOwnerViewController" customModule="Furry_Diary" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XLK-MD-Kg1">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -181,7 +181,7 @@
                                 <rect key="frame" x="0.0" y="342" width="414" height="520"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Owner Cell" rowHeight="115" id="QVK-Fq-AvB" customClass="OwnerTableViewCell" customModule="Furry" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Owner Cell" rowHeight="115" id="QVK-Fq-AvB" customClass="OwnerTableViewCell" customModule="Furry_Diary" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="115"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="QVK-Fq-AvB" id="eCq-oT-7Nm">
@@ -329,7 +329,7 @@
         <!--輸入寵物資料-->
         <scene sceneID="Vpi-OI-gmm">
             <objects>
-                <viewController storyboardIdentifier="Create Pet Page" id="pFM-r8-lXy" customClass="CreatePetViewController" customModule="Furry" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Create Pet Page" id="pFM-r8-lXy" customClass="CreatePetViewController" customModule="Furry_Diary" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="leY-HJ-8Rw">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -368,7 +368,7 @@
                                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     </collectionViewFlowLayout>
                                     <cells>
-                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Image Cell" id="QUT-Az-hK0" customClass="UploadIamgeCell" customModule="Furry" customModuleProvider="target">
+                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Image Cell" id="QUT-Az-hK0" customClass="UploadIamgeCell" customModule="Furry_Diary" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="10" width="100" height="120"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="eM3-08-3UQ">
@@ -433,7 +433,7 @@
                                     </cells>
                                 </collectionView>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Text Field Cell" rowHeight="80" id="PsW-vc-oXL" customClass="TextFieldCell" customModule="Furry" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Text Field Cell" rowHeight="80" id="PsW-vc-oXL" customClass="TextFieldCell" customModule="Furry_Diary" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="168" width="414" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PsW-vc-oXL" id="gE1-2X-ii8">
@@ -476,7 +476,7 @@
                                             <outlet property="titleLabel" destination="DEl-MS-Yis" id="mcu-vc-6Ih"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Text View Cell" rowHeight="260" id="YVZ-oK-I5h" customClass="TextViewCell" customModule="Furry" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Text View Cell" rowHeight="260" id="YVZ-oK-I5h" customClass="TextViewCell" customModule="Furry_Diary" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="248" width="414" height="260"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="YVZ-oK-I5h" id="8Bl-a0-jvU">
@@ -532,7 +532,7 @@
                                             <outlet property="titleLabel" destination="JOP-ys-WOz" id="hpE-BD-zBm"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Co Owner Cell" rowHeight="80" id="jrH-Nb-7Wb" customClass="CoOwnerCell" customModule="Furry" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Co Owner Cell" rowHeight="80" id="jrH-Nb-7Wb" customClass="CoOwnerCell" customModule="Furry_Diary" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="508" width="414" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jrH-Nb-7Wb" id="djT-zK-Yhq">
@@ -568,15 +568,15 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="dVE-xb-YV3"/>
                                                     </constraints>
-                                                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="2H9-5o-fRU">
+                                                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="2H9-5o-fRU">
                                                         <size key="itemSize" width="38" height="37"/>
                                                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                     </collectionViewFlowLayout>
                                                     <cells>
-                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CoOwner Collection Cell" id="gci-ls-sPL" customClass="CoOwnerCollectionCell" customModule="Furry" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="0.0" width="35" height="35"/>
+                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CoOwner Collection Cell" id="gci-ls-sPL" customClass="CoOwnerCollectionCell" customModule="Furry_Diary" customModuleProvider="target">
+                                                            <rect key="frame" x="0.0" y="2.5" width="35" height="35"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Z0Q-Uu-j7R">
                                                                 <rect key="frame" x="0.0" y="0.0" width="35" height="35"/>
@@ -683,7 +683,7 @@
         <!--Private Web View Controller-->
         <scene sceneID="Bdv-iP-Irq">
             <objects>
-                <viewController storyboardIdentifier="Private Web Page" id="hYJ-lx-xBi" customClass="PrivateWebViewController" customModule="Furry" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Private Web Page" id="hYJ-lx-xBi" customClass="PrivateWebViewController" customModule="Furry_Diary" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nhq-LU-2at">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
