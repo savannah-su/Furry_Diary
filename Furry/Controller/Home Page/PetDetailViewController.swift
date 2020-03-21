@@ -46,6 +46,7 @@ class PetDetailViewController: UIViewController {
             strongSelf.petData = data
             strongSelf.bannerView.reloadData()
             strongSelf.tableView.reloadData()
+            NotificationCenter.default.post(name: Notification.Name("reloadCollection"), object: nil)
         }
         present(viewController, animated: true, completion: nil)
     }
@@ -61,10 +62,8 @@ class PetDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        fetchImage()
-        
         tableView.contentInset = UIEdgeInsets(top: 200, left: 0, bottom: 0, right: 0)
-
+        
         setupPageControl()
     }
     
@@ -75,28 +74,6 @@ class PetDetailViewController: UIViewController {
     func setupPageControl() {
         pageControl.numberOfPages = petData?.petImage.count ?? 0
         pageControl.currentPageIndicatorTintColor = .white
-    }
-    
-    func fetchImage() {
-        var storeData: [String] = []
-        
-        guard let data = petData else { return }
-        
-        data.ownersID.forEach { uid in
-         
-            DownloadManager.shared.fetchUserInfo(uid: uid) {[weak self]result in
-                guard let strongSelf = self else { return }
-                switch result {
-                case .success(let image):
-                    storeData.append(image)
-                    if storeData.count == data.ownersImage.count {
-                        strongSelf.petData?.ownersImage = storeData
-                    }
-                case .failure(let error):
-                    print(error.localizedDescription)
-                }
-            }
-        }
     }
 }
 
@@ -209,7 +186,7 @@ extension PetDetailViewController: UITableViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
-        if tableView.contentOffset.y <= 0 &&  tableView.contentOffset.y >= -200 {
+        if tableView.contentOffset.y <= 0 && tableView.contentOffset.y >= -200 {
             
             topConstraint.constant = -(tableView.contentOffset.y - (-200)) / 3
             

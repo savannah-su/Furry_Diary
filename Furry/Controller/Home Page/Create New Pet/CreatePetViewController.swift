@@ -33,8 +33,6 @@ class CreatePetViewController: UIViewController {
         picUpload()
         
         petDataHandler?(petInfo)
-        
-        dismiss(animated: true, completion: nil)
     }
     
     var backURLCount = 1
@@ -173,6 +171,8 @@ class CreatePetViewController: UIViewController {
                 UploadManager.shared.uploadSuccess(text: "上傳成功！")
                 
                 NotificationCenter.default.post(name: Notification.Name("Create New Pet"), object: nil)
+                
+                self.dismiss(animated: true, completion: nil)
                 
                 print("DB added successfully")
                 
@@ -484,5 +484,7 @@ extension CreatePetViewController: RemoveOwnerDelegate {
     
     func removeOwner(index: Int) {
         petInfo.ownersImage.remove(at: index)
+        petInfo.ownersID.remove(at: index)
+        petInfo.ownersName.remove(at: index)
     }
 }

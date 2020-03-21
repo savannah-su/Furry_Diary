@@ -114,10 +114,13 @@ class PreventPageViewController: UIViewController {
             switch result {
             case .success(let success):
                 UploadManager.shared.uploadSuccess(text: "上傳成功！")
+                
                 DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                     self.navigationController?.popViewController(animated: true)
                 }
+                
                 print(success)
+                
             case .failure(let error):
                 UploadManager.shared.uploadFail(text: "上傳失敗！")
                 print(error.localizedDescription)
