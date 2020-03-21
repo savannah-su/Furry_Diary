@@ -215,6 +215,7 @@ class LoginViewController: UIViewController {
                 if error == nil {
                     
                     UserDefaults.standard.set(true, forKey: "logInOrNot")
+                    UserDefaults.standard.set(true, forKey: "remove")
                     UserDefaults.standard.set(userEmail, forKey: "email")
                     UserDefaults.standard.set(userName, forKey: "userName")
                     UserDefaults.standard.set(userPhoto, forKey: "userPhoto")

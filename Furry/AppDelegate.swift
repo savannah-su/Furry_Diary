@@ -62,11 +62,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         //        UINavigationBar.appearance().standardAppearance = coloredAppearance
         //        UINavigationBar.appearance().scrollEdgeAppearance = coloredAppearance
         
-        if UserDefaults.standard.value(forKey: "logInOrNot") != nil {
+        if UserDefaults.standard.value(forKey: "logInOrNot") != nil && UserDefaults.standard.value(forKey: "remove") != nil {
             
             toNextpage()
             
         } else {
+            
+            UserDefaults.standard.set(nil, forKey: "email")
+            UserDefaults.standard.set(nil, forKey: "userName")
+            UserDefaults.standard.set(nil, forKey: "userPhoto")
+            UserDefaults.standard.set(nil, forKey: "userID")
             
             let viewController = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(identifier: "Login Page") as? LoginViewController
             

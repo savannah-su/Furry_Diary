@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class CoOwnerCell: UITableViewCell {
     
@@ -48,17 +49,19 @@ extension CoOwnerCell: UICollectionViewDataSource {
         
         cell.ownerPhoto.loadImage(data.ownersImage[indexPath.item], placeHolder: UIImage(named: "FurryLogo"))
         
-        guard let currentUserImage = UserDefaults.standard.value(forKey: "userPhoto") as? String else {
+        guard let uid = Auth.auth().currentUser?.uid else {
             return UICollectionViewCell()
         }
         
-        if data.ownersImage[indexPath.item] != currentUserImage {
+        if uid != data.ownersID[indexPath.item] {
             
             cell.removeBtnView.isHidden = false
             
             cell.removeHandler = { [weak self] in
                 guard let strongSelf = self else { return }
                 strongSelf.data.ownersImage.remove(at: indexPath.item)
+                strongSelf.data.ownersID.remove(at: indexPath.item)
+                strongSelf.data.ownersName.remove(at: indexPath.item)
                 
                 self?.delegate?.removeOwner(index: indexPath.item)
                 

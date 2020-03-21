@@ -17,6 +17,8 @@ class OwnerCell: UITableViewCell {
         super.awakeFromNib()
         
         selectionStyle = .none
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadCollection), name: Notification.Name("reloadCollection"), object: nil)
         // Initialization code
     }
 
@@ -24,5 +26,9 @@ class OwnerCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    @objc func reloadCollection() {
+        collectionView.reloadData()
     }
 }

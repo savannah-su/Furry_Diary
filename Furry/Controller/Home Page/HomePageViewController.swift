@@ -83,7 +83,7 @@ class HomePageViewController: UIViewController {
             do {
                try Auth.auth().signOut()
                 UserDefaults.standard.set(nil, forKey: "logInOrNot")
-
+                UserDefaults.standard.set(nil, forKey: "remove")
             } catch {
                 print("登出失敗")
             }
