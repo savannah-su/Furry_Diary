@@ -62,12 +62,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         //        UINavigationBar.appearance().standardAppearance = coloredAppearance
         //        UINavigationBar.appearance().scrollEdgeAppearance = coloredAppearance
         
-        if UserDefaults.standard.value(forKey: "logInOrNot") != nil && UserDefaults.standard.value(forKey: "remove") != nil {
+        if UserDefaults.standard.value(forKey: "logInOrNot") != nil && UserDefaults.standard.value(forKey: "currentUserData") != nil {
             
             toNextpage()
             
         } else {
             
+            UserDefaults.standard.set(true, forKey: "logInOrNot")
+            UserDefaults.standard.set(true, forKey: "currentUserData")
             UserDefaults.standard.set(nil, forKey: "email")
             UserDefaults.standard.set(nil, forKey: "userName")
             UserDefaults.standard.set(nil, forKey: "userPhoto")
@@ -196,6 +198,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                     if error == nil {
                         
                         UserDefaults.standard.set(true, forKey: "logInOrNot")
+                        UserDefaults.standard.set(true, forKey: "currentUserData")
                         UserDefaults.standard.set(userEmail, forKey: "email")
                         UserDefaults.standard.set(userName, forKey: "userName")
                         UserDefaults.standard.set(userPhotoString, forKey: "userPhoto")

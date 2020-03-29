@@ -55,9 +55,9 @@ class CreatePetViewController: UIViewController {
         
         if petInfo != nil {
             createButton.setTitle("更新寵物日誌", for: .normal)
-            return
         } else {
-            petInfo = PetInfo(petID: UUID().uuidString, ownersID: [], ownersName: [], ownersImage: [], petImage: [""], petName: "", species: "", gender: "", breed: "", color: "", birth: "", chip: "", neuter: nil, neuterDate: "", memo: "")
+            petInfo = PetInfo(petID: UUID().uuidString, ownersID: [], ownersName: [], ownersImage: [], petImage: [], petName: "", species: "", gender: "", breed: "", color: "", birth: "", chip: "", neuter: nil, neuterDate: "", memo: "")
+            addCurrentUser() 
         }
         
         picker.delegate = self
@@ -66,7 +66,6 @@ class CreatePetViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(showAlert), name: Notification.Name("ShowAlert"), object: nil)
         
-        addCurrentUser()
     }
     
     override func viewDidLayoutSubviews() {
@@ -160,6 +159,10 @@ class CreatePetViewController: UIViewController {
         guard UserDefaults.standard.value(forKey: "userPhoto") != nil else { return }
         
         petID = self.petInfo.petID
+        
+        if petInfo.petImage.isEmpty {
+            petInfo.petImage = [""]
+        }
         
 //        Firestore.firestore().collection("pets").document(petID).setData(petInfo.toDict, merge: true)
 //        Firestore.firestore().collection("pets").document(petID).removeObserver(<#T##observer: NSObject##NSObject#>, forKeyPath: <#T##String#>)
@@ -408,6 +411,8 @@ extension CreatePetViewController: UICollectionViewDataSource {
                 cell.uplodaImage.image = selectedPhoto[indexPath.item]
                 
             }
+            
+            cell.removeButton.isHidden = true
         }
         
         return cell
@@ -456,6 +461,7 @@ extension CreatePetViewController: UIImagePickerControllerDelegate, UINavigation
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+        
         var selectedImageFromPicker: UIImage?
         if let pickedImage = info[.originalImage] as? UIImage {
             selectedImageFromPicker = pickedImage

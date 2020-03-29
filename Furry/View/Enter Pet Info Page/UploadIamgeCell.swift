@@ -14,6 +14,7 @@ class UploadIamgeCell: UICollectionViewCell {
     @IBOutlet weak var uplodaImage: UIImageView!
     @IBOutlet weak var imageButton: UIButton!
     @IBAction func imageButton(_ sender: Any) {
+        print(123)
         NotificationCenter.default.post(name: NSNotification.Name("ShowAlert"), object: nil)
     }
     @IBOutlet weak var removeButton: UIButton!
