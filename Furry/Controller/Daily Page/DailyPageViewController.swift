@@ -130,7 +130,7 @@ extension DailyPageViewController: UICollectionViewDataSource {
             
             cellB.petName.text = UploadManager.shared.simplePetInfo[indexPath.row].petName
             
-            let urlString = UploadManager.shared.simplePetInfo[indexPath.row].petPhoto.randomElement()!
+            let urlString = UploadManager.shared.simplePetInfo[indexPath.row].petPhoto.randomElement()
             cellB.petPhoto.loadImage(urlString, placeHolder: UIImage(named: "FurryLogo_white"))
             
             return cellB

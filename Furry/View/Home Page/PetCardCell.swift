@@ -48,8 +48,8 @@ class PetCardCell: UITableViewCell {
     
     func setupPageControl() {
         
-        pageControl.numberOfPages = petImage.count != 0 ? petImage.count : 0
-        pageControl.currentPageIndicatorTintColor = .white
+         pageControl.numberOfPages = petImage.count != 0 ? petImage.count : 1
+         pageControl.currentPageIndicatorTintColor = .white
         
     }
     
@@ -74,13 +74,14 @@ class PetCardCell: UITableViewCell {
 extension PetCardCell: BannerViewDataSource {
     
     func numberOfPages(in bannerView: BannerView) -> Int {
-        return petImage.count
+            return petImage.count
     }
     
     func viewFor(bannerView: BannerView, at index: Int) -> UIView {
         
         let imageView = UIImageView()
 //        kf.setImage(with: URL(string: ))
+        
         imageView.loadImage(petImage[index], placeHolder: UIImage(named: "FurryLogo_white"))
         
         imageView.backgroundColor = .white

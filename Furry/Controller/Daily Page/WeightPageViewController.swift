@@ -65,6 +65,8 @@ class WeightPageViewController: UIViewController {
         
         setupDatePicker()
         
+        weightTextField.keyboardType = UIKeyboardType.numberPad
+        
         saveButton.isEnabled = false
         saveButton.setTitleColor(UIColor.lightGray, for: .disabled)
     }

@@ -14,15 +14,15 @@ extension UIImageView {
     
     func loadImage(_ urlString: String?, placeHolder: UIImage? = nil) {
         
-        guard urlString != nil else {
+        guard urlString != nil, let url = URL(string: urlString!) else {
             
             self.image = placeHolder
             
             return
             
         }
-        
-        let url = URL(string: urlString!)
+          
+//        let url = URL(string: urlString!)
         
         self.kf.setImage(with: url, placeholder: placeHolder)
     }
