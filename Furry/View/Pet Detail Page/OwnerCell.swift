@@ -19,13 +19,11 @@ class OwnerCell: UITableViewCell {
         selectionStyle = .none
         
         NotificationCenter.default.addObserver(self, selector: #selector(reloadCollection), name: Notification.Name("reloadCollection"), object: nil)
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
     }
     
     @objc func reloadCollection() {

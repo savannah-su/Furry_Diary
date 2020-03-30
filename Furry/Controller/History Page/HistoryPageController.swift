@@ -159,8 +159,6 @@ class HistoryPageController: UIViewController {
             switch result {
             case .success(let monthlyData):
                 
-                print(monthlyData)
-                
                 self?.currentMonthlyData = monthlyData
                 
             case .failure(let error):
