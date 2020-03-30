@@ -323,7 +323,6 @@ extension CleanPageViewController: UITableViewDataSource {
                 
                 self?.notiMemo = text
             }
-            
 //            cell.touchHandler = { [weak self] text in
 //                
 //                //用"-"切開String，2020-01-01的count是3

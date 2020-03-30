@@ -134,7 +134,6 @@ class VetPageController: UIViewController {
             switch result {
                 
             case .success(let downloadVetData):
-                print(downloadVetData.count)
                 self?.setupPin()
                 
             case .failure(let error):

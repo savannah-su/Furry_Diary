@@ -60,6 +60,8 @@ class CreatePetViewController: UIViewController {
             addCurrentUser() 
         }
         
+        checkCreateButton()
+        
         picker.delegate = self
         
         tableView.separatorColor = .clear
@@ -188,6 +190,16 @@ class CreatePetViewController: UIViewController {
         })
         
     }
+    
+    func checkCreateButton() {
+        if petInfo.petName == "" {
+            createButton.isEnabled = false
+            createButton.setTitleColor(UIColor.lightGray, for: .disabled)
+        } else {
+            createButton.isEnabled = true
+            createButton.setTitleColor(UIColor.white, for: .normal)
+        }
+    }
 }
 
 extension CreatePetViewController: UITableViewDataSource {
@@ -213,6 +225,8 @@ extension CreatePetViewController: UITableViewDataSource {
             cell.touchHandler = { [weak self] text in
                 
                 self?.petInfo.petName = text
+                
+                self?.checkCreateButton()
             }
             return cell
             
